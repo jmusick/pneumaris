@@ -1,0 +1,75 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+	active?: "home" | "music" | "about" | "contact";
+}
+
+const { active = "home" } = Astro.props;
+
+const socials = [
+	{
+		label: "SoundCloud",
+		href: "https://soundcloud.com/pneumaris",
+		icon: "simple-icons:soundcloud",
+	},
+	{
+		label: "YouTube",
+		href: "https://www.youtube.com/@Pneumaris",
+		icon: "simple-icons:youtube",
+	},
+	{
+		label: "TikTok",
+		href: "#",
+		icon: "simple-icons:tiktok",
+	},
+	{
+		label: "Twitter / X",
+		href: "https://x.com/pneumarisband",
+		icon: "simple-icons:x",
+	},
+	{
+		label: "Instagram",
+		href: "https://www.instagram.com/pneumaris/",
+		icon: "simple-icons:instagram",
+	},
+	{
+		label: "Facebook",
+		href: "https://www.facebook.com/profile.php?id=61589446647657",
+		icon: "simple-icons:facebook",
+	},
+];
+---
+
+<header class="site-head">
+	<div class="site-head-inner">
+		<a href="/" class="brand-link">
+			<img
+				class="brand-logo"
+				src="/logo.png"
+				alt="Pneumaris"
+				loading="eager"
+				decoding="async"
+			/>
+		</a>
+
+		<div class="site-head-right">
+			<nav class="site-nav" aria-label="Primary">
+				<a class={active === "home" ? "active" : undefined} href="/">Home</a>
+				<a class={active === "music" ? "active" : undefined} href="/music">Music</a>
+				<a class={active === "about" ? "active" : undefined} href="/about">About</a>
+				<a class={active === "contact" ? "active" : undefined} href="/contact">Contact</a>
+			</nav>
+
+			<div class="site-head-divider" aria-hidden="true"></div>
+
+			<nav class="social-nav" aria-label="Social media">
+				{socials.map((s) => (
+					<a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} class="social-link">
+						<Icon name={s.icon} aria-hidden="true" />
+					</a>
+				))}
+			</nav>
+		</div>
+	</div>
+</header>

@@ -1,0 +1,119 @@
+---
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/png" href="/logo.png" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="stylesheet" href="/universal.css" />
+		<meta name="generator" content={Astro.generator} />
+		<title>About — Pneumaris</title>
+		<meta name="description" content="About Pneumaris — atmospheric music from the void." />
+		<style>
+			.page-header {
+				border-bottom: 1px solid var(--line);
+				padding: 3.5rem clamp(1.1rem, 3vw, 2.4rem) 2.5rem;
+				background: linear-gradient(to bottom, rgba(60, 40, 12, 0.08), transparent);
+			}
+
+			.page-header-inner {
+				max-width: 1280px;
+				margin: 0 auto;
+			}
+
+			.page-header .section-label {
+				margin-bottom: 0.6rem;
+				display: block;
+			}
+
+			.page-header h1 {
+				font-size: clamp(2rem, 5vw, 3.5rem);
+			}
+
+			.content {
+				max-width: 1280px;
+				margin: 0 auto;
+				padding: 3rem clamp(1.1rem, 3vw, 2.4rem);
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: clamp(2rem, 5vw, 5rem);
+				align-items: start;
+			}
+
+			.about-text {
+				display: flex;
+				flex-direction: column;
+				gap: 1.4rem;
+			}
+
+			.about-text p {
+				color: rgba(232, 224, 212, 0.72);
+				font-size: 1.05rem;
+			}
+
+			.about-image {
+				position: sticky;
+				top: 5rem;
+			}
+
+			.about-image img {
+				width: 100%;
+				height: auto;
+				border-radius: 0.5rem;
+				border: 1px solid var(--line);
+				filter: brightness(0.88) contrast(1.05);
+			}
+
+			@media (max-width: 720px) {
+				.content {
+					grid-template-columns: 1fr;
+				}
+
+				.about-image {
+					position: static;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<SiteHeader active="about" />
+
+		<main>
+			<div class="page-header">
+				<div class="page-header-inner">
+					<span class="section-label">The Project</span>
+					<h1>About</h1>
+				</div>
+			</div>
+
+			<div class="content">
+				<div class="about-text">
+					<p>
+						Pneumaris is an atmospheric music project conjured from the spaces
+						between silence and sound. The name draws from the ancient concept of
+						<em>pneuma</em> — the breath, the spirit, the unseen force that animates all
+						things — and from the Latin <em>aris</em>, suggesting both the altar and the air.
+					</p>
+					<p>
+					The music forges itself in the space between extremes — heavy
+					enough to crush, haunting enough to linger, driven by the raw
+					force of metal and the weight of dark atmosphere.
+					</p>
+					<p>
+						There are no borders between genre, no allegiance to trend.
+					Only the pursuit of something darker — riffs that cut, melodies that haunt,
+					and an atmosphere that refuses to let go.
+					</p>
+				</div>
+				<div class="about-image">
+					<img src="/header.png" alt="Pneumaris — atmospheric darkness" loading="lazy" decoding="async" />
+				</div>
+			</div>
+		</main>
+
+		<SiteFooter />
+	</body>
+</html>

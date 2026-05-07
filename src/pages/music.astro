@@ -1,0 +1,116 @@
+---
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/png" href="/logo.png" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="stylesheet" href="/universal.css" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Music — Pneumaris</title>
+		<meta
+			name="description"
+			content="Listen to Pneumaris — all releases, tracks, and streams on SoundCloud."
+		/>
+		<style>
+			.page-header {
+				border-bottom: 1px solid var(--line);
+				padding: 3.5rem clamp(1.1rem, 3vw, 2.4rem) 2.5rem;
+				background: linear-gradient(to bottom, rgba(60, 40, 12, 0.08), transparent);
+			}
+
+			.page-header-inner {
+				max-width: 1280px;
+				margin: 0 auto;
+			}
+
+			.page-header .section-label {
+				margin-bottom: 0.6rem;
+				display: block;
+			}
+
+			.page-header h1 {
+				font-size: clamp(2rem, 5vw, 3.5rem);
+			}
+
+			.embed-section {
+				max-width: 1280px;
+				margin: 0 auto;
+				padding: 3rem clamp(1.1rem, 3vw, 2.4rem);
+				display: flex;
+				flex-direction: column;
+				gap: 2rem;
+			}
+
+			.soundcloud-embed {
+				border: 1px solid var(--line);
+				border-radius: 0.5rem;
+				overflow: hidden;
+			}
+
+			.soundcloud-embed iframe {
+				display: block;
+				width: 100%;
+			}
+
+			.sc-link {
+				text-align: center;
+				color: var(--ink-soft);
+				font-size: 0.88rem;
+				letter-spacing: 0.05em;
+			}
+
+			.sc-link a {
+				color: var(--gold);
+				border-bottom: 1px solid var(--line);
+				padding-bottom: 1px;
+				transition: color 180ms ease, border-color 180ms ease;
+			}
+
+			.sc-link a:hover {
+				color: var(--gold-bright);
+				border-color: var(--gold-dim);
+			}
+		</style>
+	</head>
+	<body>
+		<SiteHeader active="music" />
+
+		<main>
+			<div class="page-header">
+				<div class="page-header-inner">
+					<span class="section-label">Discography & Streams</span>
+					<h1>Music</h1>
+				</div>
+			</div>
+
+			<div class="embed-section">
+				<!-- Tracks player -->
+				<div class="soundcloud-embed">
+					<iframe
+						height="700"
+						scrolling="no"
+						frameborder="no"
+						allow="autoplay"
+						src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/pneumaris&color=%23b89a6a&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=true&visual=false"
+						title="Pneumaris — full discography on SoundCloud"
+					></iframe>
+				</div>
+
+				<p class="sc-link">
+					Also available directly on
+					<a
+						href="https://soundcloud.com/pneumaris"
+						target="_blank"
+						rel="noopener noreferrer"
+					>soundcloud.com/pneumaris</a>.
+				</p>
+			</div>
+		</main>
+
+		<SiteFooter />
+	</body>
+</html>

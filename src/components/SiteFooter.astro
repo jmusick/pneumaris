@@ -1,0 +1,18 @@
+---
+import { SITE_VERSION } from "../config/site";
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+	<span>© {currentYear} Pneumaris. All rights reserved. Version {SITE_VERSION}</span>
+	<div class="footer-links">
+		<a href="/privacy-policy">Privacy Policy</a>
+		<a
+			href="https://soundcloud.com/pneumaris"
+			target="_blank"
+			rel="noopener noreferrer"
+		>
+			SoundCloud
+		</a>
+	</div>
+</footer>
