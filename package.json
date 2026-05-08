@@ -15,10 +15,6 @@
     "@iconify-json/lucide": "^1.2.105",
     "@iconify-json/simple-icons": "^1.2.81",
     "astro": "^6.2.2",
-    "astro-icon": "^1.1.5",
-    "mimetext": "^3.0.28"
-  },
-  "devDependencies": {
-    "@cloudflare/workers-types": "^4.20260507.1"
+    "astro-icon": "^1.1.5"
   }
 }
