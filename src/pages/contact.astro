@@ -12,6 +12,7 @@ import SiteFooter from "../components/SiteFooter.astro";
 		<meta name="generator" content={Astro.generator} />
 		<title>Contact — Pneumaris</title>
 		<meta name="description" content="Get in touch with Pneumaris." />
+		<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 		<style>
 			.page-header {
 				border-bottom: 1px solid var(--line);
@@ -221,6 +222,8 @@ import SiteFooter from "../components/SiteFooter.astro";
 						<input id="website" name="website" type="text" autocomplete="off" tabindex="-1" />
 					</div>
 
+					<div class="cf-turnstile" data-sitekey="0x4AAAAAADLj5l89sWh7XOVH" data-theme="dark"></div>
+
 					<button class="contact-submit" type="submit">Send Message</button>
 					<p id="form-status" class="form-status" role="status" aria-live="polite"></p>
 				</form>
@@ -254,6 +257,14 @@ import SiteFooter from "../components/SiteFooter.astro";
 					submitButton.disabled = true;
 
 					const formData = new FormData(form);
+					const turnstileToken = String(formData.get("cf-turnstile-response") || "").trim();
+					if (!turnstileToken) {
+						statusEl.textContent = "Please complete the CAPTCHA challenge.";
+						statusEl.className = "form-status error";
+						submitButton.disabled = false;
+						return;
+					}
+
 					const payload = {
 						access_key: "55ac3568-093b-489a-8817-cb61c0d8d985",
 						name: String(formData.get("name") || "").trim(),
