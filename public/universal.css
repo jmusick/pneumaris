@@ -192,6 +192,14 @@ a:hover {
 	margin-right: auto;
 }
 
+.footer-version {
+	font-family: "Cinzel", serif;
+	font-size: 0.72rem;
+	letter-spacing: 0.15em;
+	color: var(--ink-muted);
+	opacity: 0.6;
+}
+
 .site-footer a {
 	color: var(--ink-soft);
 	transition: color 180ms ease;

@@ -42,8 +42,101 @@ import SiteFooter from "../components/SiteFooter.astro";
 			.contact-intro {
 				color: rgba(232, 224, 212, 0.65);
 				font-size: 1.05rem;
-				margin-bottom: 2.5rem;
+				margin-bottom: 2rem;
 				line-height: 1.8;
+			}
+
+			.contact-form {
+				display: grid;
+				gap: 1rem;
+				margin-bottom: 2rem;
+			}
+
+			.form-row {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 1rem;
+			}
+
+			.form-field {
+				display: flex;
+				flex-direction: column;
+				gap: 0.45rem;
+			}
+
+			.form-field label {
+				font-family: "Cinzel", serif;
+				font-size: 0.75rem;
+				letter-spacing: 0.14em;
+				text-transform: uppercase;
+				color: var(--ink-soft);
+			}
+
+			.form-field input,
+			.form-field textarea {
+				width: 100%;
+				background: rgba(22, 15, 10, 0.75);
+				border: 1px solid var(--line);
+				border-radius: 0.4rem;
+				padding: 0.8rem 0.9rem;
+				color: var(--ink);
+				font: inherit;
+				transition: border-color 180ms ease, box-shadow 180ms ease;
+			}
+
+			.form-field textarea {
+				min-height: 180px;
+				resize: vertical;
+			}
+
+			.form-field input:focus,
+			.form-field textarea:focus {
+				outline: none;
+				border-color: var(--gold-dim);
+				box-shadow: 0 0 0 2px rgba(184, 154, 106, 0.18);
+			}
+
+			.contact-submit {
+				justify-self: start;
+				background: rgba(184, 154, 106, 0.12);
+				border: 1px solid var(--gold-dim);
+				border-radius: 0.35rem;
+				padding: 0.7rem 1.2rem;
+				font-family: "Cinzel", serif;
+				font-size: 0.78rem;
+				letter-spacing: 0.16em;
+				text-transform: uppercase;
+				color: var(--gold-bright);
+				cursor: pointer;
+				transition: background 180ms ease, border-color 180ms ease;
+			}
+
+			.contact-submit:hover {
+				background: rgba(184, 154, 106, 0.2);
+				border-color: var(--gold);
+			}
+
+			.contact-submit:disabled {
+				opacity: 0.6;
+				cursor: not-allowed;
+			}
+
+			.form-status {
+				min-height: 1.4rem;
+				font-size: 0.9rem;
+				color: var(--ink-soft);
+			}
+
+			.form-status.success {
+				color: #9ec08f;
+			}
+
+			.form-status.error {
+				color: #d4948f;
+			}
+
+			.form-honeypot {
+				display: none;
 			}
 
 			.links-list {
@@ -77,6 +170,12 @@ import SiteFooter from "../components/SiteFooter.astro";
 				opacity: 0.4;
 				font-size: 0.9rem;
 			}
+
+			@media (max-width: 720px) {
+				.form-row {
+					grid-template-columns: 1fr;
+				}
+			}
 		</style>
 	</head>
 	<body>
@@ -92,9 +191,39 @@ import SiteFooter from "../components/SiteFooter.astro";
 
 			<div class="content">
 				<p class="contact-intro">
-					For booking, press inquiries, collaborations, or anything else —
-					reach through the following channels.
+					For booking, press inquiries, collaborations, or anything else, use the form below.
 				</p>
+
+				<form id="contact-form" class="contact-form" novalidate>
+					<div class="form-row">
+						<div class="form-field">
+							<label for="name">Name</label>
+							<input id="name" name="name" type="text" required maxlength="100" />
+						</div>
+						<div class="form-field">
+							<label for="email">Email</label>
+							<input id="email" name="email" type="email" required maxlength="255" />
+						</div>
+					</div>
+
+					<div class="form-field">
+						<label for="subject">Subject</label>
+						<input id="subject" name="subject" type="text" required maxlength="140" />
+					</div>
+
+					<div class="form-field">
+						<label for="message">Message</label>
+						<textarea id="message" name="message" required maxlength="5000"></textarea>
+					</div>
+
+					<div class="form-honeypot" aria-hidden="true">
+						<label for="website">Website</label>
+						<input id="website" name="website" type="text" autocomplete="off" tabindex="-1" />
+					</div>
+
+					<button class="contact-submit" type="submit">Send Message</button>
+					<p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+				</form>
 
 				<div class="links-list">
 					<a
@@ -111,5 +240,56 @@ import SiteFooter from "../components/SiteFooter.astro";
 		</main>
 
 		<SiteFooter />
+
+		<script>
+			const form = document.getElementById("contact-form");
+			const statusEl = document.getElementById("form-status");
+			const submitButton = form?.querySelector("button[type='submit']");
+
+			if (form && statusEl && submitButton) {
+				form.addEventListener("submit", async (event) => {
+					event.preventDefault();
+					statusEl.textContent = "Sending...";
+					statusEl.className = "form-status";
+					submitButton.disabled = true;
+
+					const formData = new FormData(form);
+					const payload = {
+						name: String(formData.get("name") || "").trim(),
+						email: String(formData.get("email") || "").trim(),
+						subject: String(formData.get("subject") || "").trim(),
+						message: String(formData.get("message") || "").trim(),
+						website: String(formData.get("website") || "").trim(),
+					};
+
+					try {
+						const response = await fetch("/api/contact", {
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify(payload),
+						});
+
+						const result = await response.json().catch(() => ({ ok: false }));
+
+						if (!response.ok || !result.ok) {
+							throw new Error(result.error || "Unable to send your message right now.");
+						}
+
+						form.reset();
+						statusEl.textContent = "Message sent successfully.";
+						statusEl.className = "form-status success";
+					} catch (error) {
+						statusEl.textContent = error instanceof Error
+							? error.message
+							: "Unable to send your message right now.";
+						statusEl.className = "form-status error";
+					} finally {
+						submitButton.disabled = false;
+					}
+				});
+			}
+		</script>
 	</body>
 </html>

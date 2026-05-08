@@ -1,0 +1,7 @@
+name = "pneumaris"
+pages_build_output_dir = "dist"
+compatibility_date = "2025-02-04"
+
+[[send_email]]
+name = "CONTACT_EMAIL"
+destination_address = "contact@pneumarisband.com"
