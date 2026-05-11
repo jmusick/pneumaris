@@ -557,12 +557,12 @@ const albums: Album[] = [
 		<SiteFooter />
 
 		<script>
-			const lightbox = document.getElementById("artwork-lightbox");
-			const lightboxImage = document.getElementById("artwork-lightbox-image");
-			const lightboxTitle = document.getElementById("artwork-lightbox-title");
-			const lightboxMeta = document.getElementById("artwork-lightbox-meta");
+			const lightbox = document.getElementById("artwork-lightbox") as HTMLElement | null;
+			const lightboxImage = document.getElementById("artwork-lightbox-image") as HTMLImageElement | null;
+			const lightboxTitle = document.getElementById("artwork-lightbox-title") as HTMLElement | null;
+			const lightboxMeta = document.getElementById("artwork-lightbox-meta") as HTMLElement | null;
 
-			const openArtworkLightbox = (src, title, meta) => {
+			const openArtworkLightbox = (src: string, title: string, meta: string) => {
 				if (!lightbox || !lightboxImage || !lightboxTitle || !lightboxMeta) return;
 				lightboxImage.src = src;
 				lightboxTitle.textContent = title;

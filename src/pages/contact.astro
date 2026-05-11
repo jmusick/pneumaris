@@ -245,9 +245,9 @@ import SiteFooter from "../components/SiteFooter.astro";
 		<SiteFooter />
 
 		<script>
-			const form = document.getElementById("contact-form");
-			const statusEl = document.getElementById("form-status");
-			const submitButton = form?.querySelector("button[type='submit']");
+			const form = document.getElementById("contact-form") as HTMLFormElement | null;
+			const statusEl = document.getElementById("form-status") as HTMLElement | null;
+			const submitButton = form?.querySelector("button[type='submit']") as HTMLButtonElement | null;
 
 			if (form && statusEl && submitButton) {
 				form.addEventListener("submit", async (event) => {
