@@ -1,17 +1,67 @@
 # Pneumaris Website
 
-Official website for Pneumaris, built with Astro.
+Official website for Pneumaris, built with Astro and deployed on Cloudflare Pages.
 
-## Stack
+## Current Stack
 
-- Astro
+- Astro 6
 - astro-icon (Iconify)
-- TypeScript config (strict Astro tsconfig)
+- TypeScript (strict Astro tsconfig)
+- Cloudflare Pages (static output)
+- Web3Forms (contact form delivery)
+- hCaptcha (bot protection)
 
-## Version
+## Current Version
 
-- App package version: 1.0.1
-- Site display version: 1.0.1
+- App package version: 1.2.0
+- Site display version: 1.2.0
+
+## Site Features
+
+- Dark atmospheric visual theme with shared global styles
+- Reusable site header and footer components
+- Responsive pages:
+	- Home (`/`)
+	- Music (`/music`) with album cards, descriptions, track lists, per-track artwork, lightbox previews, and SoundCloud playlist playback
+	- About (`/about`)
+	- Contact (`/contact`) with Web3Forms + hCaptcha
+	- Privacy Policy (`/privacy-policy`)
+- Social links in header:
+	- SoundCloud
+	- YouTube
+	- TikTok
+	- X
+	- Instagram
+	- Facebook
+- Footer version badge sourced from `src/config/site.ts`
+
+## Music Page Highlights
+
+- Data-backed album sections for current Pneumaris releases
+- Album metadata display:
+	- Type (EP/Album)
+	- Release date
+	- Description
+	- Track count
+- Full track lists with:
+	- Individual track artwork thumbnails
+	- Track durations
+	- Direct links to each SoundCloud track
+- Artwork lightbox modal:
+	- Opens when clicking album art or track art
+	- Supports close button, backdrop click, and `Esc` key
+- Embedded SoundCloud playlist players per release
+
+## Contact Form
+
+The contact form is client-side and submits directly to Web3Forms:
+
+- Endpoint: `https://api.web3forms.com/submit`
+- Access key: configured in `src/pages/contact.astro`
+- CAPTCHA: hCaptcha widget token sent as `h-captcha-response`
+- Honeypot field: `website`/`botcheck`
+
+No Cloudflare Pages Functions are required for form delivery.
 
 ## Local Development
 
@@ -43,28 +93,25 @@ Preview production build:
 npm run preview
 ```
 
+## Deployment (Cloudflare Pages)
+
+- Build command: `npm run build`
+- Build output directory: `dist`
+- Wrangler config: `wrangler.toml`
+- Recommended environment variable in Cloudflare Pages:
+	- `NODE_VERSION=22.12.0`
+
 ## Project Structure
 
 ```text
-functions/api/          Cloudflare Pages Functions (contact API)
 public/                 Static assets (logo, header art, global CSS)
 src/components/         Shared UI components (header/footer)
 src/config/             Site constants (site version)
 src/pages/              Astro routes/pages
+wrangler.toml           Cloudflare Pages build config
 ```
 
-## Contact Form (Brevo)
-
-The contact page submits to `POST /api/contact`, implemented as a Cloudflare Pages Function in `functions/api/contact.ts`.
-
-Set these environment variables in Cloudflare Pages:
-
-- `BREVO_API_KEY` (required)
-- `BREVO_SENDER_EMAIL` (required, must be a verified sender in Brevo)
-- `BREVO_SENDER_NAME` (optional, defaults to `Pneumaris Contact`)
-- `CONTACT_TO_EMAIL` (optional, defaults to `contact@pneumarisband.com`)
-
-## Social Links
+## Social Profiles
 
 - SoundCloud: https://soundcloud.com/pneumaris
 - YouTube: https://www.youtube.com/@Pneumaris

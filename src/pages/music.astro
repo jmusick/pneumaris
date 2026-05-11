@@ -1,6 +1,140 @@
 ---
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+
+interface AlbumTrack {
+	title: string;
+	url: string;
+	duration: string;
+	artwork: string;
+}
+
+interface Album {
+	title: string;
+	type: string;
+	year: string;
+	releaseDate: string;
+	description: string;
+	artwork: string;
+	albumUrl: string;
+	embedUrl: string;
+	tracks: AlbumTrack[];
+}
+
+const albums: Album[] = [
+	{
+		title: "The Shape",
+		type: "EP",
+		year: "2026",
+		releaseDate: "May 1, 2026",
+		description:
+			"The Shape is a three-song demo from Pneumaris, blending progressive metal, dark pop, and industrial atmosphere into a moody first glimpse of the project's sound. Heavy, melodic, and emotionally charged, the songs move through shadowy textures, shifting rhythms, and haunting hooks with a gothic edge.",
+		artwork: "https://i1.sndcdn.com/artworks-1h7d12BvyGr14Fsx-IzEZ5A-t500x500.jpg",
+		albumUrl: "https://soundcloud.com/pneumaris/sets/the-shape",
+		embedUrl:
+			"https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/pneumaris/sets/the-shape&start_track=0&color=%23b89a6a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&show_artwork=false&visual=false",
+		tracks: [
+			{
+				title: "Static Halo",
+				url: "https://soundcloud.com/pneumaris/static-halo",
+				duration: "2:28",
+				artwork: "https://i1.sndcdn.com/artworks-hlOxdsPUw2NXVahw-dPcg8g-t500x500.jpg",
+			},
+			{
+				title: "Silk & Silence",
+				url: "https://soundcloud.com/pneumaris/silk-silence",
+				duration: "2:09",
+				artwork: "https://i1.sndcdn.com/artworks-3hgK6gXNvquMpVwp-qkTmUw-t500x500.jpg",
+			},
+			{
+				title: "Velvet Teeth",
+				url: "https://soundcloud.com/pneumaris/velvet-teeth",
+				duration: "2:02",
+				artwork: "https://i1.sndcdn.com/artworks-kVdi9tfdxLZsSrPk-5k7hXQ-t500x500.jpg",
+			},
+		],
+	},
+	{
+		title: "Pleroma",
+		type: "Album",
+		year: "2026",
+		releaseDate: "May 8, 2026",
+		description:
+			"Pleroma drifts between devotion and collapse, a full-length descent through cosmic longing, fractured identity, ritualistic heaviness, and the quiet violence of becoming. Built from progressive metal, dark pop, ambient horror, and cinematic atmosphere, these songs move through eclipsed cathedrals, black oceans, sacred machinery, and the things we carry just to remain human.",
+		artwork: "https://i1.sndcdn.com/artworks-eN97hf5D66N4XleI-FOvo4w-t500x500.jpg",
+		albumUrl: "https://soundcloud.com/pneumaris/sets/pleroma",
+		embedUrl:
+			"https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/pneumaris/sets/pleroma&start_track=0&color=%23b89a6a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&show_artwork=false&visual=false",
+		tracks: [
+			{
+				title: "Hollow Constellations",
+				url: "https://soundcloud.com/pneumaris/hollow-constellations",
+				duration: "2:30",
+				artwork: "https://i1.sndcdn.com/artworks-LedzFHiC6M9GI4E6-5CiCjA-t500x500.jpg",
+			},
+			{
+				title: "Louder Than Your Thoughts",
+				url: "https://soundcloud.com/pneumaris/louder-than-your-thoughts",
+				duration: "2:24",
+				artwork: "https://i1.sndcdn.com/artworks-eG3WMALyprXVz14Z-D1zydA-t500x500.jpg",
+			},
+			{
+				title: "Devotion in the Low Light",
+				url: "https://soundcloud.com/pneumaris/devotion-in-the-low-light",
+				duration: "2:24",
+				artwork: "https://i1.sndcdn.com/artworks-ua4F66w4UnY4qQcD-BK2uxg-t500x500.jpg",
+			},
+			{
+				title: "The Shape That Answers",
+				url: "https://soundcloud.com/pneumaris/the-shape-that-answers",
+				duration: "2:57",
+				artwork: "https://i1.sndcdn.com/artworks-psxq6X7mCOhQOiTJ-tNZEBQ-t500x500.jpg",
+			},
+			{
+				title: "Blacklit Gravity",
+				url: "https://soundcloud.com/pneumaris/blacklit-gravity",
+				duration: "2:16",
+				artwork: "https://i1.sndcdn.com/artworks-1ZDcengSlDcDlz61-BSRzjw-t500x500.jpg",
+			},
+			{
+				title: "River",
+				url: "https://soundcloud.com/pneumaris/river",
+				duration: "0:09",
+				artwork: "https://i1.sndcdn.com/artworks-6a2RfM4dcr7VTWY8-DxEUBQ-t500x500.jpg",
+			},
+			{
+				title: "Where the Road Divides",
+				url: "https://soundcloud.com/pneumaris/where-the-road-divides",
+				duration: "1:47",
+				artwork: "https://i1.sndcdn.com/artworks-XUdUyr3QmJRjYIw6-e99NKQ-t500x500.jpg",
+			},
+			{
+				title: "What I Become",
+				url: "https://soundcloud.com/pneumaris/what-i-become",
+				duration: "3:36",
+				artwork: "https://i1.sndcdn.com/artworks-9VRX6HE1zXKPHDNU-LIR9xA-t500x500.jpg",
+			},
+			{
+				title: "A Beautiful Fracture",
+				url: "https://soundcloud.com/pneumaris/a-beautiful-fracture",
+				duration: "2:20",
+				artwork: "https://i1.sndcdn.com/artworks-IKnX0VMNjy0Ctu9B-Go9J4Q-t500x500.jpg",
+			},
+			{
+				title: "A Soft Cataclysm",
+				url: "https://soundcloud.com/pneumaris/a-soft-cataclysm",
+				duration: "1:01",
+				artwork: "https://i1.sndcdn.com/artworks-J9ji0yMGZByVJ2Dx-bdzvGQ-t500x500.jpg",
+			},
+			{
+				title: "Half-Haunted",
+				url: "https://soundcloud.com/pneumaris/half-haunted",
+				duration: "2:32",
+				artwork: "https://i1.sndcdn.com/artworks-ppNjWtXAWKyXL2Uf-hpW00Q-t500x500.jpg",
+			},
+		],
+	},
+];
 ---
 
 <html lang="en">
@@ -13,7 +147,7 @@ import SiteFooter from "../components/SiteFooter.astro";
 		<title>Music — Pneumaris</title>
 		<meta
 			name="description"
-			content="Listen to Pneumaris — all releases, tracks, and streams on SoundCloud."
+			content="Listen to Pneumaris albums with artwork, track lists, and SoundCloud playback."
 		/>
 		<style>
 			.page-header {
@@ -36,24 +170,248 @@ import SiteFooter from "../components/SiteFooter.astro";
 				font-size: clamp(2rem, 5vw, 3.5rem);
 			}
 
-			.embed-section {
+			.albums-section {
 				max-width: 1280px;
 				margin: 0 auto;
 				padding: 3rem clamp(1.1rem, 3vw, 2.4rem);
 				display: flex;
 				flex-direction: column;
-				gap: 2rem;
+				gap: 2.2rem;
 			}
 
-			.soundcloud-embed {
+			.album-card {
 				border: 1px solid var(--line);
-				border-radius: 0.5rem;
+				border-radius: 0.55rem;
+				background: linear-gradient(to bottom, rgba(28, 20, 13, 0.35), rgba(10, 8, 6, 0.4));
+				overflow: clip;
+			}
+
+			.album-meta {
+				display: grid;
+				grid-template-columns: minmax(180px, 240px) 1fr;
+				gap: 1.5rem;
+				padding: 1.3rem;
+				border-bottom: 1px solid var(--line);
+			}
+
+			.album-artwork {
+				aspect-ratio: 1 / 1;
+				width: 100%;
+				object-fit: cover;
+				border-radius: 0.45rem;
+				border: 1px solid var(--line);
+				box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+			}
+
+			.album-copy h2 {
+				font-size: clamp(1.5rem, 2.6vw, 2rem);
+				margin-bottom: 0.45rem;
+			}
+
+			.album-detail-line {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.65rem;
+				font-family: "Cinzel", serif;
+				font-size: 0.74rem;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+				color: var(--ink-soft);
+				margin-bottom: 0.8rem;
+			}
+
+			.album-description {
+				font-size: 0.98rem;
+				line-height: 1.75;
+				color: rgba(232, 224, 212, 0.78);
+				margin-bottom: 1rem;
+			}
+
+			.album-link {
+				font-family: "Cinzel", serif;
+				font-size: 0.75rem;
+				letter-spacing: 0.14em;
+				text-transform: uppercase;
+				color: var(--gold);
+				border-bottom: 1px solid rgba(184, 154, 106, 0.38);
+				padding-bottom: 0.15rem;
+				transition: color 160ms ease, border-color 160ms ease;
+			}
+
+			.album-link:hover {
+				color: var(--gold-bright);
+				border-color: var(--gold);
+			}
+
+			.track-list-wrap {
+				padding: 1.15rem 1.3rem 1.3rem;
+			}
+
+			.track-list-title {
+				font-family: "Cinzel", serif;
+				font-size: 0.78rem;
+				letter-spacing: 0.16em;
+				text-transform: uppercase;
+				color: var(--ink-soft);
+				margin-bottom: 0.85rem;
+			}
+
+			.track-list {
+				list-style: none;
+				padding: 0;
+				margin: 0 0 1.15rem;
+				display: grid;
+				gap: 0.4rem;
+			}
+
+			.track-row {
+				display: grid;
+				grid-template-columns: auto auto 1fr auto;
+				gap: 0.65rem;
+				align-items: center;
+				padding: 0.45rem 0.55rem;
+				border: 1px solid rgba(184, 154, 106, 0.15);
+				border-radius: 0.35rem;
+				background: rgba(18, 12, 8, 0.35);
+			}
+
+			.artwork-trigger {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				padding: 0;
+				border: 0;
+				background: transparent;
+				cursor: zoom-in;
+				border-radius: 0.25rem;
+			}
+
+			.artwork-trigger:focus-visible {
+				outline: 2px solid var(--gold);
+				outline-offset: 2px;
+			}
+
+			.artwork-trigger-album {
+				align-self: start;
+			}
+
+			.track-art {
+				width: 28px;
+				height: 28px;
+				border-radius: 0.2rem;
+				object-fit: cover;
+				border: 1px solid rgba(184, 154, 106, 0.25);
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+				align-self: center;
+			}
+
+			.track-index {
+				font-family: "Cinzel", serif;
+				font-size: 0.75rem;
+				letter-spacing: 0.1em;
+				color: var(--ink-soft);
+				min-width: 1.5rem;
+			}
+
+			.track-link {
+				color: var(--ink);
+				font-size: 0.95rem;
+				line-height: 1.35;
+				transition: color 160ms ease;
+			}
+
+			.track-link:hover {
+				color: var(--gold-bright);
+			}
+
+			.track-duration {
+				font-family: "Cinzel", serif;
+				font-size: 0.72rem;
+				letter-spacing: 0.12em;
+				color: rgba(232, 224, 212, 0.55);
+			}
+
+			.artwork-lightbox {
+				position: fixed;
+				inset: 0;
+				z-index: 1000;
+				display: grid;
+				place-items: center;
+				padding: 1.2rem;
+				background: rgba(4, 3, 2, 0.88);
+				backdrop-filter: blur(3px);
+			}
+
+			.artwork-lightbox[hidden] {
+				display: none;
+			}
+
+			.artwork-lightbox-dialog {
+				position: relative;
+				max-width: min(92vw, 980px);
+				max-height: 92vh;
+				border: 1px solid rgba(184, 154, 106, 0.5);
+				border-radius: 0.55rem;
+				background: #0d0a07;
+				box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
 				overflow: hidden;
 			}
 
-			.soundcloud-embed iframe {
+			.artwork-lightbox-image {
+				display: block;
+				max-width: min(92vw, 980px);
+				max-height: calc(92vh - 96px);
+				width: auto;
+				height: auto;
+			}
+
+			.artwork-lightbox-caption {
+				display: flex;
+				justify-content: space-between;
+				gap: 1rem;
+				align-items: baseline;
+				padding: 0.75rem 0.9rem;
+				border-top: 1px solid rgba(184, 154, 106, 0.22);
+			}
+
+			.artwork-lightbox-title {
+				font-family: "Cinzel", serif;
+				font-size: 0.9rem;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				color: var(--ink);
+			}
+
+			.artwork-lightbox-meta {
+				font-size: 0.82rem;
+				color: var(--ink-soft);
+			}
+
+			.artwork-lightbox-close {
+				position: absolute;
+				top: 0.45rem;
+				right: 0.45rem;
+				width: 2rem;
+				height: 2rem;
+				border: 1px solid rgba(184, 154, 106, 0.5);
+				border-radius: 999px;
+				background: rgba(8, 6, 4, 0.8);
+				color: var(--gold-bright);
+				font-size: 1.1rem;
+				line-height: 1;
+				cursor: pointer;
+			}
+
+			.album-player {
+				border: 1px solid rgba(184, 154, 106, 0.2);
+				border-radius: 0.35rem;
+				overflow: hidden;
+			}
+
+			.album-player iframe {
 				display: block;
 				width: 100%;
+				height: 166px;
 			}
 
 			.sc-link {
@@ -74,6 +432,21 @@ import SiteFooter from "../components/SiteFooter.astro";
 				color: var(--gold-bright);
 				border-color: var(--gold-dim);
 			}
+
+			@media (max-width: 860px) {
+				.album-meta {
+					grid-template-columns: 1fr;
+				}
+
+				.album-artwork {
+					max-width: 360px;
+				}
+
+				.artwork-lightbox-caption {
+					flex-direction: column;
+					gap: 0.25rem;
+				}
+			}
 		</style>
 	</head>
 	<body>
@@ -87,18 +460,75 @@ import SiteFooter from "../components/SiteFooter.astro";
 				</div>
 			</div>
 
-			<div class="embed-section">
-				<!-- Tracks player -->
-				<div class="soundcloud-embed">
-					<iframe
-						height="420"
-						scrolling="no"
-						frameborder="no"
-						allow="autoplay"
-						src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/pneumaris&color=%23b89a6a&auto_play=false&hide_related=false&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&show_artwork=false&visual=false"
-						title="Pneumaris — full discography on SoundCloud"
-					></iframe>
-				</div>
+			<div class="albums-section">
+				{
+					albums.map((album) => (
+						<article class="album-card">
+							<div class="album-meta">
+								<button
+									type="button"
+									class="artwork-trigger artwork-trigger-album"
+									data-artwork-src={album.artwork}
+									data-artwork-title={`${album.title} Cover`}
+									data-artwork-meta={`${album.type} • Released ${album.releaseDate}`}
+									aria-label={`Open full artwork for ${album.title}`}
+								>
+									<img class="album-artwork" src={album.artwork} alt={`${album.title} cover art`} loading="lazy" />
+								</button>
+								<div class="album-copy">
+									<h2>{album.title}</h2>
+									<div class="album-detail-line">
+										<span>{album.type}</span>
+										<span>{album.year}</span>
+										<span>{album.tracks.length} Tracks</span>
+										<span>Released {album.releaseDate}</span>
+									</div>
+									<p class="album-description">{album.description}</p>
+									<a class="album-link" href={album.albumUrl} target="_blank" rel="noopener noreferrer">
+										Open Album on SoundCloud
+									</a>
+								</div>
+							</div>
+
+							<div class="track-list-wrap">
+								<p class="track-list-title">Track List</p>
+								<ol class="track-list">
+									{
+										album.tracks.map((track, idx) => (
+											<li class="track-row">
+												<span class="track-index">{idx + 1}</span>
+												<button
+													type="button"
+													class="artwork-trigger"
+													data-artwork-src={track.artwork}
+													data-artwork-title={track.title}
+													data-artwork-meta={`${album.title} • Track ${idx + 1} • ${track.duration}`}
+													aria-label={`Open full artwork for ${track.title}`}
+												>
+													<img class="track-art" src={track.artwork} alt={`${track.title} artwork`} loading="lazy" />
+												</button>
+												<a class="track-link" href={track.url} target="_blank" rel="noopener noreferrer">
+													{track.title}
+												</a>
+												<span class="track-duration">{track.duration}</span>
+											</li>
+										))
+									}
+								</ol>
+
+								<div class="album-player">
+									<iframe
+										scrolling="no"
+										frameborder="no"
+										allow="autoplay"
+										src={album.embedUrl}
+										title={`${album.title} playlist player`}
+									></iframe>
+								</div>
+							</div>
+						</article>
+					))
+				}
 
 				<p class="sc-link">
 					Also available directly on
@@ -109,8 +539,75 @@ import SiteFooter from "../components/SiteFooter.astro";
 					>soundcloud.com/pneumaris</a>.
 				</p>
 			</div>
+
+			<div id="artwork-lightbox" class="artwork-lightbox" hidden>
+				<div class="artwork-lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="artwork-lightbox-title">
+					<button type="button" class="artwork-lightbox-close" data-artwork-close aria-label="Close artwork preview">
+						×
+					</button>
+					<img id="artwork-lightbox-image" class="artwork-lightbox-image" src="" alt="Expanded artwork" />
+					<div class="artwork-lightbox-caption">
+						<strong id="artwork-lightbox-title" class="artwork-lightbox-title"></strong>
+						<span id="artwork-lightbox-meta" class="artwork-lightbox-meta"></span>
+					</div>
+				</div>
+			</div>
 		</main>
 
 		<SiteFooter />
+
+		<script>
+			const lightbox = document.getElementById("artwork-lightbox");
+			const lightboxImage = document.getElementById("artwork-lightbox-image");
+			const lightboxTitle = document.getElementById("artwork-lightbox-title");
+			const lightboxMeta = document.getElementById("artwork-lightbox-meta");
+
+			const openArtworkLightbox = (src, title, meta) => {
+				if (!lightbox || !lightboxImage || !lightboxTitle || !lightboxMeta) return;
+				lightboxImage.src = src;
+				lightboxTitle.textContent = title;
+				lightboxMeta.textContent = meta;
+				lightbox.hidden = false;
+				document.body.style.overflow = "hidden";
+			};
+
+			const closeArtworkLightbox = () => {
+				if (!lightbox || !lightboxImage) return;
+				lightbox.hidden = true;
+				lightboxImage.src = "";
+				document.body.style.overflow = "";
+			};
+
+			document.addEventListener("click", (event) => {
+				if (!(event.target instanceof Element)) return;
+
+				const trigger = event.target.closest("[data-artwork-src]");
+				if (trigger instanceof HTMLElement) {
+					const src = trigger.dataset.artworkSrc;
+					if (!src) return;
+					openArtworkLightbox(
+						src,
+						trigger.dataset.artworkTitle || "Artwork",
+						trigger.dataset.artworkMeta || "",
+					);
+					return;
+				}
+
+				if (event.target.closest("[data-artwork-close]")) {
+					closeArtworkLightbox();
+					return;
+				}
+
+				if (lightbox && event.target === lightbox) {
+					closeArtworkLightbox();
+				}
+			});
+
+			document.addEventListener("keydown", (event) => {
+				if (event.key === "Escape" && lightbox && !lightbox.hidden) {
+					closeArtworkLightbox();
+				}
+			});
+		</script>
 	</body>
 </html>

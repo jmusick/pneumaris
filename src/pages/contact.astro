@@ -12,7 +12,7 @@ import SiteFooter from "../components/SiteFooter.astro";
 		<meta name="generator" content={Astro.generator} />
 		<title>Contact — Pneumaris</title>
 		<meta name="description" content="Get in touch with Pneumaris." />
-		<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+		<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 		<style>
 			.page-header {
 				border-bottom: 1px solid var(--line);
@@ -222,7 +222,7 @@ import SiteFooter from "../components/SiteFooter.astro";
 						<input id="website" name="website" type="text" autocomplete="off" tabindex="-1" />
 					</div>
 
-					<div class="cf-turnstile" data-sitekey="0x4AAAAAADLj5l89sWh7XOVH" data-theme="dark"></div>
+					<div class="h-captcha" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2" data-theme="dark"></div>
 
 					<button class="contact-submit" type="submit">Send Message</button>
 					<p id="form-status" class="form-status" role="status" aria-live="polite"></p>
@@ -257,8 +257,8 @@ import SiteFooter from "../components/SiteFooter.astro";
 					submitButton.disabled = true;
 
 					const formData = new FormData(form);
-					const turnstileToken = String(formData.get("cf-turnstile-response") || "").trim();
-					if (!turnstileToken) {
+					const hCaptchaToken = String(formData.get("h-captcha-response") || "").trim();
+					if (!hCaptchaToken) {
 						statusEl.textContent = "Please complete the CAPTCHA challenge.";
 						statusEl.className = "form-status error";
 						submitButton.disabled = false;
@@ -271,6 +271,7 @@ import SiteFooter from "../components/SiteFooter.astro";
 						email: String(formData.get("email") || "").trim(),
 						subject: String(formData.get("subject") || "").trim(),
 						message: String(formData.get("message") || "").trim(),
+						"h-captcha-response": hCaptchaToken,
 						botcheck: String(formData.get("website") || "").trim(),
 					};
 
