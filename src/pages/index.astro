@@ -1,6 +1,41 @@
 ---
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import { SITE_URL } from "../config/site";
+
+const pageTitle = "Pneumaris";
+const pageDescription = "Pneumaris — atmospheric music from the void. Listen on SoundCloud.";
+const canonicalUrl = `${SITE_URL}/`;
+const socialImageUrl = `${SITE_URL}/header.png`;
+const structuredData = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "WebSite",
+			"@id": `${SITE_URL}/#website`,
+			url: canonicalUrl,
+			name: "Pneumaris",
+			description: pageDescription,
+			inLanguage: "en",
+		},
+		{
+			"@type": "MusicGroup",
+			"@id": `${SITE_URL}/#musicgroup`,
+			url: canonicalUrl,
+			name: "Pneumaris",
+			description: pageDescription,
+			image: socialImageUrl,
+			sameAs: [
+				"https://soundcloud.com/pneumaris",
+				"https://www.youtube.com/@Pneumaris",
+				"https://www.tiktok.com/@pneumaris",
+				"https://x.com/pneumarisband",
+				"https://www.instagram.com/pneumaris/",
+				"https://www.facebook.com/profile.php?id=61589446647657",
+			],
+		},
+	],
+};
 ---
 
 <html lang="en">
@@ -10,11 +45,20 @@ import SiteFooter from "../components/SiteFooter.astro";
 		<meta name="viewport" content="width=device-width" />
 		<link rel="stylesheet" href="/universal.css" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Pneumaris</title>
-		<meta
-			name="description"
-			content="Pneumaris — atmospheric music from the void. Listen on SoundCloud."
-		/>
+		<title>{pageTitle}</title>
+		<meta name="description" content={pageDescription} />
+		<link rel="canonical" href={canonicalUrl} />
+		<meta property="og:site_name" content="Pneumaris" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={pageDescription} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:image" content={socialImageUrl} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={pageDescription} />
+		<meta name="twitter:image" content={socialImageUrl} />
+		<script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
 		<style>
 			.hero {
 				position: relative;

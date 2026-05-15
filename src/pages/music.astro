@@ -1,6 +1,7 @@
 ---
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import { SITE_URL } from "../config/site";
 
 interface AlbumTrack {
 	title: string;
@@ -135,6 +136,11 @@ const albums: Album[] = [
 		],
 	},
 ];
+
+const pageTitle = "Music — Pneumaris";
+const pageDescription = "Listen to Pneumaris albums with artwork, track lists, and SoundCloud playback.";
+const canonicalUrl = `${SITE_URL}/music`;
+const socialImageUrl = `${SITE_URL}/header.png`;
 ---
 
 <html lang="en">
@@ -144,11 +150,19 @@ const albums: Album[] = [
 		<meta name="viewport" content="width=device-width" />
 		<link rel="stylesheet" href="/universal.css" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Music — Pneumaris</title>
-		<meta
-			name="description"
-			content="Listen to Pneumaris albums with artwork, track lists, and SoundCloud playback."
-		/>
+		<title>{pageTitle}</title>
+		<meta name="description" content={pageDescription} />
+		<link rel="canonical" href={canonicalUrl} />
+		<meta property="og:site_name" content="Pneumaris" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={pageDescription} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:image" content={socialImageUrl} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={pageDescription} />
+		<meta name="twitter:image" content={socialImageUrl} />
 		<style>
 			.page-header {
 				border-bottom: 1px solid var(--line);

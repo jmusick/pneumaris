@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pneumaris.com/sitemap-index.xml
