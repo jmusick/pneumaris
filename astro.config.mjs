@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://pneumaris.com',
+	site: 'https://pneumarisband.com',
 	server: {
 		host: true,
 		port: 4321,
