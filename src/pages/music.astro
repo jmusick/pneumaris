@@ -1,6 +1,6 @@
 ---
-import SiteHeader from "../components/SiteHeader.astro";
-import SiteFooter from "../components/SiteFooter.astro";
+import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
 import { SITE_URL } from "../config/site";
 
 interface AlbumTrack {
@@ -19,6 +19,8 @@ interface Album {
 	artwork: string;
 	albumUrl: string;
 	embedUrl: string;
+	spotifyUrl?: string;
+	appleMusicUrl?: string;
 	tracks: AlbumTrack[];
 }
 
@@ -32,6 +34,8 @@ const albums: Album[] = [
 			"The Shape is a three-song demo from Pneumaris, blending progressive metal, dark pop, and industrial atmosphere into a moody first glimpse of the project's sound. Heavy, melodic, and emotionally charged, the songs move through shadowy textures, shifting rhythms, and haunting hooks with a gothic edge.",
 		artwork: "https://i1.sndcdn.com/artworks-1h7d12BvyGr14Fsx-IzEZ5A-t500x500.jpg",
 		albumUrl: "https://soundcloud.com/pneumaris/sets/the-shape",
+		spotifyUrl: "https://open.spotify.com/album/4wMdovuOOMvWyYrRZ18erR",
+		appleMusicUrl: "https://music.apple.com/us/album/the-shape-single/6767819822",
 		embedUrl:
 			"https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/pneumaris/sets/the-shape&start_track=0&color=%23b89a6a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&show_artwork=false&visual=false",
 		tracks: [
@@ -143,27 +147,9 @@ const canonicalUrl = `${SITE_URL}/music`;
 const socialImageUrl = `${SITE_URL}/header.png`;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/png" href="/logo.png" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="stylesheet" href="/universal.css" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-		<meta name="description" content={pageDescription} />
-		<link rel="canonical" href={canonicalUrl} />
-		<meta property="og:site_name" content="Pneumaris" />
-		<meta property="og:type" content="website" />
-		<meta property="og:title" content={pageTitle} />
-		<meta property="og:description" content={pageDescription} />
-		<meta property="og:url" content={canonicalUrl} />
-		<meta property="og:image" content={socialImageUrl} />
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content={pageTitle} />
-		<meta name="twitter:description" content={pageDescription} />
-		<meta name="twitter:image" content={socialImageUrl} />
-		<style>
+<Layout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl} active="music">
+
+<style>
 			.page-header {
 				border-bottom: 1px solid var(--line);
 				padding: 3.5rem clamp(1.1rem, 3vw, 2.4rem) 2.5rem;
@@ -242,19 +228,30 @@ const socialImageUrl = `${SITE_URL}/header.png`;
 			}
 
 			.album-link {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
 				font-family: "Cinzel", serif;
 				font-size: 0.75rem;
-				letter-spacing: 0.14em;
+				letter-spacing: 0.12em;
 				text-transform: uppercase;
 				color: var(--gold);
-				border-bottom: 1px solid rgba(184, 154, 106, 0.38);
-				padding-bottom: 0.15rem;
-				transition: color 160ms ease, border-color 160ms ease;
+				border: 1px solid rgba(184, 154, 106, 0.38);
+				border-radius: 2rem;
+				padding: 0.45rem 0.9rem;
+				transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
 			}
 
 			.album-link:hover {
 				color: var(--gold-bright);
 				border-color: var(--gold);
+				background: rgba(184, 154, 106, 0.08);
+			}
+
+			.album-link svg {
+				width: 1.1rem;
+				height: 1.1rem;
+				flex-shrink: 0;
 			}
 
 			.track-list-wrap {
@@ -428,23 +425,23 @@ const socialImageUrl = `${SITE_URL}/header.png`;
 				height: 166px;
 			}
 
-			.sc-link {
+			.stream-links {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+				align-items: center;
+				gap: 0.85rem;
+				padding: 0.5rem 0;
+			}
+
+			.stream-links-label {
 				text-align: center;
 				color: var(--ink-soft);
-				font-size: 0.88rem;
-				letter-spacing: 0.05em;
-			}
-
-			.sc-link a {
-				color: var(--gold);
-				border-bottom: 1px solid var(--line);
-				padding-bottom: 1px;
-				transition: color 180ms ease, border-color 180ms ease;
-			}
-
-			.sc-link a:hover {
-				color: var(--gold-bright);
-				border-color: var(--gold-dim);
+				font-size: 0.82rem;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				font-family: "Cinzel", serif;
+				margin-bottom: 0.75rem;
 			}
 
 			@media (max-width: 860px) {
@@ -461,10 +458,7 @@ const socialImageUrl = `${SITE_URL}/header.png`;
 					gap: 0.25rem;
 				}
 			}
-		</style>
-	</head>
-	<body>
-		<SiteHeader active="music" />
+</style>
 
 		<main>
 			<div class="page-header">
@@ -498,9 +492,11 @@ const socialImageUrl = `${SITE_URL}/header.png`;
 										<span>Released {album.releaseDate}</span>
 									</div>
 									<p class="album-description">{album.description}</p>
-									<a class="album-link" href={album.albumUrl} target="_blank" rel="noopener noreferrer">
-										Open Album on SoundCloud
-									</a>
+								<div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;">
+									<a class="album-link" href={album.albumUrl} target="_blank" rel="noopener noreferrer"><Icon name="simple-icons:soundcloud" aria-hidden="true" />SoundCloud</a>
+									{album.spotifyUrl && <a class="album-link" href={album.spotifyUrl} target="_blank" rel="noopener noreferrer"><Icon name="simple-icons:spotify" aria-hidden="true" />Spotify</a>}
+									{album.appleMusicUrl && <a class="album-link" href={album.appleMusicUrl} target="_blank" rel="noopener noreferrer"><Icon name="simple-icons:applemusic" aria-hidden="true" />Apple Music</a>}
+								</div>
 								</div>
 							</div>
 
@@ -544,14 +540,20 @@ const socialImageUrl = `${SITE_URL}/header.png`;
 					))
 				}
 
-				<p class="sc-link">
-					Also available directly on
-					<a
-						href="https://soundcloud.com/pneumaris"
-						target="_blank"
-						rel="noopener noreferrer"
-					>soundcloud.com/pneumaris</a>.
-				</p>
+				<div>
+					<p class="stream-links-label">Stream on</p>
+					<div class="stream-links">
+						<a class="album-link" href="https://soundcloud.com/pneumaris" target="_blank" rel="noopener noreferrer">
+							<Icon name="simple-icons:soundcloud" aria-hidden="true" />SoundCloud
+						</a>
+						<a class="album-link" href="https://open.spotify.com/artist/0LwtEDzdDXRarZ1H4eLqnU" target="_blank" rel="noopener noreferrer">
+							<Icon name="simple-icons:spotify" aria-hidden="true" />Spotify
+						</a>
+						<a class="album-link" href="https://music.apple.com/us/artist/pneumaris/1896511324" target="_blank" rel="noopener noreferrer">
+							<Icon name="simple-icons:applemusic" aria-hidden="true" />Apple Music
+						</a>
+					</div>
+				</div>
 			</div>
 
 			<div id="artwork-lightbox" class="artwork-lightbox" hidden>
@@ -568,7 +570,6 @@ const socialImageUrl = `${SITE_URL}/header.png`;
 			</div>
 		</main>
 
-		<SiteFooter />
 
 		<script>
 			const lightbox = document.getElementById("artwork-lightbox") as HTMLElement | null;
@@ -623,5 +624,4 @@ const socialImageUrl = `${SITE_URL}/header.png`;
 				}
 			});
 		</script>
-	</body>
-</html>
+</Layout>

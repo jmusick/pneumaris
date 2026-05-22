@@ -1,6 +1,5 @@
 ---
-import SiteHeader from "../components/SiteHeader.astro";
-import SiteFooter from "../components/SiteFooter.astro";
+import Layout from "../layouts/Layout.astro";
 import { SITE_URL } from "../config/site";
 
 const pageTitle = "Privacy Policy — Pneumaris";
@@ -9,27 +8,9 @@ const canonicalUrl = `${SITE_URL}/privacy-policy`;
 const socialImageUrl = `${SITE_URL}/header.png`;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/png" href="/logo.png" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="stylesheet" href="/universal.css" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-		<meta name="description" content={pageDescription} />
-		<link rel="canonical" href={canonicalUrl} />
-		<meta property="og:site_name" content="Pneumaris" />
-		<meta property="og:type" content="website" />
-		<meta property="og:title" content={pageTitle} />
-		<meta property="og:description" content={pageDescription} />
-		<meta property="og:url" content={canonicalUrl} />
-		<meta property="og:image" content={socialImageUrl} />
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content={pageTitle} />
-		<meta name="twitter:description" content={pageDescription} />
-		<meta name="twitter:image" content={socialImageUrl} />
-		<style>
+<Layout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl}>
+
+<style>
 			.page-header {
 				border-bottom: 1px solid var(--line);
 				padding: 3.5rem clamp(1.1rem, 3vw, 2.4rem) 2.5rem;
@@ -90,10 +71,7 @@ const socialImageUrl = `${SITE_URL}/header.png`;
 				color: var(--ink-muted);
 				letter-spacing: 0.05em;
 			}
-		</style>
-	</head>
-	<body>
-		<SiteHeader />
+</style>
 
 		<main>
 			<div class="page-header">
@@ -104,7 +82,7 @@ const socialImageUrl = `${SITE_URL}/header.png`;
 			</div>
 
 			<div class="content">
-				<p class="last-updated">Last updated: May 11, 2026</p>
+				<p class="last-updated">Last updated: May 22, 2026</p>
 
 				<div class="policy-block">
 					<h2>Overview</h2>
@@ -132,29 +110,38 @@ const socialImageUrl = `${SITE_URL}/header.png`;
 				<div class="policy-block">
 					<h2>Analytics</h2>
 					<p>
-						This website uses <strong>Cloudflare Web Analytics</strong> to measure
-						aggregate traffic and site performance (for example, page views,
-						referrers, browser/device categories, and country-level trends).
+						This website uses <strong>Google Analytics 4</strong> (via Google's
+						global site tag, gtag.js) to measure traffic and understand how
+						visitors use the site. Google Analytics collects information such as
+						pages visited, time on site, referral source, device type, and
+						approximate geographic location.
 					</p>
 					<p>
-						Cloudflare Web Analytics is designed to be privacy-friendly and does
-						not rely on client-side advertising cookies for basic reporting. See
-						the
-						<a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">Cloudflare Privacy Policy</a>.
+						Google Analytics uses cookies (including <code>_ga</code> and
+						<code>_ga_*</code>) to distinguish users and sessions. You can opt
+						out using the
+						<a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Browser Add-on</a>
+						or by enabling Do Not Track in your browser. See the
+						<a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a>.
 					</p>
 				</div>
 
 				<div class="policy-block">
 					<h2>Third-Party Services</h2>
 					<p>
-						This site embeds content from third-party platforms that may collect
+						This site uses or links to third-party platforms that may collect
 						data independently under their own privacy policies:
 					</p>
 					<ul>
 						<li>
-							<strong>Cloudflare Web Analytics</strong> — used to measure
-							aggregate site usage and performance trends. See the
-							<a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">Cloudflare Privacy Policy</a>.
+							<strong>Google Analytics</strong> — used to measure site traffic
+							and visitor behavior. See the
+							<a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a>.
+						</li>
+						<li>
+							<strong>Google Fonts</strong> — used to load typefaces. Google may
+							log requests made to their font servers. See the
+							<a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a>.
 						</li>
 						<li>
 							<strong>Web3Forms</strong> — used to process contact form
@@ -163,19 +150,25 @@ const socialImageUrl = `${SITE_URL}/header.png`;
 						</li>
 						<li>
 							<strong>hCaptcha</strong> — used to protect the contact form from
-							spam and abuse. hCaptcha may process technical and behavioral data to
-							perform bot detection. See the
+							spam and abuse. hCaptcha may process technical and behavioral data
+							to perform bot detection. See the
 							<a href="https://www.hcaptcha.com/privacy" target="_blank" rel="noopener noreferrer">hCaptcha Privacy Policy</a>.
 						</li>
 						<li>
-							<strong>SoundCloud</strong> — used to stream music. SoundCloud may set
-							cookies and collect usage data. See the
+							<strong>SoundCloud</strong> — used to stream music. SoundCloud may
+							set cookies and collect usage data. See the
 							<a href="https://soundcloud.com/pages/privacy" target="_blank" rel="noopener noreferrer">SoundCloud Privacy Policy</a>.
 						</li>
 						<li>
-							<strong>Google Fonts</strong> — used to load typefaces. Google may log
-							requests made to their font servers. See the
-							<a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a>.
+							<strong>Spotify</strong> — we link to our Spotify artist profile.
+							Spotify may collect data if you visit their platform. See the
+							<a href="https://www.spotify.com/legal/privacy-policy/" target="_blank" rel="noopener noreferrer">Spotify Privacy Policy</a>.
+						</li>
+						<li>
+							<strong>Apple Music</strong> — we link to our Apple Music artist
+							profile. Apple may collect data if you visit their platform. See
+							the
+							<a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Apple Privacy Policy</a>.
 						</li>
 					</ul>
 				</div>
@@ -183,9 +176,16 @@ const socialImageUrl = `${SITE_URL}/header.png`;
 				<div class="policy-block">
 					<h2>Cookies</h2>
 					<p>
-						This website does not set its own analytics cookies. Third-party
-						services listed above, including SoundCloud and hCaptcha, may set
-						cookies or similar technologies subject to their own policies.
+						This website uses cookies set by <strong>Google Analytics</strong>
+						(<code>_ga</code>, <code>_ga_*</code>) to distinguish users and
+						measure site usage. These cookies persist for up to 2 years. Third-party
+						services such as SoundCloud and hCaptcha may also set their own cookies
+						subject to their respective policies.
+					</p>
+					<p>
+						You can disable or delete cookies through your browser settings, or
+						opt out of Google Analytics tracking via the
+						<a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Browser Add-on</a>.
 					</p>
 				</div>
 
@@ -215,6 +215,4 @@ const socialImageUrl = `${SITE_URL}/header.png`;
 			</div>
 		</main>
 
-		<SiteFooter />
-	</body>
-</html>
+</Layout>

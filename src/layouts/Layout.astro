@@ -1,0 +1,58 @@
+---
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { SITE_URL } from "../config/site";
+
+interface Props {
+	title: string;
+	description: string;
+	canonicalUrl: string;
+	socialImageUrl?: string;
+	active?: "home" | "music" | "about" | "contact";
+}
+
+const {
+	title,
+	description,
+	canonicalUrl,
+	socialImageUrl = `${SITE_URL}/header.png`,
+	active,
+} = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-DE6XTGT291"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-DE6XTGT291');
+		</script>
+		<link rel="icon" type="image/png" href="/logo.png" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="stylesheet" href="/universal.css" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalUrl} />
+		<meta property="og:site_name" content="Pneumaris" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:image" content={socialImageUrl} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={socialImageUrl} />
+		<slot name="head" />
+	</head>
+	<body>
+		<SiteHeader active={active} />
+		<slot />
+		<SiteFooter />
+	</body>
+</html>

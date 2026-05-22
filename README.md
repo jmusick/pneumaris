@@ -5,16 +5,17 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 ## Current Stack
 
 - Astro 6
-- astro-icon (Iconify)
+- astro-icon (Iconify / Simple Icons)
 - TypeScript (strict Astro tsconfig)
 - Cloudflare Pages (static output)
+- Google Analytics 4 (gtag.js)
 - Web3Forms (contact form delivery)
 - hCaptcha (bot protection)
 
 ## Current Version
 
-- App package version: 1.2.4
-- Site display version: 1.2.4
+- App package version: 1.3.0
+- Site display version: 1.3.0
 
 ## Site Features
 
@@ -27,17 +28,23 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 	- Contact (`/contact`) with Web3Forms + hCaptcha
 	- Privacy Policy (`/privacy-policy`)
 - Social links in header:
+	- Spotify
+	- Apple Music
 	- SoundCloud
 	- YouTube
 	- TikTok
 	- X
 	- Instagram
 	- Facebook
-- Footer version badge sourced from `src/config/site.ts`
+- Footer: Privacy Policy, Sitemap, version badge (sourced from `src/config/site.ts`)
+- Shared page layout via `src/layouts/Layout.astro` (meta tags, GA4 tag, header/footer)
+- Google Analytics 4 tracking on all pages
 
 ## Music Page Highlights
 
 - Data-backed album sections for current Pneumaris releases
+- Per-album streaming links (SoundCloud, Spotify, Apple Music) with icons
+- "Stream on" section at the bottom of the page with all three platforms
 - Album metadata display:
 	- Type (EP/Album)
 	- Release date
@@ -106,13 +113,16 @@ npm run preview
 ```text
 public/                 Static assets (logo, header art, global CSS)
 src/components/         Shared UI components (header/footer)
-src/config/             Site constants (site version)
+src/config/             Site constants (site version, site URL)
+src/layouts/            Shared page layout (Layout.astro)
 src/pages/              Astro routes/pages
 wrangler.toml           Cloudflare Pages build config
 ```
 
-## Social Profiles
+## Social & Streaming Profiles
 
+- Spotify: https://open.spotify.com/artist/0LwtEDzdDXRarZ1H4eLqnU
+- Apple Music: https://music.apple.com/us/artist/pneumaris/1896511324
 - SoundCloud: https://soundcloud.com/pneumaris
 - YouTube: https://www.youtube.com/@Pneumaris
 - TikTok: https://www.tiktok.com/@pneumaris

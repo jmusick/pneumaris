@@ -1,6 +1,5 @@
 ---
-import SiteHeader from "../components/SiteHeader.astro";
-import SiteFooter from "../components/SiteFooter.astro";
+import Layout from "../layouts/Layout.astro";
 import { SITE_URL } from "../config/site";
 
 const pageTitle = "Contact — Pneumaris";
@@ -9,28 +8,13 @@ const canonicalUrl = `${SITE_URL}/contact`;
 const socialImageUrl = `${SITE_URL}/header.png`;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/png" href="/logo.png" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="stylesheet" href="/universal.css" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-		<meta name="description" content={pageDescription} />
-		<link rel="canonical" href={canonicalUrl} />
-		<meta property="og:site_name" content="Pneumaris" />
-		<meta property="og:type" content="website" />
-		<meta property="og:title" content={pageTitle} />
-		<meta property="og:description" content={pageDescription} />
-		<meta property="og:url" content={canonicalUrl} />
-		<meta property="og:image" content={socialImageUrl} />
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content={pageTitle} />
-		<meta name="twitter:description" content={pageDescription} />
-		<meta name="twitter:image" content={socialImageUrl} />
+<Layout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl} active="contact">
+
+	<Fragment slot="head">
 		<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
-		<style>
+	</Fragment>
+
+<style>
 			.page-header {
 				border-bottom: 1px solid var(--line);
 				padding: 3.5rem clamp(1.1rem, 3vw, 2.4rem) 2.5rem;
@@ -194,10 +178,7 @@ const socialImageUrl = `${SITE_URL}/header.png`;
 					grid-template-columns: 1fr;
 				}
 			}
-		</style>
-	</head>
-	<body>
-		<SiteHeader active="contact" />
+</style>
 
 		<main>
 			<div class="page-header">
@@ -259,7 +240,6 @@ const socialImageUrl = `${SITE_URL}/header.png`;
 			</div>
 		</main>
 
-		<SiteFooter />
 
 		<script>
 			const form = document.getElementById("contact-form") as HTMLFormElement | null;
@@ -322,5 +302,4 @@ const socialImageUrl = `${SITE_URL}/header.png`;
 				});
 			}
 		</script>
-	</body>
-</html>
+</Layout>

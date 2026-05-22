@@ -1,6 +1,5 @@
 ---
-import SiteHeader from "../components/SiteHeader.astro";
-import SiteFooter from "../components/SiteFooter.astro";
+import Layout from "../layouts/Layout.astro";
 import { SITE_URL } from "../config/site";
 
 const pageTitle = "Pneumaris";
@@ -38,28 +37,13 @@ const structuredData = {
 };
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/png" href="/logo.png" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="stylesheet" href="/universal.css" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-		<meta name="description" content={pageDescription} />
-		<link rel="canonical" href={canonicalUrl} />
-		<meta property="og:site_name" content="Pneumaris" />
-		<meta property="og:type" content="website" />
-		<meta property="og:title" content={pageTitle} />
-		<meta property="og:description" content={pageDescription} />
-		<meta property="og:url" content={canonicalUrl} />
-		<meta property="og:image" content={socialImageUrl} />
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content={pageTitle} />
-		<meta name="twitter:description" content={pageDescription} />
-		<meta name="twitter:image" content={socialImageUrl} />
+<Layout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl} active="home">
+
+	<Fragment slot="head">
 		<script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
-		<style>
+	</Fragment>
+
+<style>
 			.hero {
 				position: relative;
 				width: 100%;
@@ -215,10 +199,7 @@ const structuredData = {
 					width: min(100%, 220px);
 				}
 			}
-		</style>
-	</head>
-	<body>
-		<SiteHeader active="home" />
+</style>
 
 		<main>
 			<!-- Hero -->
@@ -258,6 +239,4 @@ const structuredData = {
 			</section>
 		</main>
 
-		<SiteFooter />
-	</body>
-</html>
+</Layout>
