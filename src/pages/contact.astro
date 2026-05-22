@@ -8,7 +8,13 @@ const canonicalUrl = `${SITE_URL}/contact`;
 const socialImageUrl = `${SITE_URL}/header.png`;
 ---
 
-<Layout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl} active="contact">
+<Layout
+	title={pageTitle}
+	description={pageDescription}
+	canonicalUrl={canonicalUrl}
+	socialImageUrl={socialImageUrl}
+	active="contact"
+>
 
 	<Fragment slot="head">
 		<script src="https://js.hcaptcha.com/1/api.js" async defer></script>

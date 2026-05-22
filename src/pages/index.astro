@@ -37,11 +37,14 @@ const structuredData = {
 };
 ---
 
-<Layout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl} active="home">
-
-	<Fragment slot="head">
-		<script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
-	</Fragment>
+<Layout
+	title={pageTitle}
+	description={pageDescription}
+	canonicalUrl={canonicalUrl}
+	socialImageUrl={socialImageUrl}
+	structuredData={structuredData}
+	active="home"
+>
 
 <style>
 			.hero {
