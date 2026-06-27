@@ -2,18 +2,14 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Dev Server",
-      "type": "node",
+      "name": "Pneumaris: Local Dev",
+      "type": "firefox",
       "request": "launch",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
+      "reAttach": true,
+      "url": "http://localhost:4321/",
+      "webRoot": "${workspaceFolder}",
       "cwd": "${workspaceFolder}",
-      "serverReadyAction": {
-        "pattern": "Local\\s+http://localhost:(\\d+)",
-        "uriFormat": "http://localhost:%s",
-        "action": "openExternally"
-      },
-      "skipFiles": ["<node_internals>/**"]
+      "preLaunchTask": "Pneumaris: dev"
     }
   ]
 }

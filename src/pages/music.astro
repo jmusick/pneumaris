@@ -34,6 +34,8 @@ const albums: Album[] = [
 			"Eidolon is a haunted transmission from the self that survived and the self that didn't. Across 13 tracks, Pneumaris pulls progressive metal, dark cinematic pop, industrial textures, blues-soaked guitar, piano balladry, bowed-string atmosphere, and experimental rhythmic detours into one shadowed body. Moving through identity, obsession, memory, devotion, artificial creation, and the strange rituals we build to stay intact, the album is dark, melodic, intimate, and massive in turns — an album about echoes: the voices we follow, the ghosts we become, and the shape left behind when something inside us changes.",
 		artwork: "https://i1.sndcdn.com/artworks-koC13oEvnjO9T9uh-zpvuYQ-t500x500.jpg",
 		albumUrl: "https://soundcloud.com/pneumaris/sets/eidolon",
+		spotifyUrl: "https://open.spotify.com/album/4AslLFUqQ4D77DBdPA95nO",
+		appleMusicUrl: "https://music.apple.com/us/album/eidolon/6782643086",
 		embedUrl:
 			"https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/pneumaris/sets/eidolon&start_track=0&color=%23b89a6a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&show_artwork=false&visual=false",
 		tracks: [
@@ -126,6 +128,8 @@ const albums: Album[] = [
 			"The Black Wake is a two-track single from Pneumaris, pairing a gothic progressive metal sea shanty with a haunted ragtime instrumental. The release drifts through cosmic horror, maritime dread, and the strange beauty found beneath dark water.",
 		artwork: "https://i1.sndcdn.com/artworks-lvnO03Qb1grNbhcm-2VyPzQ-t500x500.jpg",
 		albumUrl: "https://soundcloud.com/pneumaris/sets/the-black-wake",
+		spotifyUrl: "https://open.spotify.com/album/1lzphocLKpT5uscfQqLaIt",
+		appleMusicUrl: "https://music.apple.com/us/album/the-black-wake-single/6777567916",
 		embedUrl:
 			"https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/pneumaris/sets/the-black-wake&start_track=0&color=%23b89a6a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&show_artwork=false&visual=false",
 		tracks: [
@@ -152,6 +156,8 @@ const albums: Album[] = [
 			"Pleroma drifts between devotion and collapse, a full-length descent through cosmic longing, fractured identity, ritualistic heaviness, and the quiet violence of becoming. Built from progressive metal, dark pop, ambient horror, and cinematic atmosphere, these songs move through eclipsed cathedrals, black oceans, sacred machinery, and the things we carry just to remain human.",
 		artwork: "https://i1.sndcdn.com/artworks-eN97hf5D66N4XleI-FOvo4w-t500x500.jpg",
 		albumUrl: "https://soundcloud.com/pneumaris/sets/pleroma",
+		spotifyUrl: "https://open.spotify.com/album/0tv6zoZ04743AZbHnQfA34",
+		appleMusicUrl: "https://music.apple.com/us/album/pleroma/6782904659",
 		embedUrl:
 			"https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/pneumaris/sets/pleroma&start_track=0&color=%23b89a6a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&show_artwork=false&visual=false",
 		tracks: [
@@ -260,8 +266,8 @@ const albums: Album[] = [
 ];
 
 const pageTitle = "Music — Pneumaris";
-const pageDescription = "Listen to Pneumaris albums with artwork, track lists, and SoundCloud playback.";
-const canonicalUrl = `${SITE_URL}/music`;
+const pageDescription = "Listen to Pneumaris albums with artwork and embedded playback.";
+const canonicalUrl = `${SITE_URL}/music/`;
 const socialImageUrl = `${SITE_URL}/header.png`;
 ---
 
@@ -382,33 +388,6 @@ const socialImageUrl = `${SITE_URL}/header.png`;
 				padding: 1.15rem 1.3rem 1.3rem;
 			}
 
-			.track-list-title {
-				font-family: "Cinzel", serif;
-				font-size: 0.78rem;
-				letter-spacing: 0.16em;
-				text-transform: uppercase;
-				color: var(--ink-soft);
-				margin-bottom: 0.85rem;
-			}
-
-			.track-list {
-				list-style: none;
-				padding: 0;
-				margin: 0 0 1.15rem;
-				display: grid;
-				gap: 0.4rem;
-			}
-
-			.track-row {
-				display: grid;
-				grid-template-columns: auto auto 1fr auto;
-				gap: 0.65rem;
-				align-items: center;
-				padding: 0.45rem 0.55rem;
-				border: 1px solid rgba(184, 154, 106, 0.15);
-				border-radius: 0.35rem;
-				background: rgba(18, 12, 8, 0.35);
-			}
 
 			.artwork-trigger {
 				display: inline-flex;
@@ -430,41 +409,6 @@ const socialImageUrl = `${SITE_URL}/header.png`;
 				align-self: start;
 			}
 
-			.track-art {
-				width: 28px;
-				height: 28px;
-				border-radius: 0.2rem;
-				object-fit: cover;
-				border: 1px solid rgba(184, 154, 106, 0.25);
-				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
-				align-self: center;
-			}
-
-			.track-index {
-				font-family: "Cinzel", serif;
-				font-size: 0.75rem;
-				letter-spacing: 0.1em;
-				color: var(--ink-soft);
-				min-width: 1.5rem;
-			}
-
-			.track-link {
-				color: var(--ink);
-				font-size: 0.95rem;
-				line-height: 1.35;
-				transition: color 160ms ease;
-			}
-
-			.track-link:hover {
-				color: var(--gold-bright);
-			}
-
-			.track-duration {
-				font-family: "Cinzel", serif;
-				font-size: 0.72rem;
-				letter-spacing: 0.12em;
-				color: rgba(232, 224, 212, 0.55);
-			}
 
 			.artwork-lightbox {
 				position: fixed;
@@ -549,6 +493,7 @@ const socialImageUrl = `${SITE_URL}/header.png`;
 				height: 166px;
 			}
 
+
 			.stream-links {
 				display: flex;
 				flex-wrap: wrap;
@@ -594,7 +539,15 @@ const socialImageUrl = `${SITE_URL}/header.png`;
 
 			<div class="albums-section">
 				{
-					albums.map((album) => (
+					albums.map((album) => {
+						const spotifyAlbumId = album.spotifyUrl?.match(/open\.spotify\.com\/album\/([A-Za-z0-9]+)/)?.[1];
+						const isSpotifyEmbed = Boolean(spotifyAlbumId);
+						const spotifyEmbedHeight = Math.min(760, Math.max(352, 170 + album.tracks.length * 34));
+						const preferredEmbedUrl = isSpotifyEmbed
+							? `https://open.spotify.com/embed/album/${spotifyAlbumId}?utm_source=generator&theme=0`
+							: album.embedUrl;
+
+						return (
 						<article class="album-card">
 							<div class="album-meta">
 								<button
@@ -625,43 +578,20 @@ const socialImageUrl = `${SITE_URL}/header.png`;
 							</div>
 
 							<div class="track-list-wrap">
-								<p class="track-list-title">Track List</p>
-								<ol class="track-list">
-									{
-										album.tracks.map((track, idx) => (
-											<li class="track-row">
-												<span class="track-index">{idx + 1}</span>
-												<button
-													type="button"
-													class="artwork-trigger"
-													data-artwork-src={track.artwork}
-													data-artwork-title={track.title}
-													data-artwork-meta={`${album.title} • Track ${idx + 1} • ${track.duration}`}
-													aria-label={`Open full artwork for ${track.title}`}
-												>
-													<img class="track-art" src={track.artwork} alt={`${track.title} artwork`} loading="lazy" />
-												</button>
-												<a class="track-link" href={track.url} target="_blank" rel="noopener noreferrer">
-													{track.title}
-												</a>
-												<span class="track-duration">{track.duration}</span>
-											</li>
-										))
-									}
-								</ol>
-
 								<div class="album-player">
 									<iframe
-										scrolling="no"
+										class={isSpotifyEmbed ? "spotify-player" : undefined}
 										frameborder="no"
-										allow="autoplay"
-										src={album.embedUrl}
-										title={`${album.title} playlist player`}
+										allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+										src={preferredEmbedUrl}
+										title={`${album.title} ${isSpotifyEmbed ? "Spotify" : "SoundCloud"} player`}
+										style={isSpotifyEmbed ? `height: ${spotifyEmbedHeight}px;` : undefined}
 									></iframe>
 								</div>
 							</div>
 						</article>
-					))
+						);
+					})
 				}
 
 				<div>
