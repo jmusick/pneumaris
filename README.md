@@ -14,8 +14,8 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 
 ## Current Version
 
-- App package version: 1.4.0
-- Site display version: 1.4.0
+- App package version: 1.7.2
+- Site display version: 1.7.2
 
 ## Site Features
 
@@ -23,10 +23,10 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 - Reusable site header and footer components
 - Responsive pages:
 	- Home (`/`)
-	- Music (`/music`) with album cards, descriptions, track lists, per-track artwork, lightbox previews, and SoundCloud playlist playback
-	- About (`/about`)
-	- Contact (`/contact`) with Web3Forms + hCaptcha
-	- Privacy Policy (`/privacy-policy`)
+	- Music (`/music/`) with album cards, descriptions, track lists, per-track artwork, lightbox previews, and Spotify/SoundCloud playback
+	- About (`/about/`)
+	- Contact (`/contact/`) with Web3Forms + hCaptcha
+	- Privacy Policy (`/privacy-policy/`)
 - Social links in header:
 	- Spotify
 	- Apple Music
@@ -57,7 +57,7 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 - Artwork lightbox modal:
 	- Opens when clicking album art or track art
 	- Supports close button, backdrop click, and `Esc` key
-- Embedded SoundCloud playlist players per release
+- Embedded playback player per release — Spotify iframe when a `spotifyUrl` is set (all current releases), falling back to the SoundCloud playlist embed otherwise
 
 ## Contact Form
 
