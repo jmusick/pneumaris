@@ -63,7 +63,18 @@ const socials = [
 			/>
 		</a>
 
-		<div class="site-head-right">
+		<button
+			type="button"
+			class="nav-toggle"
+			aria-expanded="false"
+			aria-controls="site-menu"
+			aria-label="Toggle menu"
+		>
+			<Icon name="lucide:menu" class="nav-toggle-icon-open" aria-hidden="true" />
+			<Icon name="lucide:x" class="nav-toggle-icon-close" aria-hidden="true" />
+		</button>
+
+		<div class="site-head-right" id="site-menu">
 			<nav class="site-nav" aria-label="Primary">
 				<a class={active === "home" ? "active" : undefined} href="/">Home</a>
 				<a class={active === "music" ? "active" : undefined} href="/music/">Music</a>
@@ -83,3 +94,24 @@ const socials = [
 		</div>
 	</div>
 </header>
+
+<script>
+	const toggle = document.querySelector<HTMLButtonElement>(".nav-toggle");
+	const menu = document.getElementById("site-menu");
+
+	if (toggle && menu) {
+		toggle.addEventListener("click", () => {
+			const isOpen = menu.classList.toggle("is-open");
+			toggle.classList.toggle("is-open", isOpen);
+			toggle.setAttribute("aria-expanded", String(isOpen));
+		});
+
+		menu.addEventListener("click", (event) => {
+			if (event.target instanceof HTMLElement && event.target.closest("a")) {
+				menu.classList.remove("is-open");
+				toggle.classList.remove("is-open");
+				toggle.setAttribute("aria-expanded", "false");
+			}
+		});
+	}
+</script>

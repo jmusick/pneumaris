@@ -155,6 +155,46 @@ a:hover {
 
 
 
+.nav-toggle {
+	display: none;
+	position: relative;
+	align-items: center;
+	justify-content: center;
+	width: 2.6rem;
+	height: 2.6rem;
+	margin-left: auto;
+	flex-shrink: 0;
+	border: 1px solid var(--line);
+	border-radius: 0.4rem;
+	background: transparent;
+	color: var(--gold);
+	cursor: pointer;
+}
+
+.nav-toggle svg {
+	position: absolute;
+	width: 1.35rem;
+	height: 1.35rem;
+	transition: opacity 160ms ease;
+}
+
+.nav-toggle-icon-close {
+	opacity: 0;
+}
+
+.nav-toggle.is-open .nav-toggle-icon-open {
+	opacity: 0;
+}
+
+.nav-toggle.is-open .nav-toggle-icon-close {
+	opacity: 1;
+}
+
+.site-nav {
+	display: flex;
+	align-items: center;
+}
+
 .site-nav a {
 	font-family: "Cinzel", serif;
 	font-size: 0.95rem;
@@ -246,29 +286,100 @@ a:hover {
 
 /* ── Responsive ──────────────────────────────── */
 
-@media (max-width: 820px) {
+@media (max-width: 900px) {
 	body {
 		background-attachment: scroll;
 	}
 
-	.site-head-inner {
+	.site-footer {
 		flex-direction: column;
-		align-items: flex-start;
-		gap: 0.75rem;
+		align-items: center;
+		text-align: center;
 	}
 
-	.site-head-right {
-		width: 100%;
-		align-items: flex-start;
-		margin-left: 0;
-	}
-
-	.site-nav {
+	.footer-links {
+		justify-content: center;
 		flex-wrap: wrap;
 	}
 
-	.site-footer {
+	.site-head-inner {
+		flex-wrap: wrap;
+		padding: 0.5rem 1rem;
+	}
+
+	.brand-logo {
+		height: 56px;
+	}
+
+	.nav-toggle {
+		display: flex;
+		margin-left: auto;
+	}
+
+	.site-head-right {
+		order: 3;
+		width: 100%;
 		flex-direction: column;
-		align-items: flex-start;
+		align-items: stretch;
+		margin-left: 0;
+		max-height: 0;
+		overflow: hidden;
+		opacity: 0;
+		transition: max-height 240ms ease, opacity 200ms ease;
+	}
+
+	.site-head-right.is-open {
+		max-height: 32rem;
+		opacity: 1;
+		padding-bottom: 0.85rem;
+	}
+
+	.site-nav {
+		flex-direction: column;
+		width: 100%;
+	}
+
+	.site-nav a {
+		width: 100%;
+		padding: 0.75rem 0.6rem;
+	}
+
+	.site-head-divider {
+		width: 100%;
+		height: 1px;
+		margin: 0.6rem 0;
+	}
+
+	.social-nav {
+		flex-wrap: nowrap;
+		justify-content: space-between;
+		gap: 0.4rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.social-link {
+		width: 2rem;
+		height: 2rem;
+	}
+
+	.social-link svg {
+		width: 1.1rem;
+		height: 1.1rem;
+	}
+}
+
+@media (max-width: 420px) {
+	.brand-logo {
+		height: 44px;
+	}
+
+	.page {
+		padding-top: 2rem;
+	}
+
+	.hero-cta {
+		width: 100%;
+		justify-content: center;
 	}
 }
