@@ -362,7 +362,32 @@ const albums: Album[] = [
 const pageTitle = "Music — Pneumaris";
 const pageDescription = "Listen to Pneumaris albums with artwork and embedded playback.";
 const canonicalUrl = `${SITE_URL}/music/`;
-const socialImageUrl = `${SITE_URL}/header.png`;
+const socialImageUrl = `${SITE_URL}/og-image.jpg`;
+
+const toIsoDuration = (duration: string) => {
+	const [minutes, seconds] = duration.split(":").map(Number);
+	return `PT${minutes}M${seconds}S`;
+};
+
+const structuredData = {
+	"@context": "https://schema.org",
+	"@graph": albums.map((album) => ({
+		"@type": "MusicAlbum",
+		name: album.title,
+		byArtist: { "@id": `${SITE_URL}/#musicgroup` },
+		datePublished: new Date(album.releaseDate).toISOString().slice(0, 10),
+		image: album.artwork,
+		url: album.spotifyUrl || album.albumUrl,
+		numTracks: album.tracks.length,
+		track: album.tracks.map((track) => ({
+			"@type": "MusicRecording",
+			name: track.title,
+			duration: toIsoDuration(track.duration),
+			url: track.url,
+			byArtist: { "@id": `${SITE_URL}/#musicgroup` },
+		})),
+	})),
+};
 ---
 
 <Layout
@@ -370,6 +395,7 @@ const socialImageUrl = `${SITE_URL}/header.png`;
 	description={pageDescription}
 	canonicalUrl={canonicalUrl}
 	socialImageUrl={socialImageUrl}
+	structuredData={structuredData}
 	active="music"
 >
 
@@ -652,7 +678,7 @@ const socialImageUrl = `${SITE_URL}/header.png`;
 									data-artwork-meta={`${album.type} • Released ${album.releaseDate}`}
 									aria-label={`Open full artwork for ${album.title}`}
 								>
-									<img class="album-artwork" src={album.artwork} alt={`${album.title} cover art`} loading="lazy" />
+									<img class="album-artwork" src={album.artwork} width="500" height="500" alt={`${album.title} cover art`} loading="lazy" />
 								</button>
 								<div class="album-copy">
 									<h2>{album.title}</h2>

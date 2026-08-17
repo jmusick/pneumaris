@@ -2,10 +2,11 @@
 import Layout from "../layouts/Layout.astro";
 import { SITE_URL } from "../config/site";
 
-const pageTitle = "Pneumaris";
-const pageDescription = "Pneumaris — atmospheric music from the void. Listen on SoundCloud.";
+const pageTitle = "Pneumaris — Atmospheric Metal Band";
+const pageDescription =
+	"Pneumaris is an atmospheric metal band forging crushing riffs, haunting melodies, and dark atmosphere. Stream new music on Spotify, Apple Music, and SoundCloud.";
 const canonicalUrl = `${SITE_URL}/`;
-const socialImageUrl = `${SITE_URL}/header.png`;
+const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 const structuredData = {
 	"@context": "https://schema.org",
 	"@graph": [
@@ -46,6 +47,10 @@ const structuredData = {
 	active="home"
 >
 
+<Fragment slot="head">
+	<link rel="preload" as="image" href="/header.webp" fetchpriority="high" />
+</Fragment>
+
 <style>
 			.hero {
 				position: relative;
@@ -59,7 +64,7 @@ const structuredData = {
 			.hero-bg {
 				position: absolute;
 				inset: 0;
-				background: url('/header.png') center 25% / cover no-repeat;
+				background: url('/header.webp') center 25% / cover no-repeat;
 				filter: brightness(0.55);
 				z-index: 0;
 			}
@@ -237,7 +242,7 @@ const structuredData = {
 					</p>
 				</div>
 				<div class="intro-logo">
-					<img src="/logo-circle.png" alt="Pneumaris logo" loading="lazy" decoding="async" />
+					<img src="/logo-circle.webp" width="640" height="640" alt="Pneumaris logo" loading="lazy" decoding="async" />
 				</div>
 			</section>
 		</main>
