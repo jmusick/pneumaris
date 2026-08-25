@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Pneumaris: Local Dev",
+      "name": "Local Dev",
       "type": "firefox",
       "request": "launch",
       "reAttach": true,

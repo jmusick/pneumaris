@@ -252,6 +252,10 @@ a:hover {
 	gap: 1rem;
 }
 
+.footer-credit {
+	color: var(--ink-muted);
+}
+
 /* ── Shared Utilities ────────────────────────── */
 
 .page {
