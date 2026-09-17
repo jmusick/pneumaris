@@ -2,7 +2,7 @@
 import { Icon } from "astro-icon/components";
 
 interface Props {
-	active?: "home" | "music" | "about" | "contact";
+	active?: "home" | "music" | "about" | "extras" | "contact";
 }
 
 const { active = "home" } = Astro.props;
@@ -81,6 +81,14 @@ const socials = [
 				<a class={active === "home" ? "active" : undefined} href="/">Home</a>
 				<a class={active === "music" ? "active" : undefined} href="/music/">Music</a>
 				<a class={active === "about" ? "active" : undefined} href="/about/">About</a>
+				<a class={active === "extras" ? "active" : undefined} href="/extras/">Extras</a>
+				<a
+					href="https://www.etsy.com/shop/EgamiDesigns?section_id=59398309"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					Merch
+				</a>
 				<a class={active === "contact" ? "active" : undefined} href="/contact/">Contact</a>
 			</nav>
 

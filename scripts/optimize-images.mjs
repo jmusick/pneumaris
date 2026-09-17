@@ -1,4 +1,5 @@
 import sharp from "sharp";
+import { copyFile } from "node:fs/promises";
 
 // Source masters live in assets-src/ (not deployed). Optimized derivatives are
 // written to public/ and are what the site actually references. Re-run this
@@ -41,6 +42,16 @@ async function run() {
 		.resize({ width: 180, height: 180, fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
 		.png()
 		.toFile(pub("apple-touch-icon.png"));
+
+	// wallpaper-1.png -> downloads/pneumaris-wallpaper-3440x1440.png (freebie download, full res, copied as-is —
+	// sharp's re-encode is larger than the source's existing PNG compression)
+	await copyFile(src("wallpaper-1.png"), pub("downloads/pneumaris-wallpaper-3440x1440.png"));
+
+	// wallpaper-1.png -> wallpaper-preview.webp (extras page preview thumbnail)
+	await sharp(src("wallpaper-1.png"))
+		.resize({ width: 1280, withoutEnlargement: true })
+		.webp({ quality: 80 })
+		.toFile(pub("wallpaper-preview.webp"));
 
 	console.log("done");
 }

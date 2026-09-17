@@ -1,0 +1,136 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { SITE_URL } from "../config/site";
+
+const pageTitle = "Extras | Pneumaris";
+const pageDescription = "Free downloads for Pneumaris fans: a desktop wallpaper from the void.";
+const canonicalUrl = `${SITE_URL}/extras/`;
+const socialImageUrl = `${SITE_URL}/og-image.jpg`;
+---
+
+<Layout
+	title={pageTitle}
+	description={pageDescription}
+	canonicalUrl={canonicalUrl}
+	socialImageUrl={socialImageUrl}
+	active="extras"
+>
+
+<style>
+	.page-header {
+		border-bottom: 1px solid var(--line);
+		padding: 3.5rem clamp(1.1rem, 3vw, 2.4rem) 2.5rem;
+		background: linear-gradient(to bottom, rgba(60, 40, 12, 0.08), transparent);
+	}
+
+	.page-header-inner {
+		max-width: 1280px;
+		margin: 0 auto;
+	}
+
+	.page-header .section-label {
+		margin-bottom: 0.6rem;
+		display: block;
+	}
+
+	.page-header h1 {
+		font-size: clamp(2rem, 5vw, 3.5rem);
+	}
+
+	.content {
+		max-width: 1280px;
+		margin: 0 auto;
+		padding: 3rem clamp(1.1rem, 3vw, 2.4rem) 5rem;
+	}
+
+	.freebie-card {
+		border: 1px solid var(--line);
+		border-radius: 0.5rem;
+		overflow: hidden;
+		background: rgba(255, 255, 255, 0.02);
+	}
+
+	.freebie-card img {
+		display: block;
+		width: 100%;
+		height: auto;
+		filter: brightness(0.92) contrast(1.05);
+	}
+
+	.freebie-info {
+		padding: 1.6rem clamp(1.1rem, 3vw, 2rem) 2rem;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.2rem;
+	}
+
+	.freebie-info h2 {
+		font-size: 1.4rem;
+		margin-bottom: 0.35rem;
+	}
+
+	.freebie-meta {
+		color: rgba(232, 224, 212, 0.6);
+		font-size: 0.9rem;
+	}
+
+	.download-button {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		border: 1px solid var(--line);
+		border-radius: 0.35rem;
+		color: var(--ink);
+		text-decoration: none;
+		font-size: 0.95rem;
+		letter-spacing: 0.03em;
+		white-space: nowrap;
+		transition: background-color 0.2s ease, border-color 0.2s ease;
+	}
+
+	.download-button:hover,
+	.download-button:focus-visible {
+		background: rgba(232, 224, 212, 0.08);
+		border-color: rgba(232, 224, 212, 0.4);
+	}
+</style>
+
+<main id="main">
+	<div class="page-header">
+		<div class="page-header-inner">
+			<span class="section-label">Free Downloads</span>
+			<h1>Extras</h1>
+		</div>
+	</div>
+
+	<div class="content">
+		<div class="freebie-card">
+			<img
+				src="/wallpaper-preview.webp"
+				width="1280"
+				height="536"
+				alt="Pneumaris desktop wallpaper: a robed figure facing an eclipsed moon over a gothic spire skyline"
+				loading="eager"
+				decoding="async"
+			/>
+			<div class="freebie-info">
+				<div>
+					<h2>Desktop Wallpaper</h2>
+					<p class="freebie-meta">3440&times;1440 &middot; PNG &middot; 5.2&nbsp;MB</p>
+				</div>
+				<a
+					class="download-button"
+					href="/downloads/pneumaris-wallpaper-3440x1440.png"
+					download="pneumaris-wallpaper-3440x1440.png"
+				>
+					Download
+				</a>
+			</div>
+		</div>
+	</div>
+</main>
+
+</Layout>
