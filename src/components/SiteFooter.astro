@@ -1,5 +1,5 @@
 ---
-import { SITE_VERSION } from "../config/site";
+import { GA_MEASUREMENT_ID, SITE_VERSION } from "../config/site";
 const currentYear = new Date().getFullYear();
 ---
 
@@ -7,6 +7,12 @@ const currentYear = new Date().getFullYear();
 	<span>© {currentYear} Pneumaris. All rights reserved.</span>
 	<div class="footer-links">
 		<a href="/privacy-policy/">Privacy Policy</a>
+		{GA_MEASUREMENT_ID && (
+			/* Reopens the consent banner — see src/components/CookieConsent.astro. */
+			<button type="button" class="footer-link-button" data-cookie-preferences>
+				Cookie Choices
+			</button>
+		)}
 		<a href="/sitemap-index.xml">Sitemap</a>
 		<span class="footer-version">v{SITE_VERSION}</span>
 	</div>

@@ -268,6 +268,22 @@ a:hover {
 	gap: 1rem;
 }
 
+/* A button that has to sit inline with the footer's links and be
+   indistinguishable from them — it triggers script, so it can't be an anchor. */
+.footer-link-button {
+	background: none;
+	border: 0;
+	padding: 0;
+	font: inherit;
+	color: var(--ink-soft);
+	cursor: pointer;
+	transition: color 180ms ease;
+}
+
+.footer-link-button:hover {
+	color: var(--gold);
+}
+
 .footer-credit {
 	color: var(--ink-muted);
 }

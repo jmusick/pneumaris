@@ -1,7 +1,8 @@
 ---
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-import { SITE_NAME, SITE_TWITTER_HANDLE, SITE_URL } from "../config/site";
+import CookieConsent from "../components/CookieConsent.astro";
+import { ANALYTICS_ID, GA_MEASUREMENT_ID, SITE_NAME, SITE_TWITTER_HANDLE, SITE_URL } from "../config/site";
 
 interface Props {
 	title: string;
@@ -24,21 +25,18 @@ const {
 	structuredData,
 	active,
 } = Astro.props;
+
+/**
+ * The banner renders wherever analytics is configured at all, so it stays
+ * workable in dev; ANALYTICS_ID is what decides whether accepting actually
+ * loads anything, and that is production-only.
+ */
+const showConsentBanner = GA_MEASUREMENT_ID !== null;
 ---
 
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-DE6XTGT291"></script>
-		<script is:inline>
-			window.dataLayer = window.dataLayer || [];
-			function gtag() {
-				dataLayer.push(arguments);
-			}
-			gtag("js", new Date());
-			gtag("config", "G-DE6XTGT291");
-		</script>
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -83,5 +81,6 @@ const {
 		<SiteHeader active={active} />
 		<slot />
 		<SiteFooter />
+		{showConsentBanner && <CookieConsent measurementId={ANALYTICS_ID} />}
 	</body>
 </html>
