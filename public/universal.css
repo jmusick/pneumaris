@@ -70,6 +70,22 @@ a:hover {
 	color: var(--gold-bright);
 }
 
+.skip-link {
+	position: absolute;
+	left: -9999px;
+	top: 0;
+	z-index: 200;
+	padding: 0.75rem 1.25rem;
+	background: var(--surface-strong);
+	color: var(--ink);
+	border: 1px solid var(--line);
+}
+
+.skip-link:focus {
+	left: 1rem;
+	top: 1rem;
+}
+
 /* ── Header ──────────────────────────────────── */
 
 .site-head {

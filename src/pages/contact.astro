@@ -186,7 +186,7 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 			}
 </style>
 
-		<main>
+		<main id="main">
 			<div class="page-header">
 				<div class="page-header-inner">
 					<span class="section-label">Reach Out</span>
@@ -203,11 +203,11 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 					<div class="form-row">
 						<div class="form-field">
 							<label for="name">Name</label>
-							<input id="name" name="name" type="text" required maxlength="100" />
+							<input id="name" name="name" type="text" autocomplete="name" required maxlength="100" />
 						</div>
 						<div class="form-field">
 							<label for="email">Email</label>
-							<input id="email" name="email" type="email" required maxlength="255" />
+							<input id="email" name="email" type="email" autocomplete="email" required maxlength="255" />
 						</div>
 					</div>
 

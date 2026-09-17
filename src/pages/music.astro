@@ -649,7 +649,7 @@ const structuredData = {
 			}
 </style>
 
-		<main>
+		<main id="main">
 			<div class="page-header">
 				<div class="page-header-inner">
 					<span class="section-label">Discography & Streams</span>
@@ -703,6 +703,7 @@ const structuredData = {
 										class={isSpotifyEmbed ? "spotify-player" : undefined}
 										frameborder="no"
 										allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+										referrerpolicy="strict-origin-when-cross-origin"
 										src={preferredEmbedUrl}
 										title={`${album.title} ${isSpotifyEmbed ? "Spotify" : "SoundCloud"} player`}
 										style={isSpotifyEmbed ? `height: ${spotifyEmbedHeight}px;` : undefined}

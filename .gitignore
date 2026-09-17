@@ -36,3 +36,6 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+
+# Local working checklist (audit findings) — not a deliverable
+TODO.md
