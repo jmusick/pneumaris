@@ -8,14 +8,15 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 - astro-icon (Iconify / Simple Icons)
 - TypeScript (strict Astro tsconfig)
 - Cloudflare Pages (static output)
-- Google Analytics 4 (gtag.js)
+- Google Analytics 4 (gtag.js), gated behind an opt-in cookie consent banner
+- Security response headers via `public/_headers` (CSP, HSTS, etc.)
 - Web3Forms (contact form delivery)
 - hCaptcha (bot protection)
 
 ## Current Version
 
-- App package version: 1.7.2
-- Site display version: 1.7.2
+- App package version: 1.12.2
+- Site display version: 1.12.2
 
 ## Site Features
 
@@ -36,9 +37,9 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 	- X
 	- Instagram
 	- Facebook
-- Footer: Privacy Policy, Sitemap, version badge (sourced from `src/config/site.ts`)
-- Shared page layout via `src/layouts/Layout.astro` (meta tags, GA4 tag, header/footer)
-- Google Analytics 4 tracking on all pages
+- Footer: Privacy Policy, Cookie Choices (reopens the consent banner), Sitemap, version badge (sourced from `src/config/site.ts`)
+- Shared page layout via `src/layouts/Layout.astro` (meta tags, skip link, header/footer, cookie consent banner)
+- Google Analytics 4, opt-in only: `src/components/CookieConsent.astro` is the only thing that loads `gtag.js`, and only after a visitor accepts
 
 ## Music Page Highlights
 
@@ -112,8 +113,9 @@ npm run preview
 
 ```text
 public/                 Static assets (logo, header art, global CSS)
-src/components/         Shared UI components (header/footer)
-src/config/             Site constants (site version, site URL)
+public/_headers         Cloudflare Pages security response headers (CSP, HSTS, etc.)
+src/components/         Shared UI components (header/footer/cookie consent banner)
+src/config/             Site constants (site version, site URL, GA measurement ID)
 src/layouts/            Shared page layout (Layout.astro)
 src/pages/              Astro routes/pages
 wrangler.toml           Cloudflare Pages build config
