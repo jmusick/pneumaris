@@ -58,7 +58,7 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 - Artwork lightbox modal:
 	- Opens when clicking album art or track art
 	- Supports close button, backdrop click, and `Esc` key
-- Embedded playback player per release — Spotify iframe when a `spotifyUrl` is set (all current releases), falling back to the SoundCloud playlist embed otherwise
+- Embedded playback player per release: Spotify iframe when a `spotifyUrl` is set (all current releases), falling back to the SoundCloud playlist embed otherwise
 
 ## Contact Form
 
