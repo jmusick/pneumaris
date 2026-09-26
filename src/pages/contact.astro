@@ -248,6 +248,8 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 
 
 		<script>
+			declare const hcaptcha: { reset: () => void } | undefined;
+
 			const form = document.getElementById("contact-form") as HTMLFormElement | null;
 			const statusEl = document.getElementById("form-status") as HTMLElement | null;
 			const submitButton = form?.querySelector("button[type='submit']") as HTMLButtonElement | null;
@@ -304,6 +306,9 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 						statusEl.className = "form-status error";
 					} finally {
 						submitButton.disabled = false;
+						// hCaptcha tokens are single-use; reset so a retry (or a second
+						// message) doesn't submit an already-spent token.
+						if (typeof hcaptcha !== "undefined") hcaptcha.reset();
 					}
 				});
 			}

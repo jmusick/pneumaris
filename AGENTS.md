@@ -29,7 +29,7 @@ contact form, runs client-side or against a third-party endpoint. See
 ## Structure
 
 - `src/pages/` — routes: `index.astro`, `music.astro`, `about.astro`,
-  `contact.astro`, `privacy-policy.astro`.
+  `extras.astro`, `contact.astro`, `privacy-policy.astro`.
 - `src/components/` — `SiteHeader.astro`, `SiteFooter.astro`,
   `CookieConsent.astro` (see Analytics & consent below).
 - `src/layouts/Layout.astro` — shared page shell.
