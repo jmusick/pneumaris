@@ -1,0 +1,894 @@
+{
+  "auditDate": "2026-10-12",
+  "checkedAt": "2026-10-12T22:27:01.537Z",
+  "results": [
+    {
+      "url": "https://pneumarisband.com/",
+      "status": 200,
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-security-policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://i1.sndcdn.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://hcaptcha.com https://*.hcaptcha.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.hcaptcha.com https://hcaptcha.com https://*.hcaptcha.com https://static.cloudflareinsights.com; connect-src 'self' https://api.web3forms.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://hcaptcha.com https://*.hcaptcha.com https://cloudflareinsights.com; frame-src https://hcaptcha.com https://*.hcaptcha.com https://open.spotify.com https://w.soundcloud.com; worker-src 'self' blob:; upgrade-insecure-requests",
+        "content-type": "text/html; charset=utf-8",
+        "cross-origin-opener-policy": "same-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "title": "Pneumaris | Atmospheric Metal Band",
+      "description": "Pneumaris is an atmospheric metal band forging crushing riffs, haunting melodies, and dark atmosphere. Stream new music on Spotify, Apple Music, and SoundCloud.",
+      "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+      "canonical": "https://pneumarisband.com/",
+      "h1": [
+        "Pneumaris"
+      ],
+      "structuredData": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://pneumarisband.com/#website",
+              "url": "https://pneumarisband.com/",
+              "name": "Pneumaris",
+              "description": "Pneumaris is an atmospheric metal band forging crushing riffs, haunting melodies, and dark atmosphere. Stream new music on Spotify, Apple Music, and SoundCloud.",
+              "inLanguage": "en"
+            },
+            {
+              "@type": "MusicGroup",
+              "@id": "https://pneumarisband.com/#musicgroup",
+              "url": "https://pneumarisband.com/",
+              "name": "Pneumaris",
+              "description": "Pneumaris is an atmospheric metal band forging crushing riffs, haunting melodies, and dark atmosphere. Stream new music on Spotify, Apple Music, and SoundCloud.",
+              "image": "https://pneumarisband.com/og-image.jpg",
+              "sameAs": [
+                "https://soundcloud.com/pneumaris",
+                "https://www.youtube.com/@Pneumaris",
+                "https://www.tiktok.com/@pneumaris",
+                "https://x.com/pneumarisband",
+                "https://www.instagram.com/pneumaris/",
+                "https://www.facebook.com/profile.php?id=61589446647657"
+              ]
+            }
+          ]
+        }
+      ],
+      "version": "1.14.0",
+      "bytes": 25264
+    },
+    {
+      "url": "https://pneumarisband.com/music/",
+      "status": 200,
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-security-policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://i1.sndcdn.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://hcaptcha.com https://*.hcaptcha.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.hcaptcha.com https://hcaptcha.com https://*.hcaptcha.com https://static.cloudflareinsights.com; connect-src 'self' https://api.web3forms.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://hcaptcha.com https://*.hcaptcha.com https://cloudflareinsights.com; frame-src https://hcaptcha.com https://*.hcaptcha.com https://open.spotify.com https://w.soundcloud.com; worker-src 'self' blob:; upgrade-insecure-requests",
+        "content-type": "text/html; charset=utf-8",
+        "cross-origin-opener-policy": "same-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "title": "Music | Pneumaris",
+      "description": "Listen to Pneumaris albums with artwork and embedded playback.",
+      "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+      "canonical": "https://pneumarisband.com/music/",
+      "h1": [
+        "Music"
+      ],
+      "structuredData": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "MusicAlbum",
+              "name": "Anathema",
+              "byArtist": {
+                "@id": "https://pneumarisband.com/#musicgroup"
+              },
+              "datePublished": "2026-07-12",
+              "image": "https://i1.sndcdn.com/artworks-vATCaC2x1pjCv5Z9-8HJvtg-t500x500.jpg",
+              "url": "https://open.spotify.com/album/0QqaNkRcgBQ6wPV9UgecXj",
+              "numTracks": 13,
+              "track": [
+                {
+                  "@type": "MusicRecording",
+                  "name": "The Last Restraint",
+                  "duration": "PT5M52S",
+                  "url": "https://soundcloud.com/pneumaris/the-last-restraint",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "The Ninth Amen",
+                  "duration": "PT5M27S",
+                  "url": "https://soundcloud.com/pneumaris/the-ninth-amen",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "Gods of Small Machines",
+                  "duration": "PT5M0S",
+                  "url": "https://soundcloud.com/pneumaris/gods-of-small-machines",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "Emergency Contact",
+                  "duration": "PT5M8S",
+                  "url": "https://soundcloud.com/pneumaris/emergency-contact",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "The Archive at Zero Light",
+                  "duration": "PT5M24S",
+                  "url": "https://soundcloud.com/pneumaris/the-archive-at-zero-light",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "Pretty Little Hex",
+                  "duration": "PT6M13S",
+                  "url": "https://soundcloud.com/pneumaris/pretty-little-hex",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "Cold",
+                  "duration": "PT0M46S",
+                  "url": "https://soundcloud.com/pneumaris/cold",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "The Hollow Battalion",
+                  "duration": "PT6M12S",
+                  "url": "https://soundcloud.com/pneumaris/the-hollow-battalion",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "The Devil Keeps My Change",
+                  "duration": "PT6M4S",
+                  "url": "https://soundcloud.com/pneumaris/the-devil-keeps-my-change",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "The Drowned Meridian",
+                  "duration": "PT6M52S",
+                  "url": "https://soundcloud.com/pneumaris/the-drowned-meridian",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "When the Fever Sings",
+                  "duration": "PT5M48S",
+                  "url": "https://soundcloud.com/pneumaris/when-the-fever-sings",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "The Life Beside You",
+                  "duration": "PT4M14S",
+                  "url": "https://soundcloud.com/pneumaris/the-life-beside-you",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "After the Ending",
+                  "duration": "PT5M24S",
+                  "url": "https://soundcloud.com/pneumaris/after-the-ending",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                }
+              ]
+            },
+            {
+              "@type": "MusicAlbum",
+              "name": "Eidolon",
+              "byArtist": {
+                "@id": "https://pneumarisband.com/#musicgroup"
+              },
+              "datePublished": "2026-05-23",
+              "image": "https://i1.sndcdn.com/artworks-koC13oEvnjO9T9uh-zpvuYQ-t500x500.jpg",
+              "url": "https://open.spotify.com/album/4AslLFUqQ4D77DBdPA95nO",
+              "numTracks": 13,
+              "track": [
+                {
+                  "@type": "MusicRecording",
+                  "name": "Parasite Choir",
+                  "duration": "PT5M39S",
+                  "url": "https://soundcloud.com/pneumaris/parasite-choir",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "Fault King",
+                  "duration": "PT5M3S",
+                  "url": "https://soundcloud.com/pneumaris/fault-king",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "The Low Note Knows",
+                  "duration": "PT7M8S",
+                  "url": "https://soundcloud.com/pneumaris/the-low-note-knows",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "Lacquer and Fever",
+                  "duration": "PT6M17S",
+                  "url": "https://soundcloud.com/pneumaris/lacquer-and-fever",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "The Man I Was Following",
+                  "duration": "PT6M49S",
+                  "url": "https://soundcloud.com/pneumaris/the-man-i-was-following",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "Proof of You",
+                  "duration": "PT6M4S",
+                  "url": "https://soundcloud.com/pneumaris/proof-of-you",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "Counterfeit Lungs",
+                  "duration": "PT5M34S",
+                  "url": "https://soundcloud.com/pneumaris/counterfeit-lungs",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "Hollow Season",
+                  "duration": "PT5M34S",
+                  "url": "https://soundcloud.com/pneumaris/hollow-season",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "Feral Systems",
+                  "duration": "PT6M1S",
+                  "url": "https://soundcloud.com/pneumaris/feral-systems",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "Ossuary Bloom",
+                  "duration": "PT6M3S",
+                  "url": "https://soundcloud.com/pneumaris/ossuary-bloom",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "Still Becoming",
+                  "duration": "PT5M46S",
+                  "url": "https://soundcloud.com/pneumaris/still-becoming",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "Litany of the Machine Heart",
+                  "duration": "PT5M22S",
+                  "url": "https://soundcloud.com/pneumaris/litany-of-the-machine-heart",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "The Ballroom at the End of Time",
+                  "duration": "PT6M0S",
+                  "url": "https://soundcloud.com/pneumaris/the-ballroom-at-the-end-of",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                }
+              ]
+            },
+            {
+              "@type": "MusicAlbum",
+              "name": "The Black Wake",
+              "byArtist": {
+                "@id": "https://pneumarisband.com/#musicgroup"
+              },
+              "datePublished": "2026-05-16",
+              "image": "https://i1.sndcdn.com/artworks-lvnO03Qb1grNbhcm-2VyPzQ-t500x500.jpg",
+              "url": "https://open.spotify.com/album/1lzphocLKpT5uscfQqLaIt",
+              "numTracks": 2,
+              "track": [
+                {
+                  "@type": "MusicRecording",
+                  "name": "Salt",
+                  "duration": "PT1M1S",
+                  "url": "https://soundcloud.com/pneumaris/salt",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "The Black Wake",
+                  "duration": "PT5M28S",
+                  "url": "https://soundcloud.com/pneumaris/the-black-wake",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                }
+              ]
+            },
+            {
+              "@type": "MusicAlbum",
+              "name": "Pleroma",
+              "byArtist": {
+                "@id": "https://pneumarisband.com/#musicgroup"
+              },
+              "datePublished": "2026-05-08",
+              "image": "https://i1.sndcdn.com/artworks-eN97hf5D66N4XleI-FOvo4w-t500x500.jpg",
+              "url": "https://open.spotify.com/album/0tv6zoZ04743AZbHnQfA34",
+              "numTracks": 11,
+              "track": [
+                {
+                  "@type": "MusicRecording",
+                  "name": "Hollow Constellations",
+                  "duration": "PT2M30S",
+                  "url": "https://soundcloud.com/pneumaris/hollow-constellations",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "Louder Than Your Thoughts",
+                  "duration": "PT2M24S",
+                  "url": "https://soundcloud.com/pneumaris/louder-than-your-thoughts",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "Devotion in the Low Light",
+                  "duration": "PT2M24S",
+                  "url": "https://soundcloud.com/pneumaris/devotion-in-the-low-light",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "The Shape That Answers",
+                  "duration": "PT2M57S",
+                  "url": "https://soundcloud.com/pneumaris/the-shape-that-answers",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "Blacklit Gravity",
+                  "duration": "PT2M16S",
+                  "url": "https://soundcloud.com/pneumaris/blacklit-gravity",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "River",
+                  "duration": "PT0M9S",
+                  "url": "https://soundcloud.com/pneumaris/river",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "Where the Road Divides",
+                  "duration": "PT1M47S",
+                  "url": "https://soundcloud.com/pneumaris/where-the-road-divides",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "What I Become",
+                  "duration": "PT3M36S",
+                  "url": "https://soundcloud.com/pneumaris/what-i-become",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "A Beautiful Fracture",
+                  "duration": "PT2M20S",
+                  "url": "https://soundcloud.com/pneumaris/a-beautiful-fracture",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "A Soft Cataclysm",
+                  "duration": "PT1M1S",
+                  "url": "https://soundcloud.com/pneumaris/a-soft-cataclysm",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "Half-Haunted",
+                  "duration": "PT2M32S",
+                  "url": "https://soundcloud.com/pneumaris/half-haunted",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                }
+              ]
+            },
+            {
+              "@type": "MusicAlbum",
+              "name": "The Shape",
+              "byArtist": {
+                "@id": "https://pneumarisband.com/#musicgroup"
+              },
+              "datePublished": "2026-05-01",
+              "image": "https://i1.sndcdn.com/artworks-1h7d12BvyGr14Fsx-IzEZ5A-t500x500.jpg",
+              "url": "https://open.spotify.com/album/4wMdovuOOMvWyYrRZ18erR",
+              "numTracks": 3,
+              "track": [
+                {
+                  "@type": "MusicRecording",
+                  "name": "Static Halo",
+                  "duration": "PT2M28S",
+                  "url": "https://soundcloud.com/pneumaris/static-halo",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "Silk & Silence",
+                  "duration": "PT2M9S",
+                  "url": "https://soundcloud.com/pneumaris/silk-silence",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                },
+                {
+                  "@type": "MusicRecording",
+                  "name": "Velvet Teeth",
+                  "duration": "PT2M2S",
+                  "url": "https://soundcloud.com/pneumaris/velvet-teeth",
+                  "byArtist": {
+                    "@id": "https://pneumarisband.com/#musicgroup"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "version": "1.14.0",
+      "bytes": 47964
+    },
+    {
+      "url": "https://pneumarisband.com/about/",
+      "status": 200,
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-security-policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://i1.sndcdn.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://hcaptcha.com https://*.hcaptcha.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.hcaptcha.com https://hcaptcha.com https://*.hcaptcha.com https://static.cloudflareinsights.com; connect-src 'self' https://api.web3forms.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://hcaptcha.com https://*.hcaptcha.com https://cloudflareinsights.com; frame-src https://hcaptcha.com https://*.hcaptcha.com https://open.spotify.com https://w.soundcloud.com; worker-src 'self' blob:; upgrade-insecure-requests",
+        "content-type": "text/html; charset=utf-8",
+        "cross-origin-opener-policy": "same-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "title": "About | Pneumaris",
+      "description": "About Pneumaris: atmospheric music from the void.",
+      "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+      "canonical": "https://pneumarisband.com/about/",
+      "h1": [
+        "About"
+      ],
+      "structuredData": [],
+      "version": "1.14.0",
+      "bytes": 22055
+    },
+    {
+      "url": "https://pneumarisband.com/extras/",
+      "status": 200,
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-security-policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://i1.sndcdn.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://hcaptcha.com https://*.hcaptcha.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.hcaptcha.com https://hcaptcha.com https://*.hcaptcha.com https://static.cloudflareinsights.com; connect-src 'self' https://api.web3forms.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://hcaptcha.com https://*.hcaptcha.com https://cloudflareinsights.com; frame-src https://hcaptcha.com https://*.hcaptcha.com https://open.spotify.com https://w.soundcloud.com; worker-src 'self' blob:; upgrade-insecure-requests",
+        "content-type": "text/html; charset=utf-8",
+        "cross-origin-opener-policy": "same-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "title": "Extras | Pneumaris",
+      "description": "Free downloads for Pneumaris fans: a desktop wallpaper from the void.",
+      "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+      "canonical": "https://pneumarisband.com/extras/",
+      "h1": [
+        "Extras"
+      ],
+      "structuredData": [],
+      "version": "1.14.0",
+      "bytes": 22171
+    },
+    {
+      "url": "https://pneumarisband.com/contact/",
+      "status": 200,
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-security-policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://i1.sndcdn.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://hcaptcha.com https://*.hcaptcha.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.hcaptcha.com https://hcaptcha.com https://*.hcaptcha.com https://static.cloudflareinsights.com; connect-src 'self' https://api.web3forms.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://hcaptcha.com https://*.hcaptcha.com https://cloudflareinsights.com; frame-src https://hcaptcha.com https://*.hcaptcha.com https://open.spotify.com https://w.soundcloud.com; worker-src 'self' blob:; upgrade-insecure-requests",
+        "content-type": "text/html; charset=utf-8",
+        "cross-origin-opener-policy": "same-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "title": "Contact | Pneumaris",
+      "description": "Get in touch with Pneumaris.",
+      "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+      "canonical": "https://pneumarisband.com/contact/",
+      "h1": [
+        "Contact"
+      ],
+      "structuredData": [],
+      "version": "1.14.0",
+      "bytes": 26376
+    },
+    {
+      "url": "https://pneumarisband.com/privacy-policy/",
+      "status": 200,
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-security-policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://i1.sndcdn.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://hcaptcha.com https://*.hcaptcha.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.hcaptcha.com https://hcaptcha.com https://*.hcaptcha.com https://static.cloudflareinsights.com; connect-src 'self' https://api.web3forms.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://hcaptcha.com https://*.hcaptcha.com https://cloudflareinsights.com; frame-src https://hcaptcha.com https://*.hcaptcha.com https://open.spotify.com https://w.soundcloud.com; worker-src 'self' blob:; upgrade-insecure-requests",
+        "content-type": "text/html; charset=utf-8",
+        "cross-origin-opener-policy": "same-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "title": "Privacy Policy | Pneumaris",
+      "description": "Privacy Policy for the Pneumaris website.",
+      "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+      "canonical": "https://pneumarisband.com/privacy-policy/",
+      "h1": [
+        "Privacy Policy"
+      ],
+      "structuredData": [],
+      "version": "1.14.0",
+      "bytes": 28421
+    },
+    {
+      "url": "https://pneumarisband.com/robots.txt",
+      "status": 200,
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "public, max-age=14400, must-revalidate",
+        "content-security-policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://i1.sndcdn.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://hcaptcha.com https://*.hcaptcha.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.hcaptcha.com https://hcaptcha.com https://*.hcaptcha.com https://static.cloudflareinsights.com; connect-src 'self' https://api.web3forms.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://hcaptcha.com https://*.hcaptcha.com https://cloudflareinsights.com; frame-src https://hcaptcha.com https://*.hcaptcha.com https://open.spotify.com https://w.soundcloud.com; worker-src 'self' blob:; upgrade-insecure-requests",
+        "content-type": "text/plain; charset=utf-8",
+        "cross-origin-opener-policy": "same-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "h1": [],
+      "structuredData": [],
+      "content": "User-agent: *\nAllow: /\n\nSitemap: https://pneumarisband.com/sitemap-index.xml\n",
+      "bytes": 77
+    },
+    {
+      "url": "https://pneumarisband.com/sitemap-index.xml",
+      "status": 200,
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-security-policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://i1.sndcdn.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://hcaptcha.com https://*.hcaptcha.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.hcaptcha.com https://hcaptcha.com https://*.hcaptcha.com https://static.cloudflareinsights.com; connect-src 'self' https://api.web3forms.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://hcaptcha.com https://*.hcaptcha.com https://cloudflareinsights.com; frame-src https://hcaptcha.com https://*.hcaptcha.com https://open.spotify.com https://w.soundcloud.com; worker-src 'self' blob:; upgrade-insecure-requests",
+        "content-type": "application/xml",
+        "cross-origin-opener-policy": "same-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "h1": [],
+      "structuredData": [],
+      "content": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"><sitemap><loc>https://pneumarisband.com/sitemap-0.xml</loc></sitemap></sitemapindex>",
+      "bytes": 188
+    },
+    {
+      "url": "https://pneumarisband.com/sitemap-0.xml",
+      "status": 200,
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-security-policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://i1.sndcdn.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://hcaptcha.com https://*.hcaptcha.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.hcaptcha.com https://hcaptcha.com https://*.hcaptcha.com https://static.cloudflareinsights.com; connect-src 'self' https://api.web3forms.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://hcaptcha.com https://*.hcaptcha.com https://cloudflareinsights.com; frame-src https://hcaptcha.com https://*.hcaptcha.com https://open.spotify.com https://w.soundcloud.com; worker-src 'self' blob:; upgrade-insecure-requests",
+        "content-type": "application/xml",
+        "cross-origin-opener-policy": "same-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "h1": [],
+      "structuredData": [],
+      "content": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:news=\"http://www.google.com/schemas/sitemap-news/0.9\" xmlns:xhtml=\"http://www.w3.org/1999/xhtml\" xmlns:image=\"http://www.google.com/schemas/sitemap-image/1.1\" xmlns:video=\"http://www.google.com/schemas/sitemap-video/1.1\"><url><loc>https://pneumarisband.com/</loc></url><url><loc>https://pneumarisband.com/about/</loc></url><url><loc>https://pneumarisband.com/contact/</loc></url><url><loc>https://pneumarisband.com/extras/</loc></url><url><loc>https://pneumarisband.com/music/</loc></url><url><loc>https://pneumarisband.com/privacy-policy/</loc></url></urlset>",
+      "bytes": 664
+    },
+    {
+      "url": "https://pneumarisband.com/audit-missing-page-2026-10-12/",
+      "status": 200,
+      "headers": {
+        "access-control-allow-origin": "*",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-security-policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://i1.sndcdn.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://hcaptcha.com https://*.hcaptcha.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.hcaptcha.com https://hcaptcha.com https://*.hcaptcha.com https://static.cloudflareinsights.com; connect-src 'self' https://api.web3forms.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://hcaptcha.com https://*.hcaptcha.com https://cloudflareinsights.com; frame-src https://hcaptcha.com https://*.hcaptcha.com https://open.spotify.com https://w.soundcloud.com; worker-src 'self' blob:; upgrade-insecure-requests",
+        "content-type": "text/html; charset=utf-8",
+        "cross-origin-opener-policy": "same-origin",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "title": "Pneumaris | Atmospheric Metal Band",
+      "description": "Pneumaris is an atmospheric metal band forging crushing riffs, haunting melodies, and dark atmosphere. Stream new music on Spotify, Apple Music, and SoundCloud.",
+      "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+      "canonical": "https://pneumarisband.com/",
+      "h1": [
+        "Pneumaris"
+      ],
+      "structuredData": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://pneumarisband.com/#website",
+              "url": "https://pneumarisband.com/",
+              "name": "Pneumaris",
+              "description": "Pneumaris is an atmospheric metal band forging crushing riffs, haunting melodies, and dark atmosphere. Stream new music on Spotify, Apple Music, and SoundCloud.",
+              "inLanguage": "en"
+            },
+            {
+              "@type": "MusicGroup",
+              "@id": "https://pneumarisband.com/#musicgroup",
+              "url": "https://pneumarisband.com/",
+              "name": "Pneumaris",
+              "description": "Pneumaris is an atmospheric metal band forging crushing riffs, haunting melodies, and dark atmosphere. Stream new music on Spotify, Apple Music, and SoundCloud.",
+              "image": "https://pneumarisband.com/og-image.jpg",
+              "sameAs": [
+                "https://soundcloud.com/pneumaris",
+                "https://www.youtube.com/@Pneumaris",
+                "https://www.tiktok.com/@pneumaris",
+                "https://x.com/pneumarisband",
+                "https://www.instagram.com/pneumaris/",
+                "https://www.facebook.com/profile.php?id=61589446647657"
+              ]
+            }
+          ]
+        }
+      ],
+      "version": "1.14.0",
+      "bytes": 25264
+    },
+    {
+      "url": "https://pneumarisband.com/music",
+      "status": 308,
+      "headers": {
+        "access-control-allow-origin": "*",
+        "content-length": "0",
+        "content-security-policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://i1.sndcdn.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://hcaptcha.com https://*.hcaptcha.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.hcaptcha.com https://hcaptcha.com https://*.hcaptcha.com https://static.cloudflareinsights.com; connect-src 'self' https://api.web3forms.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://hcaptcha.com https://*.hcaptcha.com https://cloudflareinsights.com; frame-src https://hcaptcha.com https://*.hcaptcha.com https://open.spotify.com https://w.soundcloud.com; worker-src 'self' blob:; upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "location": "/music/",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "h1": [],
+      "structuredData": [],
+      "bytes": 0
+    },
+    {
+      "url": "https://pneumarisband.com/about",
+      "status": 308,
+      "headers": {
+        "access-control-allow-origin": "*",
+        "content-length": "0",
+        "content-security-policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://i1.sndcdn.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://hcaptcha.com https://*.hcaptcha.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.hcaptcha.com https://hcaptcha.com https://*.hcaptcha.com https://static.cloudflareinsights.com; connect-src 'self' https://api.web3forms.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://hcaptcha.com https://*.hcaptcha.com https://cloudflareinsights.com; frame-src https://hcaptcha.com https://*.hcaptcha.com https://open.spotify.com https://w.soundcloud.com; worker-src 'self' blob:; upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "location": "/about/",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "h1": [],
+      "structuredData": [],
+      "bytes": 0
+    },
+    {
+      "url": "https://pneumarisband.com/extras",
+      "status": 308,
+      "headers": {
+        "access-control-allow-origin": "*",
+        "content-length": "0",
+        "content-security-policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://i1.sndcdn.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://hcaptcha.com https://*.hcaptcha.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.hcaptcha.com https://hcaptcha.com https://*.hcaptcha.com https://static.cloudflareinsights.com; connect-src 'self' https://api.web3forms.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://hcaptcha.com https://*.hcaptcha.com https://cloudflareinsights.com; frame-src https://hcaptcha.com https://*.hcaptcha.com https://open.spotify.com https://w.soundcloud.com; worker-src 'self' blob:; upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "location": "/extras/",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "h1": [],
+      "structuredData": [],
+      "bytes": 0
+    },
+    {
+      "url": "https://pneumarisband.com/contact",
+      "status": 308,
+      "headers": {
+        "access-control-allow-origin": "*",
+        "content-length": "0",
+        "content-security-policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://i1.sndcdn.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://hcaptcha.com https://*.hcaptcha.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.hcaptcha.com https://hcaptcha.com https://*.hcaptcha.com https://static.cloudflareinsights.com; connect-src 'self' https://api.web3forms.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://hcaptcha.com https://*.hcaptcha.com https://cloudflareinsights.com; frame-src https://hcaptcha.com https://*.hcaptcha.com https://open.spotify.com https://w.soundcloud.com; worker-src 'self' blob:; upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "location": "/contact/",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "h1": [],
+      "structuredData": [],
+      "bytes": 0
+    },
+    {
+      "url": "https://pneumarisband.com/privacy-policy",
+      "status": 308,
+      "headers": {
+        "access-control-allow-origin": "*",
+        "content-length": "0",
+        "content-security-policy": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://i1.sndcdn.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://hcaptcha.com https://*.hcaptcha.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.hcaptcha.com https://hcaptcha.com https://*.hcaptcha.com https://static.cloudflareinsights.com; connect-src 'self' https://api.web3forms.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://hcaptcha.com https://*.hcaptcha.com https://cloudflareinsights.com; frame-src https://hcaptcha.com https://*.hcaptcha.com https://open.spotify.com https://w.soundcloud.com; worker-src 'self' blob:; upgrade-insecure-requests",
+        "cross-origin-opener-policy": "same-origin",
+        "location": "/privacy-policy/",
+        "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+        "x-content-type-options": "nosniff",
+        "x-frame-options": "DENY"
+      },
+      "h1": [],
+      "structuredData": [],
+      "bytes": 0
+    },
+    {
+      "url": "http://pneumarisband.com/music/",
+      "status": 308,
+      "headers": {
+        "content-type": "text/html; charset=UTF-8",
+        "location": "https://pneumarisband.com/music/"
+      },
+      "title": "308 Permanent Redirect",
+      "h1": [
+        "308 Permanent Redirect"
+      ],
+      "structuredData": [],
+      "bytes": 169
+    },
+    {
+      "url": "https://www.pneumarisband.com/music/",
+      "status": 308,
+      "headers": {
+        "content-type": "text/html; charset=UTF-8",
+        "location": "https://pneumarisband.com/music/"
+      },
+      "title": "308 Permanent Redirect",
+      "h1": [
+        "308 Permanent Redirect"
+      ],
+      "structuredData": [],
+      "bytes": 169
+    },
+    {
+      "url": "http://www.pneumarisband.com/music/",
+      "status": 308,
+      "headers": {
+        "content-type": "text/html; charset=UTF-8",
+        "location": "https://pneumarisband.com/music/"
+      },
+      "title": "308 Permanent Redirect",
+      "h1": [
+        "308 Permanent Redirect"
+      ],
+      "structuredData": [],
+      "bytes": 169
+    }
+  ]
+}

@@ -43,8 +43,18 @@ contact form, runs client-side or against a third-party endpoint. See
 
 ## Conventions
 
+- Website code and engineering documentation belong in this repo. The local
+  media library is `C:\Users\JD\projects\pneumaris`; all its folders use
+  lowercase kebab-case. Creative notes and release planning belong in the asset
+  library's `notes/` folders. The Obsidian vault was intentionally deleted and
+  is no longer part of this project; do not recreate it or depend on it.
+  See [docs/asset-workflow.md](docs/asset-workflow.md) for ownership and promotion
+  rules. Preserve recovery attachment filenames and original source provenance.
+- GitHub Issues are the shared audit backlog. Store dated audit evidence and
+  issue links under `docs/audits/`; `TODO.md` is ignored local scratch space.
+
 - Internal links must use a trailing slash (`/music/`, not `/music`) —
-  Cloudflare Pages 301s the no-slash form, and Astro's own canonical
+  Cloudflare Pages redirects the no-slash form (308 observed on 2026-10-12), and Astro's own canonical
   URLs/sitemap use the slash form. A no-slash internal link creates a
   needless redirect hop that Search Console flags.
 - Images referenced from components/pages live in `public/` as
@@ -77,13 +87,16 @@ so `astro dev` traffic never reaches the property.
 
 Consent is **opt-in and strict**: `src/components/CookieConsent.astro` owns
 the banner and is the only thing that loads `gtag.js`, by creating the script
-element in the accept path. Nothing is requested from Google before a visitor
+element in the accept path. Nothing is requested from Google Analytics before a visitor
 agrees — don't "simplify" this by putting the tag back in `Layout.astro`'s
 head, which would disclose visitor IPs to Google before consent and defeat
 the whole mechanism. The choice is stored in `localStorage` (not a cookie);
 withdrawing it clears `_ga*` cookies and reloads. Any element with
 `data-cookie-preferences` reopens the banner — the footer's "Cookie Choices"
-button uses this, and the privacy policy links it inline.
+button uses this. Google Fonts load independently in `Layout.astro`; the strict
+opt-in rule applies to GA scripts and collection requests. Audit issue
+[#10](https://github.com/jmusick/pneumaris/issues/10) tracks overly broad visitor
+wording about Google requests in the current banner and policy.
 
 ## Security headers (CSP)
 

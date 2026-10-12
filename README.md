@@ -15,8 +15,8 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 
 ## Current Version
 
-- App package version: 1.12.2
-- Site display version: 1.12.2
+- App package version: 1.15.0
+- Site display version: 1.15.0
 
 ## Site Features
 
@@ -24,8 +24,9 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 - Reusable site header and footer components
 - Responsive pages:
 	- Home (`/`)
-	- Music (`/music/`) with album cards, descriptions, track lists, per-track artwork, lightbox previews, and Spotify/SoundCloud playback
+	- Music (`/music/`) with album cards, descriptions, cover lightbox previews, and Spotify/SoundCloud playback
 	- About (`/about/`)
+	- Extras (`/extras/`) with a free desktop wallpaper download
 	- Contact (`/contact/`) with Web3Forms + hCaptcha
 	- Privacy Policy (`/privacy-policy/`)
 - Social links in header:
@@ -51,12 +52,10 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 	- Release date
 	- Description
 	- Track count
-- Full track lists with:
-	- Individual track artwork thumbnails
-	- Track durations
-	- Direct links to each SoundCloud track
+- Track lists and playback controls supplied by the embedded streaming player
+- Track metadata also emitted as `MusicRecording` structured data
 - Artwork lightbox modal:
-	- Opens when clicking album art or track art
+	- Opens when clicking album cover art
 	- Supports close button, backdrop click, and `Esc` key
 - Embedded playback player per release: Spotify iframe when a `spotifyUrl` is set (all current releases), falling back to the SoundCloud playlist embed otherwise
 
@@ -89,6 +88,9 @@ Run dev server:
 npm run dev
 ```
 
+The dev server listens on localhost only. To test from another device on your
+network, opt in explicitly with `npm run dev:network`.
+
 Build production output:
 
 ```bash
@@ -113,6 +115,9 @@ npm run preview
 
 ```text
 public/                 Static assets (logo, header art, global CSS)
+assets-src/             Tracked website image masters (not deployed)
+scripts/                Website image optimization and read-only HTTP audit
+docs/                   Asset workflow and dated audit reports
 public/_headers         Cloudflare Pages security response headers (CSP, HSTS, etc.)
 src/components/         Shared UI components (header/footer/cookie consent banner)
 src/config/             Site constants (site version, site URL, GA measurement ID)
@@ -120,6 +125,19 @@ src/layouts/            Shared page layout (Layout.astro)
 src/pages/              Astro routes/pages
 wrangler.toml           Cloudflare Pages build config
 ```
+
+## Asset Library and Documentation
+
+The media library lives in `C:\Users\JD\projects\pneumaris`, with lowercase
+kebab-case folders for release media, brand assets, wallpapers, drafts, and
+recovery records. Website code and engineering documentation stay in this repo.
+Creative notes and release planning belong in the asset library's `notes/`
+folders. The Obsidian vault was intentionally deleted and is no longer used.
+
+See [asset ownership and promotion](docs/asset-workflow.md) for the directory
+map and the workflow from library masters to `assets-src/` and `public/`.
+GitHub Issues are the shared findings backlog; dated reports live in
+[`docs/audits/`](docs/audits/).
 
 ## Social & Streaming Profiles
 

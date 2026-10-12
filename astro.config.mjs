@@ -7,7 +7,8 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
 	site: 'https://pneumarisband.com',
 	server: {
-		host: true,
+		// Loopback only by default. Use `npm run dev:network` to opt in to LAN access.
+		host: 'localhost',
 		port: 4321,
 	},
 	integrations: [icon(), sitemap()],

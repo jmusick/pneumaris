@@ -1,0 +1,306 @@
+{
+  "date": "2026-10-12",
+  "site": "https://pneumarisband.com",
+  "sourceCommit": "803e798",
+  "findings": [
+    {
+      "key": "seo-404",
+      "category": "seo",
+      "priority": "p1",
+      "title": "[SEO][P1] Return HTTP 404 for nonexistent routes",
+      "evidence": "On October 12, 2026, GET https://pneumarisband.com/audit-missing-page-2026-10-12/ returned HTTP 200 with the homepage title, homepage content, and canonical https://pneumarisband.com/. The build emits six routes and no 404.html. Cloudflare Pages falls back to SPA behavior without a top-level 404 page.",
+      "impact": "Invalid URLs appear successful to crawlers and visitors, creating soft-404 behavior and duplicate homepage responses.",
+      "fix": "Add a static Astro 404 page that emits dist/404.html, uses the shared shell with noindex and a helpful route back, and verify the deployed missing-route response. Keep domain redirects in Cloudflare dashboard.",
+      "acceptance": [
+        "A fresh nonexistent URL returns HTTP 404 in production, with the error page rather than homepage content.",
+        "All six real canonical URLs still return 200 and the sitemap contains only real routes."
+      ],
+      "refs": [
+        "https://developers.cloudflare.com/pages/configuration/serving-pages/",
+        "https://developers.google.com/crawling/docs/troubleshooting/http-status-codes"
+      ],
+      "files": [
+        "src/pages/",
+        "astro.config.mjs"
+      ],
+      "issueUrl": "https://github.com/jmusick/pneumaris/issues/1"
+    },
+    {
+      "key": "security-dependencies",
+      "category": "security",
+      "priority": "p1",
+      "title": "[Security][P1] Patch vulnerable build dependencies and bind development to localhost",
+      "evidence": "Lockfile versions: Astro 6.3.1, Vite 7.3.3, sharp 0.34.5, astro-icon 1.1.5. npm audit --json reports 17 affected packages (2 critical, 14 high, 1 low). astro.config.mjs sets server.host: true. Vite GHSA-fx2h-pf6j-xcff / CVE-2026-53571 affects Windows dev servers <=7.3.4 with network access enabled; fixed in 7.3.5. Astro/Sharp AVIF and other transitive advisories also require triage.",
+      "impact": "The network-bound Windows development server is a concrete sensitive-file disclosure risk if reachable. Dependency severity totals do not establish production exploitability: Cloudflare serves static output with no SSR/image endpoint; the current image optimizer reads fixed local PNGs. No exploit was attempted.",
+      "fix": "Default development to loopback and allow deliberate network testing through an explicit opt-in. Upgrade the lockfile/dependencies to patched compatible versions; assess any required Astro major migration separately. Triage every remaining advisory by reachable path. Add repeatable dependency monitoring.",
+      "acceptance": [
+        "Fresh npm ci and npm run build pass on the chosen supported runtime.",
+        "Installed Vite is patched and the default development server is loopback-only.",
+        "npm audit has no unreviewed actionable advisories; any accepted build-only risk has documented scope and rationale.",
+        "Production remains static, with working embeds, contact validation/CAPTCHA, consent, and security headers."
+      ],
+      "refs": [
+        "https://github.com/vitejs/vite/security/advisories/GHSA-fx2h-pf6j-xcff",
+        "https://github.com/withastro/astro/security/advisories/GHSA-26w7-cxv4-gfx2"
+      ],
+      "files": [
+        "astro.config.mjs",
+        "package.json",
+        "package-lock.json"
+      ],
+      "owasp": "A03:2025 Software Supply Chain Failures; related A02 development exposure",
+      "issueUrl": "https://github.com/jmusick/pneumaris/issues/2"
+    },
+    {
+      "key": "accessibility-menu",
+      "category": "accessibility",
+      "priority": "p1",
+      "title": "[Accessibility][P1] Remove collapsed mobile navigation from the tab order",
+      "evidence": "At 390x844 in Chrome on the homepage, four Tabs from initial document focus reach Home while #site-menu has height 0 and opacity 0 and the toggle reports aria-expanded=false. Navigation and social links remain in the accessibility tree. CSS collapses max-height/opacity without hidden, inert, or equivalent focus suppression.",
+      "impact": "Keyboard users traverse invisible links before reaching page content and cannot see where focus is. Relevant WCAG 2.4.3 and 2.4.7.",
+      "fix": "Synchronize actual hidden/inert state with the toggle and breakpoint. Keep desktop navigation available; opening mobile navigation must expose usable links. Make Escape close the menu and return focus to the toggle.",
+      "acceptance": [
+        "On a collapsed mobile menu, Tab skips all menu/social links.",
+        "When opened, links have visible focus and are keyboard operable.",
+        "Closing and switching between mobile/desktop breakpoints preserves appropriate focusability and aria-expanded."
+      ],
+      "refs": [
+        "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html",
+        "https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/"
+      ],
+      "files": [
+        "src/components/SiteHeader.astro",
+        "public/universal.css"
+      ],
+      "issueUrl": "https://github.com/jmusick/pneumaris/issues/3"
+    },
+    {
+      "key": "accessibility-modal",
+      "category": "accessibility",
+      "priority": "p1",
+      "title": "[Accessibility][P1] Manage keyboard focus in the artwork modal",
+      "evidence": "On /music/, activating Open full artwork for Anathema with Enter opens an aria-modal=true dialog but focus stays on the underlying trigger. Tab then moves to the underlying SoundCloud link. Escape closes the lightbox but leaves focus on that background link. Source only toggles hidden and body overflow; it does not move/trap/restore focus or make background content inert.",
+      "impact": "The modal's declared semantics and keyboard behavior disagree. Keyboard and assistive-technology users can lose the dialog or interact behind it. Relevant WCAG 2.4.3, 2.4.7, 4.1.2; WAI modal dialog pattern.",
+      "fix": "Use a native dialog/showModal or a complete equivalent: initial focus, contained tab sequence, inert background, Escape/close, and return focus to the initiating artwork button. Set the expanded image's alt from the selected artwork rather than leaving every image as Expanded artwork.",
+      "acceptance": [
+        "Enter opens the lightbox and moves focus inside it.",
+        "Tab/Shift+Tab remain inside the open modal and background controls cannot be activated.",
+        "Escape and the close button return focus to the initiating artwork trigger.",
+        "The dialog title and image alternative identify the selected cover."
+      ],
+      "refs": [
+        "https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/"
+      ],
+      "files": [
+        "src/pages/music.astro"
+      ],
+      "issueUrl": "https://github.com/jmusick/pneumaris/issues/4"
+    },
+    {
+      "key": "accessibility-contrast",
+      "category": "accessibility",
+      "priority": "p1",
+      "title": "[Accessibility][P1] Restore readable muted colors and distinguish inline links",
+      "evidence": "Live computed styles match public/universal.css: --ink-muted #5e574f is used for small footer text and social icons. Its contrast is 2.95:1 even against pure black (2.83:1 against #080706), below 4.5:1 for ordinary text and 3:1 for functional icons. --gold-dim is rgba(184,154,106,.5); over black it is about 2.57:1 and is used for small section labels. Privacy-policy inline links have text-decoration:none and gold color only, with insufficient 3:1 differentiation from surrounding paragraph text.",
+      "impact": "Small labels, footer content, and functional icons are difficult to perceive; inline links rely on color alone. Relevant WCAG 1.4.3, 1.4.11, and 1.4.1. Darker-background calculations give a best case for these colors, not screenshot pixel sampling.",
+      "fix": "Adjust the muted/dim tokens and any local overrides to pass against the actual composited surfaces. Underline links within paragraphs. Verify focus indicators and form boundaries too, keeping the site's visual theme.",
+      "acceptance": [
+        "Ordinary text passes 4.5:1 and large text passes 3:1 on actual backgrounds.",
+        "Functional icons and focus indicators pass applicable 3:1 requirements.",
+        "Inline policy/consent links have a persistent non-color cue.",
+        "Check desktop/mobile plus hover/focus states; include alpha blending and background artwork."
+      ],
+      "refs": [
+        "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html",
+        "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html",
+        "https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html"
+      ],
+      "files": [
+        "public/universal.css",
+        "src/pages/privacy-policy.astro"
+      ],
+      "issueUrl": "https://github.com/jmusick/pneumaris/issues/5"
+    },
+    {
+      "key": "seo-durations",
+      "category": "seo",
+      "priority": "p2",
+      "title": "[SEO][P2] Reconcile track durations with the embedded releases",
+      "evidence": "Chrome-rendered /music/ JSON-LD differs from its own Spotify players. Pleroma: Hollow Constellations is PT2M30S in schema vs 04:47 in player; River PT0M9S vs 01:38. The Shape: Static Halo PT2M28S vs 05:13; Silk & Silence PT2M9S vs 04:51; Velvet Teeth PT2M2S vs 04:07. All 11 Pleroma durations and all 3 The Shape durations differ in the observed player; Anathema and Eidolon examples agree.",
+      "impact": "Machine-readable recording metadata contradicts the visible embedded release. The values may refer to different/demo versions; that must be resolved rather than silently assuming the old durations are correct.",
+      "fix": "Verify authoritative metadata for the specific release/version represented by each Spotify URL, then synchronize the track data used by JSON-LD and any future visible lists. If a demo and streaming release are intentionally separate, identify them explicitly.",
+      "acceptance": [
+        "Every MusicRecording duration agrees with the intended release's authoritative metadata.",
+        "Visible player/list, release labels, URLs, and structured data describe the same version.",
+        "Build passes and rendered JSON-LD parses correctly; preserve canonical MusicGroup @id references."
+      ],
+      "refs": [
+        "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
+        "https://schema.org/MusicRecording"
+      ],
+      "files": [
+        "src/pages/music.astro"
+      ],
+      "issueUrl": "https://github.com/jmusick/pneumaris/issues/6"
+    },
+    {
+      "key": "seo-track-fallback",
+      "category": "seo",
+      "priority": "p2",
+      "title": "[SEO][P2] Provide first-party track lists alongside streaming embeds",
+      "evidence": "/music/ stores 42 tracks and emits them in JSON-LD, but its Astro template only renders album descriptions/links plus Spotify iframes. Track names and durations are not in the main document's visible first-party HTML; they depend on cross-origin streaming players. No local per-track links or fallback list is rendered.",
+      "impact": "Visitors who block or cannot load embeds lose the track list. The site's own crawlable and accessible content does not independently expose the recording catalog. This is a content/resilience improvement, not proof that Google cannot render a particular embed.",
+      "fix": "Render semantic track lists from the existing album.tracks data with accurate titles/durations and track links, retaining the player. Resolve the duration mismatch first. Avoid adding autoplay or additional third-party origins.",
+      "acceptance": [
+        "Disabling/blocking Spotify leaves all 42 track names and intended release durations readable.",
+        "Track links are descriptive and keyboard accessible.",
+        "The main HTML and JSON-LD agree, with no duplicate or misleading version metadata."
+      ],
+      "refs": [
+        "https://developers.google.com/search/docs/fundamentals/seo-starter-guide"
+      ],
+      "files": [
+        "src/pages/music.astro"
+      ],
+      "issueUrl": "https://github.com/jmusick/pneumaris/issues/7"
+    },
+    {
+      "key": "seo-lazy-embeds",
+      "category": "seo",
+      "priority": "p2",
+      "title": "[SEO][P2] Defer below-fold streaming players on the music page",
+      "evidence": "All five album iframes in src/pages/music.astro have src set immediately and no loading=lazy. Chrome's initial music-page accessibility tree populated all five Spotify players while only the first album was in view. This triggers third-party player work for below-fold albums.",
+      "impact": "Unnecessary initial third-party loading consumes bandwidth and browser work, particularly on mobile. No field Core Web Vitals failure or Lighthouse score was measured in this audit.",
+      "fix": "Add native loading=lazy to below-fold players, retain allocated heights and accessible titles, and measure representative mobile loads before/after. Consider a deliberate load-player control if additional consent/resilience requirements are chosen.",
+      "acceptance": [
+        "Below-fold players defer loading until approaching the viewport or user activation.",
+        "Player dimensions remain reserved to avoid layout shift.",
+        "Playback and keyboard navigation still work; record before/after request or performance measurements."
+      ],
+      "refs": [
+        "https://web.dev/articles/iframe-lazy-loading"
+      ],
+      "files": [
+        "src/pages/music.astro"
+      ],
+      "issueUrl": "https://github.com/jmusick/pneumaris/issues/8"
+    },
+    {
+      "key": "security-csp",
+      "category": "security",
+      "priority": "p2",
+      "title": "[Security][P2] Remove blanket inline-script permission from the production CSP",
+      "evidence": "public/_headers and live HTML responses enforce script-src 'self' 'unsafe-inline' plus analytics/CAPTCHA/Cloudflare origins. The consent loader is an inline script; the source also contains application/ld+json. Other Astro scripts are built into same-origin files.",
+      "impact": "The enforced CSP provides useful protection but blanket unsafe-inline weakens its ability to stop injected executable inline JavaScript. No exploitable XSS was found. OWASP A02 configuration hardening.",
+      "fix": "Move the consent bootstrap to a same-origin external script with safe data attributes or generate hashes for final emitted executable inline scripts. Retain the explicitly needed vendor origins. Test JSON-LD, opt-in GA, hCaptcha, and Cloudflare beacon. Avoid a fixed build-time nonce; keep within Cloudflare's _headers line limit.",
+      "acceptance": [
+        "Production script-src no longer includes unsafe-inline and permits only intended executable scripts.",
+        "GA is still fetched only after acceptance, decline/withdrawal works, and embeds/CAPTCHA load.",
+        "Verify live response headers and the browser console after deployment, not just Astro dev."
+      ],
+      "refs": [
+        "https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html",
+        "https://web.dev/articles/strict-csp",
+        "https://developers.cloudflare.com/pages/configuration/headers/"
+      ],
+      "files": [
+        "public/_headers",
+        "src/components/CookieConsent.astro",
+        "src/layouts/Layout.astro"
+      ],
+      "owasp": "A02:2025 Security Misconfiguration",
+      "issueUrl": "https://github.com/jmusick/pneumaris/issues/9"
+    },
+    {
+      "key": "security-privacy",
+      "category": "security",
+      "priority": "p2",
+      "title": "[Security][P2] Make consent wording accurately distinguish Google Analytics from Google Fonts",
+      "evidence": "The banner says Nothing is sent to Google unless you accept. The Analytics policy says declining means no data reaches Google. Layout loads/preconnects fonts.googleapis.com and fonts.gstatic.com on every page regardless of GA choice. Chrome still shows the Google Fonts stylesheet after declining. The policy's separate Fonts entry acknowledges requests to Google font servers.",
+      "impact": "The blanket promise is inaccurate even though the GA loader itself correctly waits for consent. This is a privacy/transparency finding, not a claim that GA is loaded before consent or a jurisdiction-specific legal conclusion.",
+      "fix": "Scope banner/policy wording to Google Analytics and separately explain fonts load independently, or self-host the fonts if the intended promise really is zero Google requests before consent. Remove the nonexistent close-banner reference. Update the privacy policy date and applicable repo documentation in the same change.",
+      "acceptance": [
+        "Banner and policy accurately describe all pre-consent requests.",
+        "Fresh/declined visitors make no GA script or collection requests.",
+        "The chosen font behavior and documented claims agree, including preconnects.",
+        "Update Last updated and release/version documentation for the visible change."
+      ],
+      "refs": [
+        "https://developers.google.com/fonts/faq/privacy"
+      ],
+      "files": [
+        "src/components/CookieConsent.astro",
+        "src/layouts/Layout.astro",
+        "src/pages/privacy-policy.astro"
+      ],
+      "owasp": "Privacy/transparency; browser trust boundary (no demonstrated exploit)",
+      "issueUrl": "https://github.com/jmusick/pneumaris/issues/10"
+    },
+    {
+      "key": "accessibility-form",
+      "category": "accessibility",
+      "priority": "p2",
+      "title": "[Accessibility][P2] Validate required contact fields before CAPTCHA submission",
+      "evidence": "contact-form has novalidate, but its submit handler never calls checkValidity/reportValidity or validates trimmed fields. In Chrome, submitting an empty form reports only Please complete the CAPTCHA challenge; all four required fields remain invalid with no associated error text or aria-invalid. The source proceeds to payload/fetch as soon as a CAPTCHA token exists.",
+      "impact": "Required names, email, subject, and message lack meaningful client feedback; empty/whitespace fields and invalid email can reach the third-party validation path. Relevant WCAG 3.3.1 and 3.3.2. No CAPTCHA was solved and no contact message was sent.",
+      "fix": "Use native constraint validation or accessible custom field validation before CAPTCHA/payload construction. Trim text, focus the first invalid field, associate field errors, and announce the summary. Keep third-party server-side validation as a separate control.",
+      "acceptance": [
+        "Empty, whitespace-only, malformed-email, and over-limit inputs are rejected before fetch.",
+        "Users receive clear field-specific errors with programmatic associations and focus.",
+        "A valid form progresses to CAPTCHA, and failed requests preserve entered content.",
+        "Verify retry and single-use CAPTCHA reset behavior with a controlled test endpoint."
+      ],
+      "refs": [
+        "https://www.w3.org/WAI/WCAG22/Understanding/error-identification.html",
+        "https://www.w3.org/WAI/tutorials/forms/validation/"
+      ],
+      "files": [
+        "src/pages/contact.astro"
+      ],
+      "issueUrl": "https://github.com/jmusick/pneumaris/issues/11"
+    },
+    {
+      "key": "accessibility-reflow",
+      "category": "accessibility",
+      "priority": "p2",
+      "title": "[Accessibility][P2] Fit the contact CAPTCHA within narrow-screen content",
+      "evidence": "At a Chrome viewport width of 320 CSS px with a vertical scrollbar, contact page clientWidth is 305 but scrollWidth is 320. The loaded hCaptcha iframe is 302px wide, begins at x=17.59 and ends at x=319.59, extending beyond the 305px content viewport. The screenshot shows its right edge clipped and horizontal scrolling. About/Extras/Privacy pages had clientWidth=scrollWidth=305 under the same viewport.",
+      "impact": "Contact visitors at narrow widths/high zoom need horizontal scrolling to see the entire CAPTCHA. Relevant WCAG 1.4.10 reflow.",
+      "fix": "Use hCaptcha's supported compact mode where the available content width cannot contain the normal widget, or adjust the responsive container layout. Preserve challenge accessibility rather than visually scaling or clipping the widget.",
+      "acceptance": [
+        "At 320 CSS px, the full widget fits within the usable client width and document scrollWidth equals clientWidth.",
+        "The challenge remains operable by keyboard and accessible through the provider's supported flow.",
+        "Verify contact page at desktop 400% zoom equivalent and common phone widths."
+      ],
+      "refs": [
+        "https://www.w3.org/WAI/WCAG22/Understanding/reflow.html",
+        "https://docs.hcaptcha.com/configuration/"
+      ],
+      "files": [
+        "src/pages/contact.astro"
+      ],
+      "issueUrl": "https://github.com/jmusick/pneumaris/issues/12"
+    },
+    {
+      "key": "accessibility-consent-focus",
+      "category": "accessibility",
+      "priority": "p2",
+      "title": "[Accessibility][P2] Restore focus when closing reopened cookie choices",
+      "evidence": "Clicking footer Cookie Choices opens the non-modal banner and focuses Decline. Choosing Decline hides the banner; Chrome's focused element becomes BODY instead of the footer opener. show()/record() store no focus-return target.",
+      "impact": "A keyboard user loses their place after revisiting preferences. Relevant WCAG 2.4.3 focus order. This is separate from the first-visit banner, which should not unexpectedly steal focus.",
+      "fix": "Track the preferences opener and restore focus to it when the reopened banner closes. Keep initial opt-in prompting non-modal, and preserve intentional reload behavior when withdrawing previously granted consent.",
+      "acceptance": [
+        "Reopen choices from the footer or another preference trigger, then decline/accept; focus returns to that trigger when no reload occurs.",
+        "First-visit prompting does not unexpectedly move focus.",
+        "Withdrawal still removes GA cookies and reloads as designed."
+      ],
+      "refs": [
+        "https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html"
+      ],
+      "files": [
+        "src/components/CookieConsent.astro"
+      ],
+      "issueUrl": "https://github.com/jmusick/pneumaris/issues/13"
+    }
+  ]
+}
