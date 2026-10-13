@@ -15,12 +15,16 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 
 ## Current Version
 
-- App package version: 1.15.0
-- Site display version: 1.15.0
+- App package version: 1.17.0
+- Site display version: 1.17.0
 
 ## Site Features
 
 - Dark atmospheric visual theme with shared global styles
+- Layered homepage artwork: a fixed environment with a curved character surface that turns toward the mouse, plus optional phone tilt
+- Static character fallback when WebGL is unavailable or reduced motion is requested
+- Motion pause control and automatic support for reduced-motion preferences
+- Featured latest release, shared release data, and a wallpaper preview on the homepage
 - Reusable site header and footer components
 - Responsive pages:
 	- Home (`/`)

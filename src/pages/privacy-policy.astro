@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
 import { SITE_URL } from "../config/site";
 
 const pageTitle = "Privacy Policy | Pneumaris";
@@ -16,30 +17,11 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 >
 
 <style>
-			.page-header {
-				border-bottom: 1px solid var(--line);
-				padding: 3.5rem clamp(1.1rem, 3vw, 2.4rem) 2.5rem;
-				background: linear-gradient(to bottom, rgba(60, 40, 12, 0.08), transparent);
-			}
-
-			.page-header-inner {
-				max-width: 1280px;
-				margin: 0 auto;
-			}
-
-			.page-header .section-label {
-				margin-bottom: 0.6rem;
-				display: block;
-			}
-
-			.page-header h1 {
-				font-size: clamp(2rem, 5vw, 3.5rem);
-			}
 
 			.content {
 				max-width: 720px;
 				margin: 0 auto;
-				padding: 3.5rem clamp(1.1rem, 3vw, 2.4rem);
+				padding: 3.5rem var(--gutter);
 				display: flex;
 				flex-direction: column;
 				gap: 2rem;
@@ -79,15 +61,10 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 </style>
 
 		<main id="main">
-			<div class="page-header">
-				<div class="page-header-inner">
-					<span class="section-label">Legal</span>
-					<h1>Privacy Policy</h1>
-				</div>
-			</div>
+			<PageHeader title="Privacy Policy" description="How this website handles your information." />
 
 			<div class="content">
-				<p class="last-updated">Last updated: September 17, 2026</p>
+				<p class="last-updated">Last updated: October 13, 2026</p>
 
 				<div class="policy-block">
 					<h2>Overview</h2>
@@ -207,6 +184,18 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 						your analytics choice at any time via the "Cookie Choices" link in the
 						footer, or opt out of Google Analytics tracking entirely via the
 						<a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Browser Add-on</a>.
+					</p>
+				</div>
+
+				<div class="policy-block">
+					<h2>Background Motion</h2>
+					<p>
+						The character in the homepage artwork responds to your mouse. On supported phones,
+						you can choose to enable tilt, which may ask for access to device
+						orientation. These readings are used only in your browser to move the
+						artwork; they are not stored or sent anywhere. You can disable tilt
+						or pause mouse motion using the control over the artwork. The effect
+						stays off when your device requests reduced motion.
 					</p>
 				</div>
 

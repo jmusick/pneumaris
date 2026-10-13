@@ -5,7 +5,7 @@ interface Props {
 	active?: "home" | "music" | "about" | "extras" | "contact";
 }
 
-const { active = "home" } = Astro.props;
+const { active } = Astro.props;
 
 const socials = [
 	{
@@ -56,13 +56,14 @@ const socials = [
 		<a href="/" class="brand-link">
 			<img
 				class="brand-logo"
-				src="/logo.webp"
-				width="753"
-				height="480"
-				alt="Pneumaris"
+				src="/logo-circle.webp"
+				width="640"
+				height="640"
+				alt=""
 				loading="eager"
 				decoding="async"
 			/>
+			<span class="brand-name">Pneumaris</span>
 		</a>
 
 		<button
@@ -78,10 +79,10 @@ const socials = [
 
 		<div class="site-head-right" id="site-menu">
 			<nav class="site-nav" aria-label="Primary">
-				<a class={active === "home" ? "active" : undefined} href="/">Home</a>
-				<a class={active === "music" ? "active" : undefined} href="/music/">Music</a>
-				<a class={active === "about" ? "active" : undefined} href="/about/">About</a>
-				<a class={active === "extras" ? "active" : undefined} href="/extras/">Extras</a>
+				<a class={active === "home" ? "active" : undefined} aria-current={active === "home" ? "page" : undefined} href="/">Home</a>
+				<a class={active === "music" ? "active" : undefined} aria-current={active === "music" ? "page" : undefined} href="/music/">Music</a>
+				<a class={active === "about" ? "active" : undefined} aria-current={active === "about" ? "page" : undefined} href="/about/">About</a>
+				<a class={active === "extras" ? "active" : undefined} aria-current={active === "extras" ? "page" : undefined} href="/extras/">Extras</a>
 				<a
 					href="https://www.etsy.com/shop/EgamiDesigns?section_id=59398309"
 					target="_blank"
@@ -89,7 +90,7 @@ const socials = [
 				>
 					Merch
 				</a>
-				<a class={active === "contact" ? "active" : undefined} href="/contact/">Contact</a>
+				<a class={active === "contact" ? "active" : undefined} aria-current={active === "contact" ? "page" : undefined} href="/contact/">Contact</a>
 			</nav>
 
 			<div class="site-head-divider" aria-hidden="true"></div>
@@ -110,17 +111,31 @@ const socials = [
 	const menu = document.getElementById("site-menu");
 
 	if (toggle && menu) {
+		const mobile = matchMedia("(max-width: 1100px)");
+		const closeMenu = () => {
+			menu.classList.remove("is-open");
+			toggle.classList.remove("is-open");
+			toggle.setAttribute("aria-expanded", "false");
+			menu.inert = mobile.matches;
+		};
+		mobile.addEventListener("change", closeMenu);
+		closeMenu();
 		toggle.addEventListener("click", () => {
 			const isOpen = menu.classList.toggle("is-open");
+			menu.inert = mobile.matches && !isOpen;
 			toggle.classList.toggle("is-open", isOpen);
 			toggle.setAttribute("aria-expanded", String(isOpen));
 		});
 
 		menu.addEventListener("click", (event) => {
 			if (event.target instanceof HTMLElement && event.target.closest("a")) {
-				menu.classList.remove("is-open");
-				toggle.classList.remove("is-open");
-				toggle.setAttribute("aria-expanded", "false");
+				closeMenu();
+			}
+		});
+		document.addEventListener("keydown", (event) => {
+			if (event.key === "Escape" && menu.classList.contains("is-open")) {
+				closeMenu();
+				toggle.focus();
 			}
 		});
 	}

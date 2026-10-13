@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
 import { SITE_URL } from "../config/site";
 
 const pageTitle = "Contact | Pneumaris";
@@ -21,30 +22,11 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 	</Fragment>
 
 <style>
-			.page-header {
-				border-bottom: 1px solid var(--line);
-				padding: 3.5rem clamp(1.1rem, 3vw, 2.4rem) 2.5rem;
-				background: linear-gradient(to bottom, rgba(60, 40, 12, 0.08), transparent);
-			}
-
-			.page-header-inner {
-				max-width: 1280px;
-				margin: 0 auto;
-			}
-
-			.page-header .section-label {
-				margin-bottom: 0.6rem;
-				display: block;
-			}
-
-			.page-header h1 {
-				font-size: clamp(2rem, 5vw, 3.5rem);
-			}
 
 			.content {
 				max-width: 680px;
 				margin: 0 auto;
-				padding: 3.5rem clamp(1.1rem, 3vw, 2.4rem);
+				padding: 3.5rem var(--gutter);
 			}
 
 			.contact-intro {
@@ -56,6 +38,7 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 
 			.contact-form {
 				display: grid;
+				grid-template-columns: minmax(0, 1fr);
 				gap: 1rem;
 				margin-bottom: 2rem;
 			}
@@ -67,6 +50,7 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 			}
 
 			.form-field {
+				min-width: 0;
 				display: flex;
 				flex-direction: column;
 				gap: 0.45rem;
@@ -74,9 +58,9 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 
 			.form-field label {
 				font-family: "Cinzel", serif;
-				font-size: 0.75rem;
-				letter-spacing: 0.14em;
-				text-transform: uppercase;
+				font-size: 0.85rem;
+				letter-spacing: 0.025em;
+
 				color: var(--ink-soft);
 			}
 
@@ -85,7 +69,7 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 				width: 100%;
 				background: rgba(22, 15, 10, 0.75);
 				border: 1px solid var(--line);
-				border-radius: 0.4rem;
+				border-radius: 2px;
 				padding: 0.8rem 0.9rem;
 				color: var(--ink);
 				font: inherit;
@@ -108,12 +92,12 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 				justify-self: start;
 				background: rgba(184, 154, 106, 0.12);
 				border: 1px solid var(--gold-dim);
-				border-radius: 0.35rem;
+				border-radius: 2px;
 				padding: 0.7rem 1.2rem;
 				font-family: "Cinzel", serif;
 				font-size: 0.78rem;
-				letter-spacing: 0.16em;
-				text-transform: uppercase;
+				letter-spacing: 0.025em;
+
 				color: var(--gold-bright);
 				cursor: pointer;
 				transition: background 180ms ease, border-color 180ms ease;
@@ -159,12 +143,12 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 				justify-content: space-between;
 				padding: 1.1rem 1.4rem;
 				border: 1px solid var(--line);
-				border-radius: 0.4rem;
+				border-radius: 2px;
 				color: var(--ink-soft);
 				font-family: "Cinzel", serif;
 				font-size: 0.82rem;
-				letter-spacing: 0.14em;
-				text-transform: uppercase;
+				letter-spacing: 0.025em;
+
 				transition: border-color 180ms ease, color 180ms ease, background 180ms ease;
 			}
 
@@ -187,12 +171,7 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 </style>
 
 		<main id="main">
-			<div class="page-header">
-				<div class="page-header-inner">
-					<span class="section-label">Reach Out</span>
-					<h1>Contact</h1>
-				</div>
-			</div>
+			<PageHeader title="Contact" description="Booking, press, collaborations, and conversation." />
 
 			<div class="content">
 				<p class="contact-intro">
@@ -226,7 +205,7 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 						<input id="website" name="website" type="text" autocomplete="off" tabindex="-1" />
 					</div>
 
-					<div class="h-captcha" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2" data-theme="dark"></div>
+					<div class="h-captcha" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2" data-theme="dark" data-size="compact"></div>
 
 					<button class="contact-submit" type="submit">Send Message</button>
 					<p id="form-status" class="form-status" role="status" aria-live="polite"></p>

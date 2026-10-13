@@ -8,6 +8,20 @@ const src = (name) => new URL(`../assets-src/${name}`, import.meta.url).pathname
 const pub = (name) => new URL(`../public/${name}`, import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
 
 async function run() {
+	// Matched hero layers: normalize their canvases and preserve foreground alpha.
+	for (const layer of ["environment", "character"]) {
+		await sharp(src(`hero-${layer}-v1.png`))
+			.resize({ width: 1920, height: 784, fit: "fill" })
+			.webp({ quality: 82, alphaQuality: 100 })
+			.toFile(pub(`hero-${layer}-v1.webp`));
+	}
+
+	// Promoted from assets/albums/anathema/artwork/anathema-3000x3000.png.
+	await sharp(src("anathema.png"))
+		.resize({ width: 960, height: 960 })
+		.webp({ quality: 82 })
+		.toFile(pub("anathema.webp"));
+
 	// header.png -> header.webp (hero background + about page image)
 	await sharp(src("header.png"))
 		.resize({ width: 1920, withoutEnlargement: true })

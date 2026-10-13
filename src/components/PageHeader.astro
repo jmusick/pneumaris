@@ -1,0 +1,22 @@
+---
+interface Props { title: string; description: string; }
+const { title, description } = Astro.props;
+---
+
+<div class="page-header">
+	<div class="page-header-inner">
+		<h1>{title}</h1>
+		<p>{description}</p>
+	</div>
+</div>
+
+<style>
+	.page-header {
+		padding: clamp(3rem, 7vw, 6rem) var(--gutter) clamp(2rem, 4vw, 3.5rem);
+		border-bottom: 1px solid var(--line);
+		background: radial-gradient(ellipse at 80% 0%, rgba(184, 154, 106, 0.08), transparent 65%);
+	}
+	.page-header-inner { max-width: var(--content-width); margin: auto; }
+	h1 { font-size: clamp(2.75rem, 6vw, 5rem); letter-spacing: 0.02em; line-height: 1.15; }
+	p { max-width: 52ch; margin-top: 1rem; font-size: 1rem; color: var(--ink-soft); }
+</style>

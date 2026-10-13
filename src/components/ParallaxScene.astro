@@ -1,0 +1,257 @@
+<parallax-scene>
+	<img class="scene-environment" data-parallax-environment src="/hero-environment-v1.webp" width="1920" height="784" alt="" fetchpriority="high" decoding="async" />
+	<svg class="scene-character" data-parallax-art viewBox="0 0 1920 784" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+		<!-- Register the extracted character beneath the fixed halo. The generated
+		     cutout was slightly larger than the original, so place it at 88% scale. -->
+		<image href="/hero-character-v1.webp" x="115.2" y="94.08" width="1689.6" height="689.92" />
+	</svg>
+	<canvas class="scene-surface" data-character-surface aria-hidden="true" hidden></canvas>
+	<div class="scene-shade" aria-hidden="true"></div>
+	<slot />
+	<div class="scene-controls">
+		<button type="button" data-motion-toggle aria-pressed="false" hidden>Pause motion</button>
+		<span class="sr-only" data-motion-status role="status"></span>
+	</div>
+</parallax-scene>
+
+<style>
+	parallax-scene {
+		position: relative;
+		display: flex;
+		align-items: flex-end;
+		min-height: clamp(540px, 48vw, 740px);
+		overflow: hidden;
+		isolation: isolate;
+		background: var(--bg-base);
+	}
+	.scene-environment,
+	.scene-character,
+	.scene-surface {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		filter: brightness(0.82) contrast(1.04);
+		pointer-events: none;
+	}
+	.scene-environment { object-fit: cover; object-position: center; }
+	parallax-scene[data-surface-ready] .scene-character { visibility: hidden; }
+	.scene-shade {
+		position: absolute;
+		inset: 0;
+		background:
+			linear-gradient(90deg, rgba(8, 7, 6, 0.55), transparent 75%),
+			linear-gradient(0deg, var(--bg-base), rgba(8, 7, 6, 0.25) 45%, transparent 80%);
+		pointer-events: none;
+	}
+	.scene-controls { position: absolute; top: 1.25rem; right: var(--gutter); }
+	button {
+		min-height: 44px;
+		padding: 0.5rem 0.8rem;
+		border: 1px solid var(--line);
+		border-radius: 2px;
+		background: rgba(8, 7, 6, 0.7);
+		color: var(--ink);
+		font: 400 0.75rem 'Raleway', sans-serif;
+		cursor: pointer;
+	}
+	button:hover { border-color: var(--gold); }
+	button:disabled { cursor: default; }
+	button[hidden] { display: none; }
+	@media (max-width: 600px) {
+		parallax-scene { min-height: 620px; }
+		.scene-shade { background: linear-gradient(0deg, var(--bg-base), rgba(8, 7, 6, 0.3) 65%, transparent); }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.scene-surface { display: none; }
+		parallax-scene[data-surface-ready] .scene-character { visibility: visible; }
+		.scene-controls { display: none; }
+	}
+</style>
+
+<script>
+	import { createCharacterSurface, type CharacterSurface } from '../lib/character-surface';
+	type OrientationAPI = typeof DeviceOrientationEvent & {
+		requestPermission?: () => Promise<'granted' | 'denied'>;
+	};
+
+	class ParallaxScene extends HTMLElement {
+		private cleanup?: () => void;
+
+		connectedCallback() {
+			const canvas = this.querySelector<HTMLCanvasElement>('[data-character-surface]');
+			const button = this.querySelector<HTMLButtonElement>('[data-motion-toggle]');
+			const status = this.querySelector<HTMLElement>('[data-motion-status]');
+			if (!canvas || !button || !status) return;
+			const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+			const coarse = matchMedia('(pointer: coarse)');
+			const orientation = window.DeviceOrientationEvent as OrientationAPI | undefined;
+			const canTilt = isSecureContext && !!orientation;
+			let paused = false;
+			let alive = true;
+			let initializing = false;
+			let failed = false;
+			let surface: CharacterSurface | null = null;
+			let tiltEnabled = false;
+			let visible = false;
+			let frame = 0;
+			let lastTime = 0;
+			let timeout = 0;
+			let baseline: { beta: number; gamma: number } | null = null;
+			let x = 0, y = 0, targetX = 0, targetY = 0;
+			const clamp = (value: number) => Math.max(-1, Math.min(1, value));
+			const active = () => alive && !!surface && visible && !document.hidden && !reduced.matches && !paused;
+			const draw = () => surface?.draw(x * Math.PI / 180, y * Math.PI / 180);
+
+			const render = (time: number) => {
+				frame = 0;
+				if (!active()) return;
+				// Time-based easing keeps the same gentle lag on 60Hz and 120Hz screens.
+				const ease = 1 - Math.exp(-Math.min(time - lastTime, 64) / 140);
+				lastTime = time;
+				x += (targetX - x) * ease;
+				y += (targetY - y) * ease;
+				if (Math.abs(targetX - x) + Math.abs(targetY - y) < 0.02) {
+					x = targetX;
+					y = targetY;
+				} else frame = requestAnimationFrame(render);
+				draw();
+			};
+			const move = (nextX: number, nextY: number) => {
+				if (!active()) return;
+				// Turn around a fixed anchor; never translate the character sideways.
+				targetX = clamp(nextX) * 18;
+				targetY = clamp(nextY) * 5;
+				if (x === targetX && y === targetY) return;
+				if (!frame) { lastTime = performance.now(); frame = requestAnimationFrame(render); }
+			};
+			const reset = () => {
+				cancelAnimationFrame(frame);
+				frame = 0;
+				x = y = targetX = targetY = 0;
+				baseline = null;
+				draw();
+			};
+			const pointer = (event: PointerEvent) => {
+				if (event.pointerType !== 'mouse' || tiltEnabled) return;
+				const rect = this.getBoundingClientRect();
+				move((event.clientX - rect.left) / rect.width * 2 - 1,
+					-((event.clientY - rect.top) / rect.height * 2 - 1));
+			};
+			const leave = () => { if (!tiltEnabled) move(0, 0); };
+			const sensor = (event: DeviceOrientationEvent) => {
+				if (!active() || event.beta === null || event.gamma === null ||
+					!Number.isFinite(event.beta) || !Number.isFinite(event.gamma)) return;
+				clearTimeout(timeout);
+				baseline ??= { beta: event.beta, gamma: event.gamma };
+				const delta = (angle: number, origin: number) => ((angle - origin + 540) % 360) - 180;
+				const horizontal = delta(event.gamma, baseline.gamma) / 18;
+				const vertical = delta(event.beta, baseline.beta) / 18;
+				const angle = (screen.orientation?.angle ?? window.orientation ?? 0) * Math.PI / 180;
+				move(-(horizontal * Math.cos(angle) + vertical * Math.sin(angle)),
+					-(vertical * Math.cos(angle) - horizontal * Math.sin(angle)));
+			};
+			const stopTilt = () => {
+				window.removeEventListener('deviceorientation', sensor);
+				clearTimeout(timeout);
+				tiltEnabled = false;
+				reset();
+			};
+			const updateButton = () => {
+				button.hidden = reduced.matches || !surface || (coarse.matches && !canTilt);
+				button.textContent = coarse.matches ? (tiltEnabled ? 'Disable tilt' : 'Enable tilt') :
+					(paused ? 'Resume motion' : 'Pause motion');
+				button.setAttribute('aria-pressed', String(coarse.matches ? tiltEnabled : paused));
+			};
+			const toggle = async () => {
+				if (reduced.matches) return;
+				if (!coarse.matches) { paused = !paused; reset(); updateButton(); return; }
+				if (tiltEnabled) { stopTilt(); updateButton(); return; }
+				button.disabled = true;
+				try {
+					// Safari requires this call directly within the button's user gesture.
+					const permission = await orientation?.requestPermission?.();
+					if (permission === 'denied') throw new Error('Permission denied');
+					if (reduced.matches || !this.isConnected) return;
+					tiltEnabled = true;
+					paused = false;
+					window.addEventListener('deviceorientation', sensor, { passive: true });
+					status.textContent = 'Tilt enabled. Gently tilt your device to turn the character.';
+					timeout = window.setTimeout(() => {
+						stopTilt();
+						updateButton();
+						status.textContent = 'Tilt is unavailable on this device.';
+					}, 3000);
+				} catch {
+					reset();
+					status.textContent = 'Tilt is unavailable. The background will stay still.';
+				} finally { button.disabled = false; updateButton(); }
+			};
+			const initializeSurface = async () => {
+				if (surface || initializing || failed || reduced.matches) return;
+				initializing = true;
+				const created = await createCharacterSurface(canvas);
+				initializing = false;
+				if (!alive) { created?.dispose(); return; }
+				surface = created;
+				failed = !created;
+				if (surface && !reduced.matches) {
+					canvas.hidden = false;
+					draw();
+					this.dataset.surfaceReady = '';
+				}
+				updateButton();
+			};
+			const preferenceChange = () => {
+				stopTilt(); paused = false;
+				canvas.hidden = reduced.matches || !surface;
+				if (surface && !reduced.matches) { draw(); this.dataset.surfaceReady = ''; }
+				else delete this.dataset.surfaceReady;
+				void initializeSurface();
+				updateButton();
+			};
+			const contextLost = () => {
+				stopTilt();
+				surface?.dispose(); surface = null; failed = true;
+				canvas.hidden = true;
+				delete this.dataset.surfaceReady;
+				updateButton();
+			};
+			const visibility = () => { reset(); };
+			const observer = new IntersectionObserver(([entry]) => {
+				visible = entry.isIntersecting;
+				if (!visible) reset();
+			});
+			observer.observe(this);
+			const resize = new ResizeObserver(() => { if (surface && !reduced.matches) draw(); });
+			resize.observe(this);
+			canvas.addEventListener('webglcontextlost', contextLost);
+			updateButton();
+			this.addEventListener('pointermove', pointer, { passive: true });
+			this.addEventListener('pointerleave', leave);
+			button.addEventListener('click', toggle);
+			reduced.addEventListener('change', preferenceChange);
+			coarse.addEventListener('change', preferenceChange);
+			document.addEventListener('visibilitychange', visibility);
+			window.addEventListener('orientationchange', visibility);
+			void initializeSurface();
+			this.cleanup = () => {
+				alive = false;
+				stopTilt(); observer.disconnect(); resize.disconnect();
+				surface?.dispose(); surface = null;
+				canvas.removeEventListener('webglcontextlost', contextLost);
+				canvas.hidden = true;
+				delete this.dataset.surfaceReady;
+				this.removeEventListener('pointermove', pointer);
+				this.removeEventListener('pointerleave', leave);
+				button.removeEventListener('click', toggle);
+				reduced.removeEventListener('change', preferenceChange);
+				coarse.removeEventListener('change', preferenceChange);
+				document.removeEventListener('visibilitychange', visibility);
+				window.removeEventListener('orientationchange', visibility);
+			};
+		}
+		disconnectedCallback() { this.cleanup?.(); }
+	}
+	if (!customElements.get('parallax-scene')) customElements.define('parallax-scene', ParallaxScene);
+</script>

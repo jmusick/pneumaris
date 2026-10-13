@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
 import { SITE_URL } from "../config/site";
 
 const pageTitle = "Extras | Pneumaris";
@@ -17,35 +18,16 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 >
 
 <style>
-	.page-header {
-		border-bottom: 1px solid var(--line);
-		padding: 3.5rem clamp(1.1rem, 3vw, 2.4rem) 2.5rem;
-		background: linear-gradient(to bottom, rgba(60, 40, 12, 0.08), transparent);
-	}
-
-	.page-header-inner {
-		max-width: 1280px;
-		margin: 0 auto;
-	}
-
-	.page-header .section-label {
-		margin-bottom: 0.6rem;
-		display: block;
-	}
-
-	.page-header h1 {
-		font-size: clamp(2rem, 5vw, 3.5rem);
-	}
 
 	.content {
-		max-width: 1280px;
+		max-width: var(--content-width);
 		margin: 0 auto;
-		padding: 3rem clamp(1.1rem, 3vw, 2.4rem) 5rem;
+		padding: 3rem var(--gutter) 5rem;
 	}
 
 	.freebie-card {
 		border: 1px solid var(--line);
-		border-radius: 0.5rem;
+		border-radius: 2px;
 		overflow: hidden;
 		background: rgba(255, 255, 255, 0.02);
 	}
@@ -82,7 +64,7 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 		gap: 0.5rem;
 		padding: 0.75rem 1.5rem;
 		border: 1px solid var(--line);
-		border-radius: 0.35rem;
+		border-radius: 2px;
 		color: var(--ink);
 		text-decoration: none;
 		font-size: 0.95rem;
@@ -99,12 +81,7 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 </style>
 
 <main id="main">
-	<div class="page-header">
-		<div class="page-header-inner">
-			<span class="section-label">Free Downloads</span>
-			<h1>Extras</h1>
-		</div>
-	</div>
+	<PageHeader title="Extras" description="A little of the Pneumaris world to take with you." />
 
 	<div class="content">
 		<div class="freebie-card">

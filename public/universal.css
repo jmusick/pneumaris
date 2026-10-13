@@ -1,7 +1,10 @@
 :root {
+	color-scheme: dark;
+	--content-width: 1240px;
+	--gutter: clamp(1.25rem, 4vw, 3.5rem);
 	--ink: #e8e0d4;
-	--ink-soft: #9a9089;
-	--ink-muted: #5e574f;
+	--ink-soft: #b4aaa0;
+	--ink-muted: #9d9285;
 	--surface: rgba(18, 12, 8, 0.82);
 	--surface-strong: rgba(24, 16, 10, 0.94);
 	--surface-raised: rgba(32, 22, 14, 0.72);
@@ -11,6 +14,46 @@
 	--gold-dim: rgba(184, 154, 106, 0.5);
 	--bg-base: #080706;
 }
+
+html { scroll-padding-top: 8rem; }
+[id] { scroll-margin-top: 1rem; }
+:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 5px; }
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+	border: 0;
+}
+.button-primary {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.75rem;
+	min-height: 48px;
+	padding: 0.85rem 1.35rem;
+	background: var(--gold-bright);
+	border: 1px solid var(--gold-bright);
+	border-radius: 2px;
+	color: var(--bg-base);
+	font-weight: 500;
+	font-size: 0.9rem;
+}
+.button-primary:hover { background: #ead7af; color: var(--bg-base); }
+.button-primary svg { width: 1rem; height: 1rem; }
+.text-link {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	border-bottom: 1px solid var(--gold-dim);
+	color: var(--ink);
+	font-size: 0.9rem;
+}
+.text-link:hover { border-color: var(--gold-bright); }
 
 * {
 	box-sizing: border-box;
@@ -24,7 +67,7 @@ body {
 body {
 	margin: 0;
 	font-family: "Raleway", sans-serif;
-	font-weight: 300;
+	font-weight: 400;
 	color: var(--ink);
 	background-color: var(--bg-base);
 	background-image:
@@ -100,9 +143,9 @@ a:hover {
 }
 
 .site-head-inner {
-	max-width: 1280px;
+	max-width: 1440px;
 	margin: 0 auto;
-	padding: 0.5rem clamp(1.1rem, 3vw, 2.4rem);
+	padding: 0.65rem var(--gutter);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -110,8 +153,8 @@ a:hover {
 }
 
 .brand-logo {
-	height: 120px;
-	width: auto;
+	height: 52px;
+	width: 52px;
 	display: block;
 	object-fit: contain;
 	mix-blend-mode: lighten;
@@ -120,8 +163,16 @@ a:hover {
 .brand-link {
 	display: flex;
 	align-items: center;
+	gap: 0.75rem;
 	text-decoration: none;
 	flex-shrink: 0;
+}
+
+.brand-name {
+	font-family: "Cinzel", serif;
+	font-size: 1.05rem;
+	letter-spacing: 0.055em;
+	color: var(--gold-bright);
 }
 
 .site-head-right {
@@ -150,9 +201,9 @@ a:hover {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 2.6rem;
-	height: 2.6rem;
-	border-radius: 0.35rem;
+	width: 2.2rem;
+	height: 2.75rem;
+	border-radius: 2px;
 	color: var(--ink-muted);
 	transition: color 180ms ease, background 180ms ease;
 }
@@ -211,39 +262,34 @@ a:hover {
 
 .site-nav a {
 	font-family: "Cinzel", serif;
-	font-size: 0.95rem;
+	font-size: 0.85rem;
 	font-weight: 500;
-	letter-spacing: 0.1em;
-	text-transform: uppercase;
+	letter-spacing: 0.035em;
 	color: var(--ink-soft);
-	padding: 0.55rem 0.7rem;
-	border-radius: 0.4rem;
-	border: 1px solid transparent;
+	padding: 0.75rem 0.65rem;
+	border-bottom: 1px solid transparent;
 	transition: color 180ms ease, border-color 180ms ease;
 }
 
 .site-nav a.active,
 .site-nav a:hover {
 	color: var(--gold-bright);
-	border-color: var(--line);
+	border-color: var(--gold);
 }
 
 /* ── Footer ──────────────────────────────────── */
 
 .site-footer {
-	margin-top: 4rem;
-	padding: 1.6rem clamp(1.1rem, 3vw, 2.4rem);
+	margin: 5rem auto 0;
+	padding: 2rem var(--gutter);
 	border-top: 1px solid var(--line);
-	display: flex;
-	justify-content: space-between;
+	display: grid;
+	grid-template-columns: 1fr auto;
 	align-items: center;
-	gap: 1rem;
+	gap: 1.5rem;
 	color: var(--ink-muted);
-	font-size: 0.82rem;
-	letter-spacing: 0.06em;
-	max-width: 1280px;
-	margin-left: auto;
-	margin-right: auto;
+	font-size: 0.78rem;
+	max-width: var(--content-width);
 }
 
 .site-footer a {
@@ -269,7 +315,7 @@ a:hover {
 }
 
 /* A button that has to sit inline with the footer's links and be
-   indistinguishable from them — it triggers script, so it can't be an anchor. */
+	indistinguishable from them — it triggers script, so it can't be an anchor. */
 .footer-link-button {
 	background: none;
 	border: 0;
@@ -285,6 +331,7 @@ a:hover {
 }
 
 .footer-credit {
+	grid-column: 1 / -1;
 	color: var(--ink-muted);
 }
 
@@ -311,21 +358,19 @@ a:hover {
 }
 
 .section-label {
-	font-family: "Cinzel", serif;
-	font-size: 0.7rem;
-	letter-spacing: 0.25em;
-	text-transform: uppercase;
-	color: var(--gold-dim);
+	font-size: 0.85rem;
+	color: var(--gold);
 }
 
 /* ── Responsive ──────────────────────────────── */
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
 	body {
 		background-attachment: scroll;
 	}
 
 	.site-footer {
+		display: flex;
 		flex-direction: column;
 		align-items: center;
 		text-align: center;
@@ -342,7 +387,8 @@ a:hover {
 	}
 
 	.brand-logo {
-		height: 56px;
+		height: 44px;
+		width: 44px;
 	}
 
 	.nav-toggle {
@@ -393,8 +439,8 @@ a:hover {
 
 @media (max-width: 480px) {
 	.social-link {
-		width: 2rem;
-		height: 2rem;
+		width: 2.25rem;
+		height: 2.75rem;
 	}
 
 	.social-link svg {
@@ -406,6 +452,7 @@ a:hover {
 @media (max-width: 420px) {
 	.brand-logo {
 		height: 44px;
+		width: 44px;
 	}
 
 	.page {
@@ -416,4 +463,8 @@ a:hover {
 		width: 100%;
 		justify-content: center;
 	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*, *::before, *::after { animation: none !important; transition: none !important; }
 }

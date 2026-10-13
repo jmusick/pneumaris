@@ -53,6 +53,27 @@ maps to `assets-src/logo.png`; selected header and circle logo inputs map to
 `assets-src/header.png` and `assets-src/logo-circle.png`. Replacing a library
 file alone does not update the site.
 
+The featured Anathema cover is promoted from
+`assets/albums/anathema/artwork/anathema-3000x3000.png` to
+`assets-src/anathema.png`, with a 960px WebP derivative in `public/anathema.webp`.
+The homepage and music page share its reference through `src/data/releases.ts`.
+
+The layered homepage uses two generated masters from
+`assets/brand/hero-layers/`: `hero-environment-v1.png` (empty background plate)
+and `hero-character-v1.png` (transparent character cutout). Their promoted
+copies live under the same filenames in `assets-src/`, and the optimizer emits
+matching 1920×784 WebPs in `public/`. The original complete `header.png` is
+retained for the About page and social image.
+
+Original generation filenames, input reference, and full prompts are preserved
+in the library's `sources/generated-images/2026-10-13/hero-layers-v1.json` and
+the adjacent original PNG files. `ParallaxScene.astro` registers the character
+at 88% scale inside the shared canvas. SVG image placement provides the still
+fallback. `src/lib/character-surface.ts` samples the cutout's alpha outline to
+build a shallow, rounded WebGL surface for small turns. The environment and DOM
+layout remain fixed; the renderer rotates the character geometry. This is an
+approximation from the front artwork, not a complete authored 3D character.
+
 ## Audit tracking
 
 GitHub Issues are the actionable backlog. Dated scope, evidence, passed checks,
