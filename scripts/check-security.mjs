@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parse, walk, ELEMENT_NODE } from 'ultrahtml';
 
 const dist = fileURLToPath(new URL('../dist/', import.meta.url));
 const headers = await readFile(join(dist, '_headers'), 'utf8');
@@ -23,25 +24,29 @@ async function checkPages(directory) {
       count += await checkPages(path);
     } else if (entry.name.endsWith('.html')) {
       const html = await readFile(path, 'utf8');
-      // Inspect final emitted tags: Astro can inline small bundles during builds.
-      for (const [, attributes, body] of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi)) {
-        if (/\btype="application\/ld\+json"/i.test(attributes)) {
-          JSON.parse(body);
-          continue;
+      // Inspect parsed final output: Astro can inline small bundles during builds.
+      await walk(parse(html), async (node) => {
+        if (node.type !== ELEMENT_NODE) return;
+        for (const [attribute, value] of Object.entries(node.attributes)) {
+          assert.ok(!/^on/i.test(attribute), `Inline event handler in ${path}`);
+          if (attribute === 'href' || attribute === 'src') {
+            assert.doesNotMatch(value, /^\s*javascript:/i, `JavaScript URL in ${path}`);
+          }
         }
-        const source = attributes.match(/\bsrc="([^"]+)"/i)?.[1];
+        if (node.name !== 'script') return;
+        const body = node.children.map((child) => child.value || '').join('');
+        if (node.attributes.type === 'application/ld+json') {
+          JSON.parse(body);
+          return;
+        }
+        const source = node.attributes.src;
         assert.ok(source && !body.trim(), `Executable scripts must be external: ${path}`);
         if (source.startsWith('/') && !source.startsWith('//')) {
           await readFile(join(dist, source));
         } else {
           assert.ok(scriptSources.includes(new URL(source).origin), `CSP must permit ${source}`);
         }
-      }
-      const tags = html.replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi, '').match(/<[^>]+>/g) || [];
-      for (const tag of tags) {
-        assert.doesNotMatch(tag, /\son[a-z]+\s*=/i, `Inline event handler in ${path}`);
-        assert.doesNotMatch(tag, /\b(?:href|src)\s*=\s*["']?javascript:/i, `JavaScript URL in ${path}`);
-      }
+      });
       count++;
     }
   }
