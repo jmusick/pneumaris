@@ -11,13 +11,16 @@ contact form, runs client-side or against a third-party endpoint. See
 
 ## Stack
 
-- Astro 6, TypeScript (strict), no UI framework — components are `.astro`
+- Astro 7, TypeScript (strict), no UI framework — components are `.astro`
   files with inline `<style>`/`<script>`.
 - Static output only. There is no server runtime and no API routes; don't add
   one without a real reason, since the whole deployment model (Cloudflare
   Pages, no Functions) assumes there isn't.
 - Site config (name, URL, version, GA measurement ID) lives in
   `src/config/site.ts`.
+- Node.js 22.23.4 or newer is required; `.node-version` pins the Cloudflare
+  Pages build runtime. Keep `package.json`'s engine requirement and the
+  README deployment instructions in sync when raising this minimum.
 - Shared page chrome comes from `src/layouts/Layout.astro` (meta tags,
   skip link, JSON-LD slot, cookie consent banner) plus
   `src/components/SiteHeader.astro` / `SiteFooter.astro`.

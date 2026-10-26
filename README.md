@@ -4,7 +4,7 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 
 ## Current Stack
 
-- Astro 6
+- Astro 7
 - astro-icon (Iconify / Simple Icons)
 - TypeScript (strict Astro tsconfig)
 - Cloudflare Pages (static output)
@@ -15,8 +15,8 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 
 ## Current Version
 
-- App package version: 1.17.0
-- Site display version: 1.17.0
+- App package version: 1.17.1
+- Site display version: 1.17.1
 
 ## Site Features
 
@@ -78,7 +78,7 @@ No Cloudflare Pages Functions are required for form delivery.
 
 Requirements:
 
-- Node.js 22.12.0 or newer
+- Node.js 22.23.4 or newer (Astro 7.4.2's minimum; `.node-version` pins 22.23.4)
 
 Install dependencies:
 
@@ -112,8 +112,10 @@ npm run preview
 - Build command: `npm run build`
 - Build output directory: `dist`
 - Wrangler config: `wrangler.toml`
-- Recommended environment variable in Cloudflare Pages:
-	- `NODE_VERSION=22.12.0`
+- Node.js version: `.node-version` pins 22.23.4 for the build.
+- If Cloudflare Pages has a `NODE_VERSION` environment override, remove it to
+  use the repository pin or set it to `22.23.4` or newer in both production
+  and preview environments.
 
 ## Project Structure
 
