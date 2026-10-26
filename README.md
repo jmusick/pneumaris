@@ -4,19 +4,21 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 
 ## Current Stack
 
-- Astro 6
+- Astro 7
 - astro-icon (Iconify / Simple Icons)
 - TypeScript (strict Astro tsconfig)
 - Cloudflare Pages (static output)
 - Google Analytics 4 (gtag.js), gated behind an opt-in cookie consent banner
 - Security response headers via `public/_headers` (CSP, HSTS, etc.)
+- CSP blocks executable inline scripts and event handlers; application scripts
+  are emitted as same-origin files, including the opt-in analytics loader.
 - Web3Forms (contact form delivery)
 - hCaptcha (bot protection)
 
 ## Current Version
 
-- App package version: 1.17.0
-- Site display version: 1.17.0
+- App package version: 1.17.1
+- Site display version: 1.17.1
 
 ## Site Features
 
@@ -45,6 +47,8 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 - Footer: Privacy Policy, Cookie Choices (reopens the consent banner), Sitemap, version badge (sourced from `src/config/site.ts`)
 - Shared page layout via `src/layouts/Layout.astro` (meta tags, skip link, header/footer, cookie consent banner)
 - Google Analytics 4, opt-in only: `src/components/CookieConsent.astro` is the only thing that loads `gtag.js`, and only after a visitor accepts
+- Google Fonts loads independently of analytics consent; the banner and privacy
+  policy explain this separately.
 
 ## Music Page Highlights
 
@@ -78,7 +82,7 @@ No Cloudflare Pages Functions are required for form delivery.
 
 Requirements:
 
-- Node.js 22.12.0 or newer
+- Node.js 22.23.4 or newer (Astro 7.4.2's minimum; `.node-version` pins 22.23.4)
 
 Install dependencies:
 
@@ -101,6 +105,11 @@ Build production output:
 npm run build
 ```
 
+The build also checks the emitted HTML and CSP for executable inline scripts,
+inline event handlers, valid JSON-LD, and Cloudflare header line limits.
+Run `npm test` to build and verify the deployed consent bundle's opt-in,
+decline, withdrawal, and blocked-storage behavior.
+
 Preview production build:
 
 ```bash
@@ -112,8 +121,10 @@ npm run preview
 - Build command: `npm run build`
 - Build output directory: `dist`
 - Wrangler config: `wrangler.toml`
-- Recommended environment variable in Cloudflare Pages:
-	- `NODE_VERSION=22.12.0`
+- Node.js version: `.node-version` pins 22.23.4 for the build.
+- If Cloudflare Pages has a `NODE_VERSION` environment override, remove it to
+  use the repository pin or set it to `22.23.4` or newer in both production
+  and preview environments.
 
 ## Project Structure
 
