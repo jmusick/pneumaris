@@ -22,6 +22,7 @@ const { measurementId } = Astro.props;
 
 <div
 	id="cookie-consent"
+	data-measurement-id={measurementId}
 	class="cookie-consent"
 	role="dialog"
 	aria-modal="false"
@@ -34,8 +35,9 @@ const { measurementId } = Astro.props;
 			<p id="cc-title" class="cc-title">Analytics</p>
 			<p id="cc-body" class="cc-body">
 				This site would like to count visits with Google Analytics, which sets cookies.
-				Nothing is sent to Google unless you accept, and the site works the same either
-				way. See the <a href="/privacy-policy/">privacy policy</a>.
+				Google Analytics loads only if you accept. Google Fonts loads independently
+				to display the site's typefaces. The site works the same either way.
+				See the <a href="/privacy-policy/">privacy policy</a>.
 			</p>
 		</div>
 		<div class="cc-actions">
@@ -45,21 +47,23 @@ const { measurementId } = Astro.props;
 	</div>
 </div>
 
-<script is:inline define:vars={{ measurementId }}>
+<script>
 	(function () {
 		var STORAGE_KEY = "pneumaris-analytics-consent";
-		var banner = document.getElementById("cookie-consent");
+		const banner = document.getElementById("cookie-consent");
 		if (!banner) return;
+		const measurementId = banner.dataset.measurementId || null;
 
-		var stored = null;
+		var stored: string | null = null;
 		try {
 			stored = localStorage.getItem(STORAGE_KEY);
 		} catch (e) {
 			// Private-browsing modes can throw on access; treat as "no choice yet".
 		}
 
-		window.dataLayer = window.dataLayer || [];
-		function gtag() {
+		const analyticsWindow = window as Window & { dataLayer?: IArguments[] };
+		const dataLayer = (analyticsWindow.dataLayer = analyticsWindow.dataLayer || []);
+		function gtag(..._args: unknown[]) {
 			dataLayer.push(arguments);
 		}
 
@@ -103,7 +107,7 @@ const { measurementId } = Astro.props;
 			banner.hidden = false;
 		}
 
-		function record(choice) {
+		function record(choice: string) {
 			var wasGranted = stored === "granted";
 			stored = choice;
 			try {
@@ -128,18 +132,21 @@ const { measurementId } = Astro.props;
 		}
 
 		banner.addEventListener("click", function (event) {
+			if (!(event.target instanceof Element)) return;
 			var button = event.target.closest("[data-consent]");
-			if (button) record(button.getAttribute("data-consent"));
+			var choice = button?.getAttribute("data-consent");
+			if (choice === "granted" || choice === "denied") record(choice);
 		});
 
 		// Any element with data-cookie-preferences reopens the choice — the footer
 		// link uses this, and it satisfies "consent must be as easy to withdraw".
 		document.addEventListener("click", function (event) {
+			if (!(event.target instanceof Element)) return;
 			var trigger = event.target.closest("[data-cookie-preferences]");
 			if (!trigger) return;
 			event.preventDefault();
 			show();
-			banner.querySelector("[data-consent]").focus();
+			banner.querySelector<HTMLButtonElement>("[data-consent]")?.focus();
 		});
 	})();
 </script>

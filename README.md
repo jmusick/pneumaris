@@ -10,6 +10,8 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 - Cloudflare Pages (static output)
 - Google Analytics 4 (gtag.js), gated behind an opt-in cookie consent banner
 - Security response headers via `public/_headers` (CSP, HSTS, etc.)
+- CSP blocks executable inline scripts and event handlers; application scripts
+  are emitted as same-origin files, including the opt-in analytics loader.
 - Web3Forms (contact form delivery)
 - hCaptcha (bot protection)
 
@@ -45,6 +47,8 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 - Footer: Privacy Policy, Cookie Choices (reopens the consent banner), Sitemap, version badge (sourced from `src/config/site.ts`)
 - Shared page layout via `src/layouts/Layout.astro` (meta tags, skip link, header/footer, cookie consent banner)
 - Google Analytics 4, opt-in only: `src/components/CookieConsent.astro` is the only thing that loads `gtag.js`, and only after a visitor accepts
+- Google Fonts loads independently of analytics consent; the banner and privacy
+  policy explain this separately.
 
 ## Music Page Highlights
 
@@ -100,6 +104,11 @@ Build production output:
 ```bash
 npm run build
 ```
+
+The build also checks the emitted HTML and CSP for executable inline scripts,
+inline event handlers, valid JSON-LD, and Cloudflare header line limits.
+Run `npm test` to build and verify the deployed consent bundle's opt-in,
+decline, withdrawal, and blocked-storage behavior.
 
 Preview production build:
 

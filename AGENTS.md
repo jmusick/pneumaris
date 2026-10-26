@@ -97,14 +97,16 @@ the whole mechanism. The choice is stored in `localStorage` (not a cookie);
 withdrawing it clears `_ga*` cookies and reloads. Any element with
 `data-cookie-preferences` reopens the banner — the footer's "Cookie Choices"
 button uses this. Google Fonts load independently in `Layout.astro`; the strict
-opt-in rule applies to GA scripts and collection requests. Audit issue
-[#10](https://github.com/jmusick/pneumaris/issues/10) tracks overly broad visitor
-wording about Google requests in the current banner and policy.
+opt-in rule applies to GA scripts and collection requests. Keep banner and
+policy wording scoped to Google Analytics and explain the separate font requests.
 
 ## Security headers (CSP)
 
 `public/_headers` sets a real `Content-Security-Policy`, not a
-report-only one — it fails closed. Adding any new external script, iframe,
+report-only one — it fails closed. Executable inline scripts and event-handler
+attributes are blocked. Keep component scripts processed by Astro and pass
+server values through escaped data attributes; `vite.build.assetsInlineLimit: 0`
+keeps small bundles external. JSON-LD stays an inert inline data block. Adding any new external script, iframe,
 stylesheet, font, or `fetch()` target (a new embed platform, a new analytics
 snippet, a new form backend) means adding its origin to the matching
 directive in `public/_headers` **in the same change**, or the browser silently

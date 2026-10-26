@@ -1,0 +1,53 @@
+import assert from 'node:assert/strict';
+import { readFile, readdir } from 'node:fs/promises';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const dist = fileURLToPath(new URL('../dist/', import.meta.url));
+const headers = await readFile(join(dist, '_headers'), 'utf8');
+for (const line of headers.split(/\r?\n/)) {
+  assert.ok(line.length <= 2000, 'Cloudflare _headers lines must fit the 2,000-character limit');
+}
+const policy = headers.match(/^\s+Content-Security-Policy:\s*(.+)$/m)?.[1];
+assert.ok(policy, 'The build must ship an enforced CSP');
+const scriptSources = policy.match(/(?:^|;)\s*script-src\s+([^;]+)/)?.[1].split(/\s+/);
+assert.ok(scriptSources?.includes("'self'"), 'Allow same-origin application scripts');
+assert.ok(!scriptSources.includes("'unsafe-inline'"), 'Do not allow arbitrary inline scripts');
+assert.match(policy, /(?:^|;)\s*script-src-attr\s+'none'(?:;|$)/, 'Block inline event handlers');
+
+async function checkPages(directory) {
+  let count = 0;
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const path = join(directory, entry.name);
+    if (entry.isDirectory()) {
+      count += await checkPages(path);
+    } else if (entry.name.endsWith('.html')) {
+      const html = await readFile(path, 'utf8');
+      // Inspect final emitted tags: Astro can inline small bundles during builds.
+      for (const [, attributes, body] of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi)) {
+        if (/\btype="application\/ld\+json"/i.test(attributes)) {
+          JSON.parse(body);
+          continue;
+        }
+        const source = attributes.match(/\bsrc="([^"]+)"/i)?.[1];
+        assert.ok(source && !body.trim(), `Executable scripts must be external: ${path}`);
+        if (source.startsWith('/') && !source.startsWith('//')) {
+          await readFile(join(dist, source));
+        } else {
+          assert.ok(scriptSources.includes(new URL(source).origin), `CSP must permit ${source}`);
+        }
+      }
+      const tags = html.replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi, '').match(/<[^>]+>/g) || [];
+      for (const tag of tags) {
+        assert.doesNotMatch(tag, /\son[a-z]+\s*=/i, `Inline event handler in ${path}`);
+        assert.doesNotMatch(tag, /\b(?:href|src)\s*=\s*["']?javascript:/i, `JavaScript URL in ${path}`);
+      }
+      count++;
+    }
+  }
+  return count;
+}
+
+const pages = await checkPages(dist);
+assert.ok(pages > 0, 'Build pages before checking security');
+console.log(`Security build checks passed for ${pages} pages: external scripts, valid JSON-LD, enforced CSP.`);
