@@ -136,6 +136,9 @@ a code bug.
 
 ## Before committing
 
+- `npm test` (build plus consent tests) must pass; CI runs it through the
+  shared `jmusick/ci` workflows in `.github/workflows/ci.yml`. Keep those
+  `uses:` pins on a commit SHA with the release tag as a comment.
 - `npm run build` should complete cleanly (Astro will fail the build on
   broken frontmatter/type errors).
 - Bump `SITE_VERSION` in `src/config/site.ts` for user-visible changes,

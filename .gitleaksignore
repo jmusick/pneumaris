@@ -1,0 +1,5 @@
+# Web3Forms access key in src/pages/contact.astro. It is a public client-side form key
+# that ships in the page, not a secret.
+39fa8d755aaf19afb5bf7e15baf28bccb462ba0b:src/pages/contact.astro:generic-api-key:208
+db55acf4be2381326ed9d4b8f08fde5e70d19497:src/pages/contact.astro:generic-api-key:258
+eed53be1f9347bbb64e3d8a5ba7f36f6d377a25b:src/pages/contact.astro:generic-api-key:225
