@@ -110,6 +110,11 @@ inline event handlers, valid JSON-LD, and Cloudflare header line limits.
 Run `npm test` to build and verify the deployed consent bundle's opt-in,
 decline, withdrawal, and blocked-storage behavior.
 
+CI (`.github/workflows/ci.yml`) calls the shared `jmusick/ci` baseline and
+web-app workflows, pinned by commit SHA, and runs `npm test` (which builds).
+The **CI gate** job is the single check to require on `master`. Dependabot
+proposes new `jmusick/ci` releases and action pins.
+
 Preview production build:
 
 ```bash
