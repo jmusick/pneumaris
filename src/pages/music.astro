@@ -73,9 +73,11 @@ const structuredData = {
 			}
 
 			.album-artwork {
+				display: block;
 				aspect-ratio: 1 / 1;
 				width: 100%;
-				object-fit: cover;
+				height: auto;
+				object-fit: contain;
 				border-radius: 2px;
 				border: 1px solid var(--line);
 				box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
