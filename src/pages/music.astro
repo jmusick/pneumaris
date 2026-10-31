@@ -240,7 +240,7 @@ const structuredData = {
 			.album-player iframe {
 				display: block;
 				width: 100%;
-				height: 166px;
+				border: 0;
 			}
 
 
@@ -285,12 +285,8 @@ const structuredData = {
 			<div class="albums-section">
 				{
 					albums.map((album) => {
-						const spotifyAlbumId = album.spotifyUrl?.match(/open\.spotify\.com\/album\/([A-Za-z0-9]+)/)?.[1];
-						const isSpotifyEmbed = Boolean(spotifyAlbumId);
-						const spotifyEmbedHeight = Math.min(760, Math.max(352, 170 + album.tracks.length * 34));
-						const preferredEmbedUrl = isSpotifyEmbed
-							? `https://open.spotify.com/embed/album/${spotifyAlbumId}?utm_source=generator&theme=0`
-							: album.embedUrl;
+						// Allow room for the waveform, 31px track rows, and SoundCloud's footer.
+						const playerHeight = Math.max(300, 220 + album.tracks.length * 31);
 
 						return (
 						<article class="album-card" id={album.title.toLowerCase().replaceAll(" ", "-")}>
@@ -325,13 +321,11 @@ const structuredData = {
 							<div class="track-list-wrap">
 								<div class="album-player">
 									<iframe
-										class={isSpotifyEmbed ? "spotify-player" : undefined}
-										frameborder="no"
-										allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+										allow="autoplay"
 										referrerpolicy="strict-origin-when-cross-origin"
-										src={preferredEmbedUrl}
-										title={`${album.title} ${isSpotifyEmbed ? "Spotify" : "SoundCloud"} player`}
-										style={isSpotifyEmbed ? `height: ${spotifyEmbedHeight}px;` : undefined}
+										src={album.embedUrl}
+										title={`${album.title} SoundCloud player`}
+										height={playerHeight}
 									></iframe>
 								</div>
 							</div>
