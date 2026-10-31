@@ -85,7 +85,9 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 					</p>
 					<p>
 						We also use a hidden anti-spam field and CAPTCHA verification to help
-						prevent automated abuse of the form.
+						prevent automated abuse of the form. When you submit the form, your
+						browser sends the form fields, anti-spam field, and CAPTCHA verification
+						token directly to Web3Forms for processing and delivery to Pneumaris.
 					</p>
 				</div>
 
@@ -94,23 +96,32 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 					<p>
 						This website uses <strong>Google Analytics 4</strong> (via Google's
 						global site tag, gtag.js) to measure traffic and understand how
-						visitors use the site, but only if you say yes. On your first visit,
+						visitors use the site, but only if you say yes. When no saved choice is available,
 						a banner asks whether to allow this; gtag.js is not loaded and no
 						Google Analytics cookie is set until you click Accept. If you click
 						Decline, or leave the banner unanswered, Google Analytics is not loaded
-						and no analytics data is sent to Google Analytics. Google Fonts loads
-						independently of this choice, as described below.
+						and no analytics data is sent to Google Analytics. If you previously
+						accepted, your saved choice allows Google Analytics to load on later visits.
 						When enabled, Google Analytics collects
 						information such as pages visited, time on site, referral source,
 						device type, and approximate geographic location.
 					</p>
 					<p>
 						You can change your choice at any time using the "Cookie Choices"
-						link in the site footer, which reopens the banner. Accepting sets
+						button in the site footer, which reopens the banner. Accepting allows
 						Google Analytics cookies (including <code>_ga</code> and
-						<code>_ga_*</code>); declining after previously accepting clears
-						them. See the
+						<code>_ga_*</code>) to be set. Declining after previously accepting
+						removes the analytics cookies the site can access and reloads the page
+						without Google Analytics. This does not delete data already sent to Google.
+						See the
 						<a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a>.
+					</p>
+					<p>
+						The banner controls Google Analytics only. Google Fonts, Cloudflare's
+						performance beacon, SoundCloud players and artwork, and hCaptcha load
+						independently as you visit the relevant pages or content. Their providers
+						can receive requests even if you decline Google Analytics or leave the
+						banner unanswered.
 					</p>
 				</div>
 
@@ -134,8 +145,9 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 							<a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a>.
 						</li>
 						<li>
-							<strong>Google Fonts</strong>: used to load typefaces. Google may
-							log requests made to their font servers. See the
+							<strong>Google Fonts</strong>: used to load typefaces. Font requests
+							give Google your IP address and request details, independently of
+							the analytics choice. See the
 							<a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a>.
 						</li>
 						<li>
@@ -150,9 +162,11 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 							<a href="https://www.hcaptcha.com/privacy" target="_blank" rel="noopener noreferrer">hCaptcha Privacy Policy</a>.
 						</li>
 						<li>
-							<strong>SoundCloud</strong>: used for embedded album players and
-							track artwork on the Music page. SoundCloud may set cookies and
-							collect usage data when its players load or you interact with them. See the
+							<strong>SoundCloud</strong>: used for embedded album players, track
+							artwork, and some album cover images on the Music page. Your browser
+							requests players and images from SoundCloud as that content loads,
+							before you press Play. SoundCloud receives your IP address and request
+							details, and may set cookies and collect usage data. See the
 							<a href="https://soundcloud.com/pages/privacy" target="_blank" rel="noopener noreferrer">SoundCloud Privacy Policy</a>.
 						</li>
 						<li>
@@ -161,8 +175,8 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 							<a href="https://www.spotify.com/legal/privacy-policy/" target="_blank" rel="noopener noreferrer">Spotify Privacy Policy</a>.
 						</li>
 						<li>
-							<strong>Apple Music</strong>: we link to our Apple Music artist
-							profile. Apple may collect data if you visit their platform. See
+							<strong>Apple Music</strong>: we link to our Apple Music albums and
+							artist profile. Apple may collect data if you visit their platform. See
 							the
 							<a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Apple Privacy Policy</a>.
 						</li>
@@ -170,20 +184,29 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 				</div>
 
 				<div class="policy-block">
-					<h2>Cookies</h2>
+					<h2>Cookies and Local Storage</h2>
 					<p>
 						If you accept the analytics banner, this website sets cookies via
 						<strong>Google Analytics</strong> (<code>_ga</code>, <code>_ga_*</code>)
-						to distinguish users and measure site usage; these persist for up to
-						2 years. Your choice is remembered in your browser's local storage,
-						not a cookie, so declining doesn't itself store anything. Third-party
-						services such as SoundCloud and hCaptcha may also set their
-						own cookies subject to their respective policies.
+						to distinguish users and measure site usage. Cookie lifetimes depend
+						on Analytics settings and your browser's storage restrictions.
+						Third-party services such as SoundCloud and hCaptcha may also set
+						their own cookies subject to their respective policies.
+					</p>
+					<p>
+						Both accepting and declining save your analytics preference in your
+						browser's local storage, rather than in a cookie. Declining saves
+						the preference without loading Google Analytics. The site sets no
+						automatic expiry for this preference; it remains until you change
+						it or the stored data is cleared. If your browser blocks local
+						storage, your choice applies to the current page but may not be
+						remembered on your next visit.
 					</p>
 					<p>
 						You can disable or delete cookies through your browser settings, change
 						your analytics choice at any time via the "Cookie Choices" link in the
-						footer, or opt out of Google Analytics tracking entirely via the
+						footer, clear the saved preference through your browser's site-data
+						settings, or use the
 						<a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Browser Add-on</a>.
 					</p>
 				</div>
@@ -204,7 +227,10 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 					<h2>External Links</h2>
 					<p>
 						This site may link to external websites. We are not responsible for
-						the privacy practices or content of those sites.
+						the privacy practices or content of those sites. In addition to the
+						streaming links above, these include Etsy for merchandise and our
+						profiles on YouTube, TikTok, X, Instagram, and Facebook. Following
+						a link takes you to that platform, where its own privacy policy applies.
 					</p>
 				</div>
 

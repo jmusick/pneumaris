@@ -17,8 +17,8 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 
 ## Current Version
 
-- App package version: 1.17.4
-- Site display version: 1.17.4
+- App package version: 1.17.5
+- Site display version: 1.17.5
 
 ## Site Features
 
@@ -28,6 +28,7 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 - Motion pause control and automatic support for reduced-motion preferences
 - Featured latest release, shared release data, and a wallpaper preview on the homepage
 - Reusable site header and footer components
+- Header Merch link opens the band's Etsy shop
 - Responsive pages:
 	- Home (`/`)
 	- Music (`/music/`) with album cards, descriptions, cover lightbox previews, and SoundCloud playback with individual track artwork
@@ -56,7 +57,7 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 - Per-album streaming links (SoundCloud, Spotify, Apple Music) with icons
 - "Stream on" section at the bottom of the page with all three platforms
 - Album metadata display:
-	- Type (EP/Album)
+	- Type (Single/EP/Album)
 	- Release date
 	- Description
 	- Track count
@@ -66,6 +67,11 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 	- Opens when clicking album cover art
 	- Supports close button, backdrop click, and `Esc` key
 - Embedded SoundCloud playlist per release, showing individual track artwork and sized to fit the track list; Spotify and Apple Music remain available through streaming links
+
+Release metadata and streaming URLs live in `src/data/releases.ts`; the first
+entry is featured on the homepage. The SoundCloud embed supplies its own track
+list and artwork. Editing the local track metadata or artwork URLs does not
+change what appears inside the player; update the release on SoundCloud too.
 
 ## Contact Form
 
@@ -136,13 +142,16 @@ npm run preview
 ```text
 public/                 Static assets (logo, header art, global CSS)
 assets-src/             Tracked website image masters (not deployed)
-scripts/                Website image optimization and read-only HTTP audit
+scripts/                Image optimization, HTTP audit, and build security checks
 docs/                   Asset workflow and dated audit reports
 public/_headers         Cloudflare Pages security response headers (CSP, HSTS, etc.)
 src/components/         Shared UI components (header/footer/cookie consent banner)
 src/config/             Site constants (site version, site URL, GA measurement ID)
+src/data/               Shared release and track metadata (releases.ts)
 src/layouts/            Shared page layout (Layout.astro)
+src/lib/                WebGL character surface renderer
 src/pages/              Astro routes/pages
+tests/                  Consent tests against the built application bundle
 wrangler.toml           Cloudflare Pages build config
 ```
 

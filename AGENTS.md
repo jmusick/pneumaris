@@ -36,13 +36,17 @@ contact form, runs client-side or against a third-party endpoint. See
 - `src/components/` — `SiteHeader.astro`, `SiteFooter.astro`,
   `CookieConsent.astro` (see Analytics & consent below).
 - `src/layouts/Layout.astro` — shared page shell.
+- `src/data/releases.ts` — shared release metadata and SoundCloud embed URLs;
+  the first release is featured on the homepage. Keep `show_artwork=true` and
+  `visual=false` for track artwork in the compact playlist. Track lists and art
+  inside the iframe come from SoundCloud, independently of local track metadata.
 - `src/config/site.ts` — single source of truth for `SITE_URL`, `SITE_NAME`,
   `SITE_VERSION` (sourced from the release process, not hand-edited day to
   day), `GA_MEASUREMENT_ID`, and `ANALYTICS_ID`.
 - `public/_headers` — Cloudflare Pages security response headers (CSP, HSTS,
   etc.). See CSP below before adding any new external origin.
 - `public/robots.txt` — hand-maintained; its `Sitemap:` line must match
-  `SITE_URL`.
+  `SITE_URL`. Keep `astro.config.mjs`'s `site` URL in sync as well.
 
 ## Conventions
 
@@ -60,13 +64,16 @@ contact form, runs client-side or against a third-party endpoint. See
   Cloudflare Pages redirects the no-slash form (308 observed on 2026-10-12), and Astro's own canonical
   URLs/sitemap use the slash form. A no-slash internal link creates a
   needless redirect hop that Search Console flags.
-- Images referenced from components/pages live in `public/` as
-  already-optimized `.webp` (or `.jpg` for the social share image) with
-  explicit `width`/`height` attributes on every `<img>` to avoid layout
-  shift. Original hi-res source PNGs live in `assets-src/` (not deployed —
+- Local display images live in `public/` as already-optimized `.webp` (or
+  `.jpg` for the social share image). Other album covers currently use
+  SoundCloud-hosted JPEGs. Keep explicit `width`/`height` attributes on page
+  images to avoid layout shift; the dynamically populated lightbox is the
+  existing exception. Responsive album covers use `height: auto` and
+  `object-fit: contain` so the HTML height does not cause cropping.
+  Original hi-res source PNGs live in `assets-src/` (not deployed —
   excluded from the Cloudflare Pages build output). Run
-  `node scripts/optimize-images.mjs` (requires `sharp`, already a transitive
-  dependency) to regenerate the `public/` derivatives after replacing a file
+  `node scripts/optimize-images.mjs` (requires `sharp`, a dev dependency)
+  to regenerate the `public/` derivatives after replacing a file
   in `assets-src/`.
 - Fonts (Cinzel, Raleway) load via a `<link rel="preconnect">` + `<link
   rel="stylesheet">` pair in `Layout.astro`'s `<head>` — do not switch this
@@ -139,8 +146,8 @@ a code bug.
 - `npm test` (build plus consent tests) must pass; CI runs it through the
   shared `jmusick/ci` workflows in `.github/workflows/ci.yml`. Keep those
   `uses:` pins on a commit SHA with the release tag as a comment.
-- `npm run build` should complete cleanly (Astro will fail the build on
-  broken frontmatter/type errors).
+- `npm run build` should complete cleanly; it builds the static pages and runs
+  security checks. It does not run a separate TypeScript type check.
 - Bump `SITE_VERSION` in `src/config/site.ts` for user-visible changes,
   matching the pattern in recent commits (footer displays this version).
 - The privacy policy describes actual behavior. Adding a newsletter, embed,
