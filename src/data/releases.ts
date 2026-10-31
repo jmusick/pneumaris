@@ -14,7 +14,6 @@ interface Album {
 	summary?: string;
 	artwork: string;
 	albumUrl: string;
-	embedUrl: string;
 	spotifyUrl?: string;
 	appleMusicUrl?: string;
 	tracks: AlbumTrack[];
@@ -33,8 +32,6 @@ export const albums: Album[] = [
 		albumUrl: "https://soundcloud.com/pneumaris/sets/anathema",
 		spotifyUrl: "https://open.spotify.com/album/0QqaNkRcgBQ6wPV9UgecXj",
 		appleMusicUrl: "https://music.apple.com/us/album/anathema/6790130743",
-		embedUrl:
-			"https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/pneumaris/sets/anathema&start_track=0&color=%23b89a6a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&show_artwork=true&visual=false",
 		tracks: [
 			{
 				title: "The Last Restraint",
@@ -127,8 +124,6 @@ export const albums: Album[] = [
 		albumUrl: "https://soundcloud.com/pneumaris/sets/eidolon",
 		spotifyUrl: "https://open.spotify.com/album/4AslLFUqQ4D77DBdPA95nO",
 		appleMusicUrl: "https://music.apple.com/us/album/eidolon/6782643086",
-		embedUrl:
-			"https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/pneumaris/sets/eidolon&start_track=0&color=%23b89a6a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&show_artwork=true&visual=false",
 		tracks: [
 			{
 				title: "Parasite Choir",
@@ -221,8 +216,6 @@ export const albums: Album[] = [
 		albumUrl: "https://soundcloud.com/pneumaris/sets/the-black-wake",
 		spotifyUrl: "https://open.spotify.com/album/1lzphocLKpT5uscfQqLaIt",
 		appleMusicUrl: "https://music.apple.com/us/album/the-black-wake-single/6777567916",
-		embedUrl:
-			"https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/pneumaris/sets/the-black-wake&start_track=0&color=%23b89a6a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&show_artwork=true&visual=false",
 		tracks: [
 			{
 				title: "Salt",
@@ -249,8 +242,6 @@ export const albums: Album[] = [
 		albumUrl: "https://soundcloud.com/pneumaris/sets/pleroma",
 		spotifyUrl: "https://open.spotify.com/album/0tv6zoZ04743AZbHnQfA34",
 		appleMusicUrl: "https://music.apple.com/us/album/pleroma/6782904659",
-		embedUrl:
-			"https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/pneumaris/sets/pleroma&start_track=0&color=%23b89a6a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&show_artwork=true&visual=false",
 		tracks: [
 			{
 				title: "Hollow Constellations",
@@ -331,8 +322,6 @@ export const albums: Album[] = [
 		albumUrl: "https://soundcloud.com/pneumaris/sets/the-shape",
 		spotifyUrl: "https://open.spotify.com/album/4wMdovuOOMvWyYrRZ18erR",
 		appleMusicUrl: "https://music.apple.com/us/album/the-shape-single/6767819822",
-		embedUrl:
-			"https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/pneumaris/sets/the-shape&start_track=0&color=%23b89a6a&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&show_artwork=true&visual=false",
 		tracks: [
 			{
 				title: "Static Halo",

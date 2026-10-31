@@ -1,15 +1,19 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import PageHeader from "../components/PageHeader.astro";
+import TrackPlayer from "../components/TrackPlayer.astro";
 import { Icon } from "astro-icon/components";
 import { SITE_URL } from "../config/site";
 
 import { albums } from "../data/releases";
 
 const pageTitle = "Music | Pneumaris";
-const pageDescription = "Listen to Pneumaris albums with artwork and embedded playback.";
+const pageDescription = "Listen to Pneumaris albums and explore the artwork for every track.";
 const canonicalUrl = `${SITE_URL}/music/`;
 const socialImageUrl = `${SITE_URL}/og-image.jpg`;
+
+const fullArtwork = (src: string) => src.replace(/-t500x500\.jpg$/, "-original.jpg");
+const trackThumbnail = (src: string) => src.replace(/-t500x500\.jpg$/, "-t200x200.jpg");
 
 const toIsoDuration = (duration: string) => {
 	const [minutes, seconds] = duration.split(":").map(Number);
@@ -128,6 +132,10 @@ const structuredData = {
 				background: rgba(184, 154, 106, 0.08);
 			}
 
+			@media (prefers-reduced-motion: reduce) {
+				.album-link { transition: none; }
+			}
+
 			.album-link svg {
 				width: 1.1rem;
 				height: 1.1rem;
@@ -135,9 +143,62 @@ const structuredData = {
 			}
 
 			.track-list-wrap {
-				padding: 1.15rem 1.3rem 1.3rem;
+				padding: 0 clamp(1.25rem, 3vw, 2.5rem) 1rem;
 			}
 
+			.track-list {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+
+			.track-row {
+				display: grid;
+				grid-template-columns: 1.5rem 72px minmax(0, 1fr) auto auto;
+				align-items: center;
+				gap: 1rem;
+				padding: 1rem 0;
+			}
+
+			.track-row + .track-row { border-top: 1px solid var(--line); }
+			.track-number, .track-duration { color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+			.track-number { font-size: 0.875rem; }
+			.track-title { font-size: 1rem; font-weight: 500; overflow-wrap: anywhere; }
+			.track-artwork { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; }
+			.track-play {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				gap: 0.5rem;
+				min-width: 44px;
+				min-height: 44px;
+				padding: 0.5rem 0.75rem;
+				border: 1px solid var(--gold);
+				border-radius: 2px;
+				color: var(--gold-bright);
+				font-size: 0.875rem;
+			}
+			.track-play svg { width: 1rem; height: 1rem; flex-shrink: 0; }
+			.track-play:focus-visible, .artwork-lightbox-close:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px; }
+			.track-play:active { background: rgba(184, 154, 106, 0.2); }
+			@media (hover: hover) {
+				.track-play:hover { background: rgba(184, 154, 106, 0.12); }
+				.artwork-trigger:hover { outline: 1px solid var(--gold); outline-offset: 2px; }
+			}
+			@media (max-width: 600px) {
+				.track-row { grid-template-columns: 56px minmax(0, 1fr) 44px; gap: 0.5rem 0.75rem; }
+				.track-number { display: none; }
+				.track-row .artwork-trigger { grid-column: 1; grid-row: 1 / 3; }
+				.track-title { grid-column: 2; align-self: end; }
+				.track-duration { grid-column: 2; grid-row: 2; align-self: start; font-size: 0.875rem; }
+				.track-play { grid-column: 3; grid-row: 1 / 3; padding: 0.5rem; }
+				.track-play-label { display: none; }
+			}
+			.track-play { background: transparent; font-family: inherit; cursor: pointer; }
+			.track-play[aria-pressed="true"] { background: rgba(184, 154, 106, 0.2); }
+			.track-play .pause-icon { display: none; }
+			.track-play[aria-pressed="true"] .play-icon { display: none; }
+			.track-play[aria-pressed="true"] .pause-icon { display: block; }
 
 			.artwork-trigger {
 				display: inline-flex;
@@ -163,22 +224,24 @@ const structuredData = {
 			.artwork-lightbox {
 				position: fixed;
 				inset: 0;
-				z-index: 1000;
-				display: grid;
-				place-items: center;
-				padding: 1.2rem;
-				background: rgba(4, 3, 2, 0.88);
-				backdrop-filter: blur(3px);
+				margin: auto;
+				padding: 0;
+				border: 0;
+				max-width: calc(100vw - 2.4rem);
+				max-height: calc(100dvh - 2.4rem);
+				background: #0d0a07;
+				color: var(--ink);
 			}
 
-			.artwork-lightbox[hidden] {
-				display: none;
+			.artwork-lightbox::backdrop {
+				background: rgba(4, 3, 2, 0.88);
+				backdrop-filter: blur(3px);
 			}
 
 			.artwork-lightbox-dialog {
 				position: relative;
 				max-width: min(92vw, 980px);
-				max-height: 92vh;
+				max-height: calc(100dvh - 2.4rem);
 				border: 1px solid rgba(184, 154, 106, 0.5);
 				border-radius: 0.55rem;
 				background: #0d0a07;
@@ -189,7 +252,7 @@ const structuredData = {
 			.artwork-lightbox-image {
 				display: block;
 				max-width: min(92vw, 980px);
-				max-height: calc(92vh - 96px);
+				max-height: calc(100dvh - 160px);
 				width: auto;
 				height: auto;
 			}
@@ -209,6 +272,7 @@ const structuredData = {
 				letter-spacing: 0.08em;
 				text-transform: uppercase;
 				color: var(--ink);
+				overflow-wrap: anywhere;
 			}
 
 			.artwork-lightbox-meta {
@@ -220,8 +284,8 @@ const structuredData = {
 				position: absolute;
 				top: 0.45rem;
 				right: 0.45rem;
-				width: 2rem;
-				height: 2rem;
+				width: 44px;
+				height: 44px;
 				border: 1px solid rgba(184, 154, 106, 0.5);
 				border-radius: 999px;
 				background: rgba(8, 6, 4, 0.8);
@@ -229,19 +293,12 @@ const structuredData = {
 				font-size: 1.1rem;
 				line-height: 1;
 				cursor: pointer;
+				display: grid;
+				place-items: center;
 			}
+			.artwork-lightbox-close svg { width: 20px; height: 20px; }
 
-			.album-player {
-				border: 1px solid rgba(184, 154, 106, 0.2);
-				border-radius: 0.35rem;
-				overflow: hidden;
-			}
-
-			.album-player iframe {
-				display: block;
-				width: 100%;
-				border: 0;
-			}
+			.artwork-lightbox-status { padding: 1rem; color: var(--ink-soft); }
 
 
 			.stream-links {
@@ -285,16 +342,14 @@ const structuredData = {
 			<div class="albums-section">
 				{
 					albums.map((album) => {
-						// Allow room for the waveform, 31px track rows, and SoundCloud's footer.
-						const playerHeight = Math.max(300, 220 + album.tracks.length * 31);
-
 						return (
 						<article class="album-card" id={album.title.toLowerCase().replaceAll(" ", "-")}>
 							<div class="album-meta">
 								<button
 									type="button"
 									class="artwork-trigger artwork-trigger-album"
-									data-artwork-src={album.artwork}
+									data-artwork-src={fullArtwork(album.artwork)}
+									data-artwork-fallback={album.artwork}
 									data-artwork-title={`${album.title} Cover`}
 									data-artwork-meta={`${album.type} • Released ${album.releaseDate}`}
 									aria-label={`Open full artwork for ${album.title}`}
@@ -319,15 +374,30 @@ const structuredData = {
 							</div>
 
 							<div class="track-list-wrap">
-								<div class="album-player">
-									<iframe
-										allow="autoplay"
-										referrerpolicy="strict-origin-when-cross-origin"
-										src={album.embedUrl}
-										title={`${album.title} SoundCloud player`}
-										height={playerHeight}
-									></iframe>
-								</div>
+								<ol class="track-list" aria-label={`${album.title} tracks`}>
+									{album.tracks.map((track, index) => (
+										<li class="track-row">
+											<span class="track-number" aria-hidden="true">{index + 1}</span>
+											<button type="button" class="artwork-trigger"
+												data-artwork-src={fullArtwork(track.artwork)}
+												data-artwork-fallback={track.artwork}
+												data-artwork-title={track.title}
+												data-artwork-meta={album.title}
+												aria-label={`Open full artwork for ${track.title}`}>
+												<img class="track-artwork" src={trackThumbnail(track.artwork)} width="72" height="72" alt={`${track.title} artwork`} loading="lazy" decoding="async" />
+											</button>
+											<a class="track-title" href={track.url} target="_blank" rel="noopener noreferrer">{track.title}</a>
+											<span class="track-duration">{track.duration}</span>
+											<button class="track-play" type="button" data-track-url={track.url}
+												data-track-title={track.title} data-track-artwork={trackThumbnail(track.artwork)}
+												data-track-album={album.title} aria-label={`Play ${track.title}`} aria-pressed="false">
+												<Icon class="play-icon" name="lucide:play" aria-hidden="true" />
+												<Icon class="pause-icon" name="lucide:pause" aria-hidden="true" />
+												<span class="track-play-label">Play</span>
+											</button>
+										</li>
+									))}
+								</ol>
 							</div>
 						</article>
 						);
@@ -350,42 +420,73 @@ const structuredData = {
 				</div>
 			</div>
 
-			<div id="artwork-lightbox" class="artwork-lightbox" hidden>
-				<div class="artwork-lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="artwork-lightbox-title">
+			<dialog id="artwork-lightbox" class="artwork-lightbox" aria-labelledby="artwork-lightbox-title">
+				<div class="artwork-lightbox-dialog">
 					<button type="button" class="artwork-lightbox-close" data-artwork-close aria-label="Close artwork preview">
-						×
+						<Icon name="lucide:x" aria-hidden="true" />
 					</button>
-					<img id="artwork-lightbox-image" class="artwork-lightbox-image" src="" alt="Expanded artwork" />
+					<img id="artwork-lightbox-image" class="artwork-lightbox-image" alt="Expanded artwork" />
+					<p id="artwork-lightbox-status" class="artwork-lightbox-status" role="status" hidden></p>
 					<div class="artwork-lightbox-caption">
 						<strong id="artwork-lightbox-title" class="artwork-lightbox-title"></strong>
 						<span id="artwork-lightbox-meta" class="artwork-lightbox-meta"></span>
 					</div>
 				</div>
-			</div>
+			</dialog>
 		</main>
+		<TrackPlayer />
 
 
 		<script>
-			const lightbox = document.getElementById("artwork-lightbox") as HTMLElement | null;
+			const lightbox = document.getElementById("artwork-lightbox") as HTMLDialogElement | null;
 			const lightboxImage = document.getElementById("artwork-lightbox-image") as HTMLImageElement | null;
 			const lightboxTitle = document.getElementById("artwork-lightbox-title") as HTMLElement | null;
 			const lightboxMeta = document.getElementById("artwork-lightbox-meta") as HTMLElement | null;
+			const lightboxStatus = document.getElementById("artwork-lightbox-status");
+			let previousOverflow = "";
+			let artworkFallback = "";
 
-			const openArtworkLightbox = (src: string, title: string, meta: string) => {
+			const openArtworkLightbox = (src: string, fallback: string, title: string, meta: string) => {
 				if (!lightbox || !lightboxImage || !lightboxTitle || !lightboxMeta) return;
+				artworkFallback = fallback;
+				lightboxImage.hidden = false;
+				if (lightboxStatus) {
+					lightboxStatus.textContent = "Loading artwork…";
+					lightboxStatus.hidden = false;
+				}
+				lightboxImage.alt = `${title} artwork`;
 				lightboxImage.src = src;
 				lightboxTitle.textContent = title;
 				lightboxMeta.textContent = meta;
-				lightbox.hidden = false;
+				previousOverflow = document.body.style.overflow;
+				lightbox.showModal();
 				document.body.style.overflow = "hidden";
 			};
 
 			const closeArtworkLightbox = () => {
-				if (!lightbox || !lightboxImage) return;
-				lightbox.hidden = true;
-				lightboxImage.src = "";
-				document.body.style.overflow = "";
+				lightbox?.close();
 			};
+
+			lightbox?.addEventListener("close", () => {
+				lightboxImage?.removeAttribute("src");
+				document.body.style.overflow = previousOverflow;
+			});
+			lightboxImage?.addEventListener("load", () => {
+				if (lightboxStatus) lightboxStatus.hidden = true;
+			});
+			lightboxImage?.addEventListener("error", () => {
+				if (!lightbox?.open || !lightboxImage) return;
+				if (artworkFallback && lightboxImage.src !== artworkFallback) {
+					lightboxImage.src = artworkFallback;
+					artworkFallback = "";
+					return;
+				}
+				lightboxImage.hidden = true;
+				if (lightboxStatus) {
+					lightboxStatus.textContent = "Artwork could not load. Close the preview and try again.";
+					lightboxStatus.hidden = false;
+				}
+			});
 
 			document.addEventListener("click", (event) => {
 				if (!(event.target instanceof Element)) return;
@@ -396,6 +497,7 @@ const structuredData = {
 					if (!src) return;
 					openArtworkLightbox(
 						src,
+						trigger.dataset.artworkFallback || "",
 						trigger.dataset.artworkTitle || "Artwork",
 						trigger.dataset.artworkMeta || "",
 					);
@@ -412,10 +514,5 @@ const structuredData = {
 				}
 			});
 
-			document.addEventListener("keydown", (event) => {
-				if (event.key === "Escape" && lightbox && !lightbox.hidden) {
-					closeArtworkLightbox();
-				}
-			});
 		</script>
 </Layout>

@@ -36,10 +36,15 @@ contact form, runs client-side or against a third-party endpoint. See
 - `src/components/` — `SiteHeader.astro`, `SiteFooter.astro`,
   `CookieConsent.astro` (see Analytics & consent below).
 - `src/layouts/Layout.astro` — shared page shell.
-- `src/data/releases.ts` — shared release metadata and SoundCloud embed URLs;
-  the first release is featured on the homepage. Keep `show_artwork=true` and
-  `visual=false` for track artwork in the compact playlist. Track lists and art
-  inside the iframe come from SoundCloud, independently of local track metadata.
+- `src/data/releases.ts` — shared release and track metadata, artwork, and
+  streaming links; the first release is featured on the homepage. The music
+  page renders its own track lists. Track Play buttons control a shared
+  SoundCloud widget through `TrackPlayer.astro` and `src/lib/track-player.ts`.
+  The widget and its API script load only after Play; keep this lazy loading
+  and the matching CSP script/frame origins. Spotify and Apple Music links are
+  album-level. Artwork thumbnails and
+  original-size previews come from SoundCloud's image CDN; the dialog falls
+  back to the stored artwork URL if an original is unavailable.
 - `src/config/site.ts` — single source of truth for `SITE_URL`, `SITE_NAME`,
   `SITE_VERSION` (sourced from the release process, not hand-edited day to
   day), `GA_MEASUREMENT_ID`, and `ANALYTICS_ID`.
@@ -143,7 +148,7 @@ a code bug.
 
 ## Before committing
 
-- `npm test` (build plus consent tests) must pass; CI runs it through the
+- `npm test` (build plus consent and playback tests) must pass; CI runs it through the
   shared `jmusick/ci` workflows in `.github/workflows/ci.yml`. Keep those
   `uses:` pins on a commit SHA with the release tag as a comment.
 - `npm run build` should complete cleanly; it builds the static pages and runs

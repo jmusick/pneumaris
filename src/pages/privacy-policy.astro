@@ -118,10 +118,10 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 					</p>
 					<p>
 						The banner controls Google Analytics only. Google Fonts, Cloudflare's
-						performance beacon, SoundCloud players and artwork, and hCaptcha load
+						performance beacon, SoundCloud artwork, and hCaptcha load
 						independently as you visit the relevant pages or content. Their providers
 						can receive requests even if you decline Google Analytics or leave the
-						banner unanswered.
+						banner unanswered. SoundCloud playback loads separately when you press Play.
 					</p>
 				</div>
 
@@ -162,11 +162,15 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 							<a href="https://www.hcaptcha.com/privacy" target="_blank" rel="noopener noreferrer">hCaptcha Privacy Policy</a>.
 						</li>
 						<li>
-							<strong>SoundCloud</strong>: used for embedded album players, track
-							artwork, and some album cover images on the Music page. Your browser
-							requests players and images from SoundCloud as that content loads,
-							before you press Play. SoundCloud receives your IP address and request
-							details, and may set cookies and collect usage data. See the
+							<strong>SoundCloud</strong>: hosts track artwork and some album cover
+							images on the Music page. Your browser requests these images as they
+							load, and larger images when you open an artwork preview. SoundCloud's
+							image service receives your IP address and request details independently
+							of analytics consent. When you press Play, the site loads SoundCloud's
+							player and player-control script to stream the track within this page.
+							SoundCloud may then set cookies and collect playback and usage data,
+							independently of your Google Analytics choice. Track and streaming
+							links also let you visit SoundCloud directly. See the
 							<a href="https://soundcloud.com/pages/privacy" target="_blank" rel="noopener noreferrer">SoundCloud Privacy Policy</a>.
 						</li>
 						<li>
@@ -190,7 +194,8 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 						<strong>Google Analytics</strong> (<code>_ga</code>, <code>_ga_*</code>)
 						to distinguish users and measure site usage. Cookie lifetimes depend
 						on Analytics settings and your browser's storage restrictions.
-						Third-party services such as SoundCloud and hCaptcha may also set
+						Third-party services such as hCaptcha, and SoundCloud when you use
+						playback, may also set
 						their own cookies subject to their respective policies.
 					</p>
 					<p>

@@ -1,0 +1,71 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<section class="track-player" id="track-player" aria-label="Music player" hidden>
+	<div class="player-main">
+		<img id="player-artwork" width="48" height="48" alt="" />
+		<div class="player-copy">
+			<strong id="player-title"></strong>
+			<a id="player-source" target="_blank" rel="noopener noreferrer"><Icon name="simple-icons:soundcloud" aria-hidden="true" />Pneumaris on SoundCloud</a>
+		</div>
+		<button type="button" id="player-toggle" aria-label="Play" disabled>
+			<Icon class="play-icon" name="lucide:play" aria-hidden="true" />
+			<Icon class="pause-icon" name="lucide:pause" aria-hidden="true" />
+		</button>
+		<div class="player-progress">
+			<label class="sr-only" for="player-seek">Playback position</label>
+			<input id="player-seek" type="range" min="0" max="1" step="1" value="0" disabled />
+			<span id="player-time">0:00 / 0:00</span>
+		</div>
+		<button type="button" id="player-close" aria-label="Stop and close player"><Icon name="lucide:x" aria-hidden="true" /></button>
+	</div>
+	<div class="player-message">
+		<p id="player-status" role="status"></p>
+		<button type="button" id="player-native-toggle" aria-expanded="false" aria-controls="player-embed">SoundCloud controls</button>
+	</div>
+	<div id="player-embed" class="player-embed"></div>
+</section>
+
+<style>
+	.track-player { position: fixed; bottom: 0; inset-inline: 0; z-index: 50; padding: 0.75rem var(--gutter) max(0.75rem, env(safe-area-inset-bottom)); background: #100e0b; color: var(--ink); border-top: 1px solid var(--gold); box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.4); }
+	.track-player[hidden] { display: none; }
+	.player-main { max-width: var(--content-width); margin: 0 auto; display: grid; grid-template-columns: 48px minmax(0, 1fr) 44px minmax(180px, 1fr) 44px; gap: 1rem; align-items: center; }
+	.player-main img { display: block; object-fit: contain; }
+	.player-copy { min-width: 0; }
+	.player-copy strong { display: block; font-weight: 500; overflow-wrap: anywhere; }
+	.player-copy a { display: inline-flex; gap: 0.5rem; align-items: center; color: var(--gold-bright); font-size: 0.875rem; min-height: 44px; }
+	.track-player svg { width: 20px; height: 20px; flex-shrink: 0; }
+	.track-player button { display: inline-grid; place-items: center; min-width: 44px; min-height: 44px; padding: 0.5rem; color: var(--gold-bright); background: transparent; border: 1px solid var(--gold); border-radius: 2px; cursor: pointer; font: inherit; }
+	.track-player button:disabled { opacity: 0.5; cursor: wait; }
+	.track-player button:focus-visible, .track-player a:focus-visible, .track-player input:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px; }
+	.track-player button:active { background: rgba(184, 154, 106, 0.2); }
+	@media (hover: hover) { .track-player button:hover { background: rgba(184, 154, 106, 0.12); } }
+	.player-progress { display: flex; align-items: center; gap: 1rem; }
+	.player-progress input { min-width: 0; width: 100%; height: 44px; accent-color: var(--gold); cursor: pointer; }
+	.player-progress span { white-space: nowrap; font-size: 0.875rem; font-variant-numeric: tabular-nums; color: var(--ink-soft); }
+	.player-message { max-width: var(--content-width); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: 0.875rem; color: var(--ink-soft); }
+	.player-message p { margin: 0; }
+	.player-message button { border: 0; text-decoration: underline; text-underline-offset: 3px; }
+	.pause-icon, .track-player[data-playing="true"] .play-icon { display: none; }
+	.track-player[data-playing="true"] .pause-icon { display: block; }
+	.player-embed { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+	.player-embed[data-visible="true"] { position: static; width: 100%; height: 166px; max-width: var(--content-width); margin: 0.5rem auto 0; clip-path: none; }
+	.player-embed :global(iframe) { display: block; width: 100%; height: 166px; border: 0; }
+	:global(body.has-track-player) { padding-bottom: 180px; }
+	:global(body.has-native-player) { padding-bottom: 360px; }
+	:global(html:has(body.has-track-player)) { scroll-padding-bottom: 180px; }
+	:global(html:has(body.has-native-player)) { scroll-padding-bottom: 360px; }
+	@media (max-width: 600px) {
+		.player-main { grid-template-columns: 48px minmax(0, 1fr) 44px 44px; gap: 0.5rem; }
+		.player-copy a { font-size: 0.75rem; }
+		.player-progress { grid-column: 1 / -1; grid-row: 2; }
+		.player-message { align-items: start; }
+		.player-message button { font-size: 0.75rem; padding-block: 0; flex-shrink: 0; }
+	}
+</style>
+
+<script>
+	import { initializeTrackPlayer } from "../lib/track-player";
+	initializeTrackPlayer();
+</script>

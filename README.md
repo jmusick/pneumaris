@@ -17,8 +17,8 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 
 ## Current Version
 
-- App package version: 1.17.5
-- Site display version: 1.17.5
+- App package version: 1.18.0
+- Site display version: 1.18.0
 
 ## Site Features
 
@@ -31,7 +31,7 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 - Header Merch link opens the band's Etsy shop
 - Responsive pages:
 	- Home (`/`)
-	- Music (`/music/`) with album cards, descriptions, cover lightbox previews, and SoundCloud playback with individual track artwork
+	- Music (`/music/`) with album cards, descriptions, custom track lists, and album/track artwork lightbox previews
 	- About (`/about/`)
 	- Extras (`/extras/`) with a free desktop wallpaper download
 	- Contact (`/contact/`) with Web3Forms + hCaptcha
@@ -61,17 +61,21 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 	- Release date
 	- Description
 	- Track count
-- Track lists and playback controls supplied by the embedded streaming player
+- Custom track lists with artwork, titles, durations, and Play buttons for listening within the site through SoundCloud
+- Shared player bar with play/pause, seeking, SoundCloud attribution, and automatic advance within a release
+- SoundCloud's widget and API script load only after Play; optional SoundCloud controls provide direct access to the native player
 - Track metadata also emitted as `MusicRecording` structured data
 - Artwork lightbox modal:
-	- Opens when clicking album cover art
+	- Opens when clicking album or track artwork, requesting original-size SoundCloud images with a fallback to the stored artwork URL
 	- Supports close button, backdrop click, and `Esc` key
-- Embedded SoundCloud playlist per release, showing individual track artwork and sized to fit the track list; Spotify and Apple Music remain available through streaming links
+	- Keeps keyboard focus inside the dialog and returns it to the artwork trigger when closed
+- Spotify and Apple Music remain available through album streaming links
 
 Release metadata and streaming URLs live in `src/data/releases.ts`; the first
-entry is featured on the homepage. The SoundCloud embed supplies its own track
-list and artwork. Editing the local track metadata or artwork URLs does not
-change what appears inside the player; update the release on SoundCloud too.
+entry is featured on the homepage. The music page renders track lists directly
+from this data; keep titles, durations, artwork URLs, and SoundCloud track links
+in sync with the published releases. Track titles link to SoundCloud; Spotify
+and Apple Music links open the album. Streaming playback loads on demand.
 
 ## Contact Form
 
@@ -114,7 +118,8 @@ npm run build
 The build also checks the emitted HTML and CSP for executable inline scripts,
 inline event handlers, valid JSON-LD, and Cloudflare header line limits.
 Run `npm test` to build and verify the deployed consent bundle's opt-in,
-decline, withdrawal, and blocked-storage behavior.
+decline, withdrawal, and blocked-storage behavior, plus playback loading,
+retries, seeking, release boundaries, and rapid track changes.
 
 CI (`.github/workflows/ci.yml`) calls the shared `jmusick/ci` baseline and
 web-app workflows, pinned by commit SHA, and runs `npm test` (which builds).
@@ -145,13 +150,13 @@ assets-src/             Tracked website image masters (not deployed)
 scripts/                Image optimization, HTTP audit, and build security checks
 docs/                   Asset workflow and dated audit reports
 public/_headers         Cloudflare Pages security response headers (CSP, HSTS, etc.)
-src/components/         Shared UI components (header/footer/cookie consent banner)
+src/components/         Shared UI components (header/footer/consent/player)
 src/config/             Site constants (site version, site URL, GA measurement ID)
 src/data/               Shared release and track metadata (releases.ts)
 src/layouts/            Shared page layout (Layout.astro)
-src/lib/                WebGL character surface renderer
+src/lib/                WebGL character renderer and SoundCloud playback controller
 src/pages/              Astro routes/pages
-tests/                  Consent tests against the built application bundle
+tests/                  Consent and playback tests against built application bundles
 wrangler.toml           Cloudflare Pages build config
 ```
 
