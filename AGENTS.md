@@ -32,7 +32,9 @@ contact form, runs client-side or against a third-party endpoint. See
 ## Structure
 
 - `src/pages/` — routes: `index.astro`, `music.astro`, `about.astro`,
-  `extras.astro`, `contact.astro`, `privacy-policy.astro`.
+  `extras.astro`, `contact.astro`, `privacy-policy.astro`, and `404.astro`
+  (builds `404.html`, which Cloudflare Pages serves with HTTP 404 for unknown
+  URLs; it is `noindex` and stays out of the sitemap).
 - `src/components/` — `SiteHeader.astro`, `SiteFooter.astro`,
   `CookieConsent.astro` (see Analytics & consent below).
 - `src/layouts/Layout.astro` — shared page shell.

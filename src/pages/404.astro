@@ -1,0 +1,33 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { SITE_URL } from "../config/site";
+
+const pageTitle = "Page Not Found | Pneumaris";
+const pageDescription = "This page does not exist.";
+// Error pages are not indexable, so they point crawlers at the homepage.
+const canonicalUrl = `${SITE_URL}/`;
+---
+
+<Layout
+	title={pageTitle}
+	description={pageDescription}
+	canonicalUrl={canonicalUrl}
+	robots="noindex,nofollow"
+>
+	<style>
+		.content {
+			max-width: var(--content-width);
+			margin: 0 auto;
+			padding: 3rem var(--gutter);
+		}
+	</style>
+
+	<main id="main">
+		<PageHeader title="Page not found" description="That page drifted into the void." />
+
+		<div class="content">
+			<a class="button-primary" href="/">Return home</a>
+		</div>
+	</main>
+</Layout>
