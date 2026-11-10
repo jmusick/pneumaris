@@ -11,7 +11,7 @@
 	--line: rgba(184, 154, 106, 0.22);
 	--gold: #b89a6a;
 	--gold-bright: #d4b882;
-	--gold-dim: rgba(184, 154, 106, 0.5);
+	--gold-dim: #7a6847;
 	--bg-base: #080706;
 }
 
@@ -111,6 +111,14 @@ a {
 
 a:hover {
 	color: var(--gold-bright);
+}
+
+/* Links inside running text need a non-color cue (WCAG 1.4.1). */
+p a:not([class]),
+li a:not([class]) {
+	text-decoration: underline;
+	text-underline-offset: 0.2em;
+	text-decoration-thickness: 1px;
 }
 
 .skip-link {
@@ -229,7 +237,7 @@ a:hover {
 	height: 2.6rem;
 	margin-left: auto;
 	flex-shrink: 0;
-	border: 1px solid var(--line);
+	border: 1px solid var(--gold-dim);
 	border-radius: 0.4rem;
 	background: transparent;
 	color: var(--gold);
