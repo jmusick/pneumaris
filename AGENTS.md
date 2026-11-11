@@ -21,8 +21,9 @@ contact form's Pages Function, `functions/api/contact.ts`. See
   its own security headers. Its plaintext vars live in `wrangler.toml`
   (dashboard plaintext vars are ignored when that file exists); its secrets
   (`CLOUDFLARE_API_TOKEN`, `TURNSTILE_SECRET_KEY`) live only in the Pages
-  project. The form's `maxlength` values and the Function's `LIMITS` must
-  match. README "Contact Form" covers local testing with `wrangler pages dev`.
+  project. Field limits and the email pattern live in
+  `src/lib/contact-rules.ts`, shared by the form and the Function. README
+  "Contact Form" covers local testing with `wrangler pages dev`.
 - Site config (name, URL, version, GA measurement ID) lives in
   `src/config/site.ts`.
 - Node.js 22.23.4 or newer is required; `.node-version` pins the Cloudflare
