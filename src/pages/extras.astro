@@ -4,9 +4,23 @@ import PageHeader from "../components/PageHeader.astro";
 import { SITE_URL } from "../config/site";
 
 const pageTitle = "Extras | Pneumaris";
-const pageDescription = "Free downloads for Pneumaris fans: a desktop wallpaper from the void.";
+const pageDescription = "Free downloads for Pneumaris fans: two desktop wallpapers in 3440 x 1440.";
 const canonicalUrl = `${SITE_URL}/extras/`;
 const socialImageUrl = `${SITE_URL}/og-image.jpg`;
+const wallpapers = [
+	{
+		title: "Eclipsed skyline",
+		preview: "/wallpaper-preview.webp",
+		alt: "A robed figure facing an eclipsed moon over a gothic spire skyline, with the Pneumaris wordmark",
+		filename: "pneumaris-wallpaper-3440x1440.png",
+	},
+	{
+		title: "Moonlit observatory",
+		preview: "/wallpaper-2-preview.webp",
+		alt: "A golden armillary sphere inside a ruined gothic observatory above a dark sea, with a crescent moon and the Pneumaris wordmark",
+		filename: "pneumaris-wallpaper-2-3440x1440.png",
+	},
+];
 ---
 
 <Layout
@@ -23,6 +37,8 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 		max-width: var(--content-width);
 		margin: 0 auto;
 		padding: 3rem var(--gutter) 5rem;
+		display: grid;
+		gap: 3rem;
 	}
 
 	.freebie-card {
@@ -36,7 +52,6 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 		display: block;
 		width: 100%;
 		height: auto;
-		filter: brightness(0.92) contrast(1.05);
 	}
 
 	.freebie-info {
@@ -54,8 +69,8 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 	}
 
 	.freebie-meta {
-		color: rgba(232, 224, 212, 0.6);
-		font-size: 0.9rem;
+		color: var(--ink-soft);
+		font-size: 1rem;
 	}
 
 	.download-button {
@@ -63,20 +78,24 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 		align-items: center;
 		gap: 0.5rem;
 		padding: 0.75rem 1.5rem;
-		border: 1px solid var(--line);
+		border: 1px solid var(--gold-dim);
 		border-radius: 2px;
+		min-height: 44px;
 		color: var(--ink);
 		text-decoration: none;
-		font-size: 0.95rem;
+		font-size: 1rem;
 		letter-spacing: 0.03em;
 		white-space: nowrap;
 		transition: background-color 0.2s ease, border-color 0.2s ease;
 	}
 
-	.download-button:hover,
+	.download-button:active { background: var(--surface-raised); }
 	.download-button:focus-visible {
 		background: rgba(232, 224, 212, 0.08);
 		border-color: rgba(232, 224, 212, 0.4);
+	}
+	@media (hover: hover) {
+		.download-button:hover { background: var(--surface-raised); border-color: var(--gold); }
 	}
 </style>
 
@@ -84,29 +103,20 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 	<PageHeader title="Extras" description="A little of the Pneumaris world to take with you." />
 
 	<div class="content">
-		<div class="freebie-card">
-			<img
-				src="/wallpaper-preview.webp"
-				width="1280"
-				height="536"
-				alt="Pneumaris desktop wallpaper: a robed figure facing an eclipsed moon over a gothic spire skyline"
-				loading="eager"
-				decoding="async"
-			/>
-			<div class="freebie-info">
-				<div>
-					<h2>Desktop Wallpaper</h2>
-					<p class="freebie-meta">3440&times;1440 &middot; PNG &middot; 5.2&nbsp;MB</p>
+		{wallpapers.map((wallpaper, index) => (
+			<article class="freebie-card" aria-labelledby={`wallpaper-${index + 1}`}>
+				<img src={wallpaper.preview} width="1280" height="536" alt={wallpaper.alt}
+					loading={index === 0 ? "eager" : "lazy"} decoding="async" />
+				<div class="freebie-info">
+					<div>
+						<h2 id={`wallpaper-${index + 1}`}>{wallpaper.title}</h2>
+						<p class="freebie-meta">3440 &times; 1440 PNG</p>
+					</div>
+					<a class="download-button" href={`/downloads/${wallpaper.filename}`}
+						download={wallpaper.filename} aria-label={`Download ${wallpaper.title} wallpaper`}>Download PNG</a>
 				</div>
-				<a
-					class="download-button"
-					href="/downloads/pneumaris-wallpaper-3440x1440.png"
-					download="pneumaris-wallpaper-3440x1440.png"
-				>
-					Download
-				</a>
-			</div>
-		</div>
+			</article>
+		))}
 	</div>
 </main>
 

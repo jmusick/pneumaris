@@ -10,6 +10,8 @@ interface Album {
 	type: string;
 	year: string;
 	releaseDate: string;
+	/** Requested store date; do not infer availability without verified album URLs. */
+	streamingReleaseDate?: string;
 	description: string;
 	summary?: string;
 	artwork: string;
@@ -20,6 +22,127 @@ interface Album {
 }
 
 export const albums: Album[] = [
+	{
+		title: "Reverie",
+		type: "Album",
+		year: "2026",
+		releaseDate: "November 8, 2026",
+		streamingReleaseDate: "November 13, 2026",
+		summary: "Reverie moves between the things that haunt us and the people who bring us back. Across eighteen songs, borrowed faces, stolen lullabies, impossible skies, and bargains made in desperation give way to records left spinning, hands finding each other in the dark, and a future worth wanting.",
+		description: "Reverie moves between the things that haunt us and the people who bring us back. Across eighteen songs, borrowed faces, stolen lullabies, impossible skies, and bargains made in desperation give way to records left spinning, hands finding each other in the dark, and a future worth wanting.\n\nPneumaris brings gothic and progressive metal into contact with industrial pop, coastal folk horror, tango, heavy grooves, and intimate piano-led songs. From The Bough Breaks to The Days I Haven't Had, the album follows the uneasy passage from being held by a dream to choosing to wake.",
+		artwork: "/reverie.webp",
+		albumUrl: "https://soundcloud.com/pneumaris/sets/reverie",
+		tracks: [
+			{
+				title: "The Bough Breaks",
+				url: "https://soundcloud.com/pneumaris/the-bough-breaks",
+				duration: "5:07",
+				artwork: "https://i1.sndcdn.com/artworks-0VMWfxzukmHlJfZ2-veB7OA-t500x500.jpg"
+			},
+			{
+				title: "Wear It Well",
+				url: "https://soundcloud.com/pneumaris/wear-it-well",
+				duration: "4:10",
+				artwork: "https://i1.sndcdn.com/artworks-t1tcyfBdVidRiAy8-OZicgQ-t500x500.jpg"
+			},
+			{
+				title: "The Bellkeeper",
+				url: "https://soundcloud.com/pneumaris/the-bellkeeper",
+				duration: "6:08",
+				artwork: "https://i1.sndcdn.com/artworks-2Gy6QbNJigYZ2Zpc-yqKkxA-t500x500.jpg"
+			},
+			{
+				title: "Good Company",
+				url: "https://soundcloud.com/pneumaris/good-company",
+				duration: "3:37",
+				artwork: "https://i1.sndcdn.com/artworks-ihByQfDM9a930n9S-NRcgrA-t500x500.jpg"
+			},
+			{
+				title: "The Song He Never Taught Me",
+				url: "https://soundcloud.com/pneumaris/the-song-he-never-taught-me",
+				duration: "6:31",
+				artwork: "https://i1.sndcdn.com/artworks-08dHBZDVj1ZK2qS5-RO8QBQ-t500x500.jpg"
+			},
+			{
+				title: "Occultation",
+				url: "https://soundcloud.com/pneumaris/occultation",
+				duration: "4:15",
+				artwork: "https://i1.sndcdn.com/artworks-ybD2JJXCgUMvymqH-DfdHBQ-t500x500.jpg"
+			},
+			{
+				title: "Want Too Much",
+				url: "https://soundcloud.com/pneumaris/want-too-much",
+				duration: "4:34",
+				artwork: "https://i1.sndcdn.com/artworks-EJIFIhEUwoI3GvX6-iI2obw-t500x500.jpg"
+			},
+			{
+				title: "Come Back Heavy",
+				url: "https://soundcloud.com/pneumaris/come-back-heavy",
+				duration: "3:53",
+				artwork: "https://i1.sndcdn.com/artworks-VqenTBz83S5dkQCt-XslC3A-t500x500.jpg"
+			},
+			{
+				title: "Leave the Record On",
+				url: "https://soundcloud.com/pneumaris/leave-the-record-on",
+				duration: "3:54",
+				artwork: "https://i1.sndcdn.com/artworks-XPU9ml35nkvs8alP-KRLZzg-t500x500.jpg"
+			},
+			{
+				title: "The Water's Lovely",
+				url: "https://soundcloud.com/pneumaris/the-waters-lovely",
+				duration: "4:22",
+				artwork: "https://i1.sndcdn.com/artworks-EOLQMteWbhMvvRXP-QXBK7w-t500x500.jpg"
+			},
+			{
+				title: "Everybody Wants a Miracle",
+				url: "https://soundcloud.com/pneumaris/everybody-wants-a-miracle",
+				duration: "5:15",
+				artwork: "https://i1.sndcdn.com/artworks-QQz9cmihpjMjsLH8-ab4zpw-t500x500.jpg"
+			},
+			{
+				title: "The Part Where It Turns",
+				url: "https://soundcloud.com/pneumaris/the-part-where-it-turns",
+				duration: "4:28",
+				artwork: "https://i1.sndcdn.com/artworks-s4qUtPAfzbMhTehY-cIcggw-t500x500.jpg"
+			},
+			{
+				title: "The Quiet Room",
+				url: "https://soundcloud.com/pneumaris/the-quiet-room",
+				duration: "4:05",
+				artwork: "https://i1.sndcdn.com/artworks-T8yPH9yEie4t8KoO-OYYN0g-t500x500.jpg"
+			},
+			{
+				title: "We Know the Steps",
+				url: "https://soundcloud.com/pneumaris/we-know-the-steps",
+				duration: "5:52",
+				artwork: "https://i1.sndcdn.com/artworks-QNtuHtLQLrS2AqAw-Owd5Qg-t500x500.jpg"
+			},
+			{
+				title: "I Would Know You in the Dark",
+				url: "https://soundcloud.com/pneumaris/i-would-know-you-in-the-dark",
+				duration: "5:00",
+				artwork: "https://i1.sndcdn.com/artworks-mr1bhG6R5ShsvS1Q-ynYlPA-t500x500.jpg"
+			},
+			{
+				title: "All the Way Awake",
+				url: "https://soundcloud.com/pneumaris/all-the-way-awake",
+				duration: "4:39",
+				artwork: "https://i1.sndcdn.com/artworks-PR9EtMP4EDxlEYWY-XA9vPw-t500x500.jpg"
+			},
+			{
+				title: "Half a Second",
+				url: "https://soundcloud.com/pneumaris/half-a-second",
+				duration: "4:28",
+				artwork: "https://i1.sndcdn.com/artworks-8t7jc3l4xjUgvVlc-504CYQ-t500x500.jpg"
+			},
+			{
+				title: "The Days I Haven't Had",
+				url: "https://soundcloud.com/pneumaris/the-days-i-havent-had",
+				duration: "4:19",
+				artwork: "https://i1.sndcdn.com/artworks-IIywdxMOzmzdFaeX-9fQfzw-t500x500.jpg"
+			}
+		]
+	},
 	{
 		title: "Anathema",
 		type: "Album",

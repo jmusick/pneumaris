@@ -8,9 +8,9 @@ import { SITE_URL } from "../config/site";
 import { albums } from "../data/releases";
 
 const pageTitle = "Music | Pneumaris";
-const pageDescription = "Listen to Pneumaris albums and explore the artwork for every track.";
+const pageDescription = "Listen to Reverie, the new 18-track Pneumaris album, on SoundCloud. Explore the full discography and artwork for every track.";
 const canonicalUrl = `${SITE_URL}/music/`;
-const socialImageUrl = `${SITE_URL}/og-image.jpg`;
+const socialImageUrl = `${SITE_URL}/reverie-social.jpg`;
 
 const fullArtwork = (src: string) => src.replace(/-t500x500\.jpg$/, "-original.jpg");
 const trackThumbnail = (src: string) => src.replace(/-t500x500\.jpg$/, "-t200x200.jpg");
@@ -46,11 +46,19 @@ const structuredData = {
 	description={pageDescription}
 	canonicalUrl={canonicalUrl}
 	socialImageUrl={socialImageUrl}
+	socialImageAlt="Reverie album artwork by Pneumaris"
 	structuredData={structuredData}
 	active="music"
 >
 
 <style>
+ .album-platforms { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+ .album-schedule { margin: 0 0 1.5rem; color: var(--ink-soft); font-size: 1rem; }
+ .album-schedule time { font-variant-numeric: tabular-nums; }
+ .album-card:first-child .album-copy h2 { font-size: clamp(2.5rem, 5vw, 4rem); }
+ .album-link:active { background: var(--surface-raised); }
+ .album-meta .album-description { margin-top: 1rem; }
+
 
 			.albums-section {
 				max-width: var(--content-width);
@@ -62,9 +70,9 @@ const structuredData = {
 			}
 
 			.album-card {
-				border: 1px solid var(--line);
+				border: 0;
 				border-radius: 2px;
-				background: rgba(24, 20, 15, 0.25);
+				background: transparent;
 				overflow: clip;
 			}
 
@@ -97,7 +105,7 @@ const structuredData = {
 				flex-wrap: wrap;
 				gap: 0.65rem;
 				font-family: "Cinzel", serif;
-				font-size: 0.74rem;
+				font-size: 1rem;
 				letter-spacing: 0.025em;
 
 				color: var(--ink-soft);
@@ -105,9 +113,11 @@ const structuredData = {
 			}
 
 			.album-description {
-				font-size: 0.98rem;
-				line-height: 1.75;
-				color: rgba(232, 224, 212, 0.78);
+				font-size: 1rem;
+				line-height: 1.6;
+				color: var(--ink);
+				max-width: 70ch;
+				white-space: pre-line;
 				margin-bottom: 1rem;
 			}
 
@@ -116,11 +126,11 @@ const structuredData = {
 				align-items: center;
 				gap: 0.5rem;
 				font-family: "Cinzel", serif;
-				font-size: 0.75rem;
-				letter-spacing: 0.12em;
-				text-transform: uppercase;
+				font-size: 1rem;
+				letter-spacing: 0;
+				text-transform: none;
 				color: var(--gold);
-				border: 1px solid rgba(184, 154, 106, 0.38);
+				border: 1px solid var(--gold-dim);
 				border-radius: 2px;
 				padding: 0.7rem 1rem;
 				transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
@@ -235,7 +245,7 @@ const structuredData = {
 
 			.artwork-lightbox::backdrop {
 				background: rgba(4, 3, 2, 0.88);
-				backdrop-filter: blur(3px);
+
 			}
 
 			.artwork-lightbox-dialog {
@@ -270,7 +280,7 @@ const structuredData = {
 				font-family: "Cinzel", serif;
 				font-size: 0.9rem;
 				letter-spacing: 0.08em;
-				text-transform: uppercase;
+				text-transform: none;
 				color: var(--ink);
 				overflow-wrap: anywhere;
 			}
@@ -315,7 +325,7 @@ const structuredData = {
 				color: var(--ink-soft);
 				font-size: 0.82rem;
 				letter-spacing: 0.08em;
-				text-transform: uppercase;
+				text-transform: none;
 				font-family: "Cinzel", serif;
 				margin-bottom: 0.75rem;
 			}
@@ -365,7 +375,8 @@ const structuredData = {
 										<span>Released {album.releaseDate}</span>
 									</div>
 									<p class="album-description">{album.description}</p>
-								<div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;">
+ {album.streamingReleaseDate && <p class="album-schedule">Spotify &amp; Apple Music: scheduled for <time datetime={new Date(album.streamingReleaseDate).toISOString().slice(0, 10)}>{album.streamingReleaseDate}</time>.</p>}
+								<div class="album-platforms">
 									<a class="album-link" href={album.albumUrl} target="_blank" rel="noopener noreferrer"><Icon name="simple-icons:soundcloud" aria-hidden="true" />SoundCloud</a>
 									{album.spotifyUrl && <a class="album-link" href={album.spotifyUrl} target="_blank" rel="noopener noreferrer"><Icon name="simple-icons:spotify" aria-hidden="true" />Spotify</a>}
 									{album.appleMusicUrl && <a class="album-link" href={album.appleMusicUrl} target="_blank" rel="noopener noreferrer"><Icon name="simple-icons:applemusic" aria-hidden="true" />Apple Music</a>}
@@ -425,7 +436,7 @@ const structuredData = {
 					<button type="button" class="artwork-lightbox-close" data-artwork-close aria-label="Close artwork preview">
 						<Icon name="lucide:x" aria-hidden="true" />
 					</button>
-					<img id="artwork-lightbox-image" class="artwork-lightbox-image" alt="Expanded artwork" />
+					<img id="artwork-lightbox-image" class="artwork-lightbox-image" width="1200" height="1200" alt="Expanded artwork" />
 					<p id="artwork-lightbox-status" class="artwork-lightbox-status" role="status" hidden></p>
 					<div class="artwork-lightbox-caption">
 						<strong id="artwork-lightbox-title" class="artwork-lightbox-title"></strong>

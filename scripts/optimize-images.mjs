@@ -8,6 +8,24 @@ const src = (name) => new URL(`../assets-src/${name}`, import.meta.url).pathname
 const pub = (name) => new URL(`../public/${name}`, import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
 
 async function run() {
+	// Wordmark companion for the larger homepage introduction.
+	await sharp(src("intro-emblem-v1.png"))
+		.resize({ width: 640, height: 640, fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
+		.webp({ quality: 88, alphaQuality: 100 })
+		.toFile(pub("intro-emblem-v1.webp"));
+
+	// Text-free hooded emblem adapted from the existing illustrated brand artwork.
+	await sharp(src("header-emblem-v1.png"))
+		.resize({ width: 208, height: 208, fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
+		.webp({ quality: 88, alphaQuality: 100 })
+		.toFile(pub("header-emblem-v1.webp"));
+
+	// Approved Reverie cover, promoted from the album media library.
+	await sharp(src("reverie.png")).resize(1200, 1200).webp({ quality: 84 }).toFile(pub("reverie.webp"));
+	await sharp(src("reverie.png"))
+		.resize(1200, 630, { fit: "contain", background: "#111015" })
+		.jpeg({ quality: 85, mozjpeg: true }).toFile(pub("reverie-social.jpg"));
+
 	// Matched hero layers: normalize their canvases and preserve foreground alpha.
 	for (const layer of ["environment", "character"]) {
 		await sharp(src(`hero-${layer}-v1.png`))
@@ -66,6 +84,17 @@ async function run() {
 		.resize({ width: 1280, withoutEnlargement: true })
 		.webp({ quality: 80 })
 		.toFile(pub("wallpaper-preview.webp"));
+
+	// Preserve the original upscaled master; deliver a matching ultrawide wallpaper.
+	// The centered crop trims a small amount vertically without stretching the art.
+	await sharp(src("wallpaper-2.png"))
+		.resize({ width: 3440, height: 1440, fit: "cover", position: "centre" })
+		.png({ compressionLevel: 9 })
+		.toFile(pub("downloads/pneumaris-wallpaper-2-3440x1440.png"));
+	await sharp(pub("downloads/pneumaris-wallpaper-2-3440x1440.png"))
+		.resize({ width: 1280 })
+		.webp({ quality: 80 })
+		.toFile(pub("wallpaper-2-preview.webp"));
 
 	console.log("done");
 }
