@@ -1,0 +1,13 @@
+# Copy this file to .dev.vars for local Pages Functions testing
+# (`npx wrangler pages dev dist`; see README "Contact Form"). .dev.vars is
+# gitignored. Values here override wrangler.toml's [vars] locally.
+
+# Cloudflare Email Sending. The token needs "Email Sending: Edit" on this
+# account. Leave it empty to exercise everything up to the send step, which then
+# answers 503 email_unconfigured.
+CLOUDFLARE_API_TOKEN=
+
+# Cloudflare's documented always-passes Turnstile test secret. Pair it with the
+# always-passes test site key at build time (PUBLIC_TURNSTILE_SITE_KEY). The
+# production secret goes only in the Pages project settings.
+TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA

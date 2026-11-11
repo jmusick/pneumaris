@@ -64,7 +64,7 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 			<PageHeader title="Privacy Policy" description="How this website handles your information." />
 
 			<div class="content">
-				<p class="last-updated">Last updated: October 31, 2026</p>
+				<p class="last-updated">Last updated: November 10, 2026</p>
 
 				<div class="policy-block">
 					<h2>Overview</h2>
@@ -84,10 +84,13 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 						used only to review and respond to your inquiry.
 					</p>
 					<p>
-						We also use a hidden anti-spam field and CAPTCHA verification to help
-						prevent automated abuse of the form. When you submit the form, your
-						browser sends the form fields, anti-spam field, and CAPTCHA verification
-						token directly to Web3Forms for processing and delivery to Pneumaris.
+						We also use a hidden anti-spam field and Cloudflare Turnstile
+						verification to help prevent automated abuse of the form. When you
+						submit the form, your browser sends the form fields, anti-spam field,
+						and verification token to this website, which runs on Cloudflare. The
+						site checks the token with Cloudflare Turnstile, then emails your
+						message to Pneumaris through Cloudflare Email Sending. The email
+						includes your name and email address so we can reply.
 					</p>
 				</div>
 
@@ -118,7 +121,7 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 					</p>
 					<p>
 						The banner controls Google Analytics only. Google Fonts, Cloudflare's
-						performance beacon, SoundCloud artwork, and hCaptcha load
+						performance beacon, SoundCloud artwork, and Cloudflare Turnstile load
 						independently as you visit the relevant pages or content. Their providers
 						can receive requests even if you decline Google Analytics or leave the
 						banner unanswered. SoundCloud playback loads separately when you press Play.
@@ -136,7 +139,11 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 							<strong>Cloudflare</strong>: this site is hosted and served through
 							Cloudflare, which processes visitor IP addresses to provide security
 							(e.g. DDoS protection) and content delivery, and separately runs a
-							cookie-free analytics beacon to measure page performance. See the
+							cookie-free analytics beacon to measure page performance. On the
+							Contact page, Cloudflare Turnstile checks that the form is being used
+							by a person, which may process technical and behavioral signals from
+							your browser, and Cloudflare Email Sending delivers your message to
+							Pneumaris. See the
 							<a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">Cloudflare Privacy Policy</a>.
 						</li>
 						<li>
@@ -149,17 +156,6 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 							give Google your IP address and request details, independently of
 							the analytics choice. See the
 							<a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a>.
-						</li>
-						<li>
-							<strong>Web3Forms</strong>: used to process contact form
-							submissions and deliver them to Pneumaris. See the
-							<a href="https://web3forms.com/privacy" target="_blank" rel="noopener noreferrer">Web3Forms Privacy Policy</a>.
-						</li>
-						<li>
-							<strong>hCaptcha</strong>: used to protect the contact form from
-							spam and abuse. hCaptcha may process technical and behavioral data
-							to perform bot detection. See the
-							<a href="https://www.hcaptcha.com/privacy" target="_blank" rel="noopener noreferrer">hCaptcha Privacy Policy</a>.
 						</li>
 						<li>
 							<strong>SoundCloud</strong>: hosts track artwork and some album cover
@@ -194,8 +190,8 @@ const socialImageUrl = `${SITE_URL}/og-image.jpg`;
 						<strong>Google Analytics</strong> (<code>_ga</code>, <code>_ga_*</code>)
 						to distinguish users and measure site usage. Cookie lifetimes depend
 						on Analytics settings and your browser's storage restrictions.
-						Third-party services such as hCaptcha, and SoundCloud when you use
-						playback, may also set
+						Third-party services such as SoundCloud, when you use playback, may
+						also set
 						their own cookies subject to their respective policies.
 					</p>
 					<p>

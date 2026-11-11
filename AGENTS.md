@@ -5,17 +5,25 @@ Guidance for AI coding agents working in this repo.
 ## What this is
 
 Marketing site for **Pneumaris**, a band. Astro static site, deployed to
-Cloudflare Pages. No Cloudflare Pages Functions — everything, including the
-contact form, runs client-side or against a third-party endpoint. See
+Cloudflare Pages. Pages are static; the one piece of server-side code is the
+contact form's Pages Function, `functions/api/contact.ts`. See
 [README.md](README.md) for the feature list and current version.
 
 ## Stack
 
 - Astro 7, TypeScript (strict), no UI framework — components are `.astro`
   files with inline `<style>`/`<script>`.
-- Static output only. There is no server runtime and no API routes; don't add
-  one without a real reason, since the whole deployment model (Cloudflare
-  Pages, no Functions) assumes there isn't.
+- Static output only, plus one Pages Function: `functions/api/contact.ts`
+  serves `POST /api/contact`. It verifies Turnstile and sends mail through the
+  Cloudflare Email Sending REST API, because the API token can't ship to a
+  browser. Don't add more server-side code without a real reason.
+  `public/_headers` does not apply to Function responses, so the Function sets
+  its own security headers. Its plaintext vars live in `wrangler.toml`
+  (dashboard plaintext vars are ignored when that file exists); its secrets
+  (`CLOUDFLARE_API_TOKEN`, `TURNSTILE_SECRET_KEY`) live only in the Pages
+  project. Field limits and the email pattern live in
+  `src/lib/contact-rules.ts`, shared by the form and the Function. README
+  "Contact Form" covers local testing with `wrangler pages dev`.
 - Site config (name, URL, version, GA measurement ID) lives in
   `src/config/site.ts`.
 - Node.js 22.23.4 or newer is required; `.node-version` pins the Cloudflare
@@ -150,7 +158,7 @@ a code bug.
 
 ## Before committing
 
-- `npm test` (build plus consent and playback tests) must pass; CI runs it through the
+- `npm test` (build plus consent, contact-function, and playback tests) must pass; CI runs it through the
   shared `jmusick/ci` workflows in `.github/workflows/ci.yml`. Keep those
   `uses:` pins on a commit SHA with the release tag as a comment.
 - `npm run build` should complete cleanly; it builds the static pages and runs
@@ -161,5 +169,5 @@ a code bug.
   or further third-party script means updating
   `src/pages/privacy-policy.astro` (including its "Last updated" date) in the
   same change — it currently documents Cloudflare, Google Analytics, Google
-  Fonts, Web3Forms, hCaptcha, SoundCloud, Spotify, and Apple Music. Keep that
+  Fonts, Cloudflare Turnstile and Email Sending, SoundCloud, Spotify, and Apple Music. Keep that
   list true.
