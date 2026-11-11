@@ -70,26 +70,46 @@ contact form's Pages Function, `functions/api/contact.ts`. See
   lowercase kebab-case. Creative notes and release planning belong in the asset
   library's `notes/` folders. The Obsidian vault was intentionally deleted and
   is no longer part of this project; do not recreate it or depend on it.
-  See [docs/asset-workflow.md](docs/asset-workflow.md) for ownership and promotion
-  rules. Preserve recovery attachment filenames and original source provenance.
-- GitHub Issues are the shared audit backlog. Store dated audit evidence and
-  issue links under `docs/audits/`; `TODO.md` is ignored local scratch space.
+  The library's own `README.md` indexes it and records where each promoted
+  master came from. Preserve recovery attachment filenames and original source
+  provenance.
+- GitHub Issues are the only audit backlog. Put each finding's evidence, scope,
+  and limitations in its issue, not in repo files or a local TODO list. This
+  repo and its issues are public: never copy private lyrics, recovery exports,
+  or media-library provenance into an issue.
 
 - Internal links must use a trailing slash (`/music/`, not `/music`) —
   Cloudflare Pages redirects the no-slash form (308 observed on 2026-10-12), and Astro's own canonical
   URLs/sitemap use the slash form. A no-slash internal link creates a
   needless redirect hop that Search Console flags.
-- Local display images live in `public/` as already-optimized `.webp` (or
-  `.jpg` for the social share image). Other album covers currently use
+- Where files live: `public/` holds only what must be served verbatim at a fixed
+  URL. Display and social images go in `public/images/` as already-optimized
+  `.webp` (or `.jpg` for social share images); full-size downloads go in
+  `public/downloads/` (their URLs are public, so don't rename them); only the
+  favicons, `_headers`, and `robots.txt` stay at the `public/` root, where
+  browsers and Cloudflare look for them. Site-wide CSS is
+  `src/styles/global.css`, imported by `Layout.astro` so Vite bundles it.
+  Image masters live in `assets-src/`. `npm run build` fails if any same-site
+  link, image, script, or social/JSON-LD URL is missing from the build.
+- Album covers other than Reverie and Anathema currently use
   SoundCloud-hosted JPEGs. Keep explicit `width`/`height` attributes on page
   images to avoid layout shift; the dynamically populated lightbox is the
   existing exception. Responsive album covers use `height: auto` and
   `object-fit: contain` so the HTML height does not cause cropping.
   Original hi-res source PNGs live in `assets-src/` (not deployed —
-  excluded from the Cloudflare Pages build output). Run
-  `node scripts/optimize-images.mjs` (requires `sharp`, a dev dependency)
-  to regenerate the `public/` derivatives after replacing a file
-  in `assets-src/`.
+  excluded from the Cloudflare Pages build output). To promote an image:
+  1. Pick the intended master from the media library. A retained variant or
+     draft there is not approval to publish it.
+  2. Copy it into `assets-src/` under the filename
+     `scripts/optimize-images.mjs` expects. Tracked masters keep builds
+     reproducible without the local library; replacing a library file alone
+     does not update the site.
+  3. Run `node scripts/optimize-images.mjs` (requires `sharp`, a dev
+     dependency) to regenerate the derivatives in `public/images/`,
+     `public/downloads/`, and the favicons. Remove a master and its optimizer
+     step when the site stops using its output.
+  4. Reference the derivative with descriptive alt text and explicit
+     dimensions, then run `npm test`.
 - Fonts (Cinzel, Raleway) load via a `<link rel="preconnect">` + `<link
   rel="stylesheet">` pair in `Layout.astro`'s `<head>` — do not switch this
   back to a CSS `@import`, which serializes the font fetch behind the
@@ -162,7 +182,8 @@ a code bug.
   shared `jmusick/ci` workflows in `.github/workflows/ci.yml`. Keep those
   `uses:` pins on a commit SHA with the release tag as a comment.
 - `npm run build` should complete cleanly; it builds the static pages and runs
-  security checks. It does not run a separate TypeScript type check.
+  `scripts/check-security.mjs` (CSP, external scripts, JSON-LD, and same-site
+  links). It does not run a separate TypeScript type check.
 - Bump `SITE_VERSION` in `src/config/site.ts` for user-visible changes,
   matching the pattern in recent commits (footer displays this version).
 - The privacy policy describes actual behavior. Adding a newsletter, embed,

@@ -77,17 +77,18 @@ charcoal site ground. At 44-52px, the broad pale hood and halo supply the visual
 structure; the smaller engraving adds texture rather than essential information.
 
 `assets-src/header-emblem-v1.png` is the promoted generated master. The optimizer
-emits the 208px alpha WebP `public/header-emblem-v1.webp`. The adjacent Cinzel
+emits the 208px alpha WebP `public/images/header-emblem-v1.webp`. The adjacent Cinzel
 band name supplies the home link's accessible name; the image has empty alt text.
 Original emblems remain unchanged for larger placements.
 
-The built-in ImageGen edit used `assets-src/logo-circle.png` as its reference.
+The built-in ImageGen edit used the original circle logo (kept in the media
+library's `assets/brand/`) as its reference.
 Exact prompt, original generated path, source and output provenance, and master
 hash are recorded in the media library at
 `sources/generated-images/2026-11-10/header-emblem-v1.json`.
 
 The larger homepage introduction uses a matching companion with the wordmark,
 promoted as `assets-src/intro-emblem-v1.png` and exported as
-`public/intro-emblem-v1.webp` at 640px. The header continues to use the separate
+`public/images/intro-emblem-v1.webp` at 640px. The header continues to use the separate
 text-free image. Its exact edit prompt and provenance are recorded in the media
 library at `sources/generated-images/2026-11-10/intro-emblem-v1.json`.

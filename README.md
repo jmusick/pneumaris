@@ -18,8 +18,8 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 
 ## Current Version
 
-- App package version: 2.0.4
-- Site display version: 2.0.4
+- App package version: 2.0.5
+- Site display version: 2.0.5
 
 ## Site Features
 
@@ -153,7 +153,8 @@ npm run build
 ```
 
 The build also checks the emitted HTML and CSP for executable inline scripts,
-inline event handlers, valid JSON-LD, and Cloudflare header line limits.
+inline event handlers, valid JSON-LD, and Cloudflare header line limits, and
+fails if any same-site link, image, script, or social image URL is missing.
 Run `npm test` to build and verify the deployed consent bundle's opt-in,
 decline, withdrawal, and blocked-storage behavior, plus playback loading,
 retries, seeking, release boundaries, and rapid track changes.
@@ -184,17 +185,19 @@ npm run preview
 ## Project Structure
 
 ```text
-public/                 Static assets (logo, header art, global CSS)
-assets-src/             Tracked website image masters (not deployed)
-scripts/                Image optimization, HTTP audit, and build security checks
-docs/                   Asset workflow and dated audit reports
+public/                 Served as-is: favicons, robots.txt, _headers
 public/_headers         Cloudflare Pages security response headers (CSP, HSTS, etc.)
+public/images/          Optimized display and social images
+public/downloads/       Wallpaper downloads (public URLs)
+assets-src/             Tracked image masters for the optimizer (not deployed)
+scripts/                Image optimization, HTTP audit, and build checks
 src/components/         Shared UI components (header/footer/consent/player)
 src/config/             Site constants (site version, site URL, GA measurement ID)
 src/data/               Shared release and track metadata (releases.ts)
 src/layouts/            Shared page layout (Layout.astro)
-src/lib/                WebGL character renderer and SoundCloud playback controller
+src/lib/                Contact form rules and SoundCloud playback controller
 src/pages/              Astro routes/pages
+src/styles/             Site-wide CSS (global.css, imported by Layout.astro)
 tests/                  Consent and playback tests against built application bundles
 wrangler.toml           Cloudflare Pages build config
 ```
@@ -207,10 +210,9 @@ recovery records. Website code and engineering documentation stay in this repo.
 Creative notes and release planning belong in the asset library's `notes/`
 folders. The Obsidian vault was intentionally deleted and is no longer used.
 
-See [asset ownership and promotion](docs/asset-workflow.md) for the directory
-map and the workflow from library masters to `assets-src/` and `public/`.
-GitHub Issues are the shared findings backlog; dated reports live in
-[`docs/audits/`](docs/audits/).
+To publish an image, copy its master into `assets-src/` and regenerate the
+derivatives in `public/images/`; AGENTS.md "Conventions" has the steps. GitHub Issues are
+the shared findings backlog.
 
 ## Social & Streaming Profiles
 

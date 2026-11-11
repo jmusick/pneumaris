@@ -1,6 +1,5 @@
 # Build output
 dist/
-.output/
 
 # Generated types
 .astro/
@@ -28,17 +27,15 @@ Thumbs.db
 .vscode/*
 !.vscode/extensions.json
 !.vscode/launch.json
+!.vscode/tasks.json
 !.vscode/settings.json
 
-# Wrangler / Cloudflare (if used later)
+# Local state from `wrangler pages dev`
 .wrangler/
 
 # Temporary files
 *.tmp
 *.temp
-
-# Local working checklist (audit findings) — not a deliverable
-TODO.md
 
 # Local secrets for Pages Functions (read by `wrangler pages dev`). Never commit.
 .dev.vars

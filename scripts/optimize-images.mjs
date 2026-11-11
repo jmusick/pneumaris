@@ -1,68 +1,52 @@
 import sharp from "sharp";
-import { copyFile } from "node:fs/promises";
 
 // Source masters live in assets-src/ (not deployed). Optimized derivatives are
-// written to public/ and are what the site actually references. Re-run this
+// written to public/ and are what the site actually references: display and
+// social images in public/images/, full-size downloads in public/downloads/, and
+// the favicons at the public/ root where browsers look for them. Re-run this
 // script (`node scripts/optimize-images.mjs`) whenever a source master changes.
-const src = (name) => new URL(`../assets-src/${name}`, import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
-const pub = (name) => new URL(`../public/${name}`, import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
+const path = (dir, name) => new URL(`../${dir}/${name}`, import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
+const src = (name) => path("assets-src", name);
+const pub = (name) => path("public", name);
+const image = (name) => path("public/images", name);
+const download = (name) => path("public/downloads", name);
 
 async function run() {
 	// Wordmark companion for the larger homepage introduction.
 	await sharp(src("intro-emblem-v1.png"))
 		.resize({ width: 640, height: 640, fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
 		.webp({ quality: 88, alphaQuality: 100 })
-		.toFile(pub("intro-emblem-v1.webp"));
+		.toFile(image("intro-emblem-v1.webp"));
 
 	// Text-free hooded emblem adapted from the existing illustrated brand artwork.
 	await sharp(src("header-emblem-v1.png"))
 		.resize({ width: 208, height: 208, fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
 		.webp({ quality: 88, alphaQuality: 100 })
-		.toFile(pub("header-emblem-v1.webp"));
+		.toFile(image("header-emblem-v1.webp"));
 
 	// Approved Reverie cover, promoted from the album media library.
-	await sharp(src("reverie.png")).resize(1200, 1200).webp({ quality: 84 }).toFile(pub("reverie.webp"));
+	await sharp(src("reverie.png")).resize(1200, 1200).webp({ quality: 84 }).toFile(image("reverie.webp"));
 	await sharp(src("reverie.png"))
 		.resize(1200, 630, { fit: "contain", background: "#111015" })
-		.jpeg({ quality: 85, mozjpeg: true }).toFile(pub("reverie-social.jpg"));
-
-	// Matched hero layers: normalize their canvases and preserve foreground alpha.
-	for (const layer of ["environment", "character"]) {
-		await sharp(src(`hero-${layer}-v1.png`))
-			.resize({ width: 1920, height: 784, fit: "fill" })
-			.webp({ quality: 82, alphaQuality: 100 })
-			.toFile(pub(`hero-${layer}-v1.webp`));
-	}
+		.jpeg({ quality: 85, mozjpeg: true }).toFile(image("reverie-social.jpg"));
 
 	// Promoted from assets/albums/anathema/artwork/anathema-3000x3000.png.
 	await sharp(src("anathema.png"))
 		.resize({ width: 960, height: 960 })
 		.webp({ quality: 82 })
-		.toFile(pub("anathema.webp"));
+		.toFile(image("anathema.webp"));
 
-	// header.png -> header.webp (hero background + about page image)
+	// header.png -> header.webp (About page image)
 	await sharp(src("header.png"))
 		.resize({ width: 1920, withoutEnlargement: true })
 		.webp({ quality: 76 })
-		.toFile(pub("header.webp"));
+		.toFile(image("header.webp"));
 
-	// header.png -> og-image.jpg (1200x630 standard social share crop)
+	// header.png -> og-image.jpg (1200x630 default social share crop)
 	await sharp(src("header.png"))
 		.resize({ width: 1200, height: 630, fit: "cover", position: "top" })
 		.jpeg({ quality: 82, mozjpeg: true })
-		.toFile(pub("og-image.jpg"));
-
-	// logo-circle.png -> logo-circle.webp (displayed max 320px, export at 2x)
-	await sharp(src("logo-circle.png"))
-		.resize({ width: 640, height: 640 })
-		.webp({ quality: 82 })
-		.toFile(pub("logo-circle.webp"));
-
-	// logo.png -> logo.webp (header brand mark, displayed at 120px height, export at 2x)
-	await sharp(src("logo.png"))
-		.resize({ height: 480, withoutEnlargement: true })
-		.webp({ quality: 84 })
-		.toFile(pub("logo.webp"));
+		.toFile(image("og-image.jpg"));
 
 	// logo.png -> favicon + apple touch icon (must stay raster PNG for compatibility)
 	await sharp(src("logo.png"))
@@ -75,26 +59,24 @@ async function run() {
 		.png()
 		.toFile(pub("apple-touch-icon.png"));
 
-	// wallpaper-1.png -> downloads/pneumaris-wallpaper-3440x1440.png (freebie download, full res, copied as-is —
-	// sharp's re-encode is larger than the source's existing PNG compression)
-	await copyFile(src("wallpaper-1.png"), pub("downloads/pneumaris-wallpaper-3440x1440.png"));
-
-	// wallpaper-1.png -> wallpaper-preview.webp (extras page preview thumbnail)
-	await sharp(src("wallpaper-1.png"))
+	// The first wallpaper download is its own master: it is already 3440 x 1440,
+	// and a sharp re-encode is larger than its existing PNG compression. Only the
+	// Extras preview is generated from it.
+	await sharp(download("pneumaris-wallpaper-3440x1440.png"))
 		.resize({ width: 1280, withoutEnlargement: true })
 		.webp({ quality: 80 })
-		.toFile(pub("wallpaper-preview.webp"));
+		.toFile(image("wallpaper-preview.webp"));
 
 	// Preserve the original upscaled master; deliver a matching ultrawide wallpaper.
 	// The centered crop trims a small amount vertically without stretching the art.
 	await sharp(src("wallpaper-2.png"))
 		.resize({ width: 3440, height: 1440, fit: "cover", position: "centre" })
 		.png({ compressionLevel: 9 })
-		.toFile(pub("downloads/pneumaris-wallpaper-2-3440x1440.png"));
-	await sharp(pub("downloads/pneumaris-wallpaper-2-3440x1440.png"))
+		.toFile(download("pneumaris-wallpaper-2-3440x1440.png"));
+	await sharp(download("pneumaris-wallpaper-2-3440x1440.png"))
 		.resize({ width: 1280 })
 		.webp({ quality: 80 })
-		.toFile(pub("wallpaper-2-preview.webp"));
+		.toFile(image("wallpaper-2-preview.webp"));
 
 	console.log("done");
 }

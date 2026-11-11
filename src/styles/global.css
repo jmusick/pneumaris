@@ -298,12 +298,6 @@ li a:not([class]) {
 	color: var(--ink-soft);
 }
 
-.site-footer .social-links {
-	display: flex;
-	align-items: center;
-	gap: 1rem;
-}
-
 /* A button that has to sit inline with the footer's links and be
 	indistinguishable from them — it triggers script, so it can't be an anchor. */
 .footer-link-button {
@@ -324,33 +318,6 @@ li a:not([class]) {
 .footer-credit {
 	grid-column: 1 / -1;
 	color: var(--ink-muted);
-}
-
-/* ── Shared Utilities ────────────────────────── */
-
-.page {
-	max-width: 1280px;
-	margin: 0 auto;
-	padding: 3rem clamp(1.1rem, 3vw, 2.4rem) 5rem;
-}
-
-.divider {
-	width: 60px;
-	height: 1px;
-	background: linear-gradient(90deg, transparent, var(--gold), transparent);
-	margin: 1.5rem auto;
-}
-
-.panel {
-	background: var(--surface-raised);
-	border: 1px solid var(--line);
-	border-radius: 0.5rem;
-	padding: clamp(1.2rem, 3vw, 2rem);
-}
-
-.section-label {
-	font-size: 0.85rem;
-	color: var(--gold);
 }
 
 /* ── Responsive ──────────────────────────────── */
@@ -445,15 +412,6 @@ li a:not([class]) {
 		height: 44px;
 		width: 44px;
 	}
-
-	.page {
-		padding-top: 2rem;
-	}
-
-	.hero-cta {
-		width: 100%;
-		justify-content: center;
-	}
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -468,8 +426,7 @@ input, textarea { caret-color: var(--gold-bright); }
 .button-primary:active { background: var(--gold); }
 .text-link:active { color: var(--gold-bright); }
 .footer-links { gap: 1rem; }
-.footer-links a, .site-footer .social-links a { display: inline-flex; align-items: center; min-height: 44px; }
-.site-footer .social-links a { justify-content: center; min-width: 44px; }
+.footer-links a { display: inline-flex; align-items: center; min-height: 44px; }
 @media (max-width: 1100px) {
  .social-nav { flex-wrap: wrap; justify-content: flex-start; gap: 0.5rem; }
  .site-head-right { transition: none; }

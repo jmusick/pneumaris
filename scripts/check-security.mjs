@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
-import { readFile, readdir } from 'node:fs/promises';
-import { join } from 'node:path';
+import { access, readFile, readdir } from 'node:fs/promises';
+import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse, walk, ELEMENT_NODE } from 'ultrahtml';
 
@@ -16,6 +16,21 @@ assert.ok(scriptSources?.includes("'self'"), 'Allow same-origin application scri
 assert.ok(!scriptSources.includes("'unsafe-inline'"), 'Do not allow arbitrary inline scripts');
 assert.match(policy, /(?:^|;)\s*script-src-attr\s+'none'(?:;|$)/, 'Block inline event handlers');
 
+// The site origin, taken from the homepage canonical so it can't drift from SITE_URL.
+const canonical = (await readFile(join(dist, 'index.html'), 'utf8')).match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+assert.ok(canonical, 'The homepage must declare a canonical URL');
+const site = new URL(canonical).origin;
+
+/** Every same-site URL the pages reference, checked against dist/ after the walk. */
+const links = [];
+const collectJsonLd = (value, page) => {
+  if (typeof value === 'string') {
+    if (value.startsWith(site)) links.push({ page, value });
+  } else if (value && typeof value === 'object') {
+    for (const child of Object.values(value)) collectJsonLd(child, page);
+  }
+};
+
 async function checkPages(directory) {
   let count = 0;
   for (const entry of await readdir(directory, { withFileTypes: true })) {
@@ -24,6 +39,7 @@ async function checkPages(directory) {
       count += await checkPages(path);
     } else if (entry.name.endsWith('.html')) {
       const html = await readFile(path, 'utf8');
+      const page = new URL('/' + relative(dist, path).split(sep).join('/').replace(/(^|\/)index\.html$/, '$1'), site);
       // Inspect parsed final output: Astro can inline small bundles during builds.
       await walk(parse(html), async (node) => {
         if (node.type !== ELEMENT_NODE) return;
@@ -31,19 +47,22 @@ async function checkPages(directory) {
           assert.ok(!/^on/i.test(attribute), `Inline event handler in ${path}`);
           if (attribute === 'href' || attribute === 'src') {
             assert.doesNotMatch(value, /^\s*javascript:/i, `JavaScript URL in ${path}`);
+            links.push({ page, value });
           }
+        }
+        // Social preview images and similar absolute URLs live in meta content.
+        if (node.name === 'meta' && node.attributes.content?.startsWith(site)) {
+          links.push({ page, value: node.attributes.content });
         }
         if (node.name !== 'script') return;
         const body = node.children.map((child) => child.value || '').join('');
         if (node.attributes.type === 'application/ld+json') {
-          JSON.parse(body);
+          collectJsonLd(JSON.parse(body), page);
           return;
         }
         const source = node.attributes.src;
         assert.ok(source && !body.trim(), `Executable scripts must be external: ${path}`);
-        if (source.startsWith('/') && !source.startsWith('//')) {
-          await readFile(join(dist, source));
-        } else {
+        if (!source.startsWith('/') || source.startsWith('//')) {
           assert.ok(scriptSources.includes(new URL(source).origin), `CSP must permit ${source}`);
         }
       });
@@ -55,4 +74,23 @@ async function checkPages(directory) {
 
 const pages = await checkPages(dist);
 assert.ok(pages > 0, 'Build pages before checking security');
-console.log(`Security build checks passed for ${pages} pages: external scripts, valid JSON-LD, enforced CSP.`);
+
+// Every same-site link, image, script, and social/JSON-LD URL must exist in the
+// build. Page links need the trailing slash Cloudflare Pages would redirect to.
+let checked = 0;
+for (const { page, value } of links) {
+  const target = new URL(value, page);
+  if (target.origin !== site) continue;
+  let file = decodeURIComponent(target.pathname);
+  if (file.endsWith('/')) {
+    file += 'index.html';
+  } else {
+    assert.match(file, /\.[a-z0-9]+$/i, `Internal link needs a trailing slash: ${value} on ${page.pathname}`);
+  }
+  await access(join(dist, file)).catch(() => assert.fail(`Broken link: ${value} on ${page.pathname}`));
+  checked++;
+}
+
+console.log(
+  `Build checks passed for ${pages} pages: external scripts, valid JSON-LD, enforced CSP, ${checked} same-site links resolve.`,
+);

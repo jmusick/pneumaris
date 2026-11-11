@@ -30,7 +30,7 @@ export const albums: Album[] = [
 		streamingReleaseDate: "November 13, 2026",
 		summary: "Reverie moves between the things that haunt us and the people who bring us back. Across eighteen songs, borrowed faces, stolen lullabies, impossible skies, and bargains made in desperation give way to records left spinning, hands finding each other in the dark, and a future worth wanting.",
 		description: "Reverie moves between the things that haunt us and the people who bring us back. Across eighteen songs, borrowed faces, stolen lullabies, impossible skies, and bargains made in desperation give way to records left spinning, hands finding each other in the dark, and a future worth wanting.\n\nPneumaris brings gothic and progressive metal into contact with industrial pop, coastal folk horror, tango, heavy grooves, and intimate piano-led songs. From The Bough Breaks to The Days I Haven't Had, the album follows the uneasy passage from being held by a dream to choosing to wake.",
-		artwork: "/reverie.webp",
+		artwork: "/images/reverie.webp",
 		albumUrl: "https://soundcloud.com/pneumaris/sets/reverie",
 		tracks: [
 			{
@@ -151,7 +151,7 @@ export const albums: Album[] = [
 		summary: "Exile, obsession, survival, devotion. Thirteen songs through ruined battalions, drowned horizons, and the things that remain when certainty begins to collapse.",
 		description:
 			"Anathema is a collection of songs about exile, obsession, survival, devotion, and the things that remain when faith, identity, and certainty begin to collapse. Moving between intimate piano ballads, dark pop, progressive metal, cosmic horror, mechanical dread, and moments of fragile hope, the album follows a world coming apart from both the inside and the outside. Across ruined battalions, drowned horizons, forbidden gods, fevered signals, and lives lived after the ending, Anathema asks what we become when everything we trusted turns against us, and whether being cast out might be the beginning of something else.",
-		artwork: "/anathema.webp",
+		artwork: "/images/anathema.webp",
 		albumUrl: "https://soundcloud.com/pneumaris/sets/anathema",
 		spotifyUrl: "https://open.spotify.com/album/0QqaNkRcgBQ6wPV9UgecXj",
 		appleMusicUrl: "https://music.apple.com/us/album/anathema/6790130743",
