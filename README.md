@@ -18,8 +18,8 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 
 ## Current Version
 
-- App package version: 2.0.3
-- Site display version: 2.0.3
+- App package version: 2.0.4
+- Site display version: 2.0.4
 
 ## Site Features
 
@@ -160,7 +160,7 @@ retries, seeking, release boundaries, and rapid track changes.
 
 CI (`.github/workflows/ci.yml`) calls the shared `jmusick/ci` baseline and
 web-app workflows, pinned by commit SHA, and runs `npm test` (which builds).
-The **CI gate** job is the single check to require on `master`. Dependabot
+The **CI gate** job is the single check to require on `main`. Dependabot
 proposes new `jmusick/ci` releases and action pins.
 
 Preview production build:
@@ -171,6 +171,8 @@ npm run preview
 
 ## Deployment (Cloudflare Pages)
 
+- Production branch: `main` (Cloudflare deploys pushes to `main` to
+  production and other branches as previews).
 - Build command: `npm run build`
 - Build output directory: `dist`
 - Wrangler config: `wrangler.toml`
