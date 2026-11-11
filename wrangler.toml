@@ -1,3 +1,17 @@
 name = "pneumaris"
 pages_build_output_dir = "dist"
 compatibility_date = "2025-02-04"
+
+# Plaintext variables for the contact-form Pages Function (functions/api/contact.ts).
+# They MUST live here: when a Pages project has a wrangler.toml, Cloudflare
+# ignores plaintext variables set in the dashboard. Secrets still come from the
+# dashboard (or `npx wrangler pages secret put NAME`), and never belong here:
+#   CLOUDFLARE_API_TOKEN  - account token with "Email Sending: Edit"
+#   TURNSTILE_SECRET_KEY  - secret for the "pneumaris-contact-form" widget
+[vars]
+# Not a credential: it appears in every dashboard URL for this account.
+CLOUDFLARE_ACCOUNT_ID = "fdabb6996edf7688fdaf7c8c367f7d08"
+# Must be on a domain onboarded in Email Sending.
+EMAIL_FROM_CONTACT = "contact@pneumarisband.com"
+# Email Routing's catch-all forwards this to the band's mailbox.
+CONTACT_TO_EMAIL = "hello@pneumarisband.com"

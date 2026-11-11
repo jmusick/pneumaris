@@ -12,8 +12,9 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 - Security response headers via `public/_headers` (CSP, HSTS, etc.)
 - CSP blocks executable inline scripts and event handlers; application scripts
   are emitted as same-origin files, including the opt-in analytics loader.
-- Web3Forms (contact form delivery)
-- hCaptcha (bot protection)
+- One Cloudflare Pages Function (`functions/api/contact.ts`) for the contact form
+- Cloudflare Email Sending (contact form delivery)
+- Cloudflare Turnstile (contact form bot protection)
 
 ## Current Version
 
@@ -34,7 +35,7 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 	- Music (`/music/`) with album cards, descriptions, custom track lists, and album/track artwork lightbox previews
 	- About (`/about/`)
 	- Extras (`/extras/`) with two free 3440 x 1440 desktop wallpaper downloads
-	- Contact (`/contact/`) with Web3Forms + hCaptcha
+	- Contact (`/contact/`) with Turnstile and Cloudflare Email Sending
 	- Privacy Policy (`/privacy-policy/`)
 - Social links in header:
 	- Spotify
@@ -79,14 +80,49 @@ and Apple Music links open the album. Streaming playback loads on demand.
 
 ## Contact Form
 
-The contact form is client-side and submits directly to Web3Forms:
+The contact form checks its fields in the browser, then posts JSON to
+`/api/contact`, a Cloudflare Pages Function in
+[functions/api/contact.ts](functions/api/contact.ts). The Function validates the
+fields again, verifies the Cloudflare Turnstile token, and sends one email
+through the Cloudflare Email Sending REST API:
 
-- Endpoint: `https://api.web3forms.com/submit`
-- Access key: configured in `src/pages/contact.astro`
-- CAPTCHA: hCaptcha widget token sent as `h-captcha-response`
-- Honeypot field: `website`/`botcheck`
+- From `contact@pneumarisband.com` (pneumarisband.com is onboarded in Email Sending)
+- To `hello@pneumarisband.com`, which Email Routing's catch-all forwards to the band's mailbox
+- Reply-to: the visitor's address
+- Honeypot field: `website`
+- Turnstile widget: `pneumaris-contact-form` (hostname pneumarisband.com); its
+  site key is `TURNSTILE_SITE_KEY` in `src/config/site.ts`
 
-No Cloudflare Pages Functions are required for form delivery.
+Configuration is split between `wrangler.toml` `[vars]` (account ID and the
+from/to addresses; dashboard plaintext variables are ignored when the file
+exists) and two secrets set on the Pages project, under Settings > Variables
+and secrets or with `npx wrangler pages secret put NAME --project-name pneumaris`:
+
+- `CLOUDFLARE_API_TOKEN`: an account API token with **Email Sending: Edit**
+- `TURNSTILE_SECRET_KEY`: the `pneumaris-contact-form` widget's secret
+
+Without either secret the endpoint answers 503 with a `code` naming what's
+missing. Every response carries an `X-Request-Id` that matches one structured
+log line; stream them with
+`npx wrangler pages deployment tail --project-name pneumaris`. Logs never
+include what the visitor typed.
+
+`astro dev` doesn't serve Pages Functions, so sending fails there (the page
+says so); field validation still works. To run the real endpoint locally,
+copy `.dev.vars.example` to `.dev.vars`, then build with Turnstile's test site
+key and serve the build with Wrangler:
+
+```bash
+PUBLIC_TURNSTILE_SITE_KEY=1x00000000000000000000AA npm run build
+```
+
+```bash
+npx wrangler pages dev dist
+```
+
+With `CLOUDFLARE_API_TOKEN` left empty, everything up to the send step runs and
+the form reports the 503. Rebuild without the variable before deploying by
+hand.
 
 ## Local Development
 
