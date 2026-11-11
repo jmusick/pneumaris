@@ -107,7 +107,9 @@ const { measurementId } = Astro.props;
 		var opener: HTMLElement | null = null;
 
 		function show() {
-			banner.hidden = false;
+			// The guard above returns when banner is null, but TypeScript doesn't carry that into
+			// hoisted function declarations.
+			banner!.hidden = false;
 		}
 
 		function record(choice: string) {
@@ -118,7 +120,7 @@ const { measurementId } = Astro.props;
 			} catch (e) {
 				// Choice won't persist, but honour it for this page view.
 			}
-			banner.hidden = true;
+			banner!.hidden = true;
 
 			if (choice === "granted") {
 				loadAnalytics();

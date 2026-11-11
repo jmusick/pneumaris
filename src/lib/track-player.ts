@@ -193,7 +193,8 @@ export function initializeTrackPlayer() {
 		failed = false;
 		seeking = false;
 		duration = position = 0;
-		player.hidden = false;
+		// Checked non-null at the top; TypeScript doesn't carry that into this function declaration.
+		player!.hidden = false;
 		document.body.classList.add("has-track-player");
 		title.textContent = button.dataset.trackTitle || "";
 		artwork.src = button.dataset.trackArtwork || "";

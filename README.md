@@ -155,12 +155,15 @@ npm run build
 The build also checks the emitted HTML and CSP for executable inline scripts,
 inline event handlers, valid JSON-LD, and Cloudflare header line limits, and
 fails if any same-site link, image, script, or social image URL is missing.
-Run `npm test` to build and verify the deployed consent bundle's opt-in,
-decline, withdrawal, and blocked-storage behavior, plus playback loading,
-retries, seeking, release boundaries, and rapid track changes.
+Run `npm test` to type-check (`npm run check`, which runs `astro check` over
+the pages, `src/`, and the contact Function), build, and verify the deployed
+consent bundle's opt-in, decline, withdrawal, and blocked-storage behavior,
+plus playback loading, retries, seeking, release boundaries, and rapid track
+changes.
 
 CI (`.github/workflows/ci.yml`) calls the shared `jmusick/ci` baseline and
-web-app workflows, pinned by commit SHA, and runs `npm test` (which builds).
+web-app workflows, pinned by commit SHA, and runs `npm test` (which
+type-checks and builds).
 The **CI gate** job is the single check to require on `main`. Dependabot
 proposes new `jmusick/ci` releases and action pins.
 

@@ -178,12 +178,17 @@ a code bug.
 
 ## Before committing
 
-- `npm test` (build plus consent, contact-function, and playback tests) must pass; CI runs it through the
-  shared `jmusick/ci` workflows in `.github/workflows/ci.yml`. Keep those
-  `uses:` pins on a commit SHA with the release tag as a comment.
+- `npm test` (type check, build, then consent, contact-function, and playback
+  tests) must pass; CI runs it through the shared `jmusick/ci` workflows in
+  `.github/workflows/ci.yml`. Keep those `uses:` pins on a commit SHA with the
+  release tag as a comment.
+- `npm run check` runs `astro check`, which type-checks `.astro` files,
+  `src/**/*.ts`, and `functions/api/contact.ts` against the strict tsconfig.
+  Fix reported errors rather than suppressing them; any `@ts-ignore` or
+  `@ts-expect-error` needs a comment saying why.
 - `npm run build` should complete cleanly; it builds the static pages and runs
   `scripts/check-security.mjs` (CSP, external scripts, JSON-LD, and same-site
-  links). It does not run a separate TypeScript type check.
+  links). It does not type-check; the Cloudflare Pages build runs only this.
 - Bump `SITE_VERSION` in `src/config/site.ts` for user-visible changes,
   matching the pattern in recent commits (footer displays this version).
 - The privacy policy describes actual behavior. Adding a newsletter, embed,
