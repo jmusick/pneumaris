@@ -21,6 +21,8 @@
  * one JSON response carrying `API_HEADERS`. Tests: tests/contact.test.mjs.
  */
 
+import { CONTACT_EMAIL_PATTERN, CONTACT_LIMITS } from "../../src/lib/contact-rules.ts";
+
 export interface Env {
 	CLOUDFLARE_API_TOKEN?: string;
 	CLOUDFLARE_ACCOUNT_ID?: string;
@@ -42,16 +44,9 @@ interface ContactPayload {
 	website?: unknown;
 }
 
-/**
- * Lengths are JS string lengths (UTF-16 code units), matching the form's
- * `maxlength` attributes in src/pages/contact.astro. Keep the two in step.
- */
+/** Field limits are shared with the form; see src/lib/contact-rules.ts. */
 export const LIMITS = {
-	name: 100,
-	/** RFC 5321 path limit. */
-	email: 254,
-	subject: 140,
-	message: 5000,
+	...CONTACT_LIMITS,
 	/** Cloudflare's documented maximum Turnstile token length. */
 	captchaToken: 2048,
 } as const;
@@ -163,8 +158,7 @@ const logEvent = (requestId: string, status: number, diag: Diagnostic): void => 
 
 const asString = (value: unknown): string => (typeof value === "string" ? value.trim() : "");
 
-/** Same pattern as the form's client-side check in src/pages/contact.astro. */
-const isValidEmail = (value: string): boolean => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+const isValidEmail = (value: string): boolean => CONTACT_EMAIL_PATTERN.test(value);
 
 const escapeHtml = (value: string): string =>
 	value
@@ -423,10 +417,10 @@ const handlePost = async (request: Request, env: Env): Promise<Outcome> => {
 		return outcome(400, MALFORMED, "parse", "invalid_field_type");
 	}
 
-	// Honeypot: bots fill every field they find. Answer as if sent so they learn
-	// nothing from the failure, but send nothing.
+	// Honeypot: bots fill every field they find. Answer exactly as a real send
+	// does (same status and body) so they learn nothing, but send nothing.
 	if (asString(payload.website)) {
-		return outcome(200, SENT, "honeypot", "honeypot");
+		return outcome(201, SENT, "honeypot", "honeypot");
 	}
 
 	const name = singleLine(asString(payload.name));

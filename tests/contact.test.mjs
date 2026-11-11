@@ -103,7 +103,9 @@ test('rejects blank, whitespace-only, malformed, and over-limit fields before an
 test('honeypot submissions look sent but send nothing', async () => {
   mockUpstream();
   const response = await post({ ...VALID, website: 'https://spam.example' });
-  assert.equal(response.status, 200);
+  // Indistinguishable from a real send.
+  assert.equal(response.status, 201);
+  assert.deepEqual(await response.json(), { message: 'Thanks — your message has been sent.' });
   assert.equal(calls.length, 0);
 });
 

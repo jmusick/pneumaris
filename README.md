@@ -102,7 +102,8 @@ and secrets or with `npx wrangler pages secret put NAME --project-name pneumaris
 - `TURNSTILE_SECRET_KEY`: the `pneumaris-contact-form` widget's secret
 
 Without either secret the endpoint answers 503 with a `code` naming what's
-missing. Every response carries an `X-Request-Id` that matches one structured
+missing. Preview deployments on `*.pages.dev` can't send: the widget only
+allows pneumarisband.com, and the secrets are set for production. Every response carries an `X-Request-Id` that matches one structured
 log line; stream them with
 `npx wrangler pages deployment tail --project-name pneumaris`. Logs never
 include what the visitor typed.

@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import PageHeader from "../components/PageHeader.astro";
 import { SITE_URL, TURNSTILE_SITE_KEY } from "../config/site";
+import { CONTACT_LIMITS } from "../lib/contact-rules";
 
 const pageTitle = "Contact | Pneumaris";
 const pageDescription = "Get in touch with Pneumaris.";
@@ -110,11 +111,6 @@ const functionUnavailable = import.meta.env.DEV;
 				color: #d4948f;
 			}
 
-			/* Empty unless Turnstile needs the visitor to interact. */
-			.turnstile-slot:empty {
-				display: none;
-			}
-
 			.dev-note {
 				margin: 0;
 				font-size: 0.85rem;
@@ -215,28 +211,27 @@ const functionUnavailable = import.meta.env.DEV;
 					<div class="form-row">
 						<div class="form-field">
 							<label for="name">Name</label>
-							<input id="name" name="name" type="text" autocomplete="name" required maxlength="100" aria-describedby="name-error" />
+							<input id="name" name="name" type="text" autocomplete="name" required maxlength={CONTACT_LIMITS.name} aria-describedby="name-error" />
 							<p id="name-error" class="field-error" hidden></p>
 						</div>
 						<div class="form-field">
 							<label for="email">Email</label>
-							<input id="email" name="email" type="email" autocomplete="email" required maxlength="254" aria-describedby="email-error" />
+							<input id="email" name="email" type="email" autocomplete="email" required maxlength={CONTACT_LIMITS.email} aria-describedby="email-error" />
 							<p id="email-error" class="field-error" hidden></p>
 						</div>
 					</div>
 
 					<div class="form-field">
 						<label for="subject">Subject</label>
-						<input id="subject" name="subject" type="text" required maxlength="140" aria-describedby="subject-error" />
+						<input id="subject" name="subject" type="text" required maxlength={CONTACT_LIMITS.subject} aria-describedby="subject-error" />
 						<p id="subject-error" class="field-error" hidden></p>
 					</div>
 
 					<div class="form-field">
 						<label for="message">Message</label>
-						<textarea id="message" name="message" required maxlength="5000" aria-describedby="message-error"></textarea>
+						<textarea id="message" name="message" required maxlength={CONTACT_LIMITS.message} aria-describedby="message-error"></textarea>
 						<p id="message-error" class="field-error" hidden></p>
 					</div>
-					{/* maxlength values must match LIMITS in functions/api/contact.ts. */}
 
 					<div class="form-honeypot" aria-hidden="true">
 						<label for="website">Website</label>
@@ -276,6 +271,8 @@ const functionUnavailable = import.meta.env.DEV;
 
 
 		<script>
+			import { CONTACT_EMAIL_PATTERN } from "../lib/contact-rules";
+
 			interface Turnstile {
 				render(container: HTMLElement, options: Record<string, unknown>): string;
 				getResponse(widgetId?: string): string | undefined;
@@ -293,13 +290,16 @@ const functionUnavailable = import.meta.env.DEV;
 				subject: "a subject",
 				message: "a message",
 			};
-			// Same pattern the Pages Function checks (functions/api/contact.ts).
-			const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 			const form = document.getElementById("contact-form") as HTMLFormElement | null;
 			const statusEl = document.getElementById("form-status") as HTMLElement | null;
 			const submitButton = form?.querySelector("button[type='submit']") as HTMLButtonElement | null;
 			const slot = document.getElementById("turnstile-slot");
+			const setStatusText = (text: string) => {
+				if (!statusEl) return;
+				statusEl.textContent = text;
+				statusEl.className = "form-status error";
+			};
 
 			// Turnstile: the 300px "normal" widget when the slot can hold it, otherwise
 			// the 150px "compact" one. `flexible` also has a 300px minimum, so it can't
@@ -313,7 +313,10 @@ const functionUnavailable = import.meta.env.DEV;
 				widgetId = turnstile.render(slot, {
 					sitekey: slot.dataset.sitekey ?? "",
 					theme: "dark",
-					appearance: "interaction-only",
+					// Without this the visitor would only ever see "please wait" on send.
+					"error-callback": () => {
+						setStatusText("The verification check couldn't load. Please reload the page and try again.");
+					},
 					size: slot.parentElement && slot.parentElement.clientWidth >= NORMAL_WIDGET_WIDTH ? "normal" : "compact",
 				});
 			};
@@ -369,7 +372,7 @@ const functionUnavailable = import.meta.env.DEV;
 					const input = fields[name];
 					const value = input.value.trim();
 					if (!value) return `Please enter ${LABELS[name]}.`;
-					if (name === "email" && !EMAIL_PATTERN.test(value)) return "Please enter a valid email address.";
+					if (name === "email" && !CONTACT_EMAIL_PATTERN.test(value)) return "Please enter a valid email address.";
 					if (input.maxLength > 0 && value.length > input.maxLength) {
 						const label = name.charAt(0).toUpperCase() + name.slice(1);
 						return `${label} must be ${input.maxLength} characters or fewer.`;
@@ -441,12 +444,14 @@ const functionUnavailable = import.meta.env.DEV;
 
 						if (!response.ok) {
 							const field = FIELD_NAMES.find((name) => name === result?.field);
+							// What the visitor typed stays in the form so they can try again.
 							if (field && result?.error) {
 								showError(field, result.error);
 								fields[field].focus();
+								setStatus("Please fix the highlighted field.", "error");
+							} else {
+								setStatus(result?.error ?? "Unable to send your message right now.", "error");
 							}
-							// What the visitor typed stays in the form so they can try again.
-							setStatus(result?.error ?? "Unable to send your message right now.", "error");
 							return;
 						}
 
