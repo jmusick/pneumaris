@@ -103,6 +103,9 @@ const { measurementId } = Astro.props;
 			});
 		}
 
+		/** The control that reopened the banner, so focus can go back when it closes. */
+		var opener: HTMLElement | null = null;
+
 		function show() {
 			banner.hidden = false;
 		}
@@ -122,7 +125,13 @@ const { measurementId } = Astro.props;
 			} else if (wasGranted) {
 				clearAnalyticsCookies();
 				location.reload();
+				return;
 			}
+
+			// Only a reopened banner has an opener; the first-visit prompt never
+			// moved focus, so closing it leaves focus alone too.
+			if (opener) opener.focus();
+			opener = null;
 		}
 
 		if (stored === "granted") {
@@ -145,6 +154,7 @@ const { measurementId } = Astro.props;
 			var trigger = event.target.closest("[data-cookie-preferences]");
 			if (!trigger) return;
 			event.preventDefault();
+			opener = trigger as HTMLElement;
 			show();
 			banner.querySelector<HTMLButtonElement>("[data-consent]")?.focus();
 		});

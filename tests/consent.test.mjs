@@ -13,7 +13,7 @@ function visitor({ stored = null, measurementId = 'G-TEST', storageBlocked = fal
   const requests = [];
   const cookieWrites = [];
   const listeners = {};
-  const state = { stored, reloads: 0, focused: false };
+  const state = { stored, reloads: 0, focused: false, openerFocused: 0 };
   class Element {
     constructor(choice) { this.choice = choice; }
     closest(selector) {
@@ -50,6 +50,7 @@ function visitor({ stored = null, measurementId = 'G-TEST', storageBlocked = fal
     reopen() {
       const trigger = new Element();
       trigger.closest = () => trigger;
+      trigger.focus = () => { state.openerFocused++; };
       listeners['document:click']({ target: trigger, preventDefault() {} });
     },
   };
@@ -92,6 +93,25 @@ test('reopening and withdrawing consent clears only analytics cookies and reload
   assert.equal(page.state.reloads, 1);
   assert.equal(page.cookieWrites.length, 6);
   assert.ok(page.cookieWrites.every((value) => value.startsWith('_ga') && value.includes('Max-Age=0')));
+});
+
+test('closing reopened choices returns focus to the opener, but only without a reload', () => {
+  const declined = visitor({ stored: 'granted' });
+  declined.reopen();
+  declined.choose('granted');
+  assert.equal(declined.state.openerFocused, 1);
+  declined.choose('granted');
+  assert.equal(declined.state.openerFocused, 1, 'focus is returned once per reopen');
+
+  const withdrawn = visitor({ stored: 'granted' });
+  withdrawn.reopen();
+  withdrawn.choose('denied');
+  assert.equal(withdrawn.state.reloads, 1);
+  assert.equal(withdrawn.state.openerFocused, 0);
+
+  const firstVisit = visitor();
+  firstVisit.choose('denied');
+  assert.equal(firstVisit.state.openerFocused, 0);
 });
 
 test('blocked storage and development without a measurement ID fail safely', () => {
