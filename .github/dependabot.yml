@@ -16,6 +16,11 @@ updates:
     cooldown:
       default-days: 7
       semver-major-days: 14
+    ignore:
+      # @astrojs/check 0.9.12 peers on typescript ^5 || ^6, so a TypeScript 7 bump fails npm ci (PR #44).
+      # Remove this once @astrojs/check supports TypeScript 7.
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
     groups:
       # The framework, its adapter and the Workers toolchain move together and are tested together.
       astro-and-cloudflare:
