@@ -18,13 +18,13 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 
 ## Current Version
 
-- App package version: 2.0.5
-- Site display version: 2.0.5
+- App package version: 2.1.0
+- Site display version: 2.1.0
 
 ## Site Features
 
 - Dark atmospheric visual theme with shared global styles
-- Reverie-led homepage with approved cover artwork, SoundCloud listening link, and scheduled Spotify / Apple Music release date
+- Reverie-led homepage with approved cover artwork and direct Spotify, Apple Music, and SoundCloud listening links
 - Charcoal, muted violet, and weathered gold palette with responsive artwork and catalogue layouts
 - No decorative entrance motion; reduced-motion support for existing controls
 - Featured latest release, shared release data, and a wallpaper preview on the homepage

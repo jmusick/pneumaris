@@ -9,7 +9,7 @@ const featuredUrl = `/music/#${featured.title.toLowerCase().replaceAll(" ", "-")
 
 const pageTitle = "Reverie | Pneumaris";
 const pageDescription =
-	"Reverie, the new 18-track album from Pneumaris. Listen now on SoundCloud. Scheduled for Spotify and Apple Music on November 13, 2026.";
+	"Reverie, the new 18-track album from Pneumaris. Out now on Spotify, Apple Music, and SoundCloud.";
 const canonicalUrl = `${SITE_URL}/`;
 const socialImageUrl = `${SITE_URL}/images/reverie-social.jpg`;
 const structuredData = {
@@ -56,17 +56,16 @@ const structuredData = {
 <main id="main">
 	<section class="release-hero" aria-labelledby="release-title">
 		<div class="release-copy">
-			<p class="release-intro">The new album from Pneumaris</p>
+			<p class="release-intro">The new album from Pneumaris · Out now</p>
 			<h1 id="release-title">{featured.title}</h1>
 			<p class="release-description">{featured.summary}</p>
-			<div class="hero-actions">
-				<a class="button-primary" href={featured.albumUrl} target="_blank" rel="noopener noreferrer"><Icon name="simple-icons:soundcloud" aria-hidden="true" />Listen on SoundCloud</a>
-				<a class="text-link" href={featuredUrl}>Explore all {featured.tracks.length} tracks</a>
-			</div>
-			{featured.streamingReleaseDate && <div class="streaming-date">
-				<p>Spotify &amp; Apple Music</p>
-				<p>Scheduled for <time datetime={new Date(featured.streamingReleaseDate).toISOString().slice(0, 10)}>{featured.streamingReleaseDate}</time></p>
-			</div>}
+			<nav class="hero-actions" aria-label={`Listen to ${featured.title}`}>
+				<p class="listen-label">Listen on</p>
+				{featured.spotifyUrl && <a class="streaming-link" href={featured.spotifyUrl} target="_blank" rel="noopener noreferrer"><Icon name="simple-icons:spotify" aria-hidden="true" />Spotify</a>}
+				{featured.appleMusicUrl && <a class="streaming-link" href={featured.appleMusicUrl} target="_blank" rel="noopener noreferrer"><Icon name="simple-icons:applemusic" aria-hidden="true" />Apple Music</a>}
+				<a class="streaming-link" href={featured.albumUrl} target="_blank" rel="noopener noreferrer"><Icon name="simple-icons:soundcloud" aria-hidden="true" />SoundCloud</a>
+			</nav>
+			<p class="release-explore"><a class="text-link" href={featuredUrl}>Explore all {featured.tracks.length} tracks</a></p>
 		</div>
 		<a class="release-art" href={featuredUrl} aria-label={`Explore ${featured.title}`}>
 			<img src={featured.artwork} width="1200" height="1200" alt="Reverie cover: a sleeping stone face, fractured with gold, beneath ruined arches and a star-filled sky" fetchpriority="high" decoding="async" />
@@ -114,12 +113,15 @@ const structuredData = {
 	.release-intro { color: var(--ink-soft); font-size: 1rem; margin-bottom: 1.25rem; }
 	.release-copy h1 { font-size: clamp(3.5rem, 7.4vw, 7rem); line-height: 1.1; letter-spacing: -0.035em; color: var(--gold-bright); }
 	.release-description { max-width: 49ch; margin: 1.5rem 0 2rem; }
-	.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.5rem; }
+	.hero-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; width: 100%; max-width: 32rem; }
+	.listen-label { grid-column: 1 / -1; color: var(--ink-soft); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; }
+	.streaming-link { display: flex; align-items: center; justify-content: center; gap: 0.6rem; min-height: 52px; padding: 0.75rem 0.5rem; border: 1px solid var(--line); border-radius: 2px; background: var(--surface); color: var(--ink); font-size: 0.9rem; font-weight: 500; }
+	.streaming-link svg { width: 1.25rem; height: 1.25rem; flex-shrink: 0; color: var(--gold); }
+	.streaming-link:hover, .streaming-link:focus-visible { border-color: var(--gold); background: var(--surface-raised); color: var(--gold-bright); }
+	.streaming-link:active { background: var(--surface-strong); }
 	.release-art { display: block; }
 	.release-art img { display: block; width: 100%; height: auto; object-fit: contain; }
-	.streaming-date { margin-top: 2rem; color: var(--ink-soft); font-size: 1rem; }
-	.streaming-date p:first-child { color: var(--ink); }
-	time { font-variant-numeric: tabular-nums; }
+	.release-explore { margin-top: 1rem; }
 	.catalogue-section, .intro-section, .extras-section { max-width: var(--content-width); margin: 0 auto; }
 	.catalogue-section { padding: 0 var(--gutter) clamp(4rem, 7vw, 6rem); }
 	.section-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 1.75rem; }
@@ -147,13 +149,14 @@ const structuredData = {
 		.release-copy { display: flex; flex-direction: column; }
 		.release-copy h1 { margin-bottom: 1.25rem; }
 		.hero-actions { order: 1; }
-		.streaming-date { order: 2; margin-top: 1rem; }
+		.release-explore { order: 2; }
 		.release-description { order: 3; margin: 1.5rem 0 0; }
 		.intro-section { grid-template-columns: 1fr; }
 		.intro-logo { width: 180px; }
 		.extras-section { grid-template-columns: 1fr; }
 	}
 	@media (max-width: 480px) {
+		.hero-actions { grid-template-columns: 1fr; gap: 0.5rem; }
 		.section-heading { flex-direction: column; gap: 0.25rem; }
 		.catalogue-grid { grid-template-columns: 1fr; gap: 1.5rem; }
 		.catalogue-release { display: grid; grid-template-columns: 112px minmax(0, 1fr); align-items: center; gap: 1.25rem; }

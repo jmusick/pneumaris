@@ -8,7 +8,7 @@ import { SITE_URL } from "../config/site";
 import { albums } from "../data/releases";
 
 const pageTitle = "Music | Pneumaris";
-const pageDescription = "Listen to Reverie, the new 18-track Pneumaris album, on SoundCloud. Explore the full discography and artwork for every track.";
+const pageDescription = "Listen to Reverie, the new 18-track Pneumaris album, on Spotify, Apple Music, and SoundCloud. Explore the full discography and artwork for every track.";
 const canonicalUrl = `${SITE_URL}/music/`;
 const socialImageUrl = `${SITE_URL}/images/reverie-social.jpg`;
 
@@ -375,7 +375,7 @@ const structuredData = {
 										<span>Released {album.releaseDate}</span>
 									</div>
 									<p class="album-description">{album.description}</p>
- {album.streamingReleaseDate && <p class="album-schedule">Spotify &amp; Apple Music: scheduled for <time datetime={new Date(album.streamingReleaseDate).toISOString().slice(0, 10)}>{album.streamingReleaseDate}</time>.</p>}
+ {album.streamingReleaseDate && <p class="album-schedule">Out now on Spotify &amp; Apple Music. Released <time datetime={new Date(album.streamingReleaseDate).toISOString().slice(0, 10)}>{album.streamingReleaseDate}</time>.</p>}
 								<div class="album-platforms">
 									<a class="album-link" href={album.albumUrl} target="_blank" rel="noopener noreferrer"><Icon name="simple-icons:soundcloud" aria-hidden="true" />SoundCloud</a>
 									{album.spotifyUrl && <a class="album-link" href={album.spotifyUrl} target="_blank" rel="noopener noreferrer"><Icon name="simple-icons:spotify" aria-hidden="true" />Spotify</a>}

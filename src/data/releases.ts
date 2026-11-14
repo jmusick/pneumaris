@@ -10,7 +10,7 @@ interface Album {
 	type: string;
 	year: string;
 	releaseDate: string;
-	/** Requested store date; do not infer availability without verified album URLs. */
+	/** Release date on Spotify and Apple Music. */
 	streamingReleaseDate?: string;
 	description: string;
 	summary?: string;
@@ -32,6 +32,8 @@ export const albums: Album[] = [
 		description: "Reverie moves between the things that haunt us and the people who bring us back. Across eighteen songs, borrowed faces, stolen lullabies, impossible skies, and bargains made in desperation give way to records left spinning, hands finding each other in the dark, and a future worth wanting.\n\nPneumaris brings gothic and progressive metal into contact with industrial pop, coastal folk horror, tango, heavy grooves, and intimate piano-led songs. From The Bough Breaks to The Days I Haven't Had, the album follows the uneasy passage from being held by a dream to choosing to wake.",
 		artwork: "/images/reverie.webp",
 		albumUrl: "https://soundcloud.com/pneumaris/sets/reverie",
+		spotifyUrl: "https://open.spotify.com/album/37iKuOVvClGS1LOI0m82Jd",
+		appleMusicUrl: "https://music.apple.com/us/album/reverie/6833349347",
 		tracks: [
 			{
 				title: "The Bough Breaks",
