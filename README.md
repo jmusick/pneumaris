@@ -18,8 +18,8 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 
 ## Current Version
 
-- App package version: 2.1.0
-- Site display version: 2.1.0
+- App package version: 2.2.0
+- Site display version: 2.2.0
 
 ## Site Features
 
