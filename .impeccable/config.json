@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "src/pages/music.astro"
+        ],
+        "createdAt": "2026-11-15T04:23:20.043Z",
+        "reason": "Claude triage: #artwork-lightbox-image sits inside a closed <dialog> and gets its src from script when artwork is opened; never rendered empty"
+      }
+    ]
+  }
+}
