@@ -231,8 +231,13 @@ messages are the floor). The cookie banner's 11.5px text is below this floor.
 - **Rhythm:** an 8px base. Sections are separated by
   `clamp(3rem–4rem, 6–7vw, 5–6rem)` of vertical space, not by rules.
 - **Release hero:** two columns (copy `1fr`, cover `1.12fr`), vertically
-  centred. At 800px and below it becomes one column with the full cover first,
-  then the title, the listening actions, the explore link, and the description.
+  centred. The title leads; the "new album · Out now" line sits under it, never
+  above it as an eyebrow. At 800px and below it becomes one column with the full
+  cover first, then the title and that line, the listening actions, the explore
+  link, and the description.
+- **Closing band:** the homepage ends on the release, not on extras: a
+  violet-stone band with a small cover, "Listen to {title}", and the same
+  listening actions as the hero, directly above the footer.
 - **Catalogue:** three equal columns of square artwork with titles beneath,
   with no card around them. Below 480px each release becomes a compact row
   (112px artwork, then the text).
@@ -241,8 +246,8 @@ messages are the floor). The cookie banner's 11.5px text is below this floor.
   icon-only Play.
 - **Breakpoints in use:** 1100px (header collapses to the menu toggle), 800px
   (hero and split sections stack), 720px (about page stacks), 600px (track
-  rows compact), 480px (streaming buttons stack full-width and the catalogue
-  becomes rows).
+  rows compact), 480px (the catalogue becomes rows). The closing band moves its
+  listening actions below the cover at 1000px.
 
 ### Named Rules
 **The One Image Rule.** Each band of the page has at most one image, and on the
@@ -285,8 +290,13 @@ Quiet and carved: thin gold-edged outlines and near-square corners that stay
 out of the artwork's way. Only the one primary action is filled.
 - **Shape:** near-square (2px), minimum 44px tall; hero streaming buttons are 52px.
 - **Primary:** pale-gold fill, charcoal text, Raleway 500. Hover lifts to
-  pale-gold-lit, press drops to weathered gold. One per view at most. It is
-  defined globally but not currently used on the homepage hero.
+  pale-gold-lit, press drops to weathered gold. One per view at most.
+- **Listening actions** (`ListenLinks.astro`): a labelled group ("Listen on"),
+  max 32rem. The first verified store link (Spotify, then Apple Music) is the
+  primary: pale-gold fill spanning the full row, charcoal label and icon. The
+  rest share the row below it as streaming buttons. All are 52px tall, 1rem
+  labels, no wrapping; they stack only below 340px. Each announces that it
+  opens in a new tab.
 - **Streaming:** violet-stone surface, hairline border, chalk label with a
   weathered-gold platform icon. On hover or focus the border turns gold, the
   surface rises, and the label turns pale gold.

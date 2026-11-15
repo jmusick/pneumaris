@@ -1,11 +1,18 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { albums } from "../data/releases";
-import { Icon } from "astro-icon/components";
+import { albums, releaseSlug } from "../data/releases";
+import ListenLinks from "../components/ListenLinks.astro";
 import { SITE_URL } from "../config/site";
 
 const featured = albums[0];
-const featuredUrl = `/music/#${featured.title.toLowerCase().replaceAll(" ", "-")}`;
+const featuredUrl = `/music/#${releaseSlug(featured.title)}`;
+const plural = (count: number, word: string) => `${count} ${word}${count === 1 ? "" : "s"}`;
+// "July 12, 2026" → "July 2026"
+const releaseMonth = (date: string) => date.replace(/\s+\d{1,2},/, "");
+// Releases are listed newest first; the bio counts them so it stays true with each new one.
+const firstRelease = albums[albums.length - 1];
+const numberWords = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"];
+const releaseCount = numberWords[albums.length] ?? String(albums.length);
 
 const pageTitle = "Reverie | Pneumaris";
 const pageDescription =
@@ -56,32 +63,28 @@ const structuredData = {
 <main id="main">
 	<section class="release-hero" aria-labelledby="release-title">
 		<div class="release-copy">
-			<p class="release-intro">The new album from Pneumaris · Out now</p>
 			<h1 id="release-title">{featured.title}</h1>
+			<p class="release-intro">The new album from Pneumaris · Out now</p>
 			<p class="release-description">{featured.summary}</p>
-			<nav class="hero-actions" aria-label={`Listen to ${featured.title}`}>
-				<p class="listen-label">Listen on</p>
-				{featured.spotifyUrl && <a class="streaming-link" href={featured.spotifyUrl} target="_blank" rel="noopener noreferrer"><Icon name="simple-icons:spotify" aria-hidden="true" />Spotify</a>}
-				{featured.appleMusicUrl && <a class="streaming-link" href={featured.appleMusicUrl} target="_blank" rel="noopener noreferrer"><Icon name="simple-icons:applemusic" aria-hidden="true" />Apple Music</a>}
-				<a class="streaming-link" href={featured.albumUrl} target="_blank" rel="noopener noreferrer"><Icon name="simple-icons:soundcloud" aria-hidden="true" />SoundCloud</a>
-			</nav>
+			<div class="hero-actions"><ListenLinks album={featured} /></div>
 			<p class="release-explore"><a class="text-link" href={featuredUrl}>Explore all {featured.tracks.length} tracks</a></p>
 		</div>
-		<a class="release-art" href={featuredUrl} aria-label={`Explore ${featured.title}`}>
+		<!-- Same destination as "Explore all tracks": kept for pointer and touch, out of the tab order and the accessibility tree. -->
+		<a class="release-art" href={featuredUrl} tabindex="-1" aria-hidden="true">
 			<img src={featured.artwork} width="1200" height="1200" alt="Reverie cover: a sleeping stone face, fractured with gold, beneath ruined arches and a star-filled sky" fetchpriority="high" decoding="async" />
 		</a>
 	</section>
 
 	<section class="catalogue-section" aria-labelledby="catalogue-title">
 		<div class="section-heading">
-			<h2 id="catalogue-title">Before Reverie</h2>
+			<h2 id="catalogue-title">Before {featured.title}</h2>
 			<a class="text-link" href="/music/">The full discography</a>
 		</div>
 		<div class="catalogue-grid">
 			{albums.slice(1, 4).map((album) => (
-				<a class="catalogue-release" href={`/music/#${album.title.toLowerCase().replaceAll(" ", "-")}`}>
+				<a class="catalogue-release" href={`/music/#${releaseSlug(album.title)}`}>
 					<img src={album.artwork} width="500" height="500" alt={`${album.title} cover art`} loading="lazy" decoding="async" />
-					<div><h3>{album.title}</h3><p>{album.type}, {album.year}</p></div>
+					<div><h3>{album.title}</h3><p>{album.type} · {plural(album.tracks.length, "track")} · {releaseMonth(album.releaseDate)}</p></div>
 				</a>
 			))}
 		</div>
@@ -90,8 +93,8 @@ const structuredData = {
 	<section class="intro-section" aria-labelledby="intro-title">
 		<div class="intro-text">
 			<h2 id="intro-title">Between silence<br />and fury.</h2>
-			<p>Pneumaris is an atmospheric project that dwells in the space between silence and fury, conjuring crushing riffs, haunting melodies, and an air of the esoteric.</p>
-			<p>Each release is an invitation to descend into the dark, where the weight of the music hits as hard as it haunts.</p>
+			<p>Pneumaris is a solo project that brings gothic and progressive metal into contact with industrial pop, coastal folk horror, tango, heavy grooves, and intimate piano-led songs.</p>
+			<p>The name joins <em lang="grc-Latn">pneuma</em>, breath and spirit, with the Latin <em lang="la">aris</em>: altar, and air. {releaseCount} releases since {releaseMonth(firstRelease.releaseDate)}, from {firstRelease.title} to {featured.title}.</p>
 			<a class="text-link" href="/about/">Meet the project</a>
 		</div>
 		<img class="intro-logo" src="/images/intro-emblem-v1.webp" width="640" height="640" alt="Pneumaris wordmark across a shrouded figure beneath a cracked stone halo" loading="lazy" decoding="async" />
@@ -105,20 +108,23 @@ const structuredData = {
 			<a class="text-link" href="/extras/">Explore extras</a>
 		</div>
 	</section>
+
+	<section class="closing-section" aria-labelledby="closing-title">
+		<img class="closing-art" src={featured.artwork} width="1200" height="1200" alt="" loading="lazy" decoding="async" />
+		<div class="closing-copy">
+			<h2 id="closing-title">Listen to {featured.title}</h2>
+			<p>{featured.type} · {plural(featured.tracks.length, "track")} · Out now</p>
+		</div>
+		<div class="closing-actions"><ListenLinks album={featured} /></div>
+	</section>
 </main>
 
 <style>
 	.release-hero { max-width: 1440px; margin: auto; padding: clamp(2.5rem, 5vw, 5rem) var(--gutter) clamp(4rem, 7vw, 6rem); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr); align-items: center; gap: clamp(2rem, 5vw, 5rem); }
 	.release-copy { min-width: 0; }
-	.release-intro { color: var(--ink-soft); font-size: 1rem; margin-bottom: 1.25rem; }
 	.release-copy h1 { font-size: clamp(3.5rem, 7.4vw, 7rem); line-height: 1.1; letter-spacing: -0.035em; color: var(--gold-bright); }
+	.release-intro { color: var(--ink-soft); margin-top: 0.75rem; }
 	.release-description { max-width: 49ch; margin: 1.5rem 0 2rem; }
-	.hero-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; width: 100%; max-width: 32rem; }
-	.listen-label { grid-column: 1 / -1; color: var(--ink-soft); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; }
-	.streaming-link { display: flex; align-items: center; justify-content: center; gap: 0.6rem; min-height: 52px; padding: 0.75rem 0.5rem; border: 1px solid var(--line); border-radius: 2px; background: var(--surface); color: var(--ink); font-size: 0.9rem; font-weight: 500; }
-	.streaming-link svg { width: 1.25rem; height: 1.25rem; flex-shrink: 0; color: var(--gold); }
-	.streaming-link:hover, .streaming-link:focus-visible { border-color: var(--gold); background: var(--surface-raised); color: var(--gold-bright); }
-	.streaming-link:active { background: var(--surface-strong); }
 	.release-art { display: block; }
 	.release-art img { display: block; width: 100%; height: auto; object-fit: contain; }
 	.release-explore { margin-top: 1rem; }
@@ -140,14 +146,23 @@ const structuredData = {
 	.extras-section { display: grid; grid-template-columns: 1.2fr 1fr; align-items: center; gap: clamp(2rem, 4vw, 4rem); padding: clamp(3rem, 6vw, 5rem) var(--gutter) 0; }
 	.extras-section img { width: 100%; height: auto; display: block; }
 	.extras-section p { margin: 1rem 0; max-width: 34ch; }
+	/* The page ends where it began: the record, and the way in. */
+	.closing-section { max-width: var(--content-width); margin: clamp(4rem, 7vw, 6rem) auto 0; padding: clamp(2rem, 4vw, 3rem) var(--gutter); background: var(--surface); display: grid; grid-template-columns: clamp(7rem, 12vw, 10rem) minmax(0, 1fr) minmax(0, 26rem); align-items: center; gap: clamp(1.5rem, 3vw, 2.5rem); }
+	.closing-art { width: 100%; height: auto; aspect-ratio: 1; display: block; }
+	.closing-copy h2 { font-size: clamp(1.75rem, 3vw, 2.75rem); line-height: 1.2; letter-spacing: -0.015em; }
+	.closing-copy p { color: var(--ink-soft); margin-top: 0.5rem; }
+	.closing-actions { min-width: 0; }
 	@media (hover: hover) { .catalogue-release:hover h3 { color: var(--gold-bright); } }
+	@media (max-width: 1000px) {
+		.closing-section { grid-template-columns: clamp(6rem, 18vw, 9rem) minmax(0, 1fr); }
+		.closing-actions { grid-column: 1 / -1; }
+	}
 	@media (max-width: 800px) {
 		.release-hero { grid-template-columns: 1fr; gap: 2rem; padding-top: 1.75rem; }
 		.release-art { grid-row: 1; max-width: 560px; width: 100%; justify-self: center; }
 		.release-copy h1 { font-size: clamp(3.5rem, 14vw, 6rem); }
-		.release-intro { margin-bottom: 0.75rem; }
 		.release-copy { display: flex; flex-direction: column; }
-		.release-copy h1 { margin-bottom: 1.25rem; }
+		.release-intro { margin: 0.5rem 0 1.5rem; }
 		.hero-actions { order: 1; }
 		.release-explore { order: 2; }
 		.release-description { order: 3; margin: 1.5rem 0 0; }
@@ -156,7 +171,6 @@ const structuredData = {
 		.extras-section { grid-template-columns: 1fr; }
 	}
 	@media (max-width: 480px) {
-		.hero-actions { grid-template-columns: 1fr; gap: 0.5rem; }
 		.section-heading { flex-direction: column; gap: 0.25rem; }
 		.catalogue-grid { grid-template-columns: 1fr; gap: 1.5rem; }
 		.catalogue-release { display: grid; grid-template-columns: 112px minmax(0, 1fr); align-items: center; gap: 1.25rem; }

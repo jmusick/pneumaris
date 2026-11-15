@@ -1,0 +1,51 @@
+---
+import { Icon } from "astro-icon/components";
+import type { Album } from "../data/releases";
+
+interface Props {
+	album: Album;
+}
+
+const { album } = Astro.props;
+
+// Spotify and Apple Music are the destinations that count (PRODUCT.md), so the
+// first verified one is the filled primary; SoundCloud is always available.
+const links = [
+	{ label: "Spotify", href: album.spotifyUrl, icon: "simple-icons:spotify" },
+	{ label: "Apple Music", href: album.appleMusicUrl, icon: "simple-icons:applemusic" },
+	{ label: "SoundCloud", href: album.albumUrl, icon: "simple-icons:soundcloud" },
+].filter((link): link is typeof link & { href: string } => Boolean(link.href));
+---
+
+<div class="listen-links" role="group" aria-label={`Listen to ${album.title}`}>
+	<p class="listen-label" aria-hidden="true">Listen on</p>
+	{links.map((link, index) => (
+		<a
+			class:list={["listen-link", index === 0 ? "listen-link-primary" : "listen-link-secondary"]}
+			href={link.href}
+			target="_blank"
+			rel="noopener noreferrer"
+		>
+			<Icon name={link.icon} aria-hidden="true" />
+			{link.label}<span class="sr-only"> (opens in a new tab)</span>
+		</a>
+	))}
+</div>
+
+<style>
+	.listen-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; width: 100%; max-width: 32rem; }
+	.listen-label { grid-column: 1 / -1; color: var(--ink-soft); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; }
+	.listen-link { display: flex; align-items: center; justify-content: center; gap: 0.6rem; min-height: 52px; padding: 0.75rem 0.5rem; border: 1px solid var(--line); border-radius: 2px; font-size: 1rem; font-weight: 500; white-space: nowrap; transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease; }
+	.listen-link svg { width: 1.25rem; height: 1.25rem; flex-shrink: 0; }
+	/* An odd count leaves no orphan: the primary takes the full first row. */
+	.listen-link-primary { grid-column: 1 / -1; background: var(--gold-bright); border-color: var(--gold-bright); color: var(--bg-base); }
+	.listen-link-primary svg { color: var(--bg-base); }
+	.listen-link-primary:hover, .listen-link-primary:focus-visible { background: #ead7af; border-color: #ead7af; color: var(--bg-base); }
+	.listen-link-primary:active { background: var(--gold); border-color: var(--gold); }
+	.listen-link-secondary { background: var(--surface); color: var(--ink); }
+	.listen-link-secondary svg { color: var(--gold); }
+	.listen-link-secondary:hover, .listen-link-secondary:focus-visible { border-color: var(--gold); background: var(--surface-raised); color: var(--gold-bright); }
+	.listen-link-secondary:active { background: var(--surface-strong); }
+	.listen-link-secondary:nth-of-type(2):last-of-type { grid-column: 1 / -1; }
+	@media (max-width: 340px) { .listen-links { grid-template-columns: 1fr; } }
+</style>
