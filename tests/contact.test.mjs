@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { afterEach, beforeEach, test } from 'node:test';
-// Node strips the TypeScript types; the function has no runtime imports.
+// Node strips the TypeScript types. The function's only runtime import is
+// src/lib/contact-rules.ts, which must keep explicit .ts import paths so Node can load it.
 import { LIMITS, onRequest } from '../functions/api/contact.ts';
 
 const ENV = {
