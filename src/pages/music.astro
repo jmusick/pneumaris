@@ -16,7 +16,11 @@ const pageDescription = "Listen to Reverie, the new 18-track Pneumaris album, on
 const canonicalUrl = `${SITE_URL}/music/`;
 const socialImageUrl = `${SITE_URL}/images/reverie-social.jpg`;
 
-const fullArtwork = (src: string) => src.replace(/-t500x500\.jpg$/, "-original.jpg");
+// Older releases with long track lists open on their first few tracks; the newest stays whole.
+const PREVIEW_TRACKS = 3;
+const collapses = (index: number, trackCount: number) => index > 0 && trackCount > PREVIEW_TRACKS + 2;
+
+const fullArtwork =(src: string) => src.replace(/-t500x500\.jpg$/, "-original.jpg");
 const trackThumbnail = (src: string) => src.replace(/-t500x500\.jpg$/, "-t200x200.jpg");
 
 const toIsoDuration = (duration: string) => {
@@ -142,6 +146,86 @@ const structuredData = {
 			}
 
 			.track-row + .track-row { border-top: 1px solid var(--line); }
+			.track-list[data-collapsed] .track-row-more { display: none; }
+
+			.track-more {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				min-height: 44px;
+				margin-top: 0.5rem;
+				padding: 0;
+				background: transparent;
+				border: 0;
+				border-bottom: 1px solid var(--gold-dim);
+				border-radius: 0;
+				color: var(--ink);
+				font: inherit;
+				cursor: pointer;
+				transition: border-color 160ms ease;
+			}
+			.track-more[hidden] { display: none; }
+			.track-more:hover { border-bottom-color: var(--gold-bright); }
+			.track-more svg { width: 1rem; height: 1rem; color: var(--gold); transition: transform 200ms ease; }
+			.track-more[aria-expanded="true"] svg { transform: rotate(180deg); }
+			@media (prefers-reduced-motion: reduce) {
+				.track-more, .track-more svg { transition: none; }
+			}
+
+			.release-index {
+				max-width: var(--content-width);
+				margin: 0 auto;
+				padding: 1.5rem calc(var(--gutter) + clamp(1.25rem, 3vw, 2.5rem)) 0;
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				gap: 0 1.5rem;
+			}
+			.release-index ol {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				gap: 0 1.5rem;
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			.release-index-label {
+				color: var(--ink-soft);
+				font-size: 0.75rem;
+				letter-spacing: 0.14em;
+				text-transform: uppercase;
+			}
+			.release-index a {
+				display: inline-flex;
+				align-items: center;
+				min-height: 44px;
+				color: var(--ink);
+				text-decoration: underline;
+				text-decoration-color: var(--gold-dim);
+				text-underline-offset: 0.3em;
+				transition: text-decoration-color 160ms ease, color 160ms ease;
+			}
+			.release-index a:hover { color: var(--gold-bright); text-decoration-color: var(--gold-bright); }
+			/* On phones the index is one swipeable line, so it never pushes the newest release down. */
+			@media (max-width: 600px) {
+				.release-index, .release-index ol { flex-wrap: nowrap; }
+				.release-index {
+					gap: 0 1.25rem;
+					padding: 1rem var(--gutter) 0.25rem;
+					overflow-x: auto;
+					overscroll-behavior-x: contain;
+					scrollbar-width: none;
+				}
+				.release-index::-webkit-scrollbar { display: none; }
+				.release-index ol { gap: 0 1.25rem; padding: 0.25rem var(--gutter) 0.25rem 0; }
+				.release-index li, .release-index-label { flex-shrink: 0; white-space: nowrap; }
+				.release-index a:focus-visible { outline-offset: 3px; }
+				.albums-section { padding-top: 2rem; }
+			}
+			@media (prefers-reduced-motion: reduce) {
+				.release-index a { transition: none; }
+			}
 			.track-number, .track-duration { color: var(--ink-soft); font-variant-numeric: tabular-nums; }
 			.track-number { font-size: 0.875rem; }
 			.track-title { font-size: 1rem; font-weight: 500; overflow-wrap: anywhere; }
@@ -311,6 +395,15 @@ const structuredData = {
 		<main id="main">
 			<PageHeader title="Music" description="Albums, singles, and the worlds within them." />
 
+			<nav class="release-index" aria-labelledby="release-index-label">
+				<p class="release-index-label" id="release-index-label">Releases</p>
+				<ol>
+					{albums.map((album) => (
+						<li><a href={`#${releaseSlug(album.title)}`}>{album.title}</a></li>
+					))}
+				</ol>
+			</nav>
+
 			<div class="albums-section">
 				{
 					albums.map((album, index) => {
@@ -344,10 +437,10 @@ const structuredData = {
 							</div>
 
 							<div class="track-list-wrap">
-								<ol class="track-list" aria-label={`${album.title} tracks`}>
-									{album.tracks.map((track, index) => (
-										<li class="track-row">
-											<span class="track-number" aria-hidden="true">{index + 1}</span>
+								<ol class="track-list" id={`${releaseSlug(album.title)}-tracks`} aria-label={`${album.title} tracks`}>
+									{album.tracks.map((track, trackIndex) => (
+										<li class:list={["track-row", collapses(index, album.tracks.length) && trackIndex >= PREVIEW_TRACKS && "track-row-more"]}>
+											<span class="track-number" aria-hidden="true">{trackIndex + 1}</span>
 											<button type="button" class="artwork-trigger"
 												data-artwork-src={fullArtwork(track.artwork)}
 												data-artwork-fallback={track.artwork}
@@ -368,6 +461,14 @@ const structuredData = {
 										</li>
 									))}
 								</ol>
+								{/* Without JavaScript every track stays listed and this toggle stays hidden. */}
+								{collapses(index, album.tracks.length) && (
+									<button type="button" class="track-more" data-track-toggle data-track-count={album.tracks.length}
+										aria-controls={`${releaseSlug(album.title)}-tracks`} aria-expanded="false" hidden>
+										<span class="track-more-label">Show all {album.tracks.length} tracks</span>
+										<Icon name="lucide:chevron-down" aria-hidden="true" />
+									</button>
+								)}
 							</div>
 						</article>
 						);
@@ -447,6 +548,37 @@ const structuredData = {
 					lightboxStatus.hidden = false;
 				}
 			});
+
+			// Older releases open on their first tracks. Collapse only once this script runs,
+			// so the full lists stay readable without JavaScript.
+			const trackToggles = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-track-toggle]"));
+			const setExpanded = (toggle: HTMLButtonElement, expanded: boolean) => {
+				const list = document.getElementById(toggle.getAttribute("aria-controls") || "");
+				if (!list) return;
+				list.toggleAttribute("data-collapsed", !expanded);
+				toggle.setAttribute("aria-expanded", String(expanded));
+				const label = toggle.querySelector(".track-more-label");
+				if (label) label.textContent = expanded ? "Show fewer tracks" : `Show all ${toggle.dataset.trackCount} tracks`;
+			};
+			for (const toggle of trackToggles) {
+				setExpanded(toggle, false);
+				toggle.hidden = false;
+				toggle.addEventListener("click", () => {
+					const expand = toggle.getAttribute("aria-expanded") !== "true";
+					setExpanded(toggle, expand);
+					// Hiding rows pulls the toggle up the page; keep it in view.
+					if (!expand) toggle.scrollIntoView({ block: "nearest" });
+				});
+				// The player advances through a release on its own: reveal a hidden track when it starts.
+				const list = document.getElementById(toggle.getAttribute("aria-controls") || "");
+				if (list) {
+					new MutationObserver(() => {
+						if (list.hasAttribute("data-collapsed") && list.querySelector(".track-row-more [aria-pressed='true']")) setExpanded(toggle, true);
+					}).observe(list, { subtree: true, attributeFilter: ["aria-pressed"] });
+				}
+			}
+			// Collapsing shortened the page above a linked release; land on it again.
+			if (trackToggles.length && location.hash) document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView();
 
 			document.addEventListener("click", (event) => {
 				if (!(event.target instanceof Element)) return;

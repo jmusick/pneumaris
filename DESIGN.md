@@ -243,10 +243,18 @@ messages are the floor). The cookie banner's 11.5px text is below this floor.
   (112px artwork, then the text).
 - **Track lists:** a grid row of number, 72px artwork, title, duration, and
   Play. Below 600px it becomes 56px artwork, title over duration, and an
-  icon-only Play.
+  icon-only Play. On /music/ the newest release lists every track; older
+  releases with more than five open on their first three, with a "Show all N
+  tracks" text toggle under the list. The collapse happens in script, so
+  without JavaScript every track stays listed, and a hidden track opens its
+  list when the player reaches it.
+- **Release index:** /music/ opens with a "Releases" label and text links
+  to each release's anchor, wrapping on one band below the page header. Below
+  600px it becomes one line that scrolls sideways, so it costs the newest
+  release one row instead of three.
 - **Breakpoints in use:** 1100px (header collapses to the menu toggle), 800px
   (hero and split sections stack), 720px (about page stacks), 600px (track
-  rows compact), 480px (the catalogue becomes rows). The closing band moves its
+  rows compact, the release index scrolls), 480px (the catalogue becomes rows). The closing band moves its
   listening actions below the cover at 1000px.
 
 ### Named Rules

@@ -43,3 +43,27 @@ test('the closing follow links lead with Spotify and Apple Music', () => {
   assert.match(hrefs[1], /music\.apple\.com/);
   assert.match(hrefs[2], /soundcloud\.com/);
 });
+
+test('older long releases preview their first tracks, but only once the script runs', () => {
+  assert.doesNotMatch(html, /data-collapsed/, 'the built page lists every track without JavaScript');
+  const extra = (release) => (release.match(/<li\b[^>]*class="[^"]*\btrack-row-more\b/g) || []).length;
+  const rows = (release) => (release.match(/<li\b[^>]*class="[^"]*\btrack-row\b/g) || []).length;
+  assert.equal(extra(releases[0]), 0, 'the newest release stays whole');
+  for (const release of releases.slice(1)) {
+    const toggle = release.match(/<button\b[^>]*data-track-toggle[^>]*>/)?.[0];
+    if (rows(release) > 5) {
+      assert.equal(rows(release) - extra(release), 3);
+      assert.ok(toggle && /\bhidden\b/.test(toggle) && /aria-expanded="false"/.test(toggle));
+    } else {
+      assert.equal(extra(release), 0);
+      assert.equal(toggle, undefined);
+    }
+  }
+});
+
+test('the release index links to every release', () => {
+  const index = html.match(/<nav\b[^>]*class="[^"]*\brelease-index\b[\s\S]*?<\/nav>/)?.[0] ?? '';
+  const targets = [...index.matchAll(/href="#([^"]+)"/g)].map(([, id]) => id);
+  assert.equal(targets.length, releases.length);
+  for (const id of targets) assert.match(html, new RegExp(`<article[^>]*\\sid="${id}"`));
+});

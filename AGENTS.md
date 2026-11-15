@@ -48,7 +48,8 @@ contact form's Pages Function, `functions/api/contact.ts`. See
 - `src/layouts/Layout.astro` — shared page shell.
 - `src/data/releases.ts` — shared release and track metadata, artwork, and
   streaming links; the first release is featured on the homepage. The music
-  page renders its own track lists. Track Play buttons control a shared
+  page renders its own track lists, previewing older long releases until
+  "Show all" is pressed. Track Play buttons control a shared
   SoundCloud widget through `TrackPlayer.astro` and `src/lib/track-player.ts`.
   The widget and its API script load only after Play; keep this lazy loading
   and the matching CSP script/frame origins. Spotify and Apple Music links are
