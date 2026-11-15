@@ -105,7 +105,7 @@ export function initializeTrackPlayer() {
 		const visible = embed.dataset.visible === "true";
 		iframe.tabIndex = visible ? 0 : -1;
 		iframe.setAttribute("aria-hidden", String(!visible));
-		const params = new URLSearchParams({ url, auto_play: "false", color: "#b89a6a", show_comments: "false", show_artwork: "true", visual: "false" });
+		const params = new URLSearchParams({ url, auto_play: "false", color: "#c4a576", show_comments: "false", show_artwork: "true", visual: "false" });
 		iframe.src = `https://w.soundcloud.com/player/?${params}`;
 		embed.replaceChildren(iframe);
 		return iframe;
