@@ -5,7 +5,7 @@ import TrackPlayer from "../components/TrackPlayer.astro";
 import { Icon } from "astro-icon/components";
 import { SITE_URL } from "../config/site";
 
-import { albums } from "../data/releases";
+import { albums, releaseSlug } from "../data/releases";
 
 const pageTitle = "Music | Pneumaris";
 const pageDescription = "Listen to Reverie, the new 18-track Pneumaris album, on Spotify, Apple Music, and SoundCloud. Explore the full discography and artwork for every track.";
@@ -353,7 +353,7 @@ const structuredData = {
 				{
 					albums.map((album) => {
 						return (
-						<article class="album-card" id={album.title.toLowerCase().replaceAll(" ", "-")}>
+						<article class="album-card" id={releaseSlug(album.title)}>
 							<div class="album-meta">
 								<button
 									type="button"

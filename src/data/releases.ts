@@ -5,7 +5,7 @@ interface AlbumTrack {
 	artwork: string;
 }
 
-interface Album {
+export interface Album {
 	title: string;
 	type: string;
 	year: string;
@@ -469,3 +469,15 @@ export const albums: Album[] = [
 		],
 	},
 ];
+
+/** URL fragment for a release on /music/. Safe for titles with punctuation ("Silk & Silence", "Half-Haunted"). */
+export function releaseSlug(title: string): string {
+	return title
+		.toLowerCase()
+		.normalize("NFKD")
+		.replace(/[̀-ͯ]/g, "")
+		.replace(/&/g, " and ")
+		.replace(/['’]/g, "")
+		.replace(/[^a-z0-9]+/g, "-")
+		.replace(/^-+|-+$/g, "");
+}
