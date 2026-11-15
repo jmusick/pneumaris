@@ -115,7 +115,7 @@ components:
   social-link-hover:
     textColor: "{colors.weathered-gold}"
   input:
-    backgroundColor: "rgba(22, 15, 10, 0.75)"
+    backgroundColor: "rgba(25, 22, 30, 0.75)"
     textColor: "{colors.chalk}"
     typography: "{typography.body}"
     rounded: "{rounded.sm}"
@@ -191,11 +191,11 @@ A cold violet-stone neutral family, lit by a single weathered-gold accent family
 fill is the single primary action; everything else gold is text, a line, an
 icon, or a focus ring.
 
-**The One Stone Rule.** All neutrals come from the violet-stone family. The warm
-browns left from the earlier palette (`#100e0b`, `#0d0a07`, `rgba(22, 15, 10, …)`,
-`rgba(8, 6, 4, …)`, and the older gold `rgba(184, 154, 106, …)`) still appear in
-the player, lightbox, form fields and hover tints. Treat them as drift and move
-them onto the tokens above when those components are next touched.
+**The One Stone Rule.** All neutrals come from the violet-stone family, and every
+translucent tint is mixed from a token: the `--gold-wash`, `--gold-hover` and
+`--gold-press` tints behind outline controls, or `color-mix()` on `--gold`,
+`--ink`, `--surface` or `--bg-base`. Never hardcode a colour literal in a
+component, so a palette change carries everywhere.
 
 ## Typography
 

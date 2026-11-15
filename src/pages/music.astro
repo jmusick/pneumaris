@@ -141,7 +141,7 @@ const structuredData = {
 			.album-link:hover {
 				color: var(--gold-bright);
 				border-color: var(--gold);
-				background: rgba(184, 154, 106, 0.08);
+				background: var(--gold-wash);
 			}
 
 			@media (prefers-reduced-motion: reduce) {
@@ -192,9 +192,9 @@ const structuredData = {
 			}
 			.track-play svg { width: 1rem; height: 1rem; flex-shrink: 0; }
 			.track-play:focus-visible, .artwork-lightbox-close:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px; }
-			.track-play:active { background: rgba(184, 154, 106, 0.2); }
+			.track-play:active { background: var(--gold-press); }
 			@media (hover: hover) {
-				.track-play:hover { background: rgba(184, 154, 106, 0.12); }
+				.track-play:hover { background: var(--gold-hover); }
 				.artwork-trigger:hover { outline: 1px solid var(--gold); outline-offset: 2px; }
 			}
 			@media (max-width: 600px) {
@@ -207,7 +207,7 @@ const structuredData = {
 				.track-play-label { display: none; }
 			}
 			.track-play { background: transparent; font-family: inherit; cursor: pointer; }
-			.track-play[aria-pressed="true"] { background: rgba(184, 154, 106, 0.2); }
+			.track-play[aria-pressed="true"] { background: var(--gold-press); }
 			.track-play .pause-icon { display: none; }
 			.track-play[aria-pressed="true"] .play-icon { display: none; }
 			.track-play[aria-pressed="true"] .pause-icon { display: block; }
@@ -241,12 +241,12 @@ const structuredData = {
 				border: 0;
 				max-width: calc(100vw - 2.4rem);
 				max-height: calc(100dvh - 2.4rem);
-				background: #0d0a07;
+				background: var(--surface-strong);
 				color: var(--ink);
 			}
 
 			.artwork-lightbox::backdrop {
-				background: rgba(4, 3, 2, 0.88);
+				background: color-mix(in srgb, var(--bg-base) 88%, transparent);
 
 			}
 
@@ -254,9 +254,9 @@ const structuredData = {
 				position: relative;
 				max-width: min(92vw, 980px);
 				max-height: calc(100dvh - 2.4rem);
-				border: 1px solid rgba(184, 154, 106, 0.5);
+				border: 1px solid color-mix(in srgb, var(--gold) 50%, transparent);
 				border-radius: 0.55rem;
-				background: #0d0a07;
+				background: var(--surface-strong);
 				box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
 				overflow: hidden;
 			}
@@ -275,7 +275,7 @@ const structuredData = {
 				gap: 1rem;
 				align-items: baseline;
 				padding: 0.75rem 0.9rem;
-				border-top: 1px solid rgba(184, 154, 106, 0.22);
+				border-top: 1px solid color-mix(in srgb, var(--gold) 22%, transparent);
 			}
 
 			.artwork-lightbox-title {
@@ -298,9 +298,9 @@ const structuredData = {
 				right: 0.45rem;
 				width: 44px;
 				height: 44px;
-				border: 1px solid rgba(184, 154, 106, 0.5);
+				border: 1px solid color-mix(in srgb, var(--gold) 50%, transparent);
 				border-radius: 999px;
-				background: rgba(8, 6, 4, 0.8);
+				background: color-mix(in srgb, var(--bg-base) 80%, transparent);
 				color: var(--gold-bright);
 				font-size: 1.1rem;
 				line-height: 1;

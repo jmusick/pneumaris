@@ -42,7 +42,7 @@ const functionUnavailable = import.meta.env.DEV;
 			}
 
 			.contact-intro {
-				color: rgba(232, 224, 212, 0.65);
+				color: color-mix(in srgb, var(--ink) 65%, transparent);
 				font-size: 1.05rem;
 				margin-bottom: 2rem;
 				line-height: 1.8;
@@ -79,7 +79,7 @@ const functionUnavailable = import.meta.env.DEV;
 			.form-field input,
 			.form-field textarea {
 				width: 100%;
-				background: rgba(22, 15, 10, 0.75);
+				background: color-mix(in srgb, var(--surface) 75%, transparent);
 				border: 1px solid var(--gold-dim);
 				border-radius: 2px;
 				padding: 0.8rem 0.9rem;
@@ -97,7 +97,7 @@ const functionUnavailable = import.meta.env.DEV;
 			.form-field textarea:focus {
 				outline: none;
 				border-color: var(--gold-bright);
-				box-shadow: 0 0 0 2px rgba(184, 154, 106, 0.18);
+				box-shadow: 0 0 0 2px color-mix(in srgb, var(--gold) 18%, transparent);
 			}
 
 			.form-field input[aria-invalid="true"],
@@ -119,7 +119,7 @@ const functionUnavailable = import.meta.env.DEV;
 
 			.contact-submit {
 				justify-self: start;
-				background: rgba(184, 154, 106, 0.12);
+				background: var(--gold-hover);
 				border: 1px solid var(--gold-dim);
 				border-radius: 2px;
 				padding: 0.7rem 1.2rem;
@@ -133,7 +133,7 @@ const functionUnavailable = import.meta.env.DEV;
 			}
 
 			.contact-submit:hover {
-				background: rgba(184, 154, 106, 0.2);
+				background: var(--gold-press);
 				border-color: var(--gold);
 			}
 
@@ -184,7 +184,7 @@ const functionUnavailable = import.meta.env.DEV;
 			.contact-link:hover {
 				border-color: var(--gold-dim);
 				color: var(--gold-bright);
-				background: rgba(184, 154, 106, 0.05);
+				background: color-mix(in srgb, var(--gold) 5%, transparent);
 			}
 
 			.contact-link span {

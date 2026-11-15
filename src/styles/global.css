@@ -12,6 +12,10 @@
 	--gold: #c4a576;
 	--gold-bright: #e0c393;
 	--gold-dim: #a48a65;
+	/* Translucent gold tints behind outline controls: hover wash, stronger hover, pressed. */
+	--gold-wash: color-mix(in srgb, var(--gold) 8%, transparent);
+	--gold-hover: color-mix(in srgb, var(--gold) 12%, transparent);
+	--gold-press: color-mix(in srgb, var(--gold) 20%, transparent);
 	--bg-base: #111015;
 }
 
@@ -205,7 +209,7 @@ li a:not([class]) {
 
 .social-link:hover {
 	color: var(--gold);
-	background: rgba(184, 154, 106, 0.08);
+	background: var(--gold-wash);
 }
 
 

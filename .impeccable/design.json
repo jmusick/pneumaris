@@ -330,7 +330,7 @@
       "refersTo": "input",
       "description": "Contact form field with a Cinzel label.",
       "html": "<label class=\"ds-field\"><span>Name</span><input type=\"text\" placeholder=\"Your name\" /></label>",
-      "css": ".ds-field { display: flex; flex-direction: column; gap: 0.45rem; } .ds-field span { font-family: Cinzel, serif; font-size: 0.85rem; letter-spacing: 0.025em; color: var(--ink-soft, #bdb6c5); } .ds-field input { width: 100%; background: rgba(22, 15, 10, 0.75); border: 1px solid var(--gold-dim, #a48a65); border-radius: 2px; padding: 0.8rem 0.9rem; color: var(--ink, #eee9e3); caret-color: var(--gold-bright, #e0c393); font-family: Raleway, sans-serif; font-size: 1rem; transition: border-color 180ms ease, box-shadow 180ms ease; } .ds-field input:focus { outline: none; border-color: var(--gold-bright, #e0c393); box-shadow: 0 0 0 2px rgba(196, 165, 118, 0.18); } .ds-field input[aria-invalid=\"true\"] { border-color: #d4948f; }"
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 0.45rem; } .ds-field span { font-family: Cinzel, serif; font-size: 0.85rem; letter-spacing: 0.025em; color: var(--ink-soft, #bdb6c5); } .ds-field input { width: 100%; background: color-mix(in srgb, var(--surface, #19161e) 75%, transparent); border: 1px solid var(--gold-dim, #a48a65); border-radius: 2px; padding: 0.8rem 0.9rem; color: var(--ink, #eee9e3); caret-color: var(--gold-bright, #e0c393); font-family: Raleway, sans-serif; font-size: 1rem; transition: border-color 180ms ease, box-shadow 180ms ease; } .ds-field input:focus { outline: none; border-color: var(--gold-bright, #e0c393); box-shadow: 0 0 0 2px rgba(196, 165, 118, 0.18); } .ds-field input[aria-invalid=\"true\"] { border-color: #d4948f; }"
     },
     {
       "name": "Header Navigation",
@@ -377,7 +377,7 @@
       {
         "name": "The One Stone Rule",
         "section": "colors",
-        "body": "All neutrals come from the violet-stone family. The warm browns left from the earlier palette (`#100e0b`, `#0d0a07`, `rgba(22, 15, 10, …)`, `rgba(8, 6, 4, …)`, and the older gold `rgba(184, 154, 106, …)`) still appear in the player, lightbox, form fields and hover tints. Treat them as drift and move them onto the tokens above when those components are next touched."
+        "body": "All neutrals come from the violet-stone family, and every translucent tint is mixed from a token: the `--gold-wash`, `--gold-hover` and `--gold-press` tints behind outline controls, or `color-mix()` on `--gold`, `--ink`, `--surface` or `--bg-base`. Never hardcode a colour literal in a component, so a palette change carries everywhere."
       },
       {
         "name": "The Inscription Rule",
