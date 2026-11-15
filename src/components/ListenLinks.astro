@@ -2,26 +2,50 @@
 import { Icon } from "astro-icon/components";
 import type { Album } from "../data/releases";
 
-interface Props {
-	album: Album;
+interface Link {
+	label: string;
+	href?: string | null;
+	icon: string;
 }
 
-const { album } = Astro.props;
+interface Props {
+	/** Album-level store links, in the order PRODUCT.md ranks them. */
+	album?: Album;
+	/** Or explicit links, already in priority order (e.g. artist profiles). */
+	links?: Link[];
+	/** Accessible group name; defaults to "Listen to {album title}". */
+	name?: string;
+	/** Visible group label; pass an empty string to omit it. */
+	label?: string;
+	/**
+	 * No filled primary: the lead link keeps its full row but uses the
+	 * streaming style, so the view's single filled action stays elsewhere.
+	 */
+	quiet?: boolean;
+}
+
+const { album, links: explicitLinks, name, label = "Listen on", quiet = false } = Astro.props;
 
 // Spotify and Apple Music are the destinations that count (PRODUCT.md), so the
-// first verified one is the filled primary; SoundCloud is always available.
-const links = [
-	{ label: "Spotify", href: album.spotifyUrl, icon: "simple-icons:spotify" },
-	{ label: "Apple Music", href: album.appleMusicUrl, icon: "simple-icons:applemusic" },
-	{ label: "SoundCloud", href: album.albumUrl, icon: "simple-icons:soundcloud" },
-].filter((link): link is typeof link & { href: string } => Boolean(link.href));
+// first verified one leads (filled, unless quiet); SoundCloud is always available.
+const links = (explicitLinks ?? [
+	{ label: "Spotify", href: album?.spotifyUrl, icon: "simple-icons:spotify" },
+	{ label: "Apple Music", href: album?.appleMusicUrl, icon: "simple-icons:applemusic" },
+	{ label: "SoundCloud", href: album?.albumUrl, icon: "simple-icons:soundcloud" },
+]).filter((link): link is Link & { href: string } => Boolean(link.href));
+
+const groupName = name ?? (album ? `Listen to ${album.title}` : undefined);
 ---
 
-<div class="listen-links" role="group" aria-label={`Listen to ${album.title}`}>
-	<p class="listen-label" aria-hidden="true">Listen on</p>
+<div class="listen-links" role="group" aria-label={groupName}>
+	{label && <p class="listen-label" aria-hidden="true">{label}</p>}
 	{links.map((link, index) => (
 		<a
-			class:list={["listen-link", index === 0 ? "listen-link-primary" : "listen-link-secondary"]}
+			class:list={[
+				"listen-link",
+				index === 0 && "listen-link-lead",
+				index === 0 && !quiet ? "listen-link-primary" : "listen-link-secondary",
+			]}
 			href={link.href}
 			target="_blank"
 			rel="noopener noreferrer"
@@ -37,8 +61,9 @@ const links = [
 	.listen-label { grid-column: 1 / -1; color: var(--ink-soft); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; }
 	.listen-link { display: flex; align-items: center; justify-content: center; gap: 0.6rem; min-height: 52px; padding: 0.75rem 0.5rem; border: 1px solid var(--line); border-radius: 2px; font-size: 1rem; font-weight: 500; white-space: nowrap; transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease; }
 	.listen-link svg { width: 1.25rem; height: 1.25rem; flex-shrink: 0; }
-	/* An odd count leaves no orphan: the primary takes the full first row. */
-	.listen-link-primary { grid-column: 1 / -1; background: var(--gold-bright); border-color: var(--gold-bright); color: var(--bg-base); }
+	/* An odd count leaves no orphan: the lead link takes the full first row. */
+	.listen-link-lead { grid-column: 1 / -1; }
+	.listen-link-primary { background: var(--gold-bright); border-color: var(--gold-bright); color: var(--bg-base); }
 	.listen-link-primary svg { color: var(--bg-base); }
 	.listen-link-primary:hover, .listen-link-primary:focus-visible { background: #ead7af; border-color: #ead7af; color: var(--bg-base); }
 	.listen-link-primary:active { background: var(--gold); border-color: var(--gold); }
@@ -46,6 +71,7 @@ const links = [
 	.listen-link-secondary svg { color: var(--gold); }
 	.listen-link-secondary:hover, .listen-link-secondary:focus-visible { border-color: var(--gold); background: var(--surface-raised); color: var(--gold-bright); }
 	.listen-link-secondary:active { background: var(--surface-strong); }
-	.listen-link-secondary:nth-of-type(2):last-of-type { grid-column: 1 / -1; }
+	.listen-link:nth-of-type(2):last-of-type { grid-column: 1 / -1; }
+	@media (prefers-reduced-motion: reduce) { .listen-link { transition: none; } }
 	@media (max-width: 340px) { .listen-links { grid-template-columns: 1fr; } }
 </style>

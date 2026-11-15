@@ -2,12 +2,14 @@
 import Layout from "../layouts/Layout.astro";
 import PageHeader from "../components/PageHeader.astro";
 import TrackPlayer from "../components/TrackPlayer.astro";
+import ListenLinks from "../components/ListenLinks.astro";
 import { Icon } from "astro-icon/components";
 import { SITE_URL, socialProfile } from "../config/site";
 
 import { albums, releaseSlug } from "../data/releases";
 
-const streamProfiles = (["soundcloud", "spotify", "applemusic"] as const).map(socialProfile);
+// Artist profiles in the same order as the store links: Spotify and Apple Music lead.
+const followProfiles = (["spotify", "applemusic", "soundcloud"] as const).map(socialProfile);
 
 const pageTitle = "Music | Pneumaris";
 const pageDescription = "Listen to Reverie, the new 18-track Pneumaris album, on Spotify, Apple Music, and SoundCloud. Explore the full discography and artwork for every track.";
@@ -54,12 +56,11 @@ const structuredData = {
 >
 
 <style>
- .album-platforms { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
- .album-schedule { margin: 0 0 1.5rem; color: var(--ink-soft); font-size: 1rem; }
+ .album-schedule { margin: 0; color: var(--ink-soft); font-size: 1rem; }
  .album-schedule time { font-variant-numeric: tabular-nums; }
  .album-card:first-child .album-copy h2 { font-size: clamp(2.5rem, 5vw, 4rem); }
- .album-link:active { background: var(--surface-raised); }
- .album-meta .album-description { margin-top: 1rem; }
+ /* Reading order: name, facts, then the way to listen; the story follows. */
+ .album-actions { margin: 1.5rem 0 2rem; }
 
 
 			.albums-section {
@@ -120,38 +121,6 @@ const structuredData = {
 				color: var(--ink);
 				max-width: 70ch;
 				white-space: pre-line;
-				margin-bottom: 1rem;
-			}
-
-			.album-link {
-				display: inline-flex;
-				align-items: center;
-				gap: 0.5rem;
-				font-family: "Cinzel", serif;
-				font-size: 1rem;
-				letter-spacing: 0;
-				text-transform: none;
-				color: var(--gold);
-				border: 1px solid var(--gold-dim);
-				border-radius: 2px;
-				padding: 0.7rem 1rem;
-				transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
-			}
-
-			.album-link:hover {
-				color: var(--gold-bright);
-				border-color: var(--gold);
-				background: var(--gold-wash);
-			}
-
-			@media (prefers-reduced-motion: reduce) {
-				.album-link { transition: none; }
-			}
-
-			.album-link svg {
-				width: 1.1rem;
-				height: 1.1rem;
-				flex-shrink: 0;
 			}
 
 			.track-list-wrap {
@@ -313,23 +282,14 @@ const structuredData = {
 			.artwork-lightbox-status { padding: 1rem; color: var(--ink-soft); }
 
 
-			.stream-links {
-				display: flex;
-				flex-wrap: wrap;
-				justify-content: center;
-				align-items: center;
-				gap: 0.85rem;
-				padding: 0.5rem 0;
+			.follow-section {
+				padding: 0 clamp(1.25rem, 3vw, 2.5rem);
 			}
 
-			.stream-links-label {
-				text-align: center;
-				color: var(--ink-soft);
-				font-size: 0.82rem;
-				letter-spacing: 0.08em;
-				text-transform: none;
-				font-family: "Cinzel", serif;
-				margin-bottom: 0.75rem;
+			.follow-section h2 {
+				font-size: clamp(1.15rem, 2vw, 1.5rem);
+				line-height: 1.2;
+				margin-bottom: 1rem;
 			}
 
 			@media (max-width: 860px) {
@@ -353,7 +313,7 @@ const structuredData = {
 
 			<div class="albums-section">
 				{
-					albums.map((album) => {
+					albums.map((album, index) => {
 						return (
 						<article class="album-card" id={releaseSlug(album.title)}>
 							<div class="album-meta">
@@ -376,13 +336,10 @@ const structuredData = {
 										<span>{album.tracks.length} Tracks</span>
 										<span>Released {album.releaseDate}</span>
 									</div>
+									{album.streamingReleaseDate && <p class="album-schedule">Out now on Spotify &amp; Apple Music. Released <time datetime={new Date(album.streamingReleaseDate).toISOString().slice(0, 10)}>{album.streamingReleaseDate}</time>.</p>}
+									{/* The newest release keeps the page's one filled action; older ones stay quiet. */}
+									<div class="album-actions"><ListenLinks album={album} quiet={index > 0} /></div>
 									<p class="album-description">{album.description}</p>
- {album.streamingReleaseDate && <p class="album-schedule">Out now on Spotify &amp; Apple Music. Released <time datetime={new Date(album.streamingReleaseDate).toISOString().slice(0, 10)}>{album.streamingReleaseDate}</time>.</p>}
-								<div class="album-platforms">
-									<a class="album-link" href={album.albumUrl} target="_blank" rel="noopener noreferrer"><Icon name="simple-icons:soundcloud" aria-hidden="true" />SoundCloud</a>
-									{album.spotifyUrl && <a class="album-link" href={album.spotifyUrl} target="_blank" rel="noopener noreferrer"><Icon name="simple-icons:spotify" aria-hidden="true" />Spotify</a>}
-									{album.appleMusicUrl && <a class="album-link" href={album.appleMusicUrl} target="_blank" rel="noopener noreferrer"><Icon name="simple-icons:applemusic" aria-hidden="true" />Apple Music</a>}
-								</div>
 								</div>
 							</div>
 
@@ -417,16 +374,10 @@ const structuredData = {
 					})
 				}
 
-				<div>
-					<p class="stream-links-label">Stream on</p>
-					<div class="stream-links">
-						{streamProfiles.map((p) => (
-							<a class="album-link" href={p.href} target="_blank" rel="noopener noreferrer">
-								<Icon name={p.icon} aria-hidden="true" />{p.label}
-							</a>
-						))}
-					</div>
-				</div>
+				<section class="follow-section" aria-labelledby="follow-title">
+					<h2 id="follow-title">Follow Pneumaris</h2>
+					<ListenLinks links={followProfiles} name="Follow Pneumaris" label="" quiet />
+				</section>
 			</div>
 
 			<dialog id="artwork-lightbox" class="artwork-lightbox" aria-labelledby="artwork-lightbox-title">

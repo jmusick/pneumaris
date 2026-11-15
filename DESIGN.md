@@ -296,7 +296,11 @@ out of the artwork's way. Only the one primary action is filled.
   primary: pale-gold fill spanning the full row, charcoal label and icon. The
   rest share the row below it as streaming buttons. All are 52px tall, 1rem
   labels, no wrapping; they stack only below 340px. Each announces that it
-  opens in a new tab.
+  opens in a new tab. On /music/ each release sits directly under its title
+  and detail line, ahead of the description; only the newest release gets the
+  filled primary, and older releases (and the closing "Follow Pneumaris"
+  artist profiles) use the quiet variant, where the lead link keeps its full
+  row in the streaming style.
 - **Streaming:** violet-stone surface, hairline border, chalk label with a
   weathered-gold platform icon. On hover or focus the border turns gold, the
   surface rises, and the label turns pale gold.
