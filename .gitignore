@@ -41,3 +41,12 @@ Thumbs.db
 .dev.vars
 .dev.vars.*
 !.dev.vars.example
+
+# Impeccable local runtime state (critique snapshots, live-mode sessions).
+# Shared design context stays committed: PRODUCT.md, DESIGN.md,
+# .impeccable/design.json, critique/ignore.md, and live/config.json.
+.impeccable/critique/*
+!.impeccable/critique/ignore.md
+.impeccable/live/*
+!.impeccable/live/config.json
+.impeccable/config.local.json
