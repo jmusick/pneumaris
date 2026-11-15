@@ -29,7 +29,7 @@ Official website for Pneumaris, built with Astro and deployed on Cloudflare Page
 - No decorative entrance motion; reduced-motion support for existing controls
 - Featured latest release, shared release data, and a wallpaper preview on the homepage
 - Reusable site header and footer components
-- Header Merch link opens the band's Etsy shop
+- Header Merch link to the Etsy shop, shown only while `MERCH_SHOP_URL` in `src/config/site.ts` is set (currently hidden while the shop is down)
 - Responsive pages:
 	- Home (`/`)
 	- Music (`/music/`) with album cards, descriptions, custom track lists, and album/track artwork lightbox previews

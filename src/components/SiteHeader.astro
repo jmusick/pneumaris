@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import { MERCH_SHOP_URL } from "../config/site";
 
 interface Props {
 	active?: "home" | "music" | "about" | "extras" | "contact";
@@ -76,13 +77,15 @@ const socials = [
 				<a class={active === "music" ? "active" : undefined} aria-current={active === "music" ? "page" : undefined} href="/music/">Music</a>
 				<a class={active === "about" ? "active" : undefined} aria-current={active === "about" ? "page" : undefined} href="/about/">About</a>
 				<a class={active === "extras" ? "active" : undefined} aria-current={active === "extras" ? "page" : undefined} href="/extras/">Extras</a>
-				<a
-					href="https://www.etsy.com/shop/EgamiDesigns?section_id=59398309"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					Merch
-				</a>
+				{MERCH_SHOP_URL && (
+					<a
+						href={MERCH_SHOP_URL}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						Merch
+					</a>
+				)}
 				<a class={active === "contact" ? "active" : undefined} aria-current={active === "contact" ? "page" : undefined} href="/contact/">Contact</a>
 			</nav>
 

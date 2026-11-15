@@ -4,6 +4,14 @@ export const SITE_NAME = "Pneumaris";
 export const SITE_TWITTER_HANDLE = "@pneumarisband";
 
 /**
+ * Etsy merch shop, linked as "Merch" in the header nav and named in the
+ * privacy policy's External Links. Null hides both while the shop is down;
+ * restore "https://www.etsy.com/shop/EgamiDesigns?section_id=59398309" to bring
+ * them back.
+ */
+export const MERCH_SHOP_URL: string | null = null;
+
+/**
  * Google Analytics 4 measurement ID.
  *
  * This is third-party tracking, so src/pages/privacy-policy.astro describes it.

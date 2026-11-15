@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import PageHeader from "../components/PageHeader.astro";
-import { SITE_URL } from "../config/site";
+import { MERCH_SHOP_URL, SITE_URL } from "../config/site";
 
 const pageTitle = "Privacy Policy | Pneumaris";
 const pageDescription = "Privacy Policy for the Pneumaris website.";
@@ -227,7 +227,7 @@ const canonicalUrl = `${SITE_URL}/privacy-policy/`;
 					<p>
 						This site may link to external websites. We are not responsible for
 						the privacy practices or content of those sites. In addition to the
-						streaming links above, these include Etsy for merchandise and our
+						streaming links above, these include {MERCH_SHOP_URL && "Etsy for merchandise and "}our
 						profiles on YouTube, TikTok, X, Instagram, and Facebook. Following
 						a link takes you to that platform, where its own privacy policy applies.
 					</p>

@@ -44,7 +44,9 @@ faceless: the identity is carried by the artwork and emblem, not by people.
   only once they are verified live.
 - Visitors arrive from social promotion: the header links Spotify, Apple Music,
   SoundCloud, YouTube, TikTok, X, Instagram, and Facebook.
-- Merch is sold through an Etsy shop linked from the header.
+- Merch is sold through an Etsy shop linked from the header. The link is
+  hidden (`MERCH_SHOP_URL` is null in `src/config/site.ts`) while the shop is
+  down.
 
 ## Capabilities and Constraints
 
