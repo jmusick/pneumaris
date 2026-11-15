@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import { albums, releaseSlug } from "../data/releases";
 import ListenLinks from "../components/ListenLinks.astro";
-import { SITE_URL } from "../config/site";
+import { SITE_URL, SOCIAL_PROFILES } from "../config/site";
 
 const featured = albums[0];
 const featuredUrl = `/music/#${releaseSlug(featured.title)}`;
@@ -37,14 +37,7 @@ const structuredData = {
 			name: "Pneumaris",
 			description: pageDescription,
 			image: `${SITE_URL}/images/og-image.jpg`,
-			sameAs: [
-				"https://soundcloud.com/pneumaris",
-				"https://www.youtube.com/@Pneumaris",
-				"https://www.tiktok.com/@pneumaris",
-				"https://x.com/pneumarisband",
-				"https://www.instagram.com/pneumaris/",
-				"https://www.facebook.com/profile.php?id=61589446647657",
-			],
+			sameAs: SOCIAL_PROFILES.map((p) => p.href),
 		},
 	],
 };

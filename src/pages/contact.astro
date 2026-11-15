@@ -1,8 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import PageHeader from "../components/PageHeader.astro";
-import { SITE_URL, TURNSTILE_SITE_KEY } from "../config/site";
+import { SITE_URL, TURNSTILE_SITE_KEY, socialProfile } from "../config/site";
 import { CONTACT_LIMITS } from "../lib/contact-rules";
+
+const soundcloud = socialProfile("soundcloud");
 
 const pageTitle = "Contact | Pneumaris";
 const pageDescription = "Get in touch with Pneumaris.";
@@ -256,11 +258,11 @@ const functionUnavailable = import.meta.env.DEV;
 				<div class="links-list">
 					<a
 						class="contact-link"
-						href="https://soundcloud.com/pneumaris"
+						href={soundcloud.href}
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						SoundCloud
+						{soundcloud.label}
 						<span>↗</span>
 					</a>
 				</div>

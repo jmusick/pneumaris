@@ -1,6 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
-import { MERCH_SHOP_URL } from "../config/site";
+import { MERCH_SHOP_URL, SOCIAL_PROFILES } from "../config/site";
 
 interface Props {
 	active?: "home" | "music" | "about" | "extras" | "contact";
@@ -8,48 +8,6 @@ interface Props {
 
 const { active } = Astro.props;
 
-const socials = [
-	{
-		label: "Spotify",
-		href: "https://open.spotify.com/artist/0LwtEDzdDXRarZ1H4eLqnU",
-		icon: "simple-icons:spotify",
-	},
-	{
-		label: "Apple Music",
-		href: "https://music.apple.com/us/artist/pneumaris/1896511324",
-		icon: "simple-icons:applemusic",
-	},
-	{
-		label: "SoundCloud",
-		href: "https://soundcloud.com/pneumaris",
-		icon: "simple-icons:soundcloud",
-	},
-	{
-		label: "YouTube",
-		href: "https://www.youtube.com/@Pneumaris",
-		icon: "simple-icons:youtube",
-	},
-	{
-		label: "TikTok",
-		href: "https://www.tiktok.com/@pneumaris",
-		icon: "simple-icons:tiktok",
-	},
-	{
-		label: "Twitter / X",
-		href: "https://x.com/pneumarisband",
-		icon: "simple-icons:x",
-	},
-	{
-		label: "Instagram",
-		href: "https://www.instagram.com/pneumaris/",
-		icon: "simple-icons:instagram",
-	},
-	{
-		label: "Facebook",
-		href: "https://www.facebook.com/profile.php?id=61589446647657",
-		icon: "simple-icons:facebook",
-	},
-];
 ---
 
 <header class="site-head">
@@ -92,7 +50,7 @@ const socials = [
 			<div class="site-head-divider" aria-hidden="true"></div>
 
 			<nav class="social-nav" aria-label="Social media">
-				{socials.map((s) => (
+				{SOCIAL_PROFILES.map((s) => (
 					<a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} class="social-link">
 						<Icon name={s.icon} aria-hidden="true" />
 					</a>

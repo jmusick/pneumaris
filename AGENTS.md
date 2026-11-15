@@ -57,7 +57,9 @@ contact form's Pages Function, `functions/api/contact.ts`. See
   back to the stored artwork URL if an original is unavailable.
 - `src/config/site.ts` — single source of truth for `SITE_URL`, `SITE_NAME`,
   `SITE_VERSION` (sourced from the release process, not hand-edited day to
-  day), `GA_MEASUREMENT_ID`, and `ANALYTICS_ID`.
+  day), `GA_MEASUREMENT_ID`, `ANALYTICS_ID`, and `SOCIAL_PROFILES` (the band's
+  profile URLs, used by the header, the homepage `sameAs`, and the music and
+  contact pages; add or change a profile there, not in a page).
 - `public/_headers` — Cloudflare Pages security response headers (CSP, HSTS,
   etc.). See CSP below before adding any new external origin.
 - `public/robots.txt` — hand-maintained; its `Sitemap:` line must match

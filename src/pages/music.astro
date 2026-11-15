@@ -3,9 +3,11 @@ import Layout from "../layouts/Layout.astro";
 import PageHeader from "../components/PageHeader.astro";
 import TrackPlayer from "../components/TrackPlayer.astro";
 import { Icon } from "astro-icon/components";
-import { SITE_URL } from "../config/site";
+import { SITE_URL, socialProfile } from "../config/site";
 
 import { albums, releaseSlug } from "../data/releases";
+
+const streamProfiles = (["soundcloud", "spotify", "applemusic"] as const).map(socialProfile);
 
 const pageTitle = "Music | Pneumaris";
 const pageDescription = "Listen to Reverie, the new 18-track Pneumaris album, on Spotify, Apple Music, and SoundCloud. Explore the full discography and artwork for every track.";
@@ -418,15 +420,11 @@ const structuredData = {
 				<div>
 					<p class="stream-links-label">Stream on</p>
 					<div class="stream-links">
-						<a class="album-link" href="https://soundcloud.com/pneumaris" target="_blank" rel="noopener noreferrer">
-							<Icon name="simple-icons:soundcloud" aria-hidden="true" />SoundCloud
-						</a>
-						<a class="album-link" href="https://open.spotify.com/artist/0LwtEDzdDXRarZ1H4eLqnU" target="_blank" rel="noopener noreferrer">
-							<Icon name="simple-icons:spotify" aria-hidden="true" />Spotify
-						</a>
-						<a class="album-link" href="https://music.apple.com/us/artist/pneumaris/1896511324" target="_blank" rel="noopener noreferrer">
-							<Icon name="simple-icons:applemusic" aria-hidden="true" />Apple Music
-						</a>
+						{streamProfiles.map((p) => (
+							<a class="album-link" href={p.href} target="_blank" rel="noopener noreferrer">
+								<Icon name={p.icon} aria-hidden="true" />{p.label}
+							</a>
+						))}
 					</div>
 				</div>
 			</div>
