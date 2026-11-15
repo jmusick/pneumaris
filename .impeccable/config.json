@@ -11,6 +11,15 @@
         ],
         "createdAt": "2026-11-15T04:23:20.043Z",
         "reason": "Claude triage: #artwork-lightbox-image sits inside a closed <dialog> and gets its src from script when artwork is opened; never rendered empty"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "src/components/TrackPlayer.astro"
+        ],
+        "createdAt": "2026-11-15T04:40:40.401Z",
+        "reason": "Claude triage: #player-artwork src is set by src/lib/track-player.ts:200 on first Play; the player section is hidden until then"
       }
     ]
   }
