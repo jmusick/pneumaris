@@ -1,0 +1,420 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-15T04:12:33.054Z",
+  "title": "Design System: Pneumaris",
+  "extensions": {
+    "colorMeta": {
+      "charcoal": {
+        "role": "neutral",
+        "displayName": "Charcoal",
+        "canonical": "oklch(17.7% 0.010 294.5)",
+        "tonalRamp": [
+          "#0b0b0c",
+          "#252527",
+          "#424145",
+          "#616066",
+          "#828187",
+          "#a5a4a9",
+          "#c9c9cb",
+          "#eeeef0"
+        ]
+      },
+      "violet-stone": {
+        "role": "neutral",
+        "displayName": "Violet Stone",
+        "canonical": "oklch(20.7% 0.016 302.1)",
+        "tonalRamp": [
+          "#0b0b0d",
+          "#252427",
+          "#434147",
+          "#635f68",
+          "#84808a",
+          "#a6a4aa",
+          "#cac8cc",
+          "#efeef1"
+        ]
+      },
+      "violet-stone-strong": {
+        "role": "neutral",
+        "displayName": "Violet Stone, Strong",
+        "canonical": "oklch(23.5% 0.020 303.1)",
+        "tonalRamp": [
+          "#0c0b0d",
+          "#262428",
+          "#434047",
+          "#635f6a",
+          "#84808b",
+          "#a6a3ab",
+          "#cac8cd",
+          "#efeef1"
+        ]
+      },
+      "violet-stone-raised": {
+        "role": "neutral",
+        "displayName": "Violet Stone, Raised",
+        "canonical": "oklch(25.4% 0.023 303.8)",
+        "tonalRamp": [
+          "#0c0b0d",
+          "#262428",
+          "#434048",
+          "#645f6b",
+          "#85808d",
+          "#a7a3ad",
+          "#cac8ce",
+          "#efedf2"
+        ]
+      },
+      "chalk": {
+        "role": "neutral",
+        "displayName": "Chalk",
+        "canonical": "oklch(93.6% 0.010 72.7)",
+        "tonalRamp": [
+          "#0c0b0a",
+          "#262523",
+          "#44413f",
+          "#64615c",
+          "#85827d",
+          "#a7a4a1",
+          "#cac9c7",
+          "#efeeed"
+        ]
+      },
+      "lavender-ash": {
+        "role": "neutral",
+        "displayName": "Lavender Ash",
+        "canonical": "oklch(78.7% 0.022 306.8)",
+        "tonalRamp": [
+          "#0c0b0d",
+          "#262428",
+          "#444048",
+          "#645e6a",
+          "#857f8c",
+          "#a7a3ac",
+          "#cac8cd",
+          "#efedf1"
+        ]
+      },
+      "muted-ash": {
+        "role": "neutral",
+        "displayName": "Muted Ash",
+        "canonical": "oklch(72.2% 0.025 310.6)",
+        "tonalRamp": [
+          "#0c0a0d",
+          "#262428",
+          "#454048",
+          "#655e6b",
+          "#867f8c",
+          "#a8a2ac",
+          "#cbc7ce",
+          "#f0edf2"
+        ]
+      },
+      "weathered-gold": {
+        "role": "primary",
+        "displayName": "Weathered Gold",
+        "canonical": "oklch(73.8% 0.073 77.6)",
+        "tonalRamp": [
+          "#0f0a04",
+          "#2c2416",
+          "#4f3f26",
+          "#755d36",
+          "#987e57",
+          "#b5a286",
+          "#d3c7b6",
+          "#f5ede1"
+        ]
+      },
+      "pale-gold": {
+        "role": "primary",
+        "displayName": "Pale Gold",
+        "canonical": "oklch(83.0% 0.071 80.0)",
+        "tonalRamp": [
+          "#0f0a04",
+          "#2c2416",
+          "#4e3f26",
+          "#745d37",
+          "#967f57",
+          "#b4a386",
+          "#d2c8b7",
+          "#f5ede2"
+        ]
+      },
+      "pale-gold-lit": {
+        "role": "primary",
+        "displayName": "Pale Gold, Lit",
+        "canonical": "oklch(88.5% 0.057 85.6)",
+        "tonalRamp": [
+          "#0e0b05",
+          "#2a241a",
+          "#4a412c",
+          "#6e5f40",
+          "#908160",
+          "#afa48d",
+          "#cfc8ba",
+          "#f3eee4"
+        ]
+      },
+      "tarnished-gold": {
+        "role": "primary",
+        "displayName": "Tarnished Gold",
+        "canonical": "oklch(64.8% 0.060 76.1)",
+        "tonalRamp": [
+          "#0f0a05",
+          "#2b2419",
+          "#4e3f2b",
+          "#735d3f",
+          "#957e5f",
+          "#b3a28c",
+          "#d2c8ba",
+          "#f4ede4"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "rgba(190, 174, 151, 0.25)",
+        "tonalRamp": [
+          "#0d0b07",
+          "#29241e",
+          "#494135",
+          "#6c5f4d",
+          "#8d806d",
+          "#ada496",
+          "#cec8c0",
+          "#f2eee8"
+        ]
+      },
+      "faded-rose": {
+        "role": "error",
+        "displayName": "Faded Rose",
+        "canonical": "oklch(72.8% 0.078 24.1)",
+        "tonalRamp": [
+          "#130807",
+          "#32201e",
+          "#593835",
+          "#84524e",
+          "#a8726e",
+          "#c29a96",
+          "#dbc2c0",
+          "#fceae8"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Homepage release title, pale gold, one per page."
+      },
+      "page-title": {
+        "displayName": "Page Title",
+        "purpose": "Shared interior page header."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headings."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Catalogue and album titles, in chalk."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All running text and control labels, 49-70ch measures."
+      },
+      "nav": {
+        "displayName": "Nav",
+        "purpose": "Header navigation, form labels, album detail lines."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Small uppercase group labels such as Listen on."
+      }
+    },
+    "shadows": [
+      {
+        "name": "artwork-lift",
+        "value": "0 8px 22px rgba(0, 0, 0, 0.35)",
+        "purpose": "Album artwork on /music/."
+      },
+      {
+        "name": "player",
+        "value": "0 -8px 30px rgba(0, 0, 0, 0.4)",
+        "purpose": "Fixed bottom track player."
+      },
+      {
+        "name": "lightbox",
+        "value": "0 16px 48px rgba(0, 0, 0, 0.6)",
+        "purpose": "Artwork lightbox dialog."
+      }
+    ],
+    "motion": [
+      {
+        "name": "feedback-fast",
+        "value": "160ms ease",
+        "purpose": "Outline buttons, album links, menu icon swap."
+      },
+      {
+        "name": "feedback",
+        "value": "180ms ease",
+        "purpose": "Link, nav, social and field colour changes."
+      },
+      {
+        "name": "menu",
+        "value": "240ms ease",
+        "purpose": "Mobile menu height reveal (disabled under 1100px in current CSS and under reduced motion)."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "header-collapse",
+        "value": "1100px"
+      },
+      {
+        "name": "stack",
+        "value": "800px"
+      },
+      {
+        "name": "about-stack",
+        "value": "720px"
+      },
+      {
+        "name": "track-compact",
+        "value": "600px"
+      },
+      {
+        "name": "phone",
+        "value": "480px"
+      }
+    ],
+    "focusRing": {
+      "value": "outline: 2px solid #e0c393; outline-offset: 5px",
+      "purpose": "Global :focus-visible; 3px offset inside the player and track lists."
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The single filled action in a view; pale gold on charcoal.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Listen on Spotify</a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; min-height: 48px; padding: 0.85rem 1.35rem; background: var(--gold-bright, #e0c393); border: 1px solid var(--gold-bright, #e0c393); border-radius: 2px; color: var(--bg-base, #111015); font-family: Raleway, sans-serif; font-weight: 500; font-size: 1rem; text-decoration: none; } .ds-btn-primary:hover { background: #ead7af; } .ds-btn-primary:active { background: var(--gold, #c4a576); } .ds-btn-primary:focus-visible { outline: 2px solid var(--gold-bright, #e0c393); outline-offset: 5px; }"
+    },
+    {
+      "name": "Streaming Button",
+      "kind": "button",
+      "refersTo": "button-streaming",
+      "description": "Platform listening link: violet-stone surface, hairline border, gold icon.",
+      "html": "<a class=\"ds-btn-streaming\" href=\"#\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"currentColor\"/></svg>Apple Music</a>",
+      "css": ".ds-btn-streaming { display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; min-height: 52px; padding: 0.75rem 1rem; border: 1px solid var(--line, rgba(190,174,151,0.25)); border-radius: 2px; background: var(--surface, #19161e); color: var(--ink, #eee9e3); font-family: Raleway, sans-serif; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: border-color 180ms ease, background 180ms ease, color 180ms ease; } .ds-btn-streaming svg { color: var(--gold, #c4a576); } .ds-btn-streaming:hover, .ds-btn-streaming:focus-visible { border-color: var(--gold, #c4a576); background: var(--surface-raised, #25202c); color: var(--gold-bright, #e0c393); } .ds-btn-streaming:active { background: var(--surface-strong, #201c26); } .ds-btn-streaming:focus-visible { outline: 2px solid var(--gold-bright, #e0c393); outline-offset: 5px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Track Play, album links and player controls: transparent with a gold edge.",
+      "html": "<button class=\"ds-btn-outline\" type=\"button\"><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" aria-hidden=\"true\"><path d=\"M7 4l13 8-13 8z\" fill=\"currentColor\"/></svg>Play</button>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-width: 44px; min-height: 44px; padding: 0.5rem 0.75rem; border: 1px solid var(--gold, #c4a576); border-radius: 2px; background: transparent; color: var(--gold-bright, #e0c393); font-family: Raleway, sans-serif; font-size: 0.875rem; cursor: pointer; transition: background 160ms ease; } .ds-btn-outline:hover { background: rgba(196, 165, 118, 0.12); } .ds-btn-outline:active { background: rgba(196, 165, 118, 0.2); } .ds-btn-outline:focus-visible { outline: 2px solid var(--gold-bright, #e0c393); outline-offset: 3px; }"
+    },
+    {
+      "name": "Text Link",
+      "kind": "custom",
+      "refersTo": "text-link",
+      "description": "Chalk text with a tarnished-gold hairline underline.",
+      "html": "<a class=\"ds-text-link\" href=\"#\">Explore all 18 tracks</a>",
+      "css": ".ds-text-link { display: inline-flex; align-items: center; min-height: 44px; border-bottom: 1px solid var(--gold-dim, #a48a65); color: var(--ink, #eee9e3); font-family: Raleway, sans-serif; font-size: 1rem; text-decoration: none; transition: border-color 180ms ease; } .ds-text-link:hover { border-color: var(--gold-bright, #e0c393); } .ds-text-link:active { color: var(--gold-bright, #e0c393); } .ds-text-link:focus-visible { outline: 2px solid var(--gold-bright, #e0c393); outline-offset: 5px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Contact form field with a Cinzel label.",
+      "html": "<label class=\"ds-field\"><span>Name</span><input type=\"text\" placeholder=\"Your name\" /></label>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 0.45rem; } .ds-field span { font-family: Cinzel, serif; font-size: 0.85rem; letter-spacing: 0.025em; color: var(--ink-soft, #bdb6c5); } .ds-field input { width: 100%; background: rgba(22, 15, 10, 0.75); border: 1px solid var(--gold-dim, #a48a65); border-radius: 2px; padding: 0.8rem 0.9rem; color: var(--ink, #eee9e3); caret-color: var(--gold-bright, #e0c393); font-family: Raleway, sans-serif; font-size: 1rem; transition: border-color 180ms ease, box-shadow 180ms ease; } .ds-field input:focus { outline: none; border-color: var(--gold-bright, #e0c393); box-shadow: 0 0 0 2px rgba(196, 165, 118, 0.18); } .ds-field input[aria-invalid=\"true\"] { border-color: #d4948f; }"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Cinzel nav links in lavender ash; active turns pale gold with a gold underline.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" class=\"is-active\">Home</a><a href=\"#\">Music</a><a href=\"#\">About</a><a href=\"#\">Extras</a><a href=\"#\">Contact</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; background: var(--bg-base, #111015); border-bottom: 1px solid var(--line, rgba(190,174,151,0.25)); padding: 0 1rem; } .ds-nav a { font-family: Cinzel, serif; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.035em; color: var(--ink-soft, #bdb6c5); padding: 0.75rem 0.65rem; border-bottom: 1px solid transparent; text-decoration: none; transition: color 180ms ease, border-color 180ms ease; } .ds-nav a:hover, .ds-nav a.is-active { color: var(--gold-bright, #e0c393); border-color: var(--gold, #c4a576); } .ds-nav a:focus-visible { outline: 2px solid var(--gold-bright, #e0c393); outline-offset: 5px; }"
+    },
+    {
+      "name": "Catalogue Release",
+      "kind": "card",
+      "refersTo": "",
+      "description": "Square uncropped artwork with a chalk Cinzel title beneath; no card box.",
+      "html": "<a class=\"ds-release\" href=\"#\"><span class=\"ds-release-art\"></span><h3>Anathema</h3><p>Album, July 2026</p></a>",
+      "css": ".ds-release { display: block; width: 220px; color: var(--ink, #eee9e3); text-decoration: none; } .ds-release-art { display: block; aspect-ratio: 1; background: var(--surface-raised, #25202c); } .ds-release h3 { font-family: Cinzel, serif; font-weight: 500; font-size: 1.25rem; margin: 1rem 0 0; color: var(--ink, #eee9e3); transition: color 180ms ease; } .ds-release p { font-family: Raleway, sans-serif; font-size: 1rem; margin: 0.25rem 0 0; color: var(--ink-soft, #bdb6c5); } .ds-release:hover h3 { color: var(--gold-bright, #e0c393); } .ds-release:focus-visible { outline: 2px solid var(--gold-bright, #e0c393); outline-offset: 5px; }"
+    },
+    {
+      "name": "Track Row",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Track list row: number, artwork, title, tabular duration, outline Play; hairline separators.",
+      "html": "<ol class=\"ds-tracks\"><li><span class=\"n\">1</span><span class=\"art\"></span><span class=\"t\">The Bough Breaks</span><span class=\"d\">5:07</span><button type=\"button\">Play</button></li><li><span class=\"n\">2</span><span class=\"art\"></span><span class=\"t\">Wear It Well</span><span class=\"d\">4:10</span><button type=\"button\">Play</button></li></ol>",
+      "css": ".ds-tracks { list-style: none; margin: 0; padding: 0; font-family: Raleway, sans-serif; color: var(--ink, #eee9e3); } .ds-tracks li { display: grid; grid-template-columns: 1.5rem 56px minmax(0, 1fr) auto auto; align-items: center; gap: 1rem; padding: 1rem 0; } .ds-tracks li + li { border-top: 1px solid var(--line, rgba(190,174,151,0.25)); } .ds-tracks .n, .ds-tracks .d { color: var(--ink-soft, #bdb6c5); font-variant-numeric: tabular-nums; font-size: 0.875rem; } .ds-tracks .art { aspect-ratio: 1; background: #25202c; } .ds-tracks .t { font-weight: 500; } .ds-tracks button { min-width: 44px; min-height: 44px; padding: 0.5rem 0.75rem; border: 1px solid var(--gold, #c4a576); border-radius: 2px; background: transparent; color: var(--gold-bright, #e0c393); font: inherit; font-size: 0.875rem; cursor: pointer; } .ds-tracks button:hover { background: rgba(196, 165, 118, 0.12); } .ds-tracks button:focus-visible { outline: 2px solid var(--gold-bright, #e0c393); outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Gilded Ruin",
+    "overview": "Weathered stone with gold in the cracks. Everything on the page is restrained, dark, and still, except where the light gets in. The palette comes straight from the Reverie cover: violet-grey stone, a charcoal night, chalk-pale relief, and gold that shows up in the fractures. Gold is not a fill colour for surfaces. It is where emphasis lives: headings, the one primary action, focus rings, and the hairline under a link.\n\nThe release's cover art is the one dominant image on every surface it appears on. The interface keeps out of its way: no simulated stars, gradients, orbit ornaments, autoplay, or decorative motion compete with it. Cinzel carries the inscription-like lettering of the record into headings and navigation; Raleway keeps longer album and track copy readable. Density is low, with generous gutters and one idea per band of the page. Surfaces separate by tone rather than by boxes and borders.\n\nThe identity is faceless. The circular Pneumaris emblem, its hooded-figure header and intro derivatives, and the release artwork carry the project. People and performance never do.",
+    "keyCharacteristics": [
+      "Dark-only (`color-scheme: dark`): charcoal ground, violet-stone surfaces, chalk text.",
+      "Gold reserved for emphasis: headings, the primary action, focus, link underlines.",
+      "Cover art leads; square, uncropped, never overlaid.",
+      "Cinzel for display and navigation, Raleway for reading and controls.",
+      "Flat, tonal layering; near-square 2px corners.",
+      "No decorative motion; only feedback transitions, and all of them off under reduced motion."
+    ],
+    "rules": [
+      {
+        "name": "The Gold-in-the-Cracks Rule",
+        "section": "colors",
+        "body": "Gold marks emphasis, never area. The only gold fill is the single primary action; everything else gold is text, a line, an icon, or a focus ring."
+      },
+      {
+        "name": "The One Stone Rule",
+        "section": "colors",
+        "body": "All neutrals come from the violet-stone family. The warm browns left from the earlier palette (`#100e0b`, `#0d0a07`, `rgba(22, 15, 10, …)`, `rgba(8, 6, 4, …)`, and the older gold `rgba(184, 154, 106, …)`) still appear in the player, lightbox, form fields and hover tints. Treat them as drift and move them onto the tokens above when those components are next touched."
+      },
+      {
+        "name": "The Inscription Rule",
+        "section": "typography",
+        "body": "Cinzel is for names, headings, and navigation: things that would be carved. Never set paragraphs, durations, or form input in it."
+      },
+      {
+        "name": "The Readable Floor Rule",
+        "section": "typography",
+        "body": "Running text and control labels stay at 1rem. Nothing a visitor must read goes below 0.875rem (track numbers and player messages are the floor). The cookie banner's 11.5px text is below this floor."
+      },
+      {
+        "name": "The One Image Rule",
+        "section": "layout",
+        "body": "Each band of the page has at most one image, and on the release hero it is the cover. Nothing overlays or crops it."
+      },
+      {
+        "name": "The Flat Stone Rule",
+        "section": "elevation",
+        "body": "Nothing in the page flow casts a shadow. Only fixed or modal layers do."
+      }
+    ],
+    "dos": [
+      "Do let the current release's full, uncropped cover be the one dominant image on the homepage.",
+      "Do keep gold for emphasis: headings, one filled primary action, focus rings, link underlines.",
+      "Do separate sections by tone (charcoal ↔ violet stone) and space, keeping dividers for the header, footer, and track rows.",
+      "Do use the 2px corner and 1px borders on every new control, and keep targets at least 44px.",
+      "Do keep Cinzel for names, headings and navigation, and Raleway at 1rem for everything read.",
+      "Do honour `prefers-reduced-motion`; feedback transitions are 160–240ms colour and opacity changes only."
+    ],
+    "donts": [
+      "Don't add simulated stars, gradients, orbit ornaments, autoplay, or entrance animations that compete with the cover.",
+      "Don't wrap catalogue items in cards or boxes.",
+      "Don't fill surfaces with gold, or use more than one filled gold button in a view.",
+      "Don't introduce warm-brown neutrals or the older `rgba(184, 154, 106, …)` gold; use the violet-stone and gold tokens.",
+      "Don't use people, faces, or performance imagery; the artwork and emblem carry the identity.",
+      "Don't add decorative blur to the header or a fade-in to the page."
+    ]
+  }
+}
