@@ -211,7 +211,7 @@ that keeps eighteen-track descriptions comfortable without competing.
 - **Page Title** (Cinzel 500, `clamp(2.75rem, 6vw, 5rem)`, 1.15, 0.02em): the shared page header on interior pages.
 - **Headline** (Cinzel 500, `clamp(1.75rem, 3vw, 2.75rem)`, 1.2, -0.015em): section headings. The first album on /music/ steps up to `clamp(2.5rem, 5vw, 4rem)`.
 - **Title** (Cinzel 500, `clamp(1.15rem, 2vw, 1.5rem)`, 1.2): catalogue and album titles. In chalk, not gold, so they read as items rather than headings.
-- **Body** (Raleway 400, 1rem, 1.6): all running text; capped at 49–52ch in hero and intro copy and 70ch in album descriptions. `text-wrap: pretty`.
+- **Body** (Raleway 400, 1rem, 1.6): all running text; capped at 49–52ch in hero and intro copy and 34em (about 70 characters) in album descriptions. `text-wrap: pretty`.
 - **Nav** (Cinzel 500, 0.85rem, 0.035em): header navigation, form labels (at 0.025em), and album detail lines.
 - **Label** (Raleway 400, 0.75rem, 0.14em, uppercase): small group labels such as "Listen on".
 
@@ -243,7 +243,9 @@ messages are the floor). The cookie banner's 11.5px text is below this floor.
   (112px artwork, then the text).
 - **Track lists:** a grid row of number, 72px artwork, title, duration, and
   Play. Below 600px it becomes 56px artwork, title over duration, and an
-  icon-only Play. On /music/ the newest release lists every track; older
+  icon-only Play. Track titles are chalk links to SoundCloud with a
+  tarnished-gold underline and a small up-right arrow, so they read as leaving
+  the site, apart from the on-site Play. On /music/ the newest release lists every track; older
   releases with more than five open on their first three, with a "Show all N
   tracks" text toggle under the list. The collapse happens in script, so
   without JavaScript every track stays listed, and a hidden track opens its
@@ -287,9 +289,7 @@ to read as rounded. Cover art is square and uncropped (`object-fit: contain`).
 Borders are 1px, either `hairline` for structure or a gold for interactive
 edges. The emblem is the only circle in the system.
 
-Remaining exceptions are drift, not vocabulary: the menu toggle (0.4rem), the
-artwork trigger (0.25rem), the lightbox dialog (0.55rem), and its round close
-button (999px).
+The remaining exception is drift, not vocabulary: the menu toggle (0.4rem).
 
 ## Components
 
