@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-15T04:12:33.054Z",
+  "generatedAt": "2026-11-15T15:00:00.000Z",
   "title": "Design System: Pneumaris",
   "extensions": {
     "colorMeta": {
@@ -262,12 +262,21 @@
         "name": "menu",
         "value": "240ms ease",
         "purpose": "Mobile menu height reveal (disabled under 1100px in current CSS and under reduced motion)."
+      },
+      {
+        "name": "disclosure",
+        "value": "200ms ease",
+        "purpose": "Chevron turn on the \"Show all N tracks\" toggle; off under reduced motion."
       }
     ],
     "breakpoints": [
       {
         "name": "header-collapse",
         "value": "1100px"
+      },
+      {
+        "name": "closing-band-stack",
+        "value": "1000px"
       },
       {
         "name": "stack",
@@ -279,11 +288,17 @@
       },
       {
         "name": "track-compact",
-        "value": "600px"
+        "value": "600px",
+        "purpose": "Track rows compact; the /music/ release index becomes one sideways-scrolling line."
       },
       {
         "name": "phone",
         "value": "480px"
+      },
+      {
+        "name": "listen-stack",
+        "value": "340px",
+        "purpose": "Listening actions stack to one column."
       }
     ],
     "focusRing": {
@@ -306,7 +321,15 @@
       "refersTo": "button-streaming",
       "description": "Platform listening link: violet-stone surface, hairline border, gold icon.",
       "html": "<a class=\"ds-btn-streaming\" href=\"#\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"currentColor\"/></svg>Apple Music</a>",
-      "css": ".ds-btn-streaming { display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; min-height: 52px; padding: 0.75rem 1rem; border: 1px solid var(--line, rgba(190,174,151,0.25)); border-radius: 2px; background: var(--surface, #19161e); color: var(--ink, #eee9e3); font-family: Raleway, sans-serif; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: border-color 180ms ease, background 180ms ease, color 180ms ease; } .ds-btn-streaming svg { color: var(--gold, #c4a576); } .ds-btn-streaming:hover, .ds-btn-streaming:focus-visible { border-color: var(--gold, #c4a576); background: var(--surface-raised, #25202c); color: var(--gold-bright, #e0c393); } .ds-btn-streaming:active { background: var(--surface-strong, #201c26); } .ds-btn-streaming:focus-visible { outline: 2px solid var(--gold-bright, #e0c393); outline-offset: 5px; }"
+      "css": ".ds-btn-streaming { display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; min-height: 52px; padding: 0.75rem 0.5rem; border: 1px solid var(--line, rgba(190,174,151,0.25)); border-radius: 2px; background: var(--surface, #19161e); color: var(--ink, #eee9e3); font-family: Raleway, sans-serif; font-size: 1rem; font-weight: 500; white-space: nowrap; text-decoration: none; transition: border-color 180ms ease, background 180ms ease, color 180ms ease; } .ds-btn-streaming svg { width: 1.25rem; height: 1.25rem; flex-shrink: 0; color: var(--gold, #c4a576); } .ds-btn-streaming:hover, .ds-btn-streaming:focus-visible { border-color: var(--gold, #c4a576); background: var(--surface-raised, #25202c); color: var(--gold-bright, #e0c393); } .ds-btn-streaming:active { background: var(--surface-strong, #201c26); } .ds-btn-streaming:focus-visible { outline: 2px solid var(--gold-bright, #e0c393); outline-offset: 5px; }"
+    },
+    {
+      "name": "Listening Actions",
+      "kind": "custom",
+      "refersTo": "button-primary",
+      "description": "ListenLinks group: Spotify, then Apple Music, then SoundCloud. The lead link takes the full first row, filled pale gold; with quiet (older releases on /music/, artist profiles) it keeps the row in the streaming style.",
+      "html": "<div class=\"ds-listen\" role=\"group\" aria-label=\"Listen to Reverie\"><p class=\"ds-listen-label\" aria-hidden=\"true\">Listen on</p><a class=\"ds-listen-link ds-listen-lead ds-listen-primary\" href=\"#\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"currentColor\"/></svg>Spotify</a><a class=\"ds-listen-link ds-listen-secondary\" href=\"#\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"currentColor\"/></svg>Apple Music</a><a class=\"ds-listen-link ds-listen-secondary\" href=\"#\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"currentColor\"/></svg>SoundCloud</a></div><div class=\"ds-listen\" role=\"group\" aria-label=\"Listen to Anathema\" style=\"margin-top: 2rem\"><p class=\"ds-listen-label\" aria-hidden=\"true\">Listen on (quiet)</p><a class=\"ds-listen-link ds-listen-lead ds-listen-secondary\" href=\"#\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"currentColor\"/></svg>Spotify</a><a class=\"ds-listen-link ds-listen-secondary\" href=\"#\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"currentColor\"/></svg>Apple Music</a><a class=\"ds-listen-link ds-listen-secondary\" href=\"#\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\" fill=\"currentColor\"/></svg>SoundCloud</a></div>",
+      "css": ".ds-listen { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; width: 100%; max-width: 32rem; font-family: Raleway, sans-serif; } .ds-listen-label { grid-column: 1 / -1; margin: 0; color: var(--ink-soft, #bdb6c5); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; } .ds-listen-link { display: flex; align-items: center; justify-content: center; gap: 0.6rem; min-height: 52px; padding: 0.75rem 0.5rem; border: 1px solid var(--line, rgba(190,174,151,0.25)); border-radius: 2px; font-size: 1rem; font-weight: 500; white-space: nowrap; text-decoration: none; transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease; } .ds-listen-link svg { width: 1.25rem; height: 1.25rem; flex-shrink: 0; } .ds-listen-lead { grid-column: 1 / -1; } .ds-listen-primary { background: var(--gold-bright, #e0c393); border-color: var(--gold-bright, #e0c393); color: var(--bg-base, #111015); } .ds-listen-primary:hover, .ds-listen-primary:focus-visible { background: #ead7af; border-color: #ead7af; } .ds-listen-primary:active { background: var(--gold, #c4a576); border-color: var(--gold, #c4a576); } .ds-listen-secondary { background: var(--surface, #19161e); color: var(--ink, #eee9e3); } .ds-listen-secondary svg { color: var(--gold, #c4a576); } .ds-listen-secondary:hover, .ds-listen-secondary:focus-visible { border-color: var(--gold, #c4a576); background: var(--surface-raised, #25202c); color: var(--gold-bright, #e0c393); } .ds-listen-secondary:active { background: var(--surface-strong, #201c26); } .ds-listen-link:focus-visible { outline: 2px solid var(--gold-bright, #e0c393); outline-offset: 5px; } @media (prefers-reduced-motion: reduce) { .ds-listen-link { transition: none; } } @media (max-width: 340px) { .ds-listen { grid-template-columns: 1fr; } }"
     },
     {
       "name": "Outline Button",
@@ -314,7 +337,7 @@
       "refersTo": "button-outline",
       "description": "Track Play, album links and player controls: transparent with a gold edge.",
       "html": "<button class=\"ds-btn-outline\" type=\"button\"><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" aria-hidden=\"true\"><path d=\"M7 4l13 8-13 8z\" fill=\"currentColor\"/></svg>Play</button>",
-      "css": ".ds-btn-outline { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-width: 44px; min-height: 44px; padding: 0.5rem 0.75rem; border: 1px solid var(--gold, #c4a576); border-radius: 2px; background: transparent; color: var(--gold-bright, #e0c393); font-family: Raleway, sans-serif; font-size: 0.875rem; cursor: pointer; transition: background 160ms ease; } .ds-btn-outline:hover { background: rgba(196, 165, 118, 0.12); } .ds-btn-outline:active { background: rgba(196, 165, 118, 0.2); } .ds-btn-outline:focus-visible { outline: 2px solid var(--gold-bright, #e0c393); outline-offset: 3px; }"
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-width: 44px; min-height: 44px; padding: 0.5rem 0.75rem; border: 1px solid var(--gold, #c4a576); border-radius: 2px; background: transparent; color: var(--gold-bright, #e0c393); font-family: Raleway, sans-serif; font-size: 0.875rem; cursor: pointer; transition: background 160ms ease; } .ds-btn-outline:hover { background: var(--gold-hover, color-mix(in srgb, #c4a576 12%, transparent)); } .ds-btn-outline:active { background: var(--gold-press, color-mix(in srgb, #c4a576 20%, transparent)); } .ds-btn-outline:focus-visible { outline: 2px solid var(--gold-bright, #e0c393); outline-offset: 3px; }"
     },
     {
       "name": "Text Link",
@@ -330,7 +353,7 @@
       "refersTo": "input",
       "description": "Contact form field with a Cinzel label.",
       "html": "<label class=\"ds-field\"><span>Name</span><input type=\"text\" placeholder=\"Your name\" /></label>",
-      "css": ".ds-field { display: flex; flex-direction: column; gap: 0.45rem; } .ds-field span { font-family: Cinzel, serif; font-size: 0.85rem; letter-spacing: 0.025em; color: var(--ink-soft, #bdb6c5); } .ds-field input { width: 100%; background: color-mix(in srgb, var(--surface, #19161e) 75%, transparent); border: 1px solid var(--gold-dim, #a48a65); border-radius: 2px; padding: 0.8rem 0.9rem; color: var(--ink, #eee9e3); caret-color: var(--gold-bright, #e0c393); font-family: Raleway, sans-serif; font-size: 1rem; transition: border-color 180ms ease, box-shadow 180ms ease; } .ds-field input:focus { outline: none; border-color: var(--gold-bright, #e0c393); box-shadow: 0 0 0 2px rgba(196, 165, 118, 0.18); } .ds-field input[aria-invalid=\"true\"] { border-color: #d4948f; }"
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 0.45rem; } .ds-field span { font-family: Cinzel, serif; font-size: 0.85rem; letter-spacing: 0.025em; color: var(--ink-soft, #bdb6c5); } .ds-field input { width: 100%; background: color-mix(in srgb, var(--surface, #19161e) 75%, transparent); border: 1px solid var(--gold-dim, #a48a65); border-radius: 2px; padding: 0.8rem 0.9rem; color: var(--ink, #eee9e3); caret-color: var(--gold-bright, #e0c393); font-family: Raleway, sans-serif; font-size: 1rem; transition: border-color 180ms ease, box-shadow 180ms ease; } .ds-field input:focus { outline: none; border-color: var(--gold-bright, #e0c393); box-shadow: 0 0 0 2px color-mix(in srgb, var(--gold, #c4a576) 18%, transparent); } .ds-field input[aria-invalid=\"true\"] { border-color: #d4948f; }"
     },
     {
       "name": "Header Navigation",
@@ -339,6 +362,14 @@
       "description": "Cinzel nav links in lavender ash; active turns pale gold with a gold underline.",
       "html": "<nav class=\"ds-nav\"><a href=\"#\" class=\"is-active\">Home</a><a href=\"#\">Music</a><a href=\"#\">About</a><a href=\"#\">Extras</a><a href=\"#\">Contact</a></nav>",
       "css": ".ds-nav { display: flex; align-items: center; background: var(--bg-base, #111015); border-bottom: 1px solid var(--line, rgba(190,174,151,0.25)); padding: 0 1rem; } .ds-nav a { font-family: Cinzel, serif; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.035em; color: var(--ink-soft, #bdb6c5); padding: 0.75rem 0.65rem; border-bottom: 1px solid transparent; text-decoration: none; transition: color 180ms ease, border-color 180ms ease; } .ds-nav a:hover, .ds-nav a.is-active { color: var(--gold-bright, #e0c393); border-color: var(--gold, #c4a576); } .ds-nav a:focus-visible { outline: 2px solid var(--gold-bright, #e0c393); outline-offset: 5px; }"
+    },
+    {
+      "name": "Release Index",
+      "kind": "nav",
+      "refersTo": "",
+      "description": "Opens /music/ below the page header: an uppercase \"Releases\" label and underlined text links to each release's anchor. Wraps on one band; at 600px and below it becomes one sideways-scrolling line.",
+      "html": "<nav class=\"ds-release-index\" aria-labelledby=\"ds-release-index-label\"><p class=\"ds-release-index-label\" id=\"ds-release-index-label\">Releases</p><ol><li><a href=\"#\">Reverie</a></li><li><a href=\"#\">Anathema</a></li><li><a href=\"#\">Eidolon</a></li><li><a href=\"#\">The Black Wake</a></li><li><a href=\"#\">Pleroma</a></li><li><a href=\"#\">The Shape</a></li></ol></nav>",
+      "css": ".ds-release-index { display: flex; flex-wrap: wrap; align-items: center; gap: 0 1.5rem; padding: 1.5rem 0 0; font-family: Raleway, sans-serif; } .ds-release-index ol { display: flex; flex-wrap: wrap; align-items: center; gap: 0 1.5rem; list-style: none; margin: 0; padding: 0; } .ds-release-index-label { margin: 0; color: var(--ink-soft, #bdb6c5); font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; } .ds-release-index a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink, #eee9e3); font-size: 1rem; text-decoration: underline; text-decoration-color: var(--gold-dim, #a48a65); text-underline-offset: 0.3em; transition: text-decoration-color 160ms ease, color 160ms ease; } .ds-release-index a:hover { color: var(--gold-bright, #e0c393); text-decoration-color: var(--gold-bright, #e0c393); } .ds-release-index a:focus-visible { outline: 2px solid var(--gold-bright, #e0c393); outline-offset: 5px; } @media (max-width: 600px) { .ds-release-index, .ds-release-index ol { flex-wrap: nowrap; gap: 0 1.25rem; } .ds-release-index { padding: 1rem 0 0.25rem; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; } .ds-release-index::-webkit-scrollbar { display: none; } .ds-release-index li, .ds-release-index-label { flex-shrink: 0; white-space: nowrap; } .ds-release-index a:focus-visible { outline-offset: 3px; } } @media (prefers-reduced-motion: reduce) { .ds-release-index a { transition: none; } }"
     },
     {
       "name": "Catalogue Release",
@@ -352,9 +383,9 @@
       "name": "Track Row",
       "kind": "custom",
       "refersTo": "",
-      "description": "Track list row: number, artwork, title, tabular duration, outline Play; hairline separators.",
-      "html": "<ol class=\"ds-tracks\"><li><span class=\"n\">1</span><span class=\"art\"></span><span class=\"t\">The Bough Breaks</span><span class=\"d\">5:07</span><button type=\"button\">Play</button></li><li><span class=\"n\">2</span><span class=\"art\"></span><span class=\"t\">Wear It Well</span><span class=\"d\">4:10</span><button type=\"button\">Play</button></li></ol>",
-      "css": ".ds-tracks { list-style: none; margin: 0; padding: 0; font-family: Raleway, sans-serif; color: var(--ink, #eee9e3); } .ds-tracks li { display: grid; grid-template-columns: 1.5rem 56px minmax(0, 1fr) auto auto; align-items: center; gap: 1rem; padding: 1rem 0; } .ds-tracks li + li { border-top: 1px solid var(--line, rgba(190,174,151,0.25)); } .ds-tracks .n, .ds-tracks .d { color: var(--ink-soft, #bdb6c5); font-variant-numeric: tabular-nums; font-size: 0.875rem; } .ds-tracks .art { aspect-ratio: 1; background: #25202c; } .ds-tracks .t { font-weight: 500; } .ds-tracks button { min-width: 44px; min-height: 44px; padding: 0.5rem 0.75rem; border: 1px solid var(--gold, #c4a576); border-radius: 2px; background: transparent; color: var(--gold-bright, #e0c393); font: inherit; font-size: 0.875rem; cursor: pointer; } .ds-tracks button:hover { background: rgba(196, 165, 118, 0.12); } .ds-tracks button:focus-visible { outline: 2px solid var(--gold-bright, #e0c393); outline-offset: 3px; }"
+      "description": "Track list row: number, artwork, title, tabular duration, outline Play; hairline separators. Older releases with more than five tracks open on their first three, with a \"Show all N tracks\" text toggle below (script-only; without JavaScript every track stays listed).",
+      "html": "<ol class=\"ds-tracks\"><li><span class=\"n\">1</span><span class=\"art\"></span><span class=\"t\">The Bough Breaks</span><span class=\"d\">5:07</span><button type=\"button\">Play</button></li><li><span class=\"n\">2</span><span class=\"art\"></span><span class=\"t\">Wear It Well</span><span class=\"d\">4:10</span><button type=\"button\">Play</button></li></ol><button type=\"button\" class=\"ds-track-more\" aria-expanded=\"false\"><span>Show all 18 tracks</span><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m6 9 6 6 6-6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button>",
+      "css": ".ds-tracks { list-style: none; margin: 0; padding: 0; font-family: Raleway, sans-serif; color: var(--ink, #eee9e3); } .ds-tracks li { display: grid; grid-template-columns: 1.5rem 56px minmax(0, 1fr) auto auto; align-items: center; gap: 1rem; padding: 1rem 0; } .ds-tracks li + li { border-top: 1px solid var(--line, rgba(190,174,151,0.25)); } .ds-tracks .n, .ds-tracks .d { color: var(--ink-soft, #bdb6c5); font-variant-numeric: tabular-nums; font-size: 0.875rem; } .ds-tracks .art { aspect-ratio: 1; background: var(--surface-raised, #25202c); } .ds-tracks .t { font-weight: 500; } .ds-tracks button { min-width: 44px; min-height: 44px; padding: 0.5rem 0.75rem; border: 1px solid var(--gold, #c4a576); border-radius: 2px; background: transparent; color: var(--gold-bright, #e0c393); font: inherit; font-size: 0.875rem; cursor: pointer; } .ds-tracks button:hover { background: var(--gold-hover, color-mix(in srgb, #c4a576 12%, transparent)); } .ds-tracks button:active { background: var(--gold-press, color-mix(in srgb, #c4a576 20%, transparent)); } .ds-tracks button:focus-visible { outline: 2px solid var(--gold-bright, #e0c393); outline-offset: 3px; } .ds-track-more { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; margin-top: 0.5rem; padding: 0; background: transparent; border: 0; border-bottom: 1px solid var(--gold-dim, #a48a65); border-radius: 0; color: var(--ink, #eee9e3); font-family: Raleway, sans-serif; font-size: 1rem; cursor: pointer; transition: border-color 160ms ease; } .ds-track-more:hover { border-bottom-color: var(--gold-bright, #e0c393); } .ds-track-more:focus-visible { outline: 2px solid var(--gold-bright, #e0c393); outline-offset: 3px; } .ds-track-more svg { width: 1rem; height: 1rem; color: var(--gold, #c4a576); transition: transform 200ms ease; } .ds-track-more[aria-expanded=\"true\"] svg { transform: rotate(180deg); } @media (prefers-reduced-motion: reduce) { .ds-track-more, .ds-track-more svg { transition: none; } }"
     }
   ],
   "narrative": {
