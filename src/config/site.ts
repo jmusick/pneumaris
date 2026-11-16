@@ -1,4 +1,4 @@
-export const SITE_VERSION = "2.3.0";
+export const SITE_VERSION = "2.3.1";
 export const SITE_URL = "https://pneumarisband.com";
 export const SITE_NAME = "Pneumaris";
 export const SITE_TWITTER_HANDLE = "@pneumarisband";
